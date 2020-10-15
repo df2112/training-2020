@@ -1,17 +1,11 @@
 
-import {SalesforceConnector} from '@mobify/commerce-integrations/dist/connectors/sfcc'
+import CommerceCloudConnector from './commerce-cloud-connector'
+import {getProtocolHostAndPort} from './utils/utils'
 
 // Replace Mobify's demo config with the correct values for your backend:
-export const getConnector = () => {
-    return SalesforceConnector.fromConfig({
-        basePath: `${
-            typeof window === 'undefined' ? process.env.APP_ORIGIN : ''
-        }/mobify/proxy/api/s/RefArch/dw/shop/v20_4`,
-        defaultHeaders: {
-            'x-dw-client-id': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
-        }
-    })
-}
+export const getConnector = () => new CommerceCloudConnector({
+    apiBaseURL: `${getProtocolHostAndPort()}/mobify/proxy/commerce-api`
+})
 
 // Return any connector-specific constants for root category ids, etc.
 export const getRootCategoryId = () => {

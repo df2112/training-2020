@@ -33,6 +33,10 @@
           "protocol": "https",
           "host": "zzrf-001.sandbox.us01.dx.commercecloud.salesforce.com",
           "path": "api"
+        },
+        {
+          "host": "8o7m175y.api.commercecloud.salesforce.com",
+          "path": "commerce-api"
         }
       ]
     }
@@ -41,6 +45,7 @@
     "@mobify/commerce-integrations": "2.3.0",
     "bluebird": "^3.5.1",
     "core-js": "2.4.0",
+    "cross-fetch": "^3.0.6",
     "es6-object-assign": "^1.1.0",
     "express": "^4.16.4",
     "hoist-non-react-statics": "^3.3.0",
