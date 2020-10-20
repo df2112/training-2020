@@ -13,6 +13,10 @@ import Tile from 'progressive-web-sdk/dist/components/tile'
 import SkeletonBlock from 'progressive-web-sdk/dist/components/skeleton-block'
 import SkeletonText from 'progressive-web-sdk/dist/components/skeleton-text'
 
+// Add a fetch library and helper method
+import fetch from 'cross-fetch'
+import {getProtocolHostAndPort} from '../../utils/utils'
+
 const PRODUCT_SKELETON_COUNT = 6
 
 const ProductList = (props) => {
@@ -153,16 +157,62 @@ ProductList.shouldGetProps = ({previousParams, params}) => {
 
 ProductList.getProps = async ({params, connector}) => {
     const {categoryId} = params
-    const [category, productSearch] = await Promise.all([
-        connector.getCategory(categoryId),
-        connector.searchProducts({
-            filters: {
-                categoryId
-            },
-            query: ''
+    const category = await connector.getCategory(categoryId)
+
+    /**
+     * Make a login request to get an authorization token
+     * Use that token to make a request to search for products
+     */
+    const getToken = () => {
+        const urlParams = new URLSearchParams({
+            siteId: '2020HeadlessDemo',
+            clientId: '049bf0a6-717d-4607-b9c2-cfba951f0f2e'
         })
-    ])
-    return {category, productSearch}
+        return fetch(
+            `${getProtocolHostAndPort()}/mobify/proxy/commerce-api/customer/shopper-customers/v1/organizations/f_ecom_zzrf_001/customers/actions/login?${urlParams}`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({type: 'guest'})
+            }
+        )
+    }
+    const tokenResponse = await getToken()
+    const token = tokenResponse.headers.get('authorization')
+
+    /**
+     * Make a request to search products
+     */
+    const searchProducts = (opts = {}) => {
+        const urlParams = new URLSearchParams({
+            siteId: '2020HeadlessDemo',
+            clientId: '049bf0a6-717d-4607-b9c2-cfba951f0f2e',
+            q: opts.filters.categoryId
+        })
+        return fetch(
+            `${getProtocolHostAndPort()}/mobify/proxy/commerce-api/search/shopper-search/v1/organizations/f_ecom_zzrf_001/product-search?${urlParams}`,
+            {
+                headers: {
+                    Authorization: token
+                }
+            }
+        )
+    }
+
+    const searchProductsResponse = await searchProducts({
+        filters: {
+            categoryId
+        },
+        query: ''
+    })
+    const products = searchProductsResponse.json()
+
+    return {
+        category,
+        productSearch: await products
+    }
 }
 
 ProductList.propTypes = {
