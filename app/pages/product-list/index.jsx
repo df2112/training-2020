@@ -65,7 +65,7 @@ const ProductList = (props) => {
                     {productSearch ? (
                         <Fragment>
                             {productSearch.hits && productSearch.hits.length > 0 &&
-                                productSearch.hits.map((productSearchResult) => console.log(productSearchResult) || (
+                                productSearch.hits.map((productSearchResult) => (
                                     <div
                                         className="t-product-list__products-items"
                                         key={productSearchResult.productId}

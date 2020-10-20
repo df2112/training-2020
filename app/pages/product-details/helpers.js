@@ -7,7 +7,7 @@ export const parseProduct = (product) => {
     product.allImages = []
 
     // Expand imageSet for easier filtering
-    product.imageGroups.forEach((imageSet) => {
+    product.imageGroups && product.imageGroups.forEach((imageSet) => {
         const {images, sizeType, variationProperties} = imageSet
         images.forEach((image) => {
             product.allImages.push({...image, sizeType, variationProperties})
