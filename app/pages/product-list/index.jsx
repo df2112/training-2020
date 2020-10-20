@@ -179,8 +179,13 @@ ProductList.getProps = async ({params, connector}) => {
             }
         )
     }
-    const tokenResponse = await getToken()
-    const token = tokenResponse.headers.get('authorization')
+
+    /**
+     * TODO: Get a JWT and store in memory
+     */
+
+    // const tokenResponse = await getToken()
+    // const token = tokenResponse.headers.get('authorization')
 
     /**
      * Make a request to search products
@@ -201,18 +206,23 @@ ProductList.getProps = async ({params, connector}) => {
         )
     }
 
-    const searchProductsResponse = await searchProducts({
-        filters: {
-            categoryId
-        },
-        query: ''
-    })
-    const products = searchProductsResponse.json()
+    /**
+     * TODO: Make a search request for products
+     * pass the response as props to `ProductList`
+     */
 
-    return {
-        category,
-        productSearch: await products
-    }
+    // const searchProductsResponse = await searchProducts({
+    //     filters: {
+    //         categoryId
+    //     },
+    //     query: ''
+    // })
+    // const products = searchProductsResponse.json()
+
+    // return {
+    //     category,
+    //     productSearch: await products
+    // }
 }
 
 ProductList.propTypes = {
