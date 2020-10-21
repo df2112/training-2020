@@ -151,18 +151,29 @@ ProductList.shouldGetProps = ({previousParams, params}) => {
     return !previousParams || previousParams.categoryId !== params.categoryId
 }
 
+/**
+ * Use the connector to make requests
+ * Make a request for category and products
+ * Pass the response to `ProductList` as props
+ */
+
 ProductList.getProps = async ({params, connector}) => {
     const {categoryId} = params
-    const [category, productSearch] = await Promise.all([
-        connector.getCategory(categoryId),
-        connector.searchProducts({
-            filters: {
-                categoryId
-            },
-            query: ''
-        })
-    ])
-    return {category, productSearch}
+    /**
+     * TODO: Make a search request for products
+     * pass the response as props to `ProductList`
+     */
+
+    // const [category, productSearch] = await Promise.all([
+    //     connector.getCategory(categoryId),
+    //     connector.searchProducts({
+    //         filters: {
+    //             categoryId
+    //         },
+    //         query: ''
+    //     })
+    // ])
+    // return {category, productSearch}
 }
 
 ProductList.propTypes = {

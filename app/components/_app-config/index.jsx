@@ -18,10 +18,19 @@ AppConfig.restore = () => undefined
 
 AppConfig.freeze = () => undefined
 
+/**
+ * Return the connector instance
+ * make it available in `getProps`
+ */
+
+/**
+ * TODO: return the CommerceCloudConnector
+ */
+
 AppConfig.extraGetPropsArgs = () => {
-    return {
-        connector: getConnector()
-    }
+    // return {
+    //     connector: getConnector()
+    // }
 }
 
 AppConfig.propTypes = {
