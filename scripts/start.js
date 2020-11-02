@@ -43,6 +43,7 @@ const beforeRun = () => {
 
 const runSSR = ({inspect}) => {
     const nodeEnv = process.env.NODE_ENV || development
+    const brand = process.env.BRAND
 
     return Promise.resolve()
         .then(() => beforeRun())
@@ -50,7 +51,7 @@ const runSSR = ({inspect}) => {
             return [
                 {
                     command: webpack,
-                    args: ['--mode', nodeEnv, '--watch'],
+                    args: ['--env.ctx', brand, '--mode', nodeEnv, '--watch'],
                     opts: {
                         env: Object.assign({}, process.env, {
                             TOUCH_BUILD_MARKER: 1,
