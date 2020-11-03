@@ -9,6 +9,24 @@ import {
     serveStaticFile
 } from 'progressive-web-sdk/dist/ssr/server/express'
 import {render} from 'progressive-web-sdk/dist/ssr/server/react-rendering'
+import {createIntl, createIntlCache} from 'react-intl'
+
+const cache = createIntlCache()
+
+// Create the `intl` object
+const intl = createIntl(
+    {
+        // Locale of the application
+        locale: 'de',
+        // Locale of the fallback defaultMessage
+        defaultLocale: 'en',
+        messages: {}
+    },
+    cache
+)
+
+const foo = intl.formatDate(new Date(9e8), {month: 'long'})
+console.log('TEST DATE: ', foo) // Expected: "Januar" when using full-icu data, "January" otherwise
 
 const app = createApp({
     // The build directory (an absolute path)

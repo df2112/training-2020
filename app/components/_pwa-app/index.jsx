@@ -19,6 +19,23 @@ import {getRootCategoryId} from '../../connector'
 import {getNavigationRoot, getNavigationRootDesktop, flattenCategory} from './helpers'
 const analyticsManager = getAnalyticsManager()
 
+import {IntlProvider, FormattedMessage} from 'react-intl'
+
+const messages = {
+    en: {
+        greeting: "Hello! How are you?"
+    },
+    es: {
+        greeting: "¡Hola! ¿Cómo estás?"
+    },
+    fr: {
+        greeting: "Bonjour! Comment ça va?"
+    },
+    de: {
+        greeting: "Hallo! Wie geht's?"
+    }
+}
+
 export const OfflineBanner = () => (
     <header className="c-pwa-app__offline-banner">
         <p>Currently browsing in offline mode</p>
@@ -32,6 +49,11 @@ const PWAApp = (props) => {
     const navigationRootDesktop = getNavigationRootDesktop(props)
 
     const [isOnline, setIsOnline] = useState(true)
+    const [locale, setLocale] = useState("de")
+
+    const handleSelect = (e) => {
+        setLocale(e.target.value)
+    }
 
     useEffect(() => {
         // Listen for events from the SDK to send analytics for.
@@ -55,40 +77,52 @@ const PWAApp = (props) => {
 
     return (
         <ResponsiveContainer>
-            <Helmet>
-                <meta name="theme-color" content="#0288a7" />
-                <meta name="apple-mobile-web-app-title" content="Scaffold" />
-                <link
-                    rel="apple-touch-icon"
-                    href={getAssetUrl('static/img/global/apple-touch-icon.png')}
-                />
-                <link rel="manifest" href={getAssetUrl('static/manifest.json')} />
-            </Helmet>
+            <IntlProvider locale={locale} messages={messages[locale]}>
+                <Helmet>
+                    <meta name="theme-color" content="#0288a7" />
+                    <meta name="apple-mobile-web-app-title" content="Scaffold" />
+                    <link
+                        rel="apple-touch-icon"
+                        href={getAssetUrl('static/img/global/apple-touch-icon.png')}
+                    />
+                    <link rel="manifest" href={getAssetUrl('static/manifest.json')} />
+                </Helmet>
 
-            <ScrollToTop />
+                <ScrollToTop />
 
-            <div id="app" className="c-pwa-app">
-                <SkipLinks
-                    items={[
-                        {target: '#app-main', label: 'Skip to content'} // See: https://www.w3.org/TR/WCAG20-TECHS/G1.html
-                    ]}
-                />
+                <div id="app" className="c-pwa-app">
+                    <SkipLinks
+                        items={[
+                            {target: '#app-main', label: 'Skip to content'} // See: https://www.w3.org/TR/WCAG20-TECHS/G1.html
+                        ]}
+                    />
 
-                <Header
-                    navigationRootMobile={navigationRootMobile}
-                    navigationRootDesktop={navigationRootDesktop}
-                />
+                    <Header
+                        navigationRootMobile={navigationRootMobile}
+                        navigationRootDesktop={navigationRootDesktop}
+                    />
 
-                {!isOnline && <OfflineBanner />}
+                    {!isOnline && <OfflineBanner />}
 
-                <main id="app-main" className="c-pwa-app__main" role="main">
-                    <div className="c-pwa-app__content">
-                        <OfflineBoundary isOnline={isOnline}>{children}</OfflineBoundary>
-                    </div>
-                </main>
+                    <main id="app-main" className="c-pwa-app__main" role="main">
+                        <div className="c-pwa-app__content">
+                            <OfflineBoundary isOnline={isOnline}>
+                                <div className="u-margin-bottom-lg">
+                                    <select onChange={handleSelect} defaultValue={locale}>
+                                        {["en", "es", "fr", "de"].map(l => (
+                                            <option key={l}>{l}</option>
+                                        ))}
+                                    </select>
+                                    <p><FormattedMessage id="greeting" /></p>
+                                </div>
+                                {children}
+                            </OfflineBoundary>
+                        </div>
+                    </main>
 
-                <Footer />
-            </div>
+                    <Footer />
+                </div>
+            </IntlProvider>
         </ResponsiveContainer>
     )
 }
