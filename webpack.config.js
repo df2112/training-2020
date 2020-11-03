@@ -10,24 +10,24 @@ const setClientEntry = (ctx) => ({
 
 const setServerEntry = (ctx) => `./app/${ctx}/ssr.js`
 
-module.exports = ({ctx}) => {
-    if (ctx == 'undefined') {
-        throw new Error('You must pass an env.ctx flag to run webpack')
+module.exports = () => {
+    if (!process.env.WEBPACK_ENTRY_PREFIX) {
+        throw new Error('You must pass an entry prefix to run webpack')
     }
     // Update entry points
-    clientConfig[0].entry = setClientEntry(ctx)
-    serverConfig[0].entry = setServerEntry(ctx)
+    clientConfig[0].entry = setClientEntry(process.env.WEBPACK_ENTRY_PREFIX)
+    serverConfig[0].entry = setServerEntry(process.env.WEBPACK_ENTRY_PREFIX)
     // Define global constant based on environment variable
     clientConfig[0].plugins = [
         ...clientConfig[0].plugins,
         new webpack.DefinePlugin({
-            __BRAND__: JSON.stringify(`${process.env.BRAND}`)
+            __BRAND__: JSON.stringify(process.env.WEBPACK_ENTRY_PREFIX)
         })
     ]
     serverConfig[0].plugins = [
         ...serverConfig[0].plugins,
         new webpack.DefinePlugin({
-            __BRAND__: JSON.stringify(`${process.env.BRAND}`)
+            __BRAND__: JSON.stringify(process.env.WEBPACK_ENTRY_PREFIX)
         })
     ]
     return config
