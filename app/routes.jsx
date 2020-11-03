@@ -7,8 +7,14 @@ const fallback = <SkeletonBlock height="100%" width="100%" />
 const Home = loadable(() => import('./pages/home'), {fallback})
 const ProductList = loadable(() => import('./pages/product-list'), {fallback})
 const ProductDetails = loadable(() => import('./pages/product-details'), {fallback})
+const Typescript = loadable(() => import('./pages/typescript'), {fallback})
 
 const routes = [
+    {
+        path: '/typescript',
+        component: Typescript,
+        exact: true
+    },
     {
         path: '/category/:categoryId',
         component: ProductList
