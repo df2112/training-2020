@@ -18,7 +18,7 @@ const routes = [
         component: ProductDetails
     },
     {
-        path: '/',
+        path: '/:locale',
         component: Home,
         exact: true
     }

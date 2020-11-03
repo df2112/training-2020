@@ -49,11 +49,6 @@ const PWAApp = (props) => {
     const navigationRootDesktop = getNavigationRootDesktop(props)
 
     const [isOnline, setIsOnline] = useState(true)
-    const [locale, setLocale] = useState("de")
-
-    const handleSelect = (e) => {
-        setLocale(e.target.value)
-    }
 
     useEffect(() => {
         // Listen for events from the SDK to send analytics for.
@@ -77,7 +72,7 @@ const PWAApp = (props) => {
 
     return (
         <ResponsiveContainer>
-            <IntlProvider locale={locale} messages={messages[locale]}>
+            <IntlProvider locale={props.locale} messages={messages[props.locale]}>
                 <Helmet>
                     <meta name="theme-color" content="#0288a7" />
                     <meta name="apple-mobile-web-app-title" content="Scaffold" />
@@ -107,13 +102,8 @@ const PWAApp = (props) => {
                     <main id="app-main" className="c-pwa-app__main" role="main">
                         <div className="c-pwa-app__content">
                             <OfflineBoundary isOnline={isOnline}>
-                                <div className="u-margin-bottom-lg">
-                                    <select onChange={handleSelect} defaultValue={locale}>
-                                        {["en", "es", "fr", "de"].map(l => (
-                                            <option key={l}>{l}</option>
-                                        ))}
-                                    </select>
-                                    <p><FormattedMessage id="greeting" /></p>
+                                <div className="u-margin-bottom-lg u-margin-top-lg">
+                                    <h1><FormattedMessage id="greeting" /></h1>
                                 </div>
                                 {children}
                             </OfflineBoundary>
@@ -132,10 +122,13 @@ PWAApp.shouldGetProps = () => {
     return typeof window === 'undefined'
 }
 
-PWAApp.getProps = async ({connector}) => {
+PWAApp.getProps = async ({connector, params}) => {
     const category = await connector.getCategory(getRootCategoryId())
     const flattened = flattenCategory(category)
-    return {categories: flattened}
+    return {
+        categories: flattened,
+        locale: params.locale
+    }
 }
 
 PWAApp.propTypes = {
