@@ -20,21 +20,7 @@ import {getNavigationRoot, getNavigationRootDesktop, flattenCategory} from './he
 const analyticsManager = getAnalyticsManager()
 
 import {IntlProvider, FormattedMessage} from 'react-intl'
-
-const messages = {
-    en: {
-        greeting: "Hello! How are you?"
-    },
-    es: {
-        greeting: "¡Hola! ¿Cómo estás?"
-    },
-    fr: {
-        greeting: "Bonjour! Comment ça va?"
-    },
-    de: {
-        greeting: "Hallo! Wie geht's?"
-    }
-}
+import messages from '../../translations'
 
 export const OfflineBanner = () => (
     <header className="c-pwa-app__offline-banner">
