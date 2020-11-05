@@ -158,6 +158,8 @@
     "lint:js": "eslint '**/*.{js,jsx}'",
     "lint:sass": "sass-lint -c .sass-lint.yml 'app/**/*.scss' -v",
     "push": "cross-env NODE_ENV=production npm run prod:build && sdk-upload",
+    "push:a": "cross-env NODE_ENV=production npm run prod:build:a && sdk-upload --projectSlug brand-a",
+    "push:b": "cross-env NODE_ENV=production npm run prod:build:b && sdk-upload --projectSlug brand-b",
     "save-credentials": "sdk-save-credentials",
     "start": "node ./scripts/start ssr",
     "start:inspect": "node ./scripts/start ssr --inspect",
