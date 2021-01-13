@@ -6,10 +6,10 @@ import {checkHttpError} from './utils/error'
 
 export default class CommerceCloudConnector {
     constructor({
-        organizationId = 'f_ecom_zzrf_001',
-        clientId = '049bf0a6-717d-4607-b9c2-cfba951f0f2e',
-        siteId = '2020HeadlessDemo',
-        apiBaseURL = 'https://8o7m175y.api.commercecloud.salesforce.com'
+        organizationId = 'f_ecom_zzsa_073',
+        clientId = 'be5f44ed-6c07-431a-be20-b52439bb9e68',
+        siteId = 'RefArch',
+        apiBaseURL = 'https://kv7kzm78.api.commercecloud.salesforce.com'
     } = {}) {
         this.organizationId = organizationId
         this.clientId = clientId
