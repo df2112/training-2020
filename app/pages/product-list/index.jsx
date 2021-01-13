@@ -74,7 +74,7 @@ const ProductList = (props) => {
                                             <Tile
                                                 isColumn
                                                 imageProps={{
-                                                    src: productSearchResult.image && productSearchResult.image.alt,
+                                                    src: productSearchResult.image.link,
                                                     alt: productSearchResult.productName,
                                                     width: '250',
                                                     ratio: {

@@ -211,9 +211,9 @@ class ProductDetails extends React.Component {
                             className="t-product-details__carousel"
                         >
                             {carouselImages[0] && carouselImages[0].images.length > 0 ? (
-                                carouselImages[0].images.map(({src, alt}) => (
-                                    <CarouselItem key={alt}>
-                                        <Image {...imgProps} alt={alt} src={alt} itemProp="image" />
+                                carouselImages[0].images.map(({link, alt}) => (
+                                    <CarouselItem key={link}>
+                                        <Image {...imgProps} alt={alt} src={link} itemProp="image" />
                                     </CarouselItem>
                                 ))
                             ) : (
