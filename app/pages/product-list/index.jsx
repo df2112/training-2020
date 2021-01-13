@@ -37,7 +37,7 @@ const ProductList = (props) => {
             />
             {productSearch && (
                 <Helmet>
-                    <title>{`${productSearch.results.length} results for "${productSearch.query}"`}</title>
+                    <title>{`${productSearch.total} results for "${productSearch.query}"`}</title>
                     <meta name="keywords" content={productSearch.query} />
                     <meta
                         name="description"
@@ -64,8 +64,8 @@ const ProductList = (props) => {
                 <div className="t-product-list__container-items">
                     {productSearch ? (
                         <Fragment>
-                            {productSearch.results.length > 0 &&
-                                productSearch.results.map((productSearchResult) => (
+                            {productSearch.hits && productSearch.hits.length > 0 &&
+                                productSearch.hits.map((productSearchResult) => (
                                     <div
                                         className="t-product-list__products-items"
                                         key={productSearchResult.productId}
@@ -74,8 +74,8 @@ const ProductList = (props) => {
                                             <Tile
                                                 isColumn
                                                 imageProps={{
-                                                    src: productSearchResult.defaultImage.src,
-                                                    alt: productSearchResult.defaultImage.alt,
+                                                    src: productSearchResult.image.link,
+                                                    alt: productSearchResult.productName,
                                                     width: '250',
                                                     ratio: {
                                                         aspect: '1:1'
@@ -103,7 +103,7 @@ const ProductList = (props) => {
                                         />
                                     </div>
                                 ))}
-                            {productSearch.results.length <= 0 && (
+                            {productSearch.hits && productSearch.hits.length <= 0 && (
                                 <h2 className="u-margin-top-lg">No results found.</h2>
                             )}
                         </Fragment>

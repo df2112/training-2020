@@ -23,3 +23,17 @@ export const watchOnlineStatus = (callback, win = window) => {
     }
     return unsubscribe
 }
+
+export const isServerSide = () => typeof window === 'undefined'
+
+export const getProtocolHostAndPort = () => {
+    if (typeof window !== 'undefined') {
+        return ''
+    }
+
+    if (process.env.NODE_ENV !== 'production' && !process.env.EXTERNAL_DOMAIN_NAME) {
+        return 'http://localhost:3000'
+    }
+
+    return `https://${process.env.EXTERNAL_DOMAIN_NAME}`
+}
