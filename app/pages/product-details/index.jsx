@@ -124,8 +124,9 @@ class ProductDetails extends React.Component {
         return !previousParams || previousParams.productId !== params.productId
     }
 
-    static async getProps({params, connector}) {
+    static async getProps({params, connector, fakeConnector}) {
         const product = await connector.getProduct(params.productId)
+        // DF TODO const product = fakeConnector.getProduct(params.productId)
         return {product: parseProduct(product)}
     }
 

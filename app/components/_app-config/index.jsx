@@ -1,6 +1,6 @@
-import React, {Fragment} from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
-import {getConnector} from '../../connector'
+import { getConnector, getFakeConnector } from '../../connector'
 
 /**
  * Use the AppConfig component to inject extra arguments into the getProps
@@ -20,7 +20,8 @@ AppConfig.freeze = () => undefined
 
 AppConfig.extraGetPropsArgs = () => {
     return {
-        connector: getConnector()
+        connector: getConnector(),
+        fakeConnector: getFakeConnector()
     }
 }
 
