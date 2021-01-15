@@ -3,7 +3,6 @@
 import React, {Fragment, useState} from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
-import {Desktop, Mobile, Tablet} from '../../components/media-queries'
 
 import Breadcrumbs from 'progressive-web-sdk/dist/components/breadcrumbs'
 import Button from 'progressive-web-sdk/dist/components/button'
@@ -17,10 +16,17 @@ import Sheet from 'progressive-web-sdk/dist/components/sheet'
 import SkeletonBlock from 'progressive-web-sdk/dist/components/skeleton-block'
 import SkeletonText from 'progressive-web-sdk/dist/components/skeleton-text'
 
+import {getAnalyticsManager} from '../../analytics'
+import EmailSubscribe from '../../components/email-subscribe'
+import {Desktop, Mobile, Tablet} from '../../components/media-queries'
+
+const analyticsManager = getAnalyticsManager()
 const PRODUCT_SKELETON_COUNT = 6
 
 const Prescriptions = (props) => {
     const [isShippingSheetOpen, setIsShippingSheetOpen] = useState(false)
+    const [isSubscribed, setIsSubscribed] = useState(false)
+
     const {errorMessage, productSearch, category} = props
 
     const getBreadcrumbs = (category) => {
@@ -190,6 +196,19 @@ const Prescriptions = (props) => {
                         onClick={() => setIsShippingSheetOpen(!isShippingSheetOpen)}>
                         Modal Button
                     </Button>
+                </ListTile>
+
+                <ListTile className="pw--instructional-block">
+                    <div className="u-margin-bottom-lg">
+                        Set up forms like a Join Mailing List section using this example:
+                    </div>
+
+                    {!isSubscribed ? (
+                        <EmailSubscribe analyticsManager={analyticsManager}
+                            onSubmit={() => setIsSubscribed(true)}/>
+                    ) : (
+                        <span>Thank you for subscribing!</span>
+                    )}
                 </ListTile>
 
                 <ListTile className="pw--instructional-block">
