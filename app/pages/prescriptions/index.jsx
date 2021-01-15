@@ -29,7 +29,7 @@ const Prescriptions = (props) => {
     }
 
     return (
-        <div className="t-product-list">
+        <div className="t-prescriptions-list">
             <Breadcrumbs
                 className="u-margin-top-lg u-margin-bottom-lg"
                 items={getBreadcrumbs(category)}
@@ -55,19 +55,19 @@ const Prescriptions = (props) => {
             <Desktop>
                 <Divider className="u-margin-bottom-md" />
             </Desktop>
-            <div className="t-product-list__container">
+            <div className="t-prescriptions-list__container">
                 {errorMessage && (
-                    <h1 className="u-margin-top-lg u-margin-center t-product-list__error-msg">
+                    <h1 className="u-margin-top-lg u-margin-center t-prescriptions-list__error-msg">
                         {errorMessage}
                     </h1>
                 )}
-                <div className="t-product-list__container-items">
+                <div className="t-prescriptions-list__container-items">
                     {productSearch ? (
                         <Fragment>
                             {productSearch.hits && productSearch.hits.length > 0 &&
                                 productSearch.hits.map((productSearchResult) => (
                                     <div
-                                        className="t-product-list__products-items"
+                                        className="t-prescriptions-list__products-items"
                                         key={productSearchResult.productId}
                                     >
                                         <Link href={`/products/${productSearchResult.productId}`}>
@@ -110,7 +110,7 @@ const Prescriptions = (props) => {
                     ) : (
                         <Fragment>
                             {[...new Array(PRODUCT_SKELETON_COUNT)].map((_, idx) => (
-                                <div key={idx} className="t-product-list__products-items">
+                                <div key={idx} className="t-prescriptions-list__products-items">
                                     <SkeletonBlock height="300px" />
                                 </div>
                             ))}

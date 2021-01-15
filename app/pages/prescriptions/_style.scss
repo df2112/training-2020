@@ -1,7 +1,7 @@
 // Product List
 // ===
 
-.t-product-list__container-items {
+.t-prescriptions-list__container-items {
     @include container();
 
     display: flex;
@@ -16,7 +16,7 @@
 //    right margin.
 // 3. Override gutter for (2n)
 
-.t-product-list__products-items {
+.t-prescriptions-list__products-items {
     width: span(2);
     margin-right: gutter();
     margin-bottom: $unit * 2;
@@ -27,7 +27,7 @@
 }
 
 @include susy-breakpoint($medium-breakpoint, $medium-layout) {
-    .t-product-list__products-items {
+    .t-prescriptions-list__products-items {
         width: span(4);
 
         &:nth-child(1n) {
@@ -45,7 +45,7 @@
 }
 
 @include susy-breakpoint($large-breakpoint, $large-layout) {
-    .t-product-list__products-items {
+    .t-prescriptions-list__products-items {
         width: span(3);
 
         &:nth-child(1n) {
@@ -61,7 +61,7 @@
 // Product Tile
 // ---
 
-.t-product-list__tile {
+.t-prescriptions-list__tile {
     .pw-tile__primary {
         margin-right: 0;
     }
