@@ -1,10 +1,10 @@
 import React from 'react'
-import ProductList from './index'
+import Prescriptions from './index'
 import {mountWithRouter} from '../../utils/test-utils'
 
-test('ProductList renders without errors with results', () => {
+test('Prescriptions renders without errors with results', () => {
     const wrapper = mountWithRouter(
-        <ProductList
+        <Prescriptions
             initialize={jest.fn()}
             trackPageLoad={jest.fn()}
             match={{
@@ -45,9 +45,9 @@ test('ProductList renders without errors with results', () => {
     expect(wrapper.hasClass('t-product-list')).toBe(true)
 })
 
-test('ProductList renders without errors with no search results', () => {
+test('Prescriptions renders without errors with no search results', () => {
     const wrapper = mountWithRouter(
-        <ProductList
+        <Prescriptions
             match={{
                 params: {
                     categoryId: 'tshirts'
@@ -61,9 +61,9 @@ test('ProductList renders without errors with no search results', () => {
     expect(wrapper.hasClass('t-product-list')).toBe(true)
 })
 
-test('ProductList renders error messages', () => {
+test('Prescriptions renders error messages', () => {
     const wrapper = mountWithRouter(
-        <ProductList
+        <Prescriptions
             match={{
                 params: {
                     categoryId: 'tshirts'
@@ -76,13 +76,13 @@ test('ProductList renders error messages', () => {
     expect(wrapper.find('.t-product-list__error-msg')).toHaveLength(1)
 })
 
-test('ProductList should get props when the category id changes in the URL', () => {
+test('Prescriptions should get props when the category id changes in the URL', () => {
     const params1 = {categoryId: 1}
     const params2 = {categoryId: 2}
-    expect(ProductList.shouldGetProps({previousParams: params1, params: params1})).toBe(false)
-    expect(ProductList.shouldGetProps({previousParams: params1, params: params2})).toBe(true)
+    expect(Prescriptions.shouldGetProps({previousParams: params1, params: params1})).toBe(false)
+    expect(Prescriptions.shouldGetProps({previousParams: params1, params: params2})).toBe(true)
 })
 
 test('getTemplateName works', () => {
-    expect(ProductList.getTemplateName()).toEqual('product-list')
+    expect(Prescriptions.getTemplateName()).toEqual('product-list')
 })

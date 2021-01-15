@@ -15,7 +15,7 @@ import SkeletonText from 'progressive-web-sdk/dist/components/skeleton-text'
 
 const PRODUCT_SKELETON_COUNT = 6
 
-const ProductList = (props) => {
+const Prescriptions = (props) => {
     const {errorMessage, productSearch, category} = props
 
     const getBreadcrumbs = (category) => {
@@ -143,15 +143,15 @@ const ProductList = (props) => {
     )
 }
 
-ProductList.getTemplateName = () => {
+Prescriptions.getTemplateName = () => {
     return 'product-list'
 }
 
-ProductList.shouldGetProps = ({previousParams, params}) => {
+Prescriptions.shouldGetProps = ({previousParams, params}) => {
     return !previousParams || previousParams.categoryId !== params.categoryId
 }
 
-ProductList.getProps = async ({params, connector}) => {
+Prescriptions.getProps = async ({params, connector}) => {
     const {categoryId} = params
     const [category, productSearch] = await Promise.all([
         connector.getCategory(categoryId),
@@ -165,11 +165,11 @@ ProductList.getProps = async ({params, connector}) => {
     return {category, productSearch}
 }
 
-ProductList.propTypes = {
+Prescriptions.propTypes = {
     errorMessage: PropTypes.string,
     productSearch: PropTypes.object,
     category: PropTypes.object,
     match: PropTypes.object
 }
 
-export default ProductList
+export default Prescriptions
