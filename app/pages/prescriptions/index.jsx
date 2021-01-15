@@ -144,7 +144,7 @@ const Prescriptions = (props) => {
 }
 
 Prescriptions.getTemplateName = () => {
-    return 'product-list'
+    return 'prescriptions'
 }
 
 Prescriptions.shouldGetProps = ({previousParams, params}) => {
@@ -152,7 +152,7 @@ Prescriptions.shouldGetProps = ({previousParams, params}) => {
 }
 
 Prescriptions.getProps = async ({params, connector}) => {
-    const {categoryId} = params
+    const categoryId = 'prescriptions'
     const [category, productSearch] = await Promise.all([
         connector.getCategory(categoryId),
         connector.searchProducts({
