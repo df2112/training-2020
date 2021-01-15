@@ -6,8 +6,10 @@ import Helmet from 'react-helmet'
 import {Desktop} from '../../components/media-queries'
 
 import Breadcrumbs from 'progressive-web-sdk/dist/components/breadcrumbs'
+import Button from 'progressive-web-sdk/dist/components/button'
 import Divider from 'progressive-web-sdk/dist/components/divider'
 import Link from 'progressive-web-sdk/dist/components/link'
+import List from 'progressive-web-sdk/dist/components/list'
 import ListTile from 'progressive-web-sdk/dist/components/list-tile'
 import Tile from 'progressive-web-sdk/dist/components/tile'
 import SkeletonBlock from 'progressive-web-sdk/dist/components/skeleton-block'
@@ -120,6 +122,34 @@ const Prescriptions = (props) => {
                 <div className="u-margin-top-lg u-margin-bottom-lg">
                     Tips for getting started on this page:
                 </div>
+
+                <List>
+                    <ListTile className="pw--instructional-block"
+                        startAction={<Button className="pw--blank" icon="user" />}
+                        endAction={<Button className="pw--blank" icon="chevron-right" />}
+                    >
+                        <div>
+                            ListItem with <code>startAction</code> and <code>endAction</code>
+                        </div>
+                    </ListTile>
+                    <ListTile className="pw--instructional-block"
+                        startAction={<Button className="pw--blank" icon="user" />}
+                        endAction={<Button className="pw--blank" icon="chevron-right" />}
+                    >
+                        <div>
+                            ListItem with <code>startAction</code> and <code>endAction</code>
+                        </div>
+                    </ListTile>
+                    <ListTile className="pw--instructional-block"
+                        startAction={<Button className="pw--blank" icon="user" />}
+                        endAction={<Button className="pw--blank" icon="chevron-right" />}
+                    >
+                        <div>
+                            ListItem with <code>startAction</code> and <code>endAction</code>
+                        </div>
+                    </ListTile>
+                </List>
+                
                 <ListTile className="pw--instructional-block">
                     <div>
                         Replace dummy products with real data using Commerce Integrations.&nbsp;
