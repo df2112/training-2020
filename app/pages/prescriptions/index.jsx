@@ -24,10 +24,10 @@ const analyticsManager = getAnalyticsManager()
 const PRODUCT_SKELETON_COUNT = 6
 
 const Prescriptions = (props) => {
+    const { errorMessage, productSearch, category } = props
+
     const [isShippingSheetOpen, setIsShippingSheetOpen] = useState(false)
     const [isSubscribed, setIsSubscribed] = useState(false)
-
-    const { errorMessage, productSearch, category } = props
 
     const getBreadcrumbs = (category) => {
         const breadcrumb = [{ text: 'Home', href: '/' }]
