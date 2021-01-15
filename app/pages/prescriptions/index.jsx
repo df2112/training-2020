@@ -158,9 +158,6 @@ const Prescriptions = (props) => {
                         </Fragment>
                     )}
                 </div>
-                <div className="u-margin-top-lg u-margin-bottom-lg">
-                    Tips for getting started on this page:
-                </div>
 
                 <List>
                     <ListTile className="pw--instructional-block"
@@ -211,24 +208,6 @@ const Prescriptions = (props) => {
                     )}
                 </ListTile>
 
-                <ListTile className="pw--instructional-block">
-                    <div>
-                        Replace dummy products with real data using Commerce Integrations.&nbsp;
-                        <Link
-                            className="pw--underline"
-                            openInNewTab
-                            href="https://dev.mobify.com/v2.x/apis-and-sdks/commerce-integrations/overview"
-                        >
-                            Read the guide
-                        </Link>
-                    </div>
-                </ListTile>
-                <div className="u-margin-bottom-lg">
-                    View more guides on&nbsp;
-                    <Link className="pw--underline" openInNewTab href="https://dev.mobify.com">
-                        dev.mobify.com
-                    </Link>
-                </div>
             </div>
 
             {/* Floating element/components */}
@@ -243,7 +222,6 @@ const Prescriptions = (props) => {
             <Desktop>
                 <ShippingDeliveryModal width="40%" />
             </Desktop>
-
         </div>
     )
 }
