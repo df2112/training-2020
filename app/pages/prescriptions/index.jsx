@@ -1,13 +1,13 @@
 /* eslint-disable import/namespace */
 /* eslint-disable import/named */
-import React, {Fragment, useState} from 'react'
+import React, { Fragment, useState } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 
 import Breadcrumbs from 'progressive-web-sdk/dist/components/breadcrumbs'
 import Button from 'progressive-web-sdk/dist/components/button'
 import Divider from 'progressive-web-sdk/dist/components/divider'
-import {HeaderBar, HeaderBarActions, HeaderBarTitle} from 'progressive-web-sdk/dist/components/header-bar'
+import { HeaderBar, HeaderBarActions, HeaderBarTitle } from 'progressive-web-sdk/dist/components/header-bar'
 import Link from 'progressive-web-sdk/dist/components/link'
 import List from 'progressive-web-sdk/dist/components/list'
 import ListTile from 'progressive-web-sdk/dist/components/list-tile'
@@ -16,9 +16,9 @@ import Sheet from 'progressive-web-sdk/dist/components/sheet'
 import SkeletonBlock from 'progressive-web-sdk/dist/components/skeleton-block'
 import SkeletonText from 'progressive-web-sdk/dist/components/skeleton-text'
 
-import {getAnalyticsManager} from '../../analytics'
+import { getAnalyticsManager } from '../../analytics'
 import EmailSubscribe from '../../components/email-subscribe'
-import {Desktop, Mobile, Tablet} from '../../components/media-queries'
+import { Desktop, Mobile, Tablet } from '../../components/media-queries'
 
 const analyticsManager = getAnalyticsManager()
 const PRODUCT_SKELETON_COUNT = 6
@@ -27,11 +27,11 @@ const Prescriptions = (props) => {
     const [isShippingSheetOpen, setIsShippingSheetOpen] = useState(false)
     const [isSubscribed, setIsSubscribed] = useState(false)
 
-    const {errorMessage, productSearch, category} = props
+    const { errorMessage, productSearch, category } = props
 
     const getBreadcrumbs = (category) => {
-        const breadcrumb = [{text: 'Home', href: '/'}]
-        if (category) breadcrumb.push({text: category['name']})
+        const breadcrumb = [{ text: 'Home', href: '/' }]
+        if (category) breadcrumb.push({ text: category['name'] })
         return breadcrumb
     }
 
@@ -39,7 +39,7 @@ const Prescriptions = (props) => {
         return price % 1 === 0 ? (price = `$${price}.00`) : `$${price}`
     }
 
-    const ShippingDeliveryModal = ({width}) => (
+    const ShippingDeliveryModal = ({ width }) => (
         <Sheet
             className="pw--no-shadow t-product-details__shipping-delivery-info-modal"
             coverage={width}
@@ -91,8 +91,8 @@ const Prescriptions = (props) => {
                     <h1 className="u-margin-bottom-lg">{category.name}</h1>
                 </Fragment>
             ) : (
-                <SkeletonText type="h1" width="50%" />
-            )}
+                    <SkeletonText type="h1" width="50%" />
+                )}
             <Desktop>
                 <Divider className="u-margin-bottom-md" />
             </Desktop>
@@ -149,14 +149,14 @@ const Prescriptions = (props) => {
                             )}
                         </Fragment>
                     ) : (
-                        <Fragment>
-                            {[...new Array(PRODUCT_SKELETON_COUNT)].map((_, idx) => (
-                                <div key={idx} className="t-prescriptions-list__products-items">
-                                    <SkeletonBlock height="300px" />
-                                </div>
-                            ))}
-                        </Fragment>
-                    )}
+                            <Fragment>
+                                {[...new Array(PRODUCT_SKELETON_COUNT)].map((_, idx) => (
+                                    <div key={idx} className="t-prescriptions-list__products-items">
+                                        <SkeletonBlock height="300px" />
+                                    </div>
+                                ))}
+                            </Fragment>
+                        )}
                 </div>
 
                 <List>
@@ -202,10 +202,10 @@ const Prescriptions = (props) => {
 
                     {!isSubscribed ? (
                         <EmailSubscribe analyticsManager={analyticsManager}
-                            onSubmit={() => setIsSubscribed(true)}/>
+                            onSubmit={() => setIsSubscribed(true)} />
                     ) : (
-                        <span>Thank you for subscribing!</span>
-                    )}
+                            <span>Thank you for subscribing!</span>
+                        )}
                 </ListTile>
 
             </div>
@@ -230,11 +230,11 @@ Prescriptions.getTemplateName = () => {
     return 'prescriptions'
 }
 
-Prescriptions.shouldGetProps = ({previousParams, params}) => {
+Prescriptions.shouldGetProps = ({ previousParams, params }) => {
     return !previousParams || previousParams.categoryId !== params.categoryId
 }
 
-Prescriptions.getProps = async ({params, connector}) => {
+Prescriptions.getProps = async ({ params, connector }) => {
     const categoryId = 'prescriptions'
     const [category, productSearch] = await Promise.all([
         connector.getCategory(categoryId),
@@ -245,7 +245,7 @@ Prescriptions.getProps = async ({params, connector}) => {
             query: ''
         })
     ])
-    return {category, productSearch}
+    return { category, productSearch }
 }
 
 Prescriptions.propTypes = {
