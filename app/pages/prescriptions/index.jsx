@@ -18,6 +18,7 @@ import SkeletonText from 'progressive-web-sdk/dist/components/skeleton-text'
 
 import { getAnalyticsManager } from '../../analytics'
 import EmailSubscribe from '../../components/email-subscribe'
+import PrescriptionsGrid from '../../components/prescriptions-grid'
 import { Desktop, Mobile, Tablet } from '../../components/media-queries'
 
 const analyticsManager = getAnalyticsManager()
@@ -158,6 +159,19 @@ const Prescriptions = (props) => {
                             </Fragment>
                         )}
                 </div>
+
+                <ListTile className="pw--instructional-block">
+                    <div className="u-margin-bottom-lg">
+                        This is the Prescriptions Grid component:
+                    </div>
+
+                    {!isSubscribed ? (
+                        <PrescriptionsGrid analyticsManager={analyticsManager}
+                            onSubmit={() => setIsSubscribed(true)} />
+                    ) : (
+                            <span>Thank you for subscribing!</span>
+                        )}
+                </ListTile>
 
                 <List>
                     <ListTile className="pw--instructional-block"
