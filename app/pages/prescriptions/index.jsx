@@ -17,7 +17,6 @@ import SkeletonBlock from 'progressive-web-sdk/dist/components/skeleton-block'
 import SkeletonText from 'progressive-web-sdk/dist/components/skeleton-text'
 
 import { getAnalyticsManager } from '../../analytics'
-import EmailSubscribe from '../../components/email-subscribe'
 import PrescriptionsGrid from '../../components/prescriptions-grid'
 import { Desktop, Mobile, Tablet } from '../../components/media-queries'
 
