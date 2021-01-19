@@ -209,19 +209,6 @@ const Prescriptions = (props) => {
                     </Button>
                 </ListTile>
 
-                <ListTile className="pw--instructional-block">
-                    <div className="u-margin-bottom-lg">
-                        Set up forms like a Join Mailing List section using this example:
-                    </div>
-
-                    {!isSubscribed ? (
-                        <EmailSubscribe analyticsManager={analyticsManager}
-                            onSubmit={() => setIsSubscribed(true)} />
-                    ) : (
-                            <span>Thank you for subscribing!</span>
-                        )}
-                </ListTile>
-
             </div>
 
             {/* Floating element/components */}
