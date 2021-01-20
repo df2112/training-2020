@@ -5,28 +5,21 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 
 import Breadcrumbs from 'progressive-web-sdk/dist/components/breadcrumbs'
-import Button from 'progressive-web-sdk/dist/components/button'
 import Divider from 'progressive-web-sdk/dist/components/divider'
-import { HeaderBar, HeaderBarActions, HeaderBarTitle } from 'progressive-web-sdk/dist/components/header-bar'
 import Link from 'progressive-web-sdk/dist/components/link'
-import List from 'progressive-web-sdk/dist/components/list'
-import ListTile from 'progressive-web-sdk/dist/components/list-tile'
 import Tile from 'progressive-web-sdk/dist/components/tile'
-import Sheet from 'progressive-web-sdk/dist/components/sheet'
 import SkeletonBlock from 'progressive-web-sdk/dist/components/skeleton-block'
 import SkeletonText from 'progressive-web-sdk/dist/components/skeleton-text'
 
 import { getAnalyticsManager } from '../../analytics'
 import PrescriptionsGrid from '../../components/prescriptions-grid'
-import { Desktop, Mobile, Tablet } from '../../components/media-queries'
+import { Desktop } from '../../components/media-queries'
 
 const analyticsManager = getAnalyticsManager()
 const PRODUCT_SKELETON_COUNT = 6
 
 const Prescriptions = (props) => {
     const { errorMessage, productSearch, category } = props
-
-    const [isShippingSheetOpen, setIsShippingSheetOpen] = useState(false)
     const [isSubscribed, setIsSubscribed] = useState(false)
 
     const getBreadcrumbs = (category) => {
@@ -39,36 +32,6 @@ const Prescriptions = (props) => {
         return price % 1 === 0 ? (price = `$${price}.00`) : `$${price}`
     }
 
-    const ShippingDeliveryModal = ({ width }) => (
-        <Sheet
-            className="pw--no-shadow t-product-details__shipping-delivery-info-modal"
-            coverage={width}
-            open={isShippingSheetOpen}
-            effect="modal-center"
-            shrinkToContent
-            headerContent={
-                <HeaderBar>
-                    <HeaderBarTitle className="u-flex u-padding-start-md u-text-align-start u-text-size-big">
-                        Shipping & Delivery Info
-                    </HeaderBarTitle>
-
-                    <HeaderBarActions>
-                        <Button innerClassName="u-padding-0" icon="close"
-                            onClick={() => setIsShippingSheetOpen(!isShippingSheetOpen)}
-                        />
-                    </HeaderBarActions>
-                </HeaderBar>
-            }
-        >
-            <div className="t-product-details__shipping-delivery-modal-content">
-                <span>
-                    Receive free Standard Shipping within Canada for purchases of $150+,
-                    excluding taxes, when signed into a Mobify.com account.
-                </span>
-            </div>
-        </Sheet>
-    )
-
     return (
         <div className="t-prescriptions-list">
             <Breadcrumbs
@@ -76,6 +39,7 @@ const Prescriptions = (props) => {
                 items={getBreadcrumbs(category)}
                 includeMicroData
             />
+
             {productSearch && (
                 <Helmet>
                     <title>{`${productSearch.total} results for "${productSearch.query}"`}</title>
@@ -86,6 +50,7 @@ const Prescriptions = (props) => {
                     />
                 </Helmet>
             )}
+
             {category ? (
                 <Fragment>
                     <h1 className="u-margin-bottom-lg">{category.name}</h1>
@@ -93,15 +58,19 @@ const Prescriptions = (props) => {
             ) : (
                     <SkeletonText type="h1" width="50%" />
                 )}
+
             <Desktop>
                 <Divider className="u-margin-bottom-md" />
             </Desktop>
+
             <div className="t-prescriptions-list__container">
+
                 {errorMessage && (
                     <h1 className="u-margin-top-lg u-margin-center t-prescriptions-list__error-msg">
                         {errorMessage}
                     </h1>
                 )}
+
                 <div className="t-prescriptions-list__container-items">
                     {productSearch ? (
                         <Fragment>
@@ -159,69 +128,19 @@ const Prescriptions = (props) => {
                         )}
                 </div>
 
-                <ListTile className="pw--instructional-block">
-                    <div className="u-margin-bottom-lg">
-                        This is the Prescriptions Grid component:
+                <div className="u-margin-bottom-lg">
+                    This is the Prescriptions Grid component:
                     </div>
 
-                    {!isSubscribed ? (
-                        <PrescriptionsGrid analyticsManager={analyticsManager}
-                            onSubmit={() => setIsSubscribed(true)} />
-                    ) : (
-                            <span>Thank you for subscribing!</span>
-                        )}
-                </ListTile>
-
-                <List>
-                    <ListTile className="pw--instructional-block"
-                        startAction={<Button className="pw--blank" icon="user" />}
-                        endAction={<Button className="pw--blank" icon="chevron-right" />}
-                    >
-                        <div>
-                            ListItem with <code>startAction</code> and <code>endAction</code>
-                        </div>
-                    </ListTile>
-                    <ListTile className="pw--instructional-block"
-                        startAction={<Button className="pw--blank" icon="user" />}
-                        endAction={<Button className="pw--blank" icon="chevron-right" />}
-                    >
-                        <div>
-                            ListItem with <code>startAction</code> and <code>endAction</code>
-                        </div>
-                    </ListTile>
-                    <ListTile className="pw--instructional-block"
-                        startAction={<Button className="pw--blank" icon="user" />}
-                        endAction={<Button className="pw--blank" icon="chevron-right" />}
-                    >
-                        <div>
-                            ListItem with <code>startAction</code> and <code>endAction</code>
-                        </div>
-                    </ListTile>
-                </List>
-
-                <ListTile className="pw--instructional-block">
-                    <div className="u-margin-bottom-lg">Set up a modal with with example:</div>
-
-                    <Button className="t-product-details__modal-button pw--primary qa-modal-button"
-                        onClick={() => setIsShippingSheetOpen(!isShippingSheetOpen)}>
-                        Modal Button
-                    </Button>
-                </ListTile>
+                {!isSubscribed ? (
+                    <PrescriptionsGrid analyticsManager={analyticsManager}
+                        onSubmit={() => setIsSubscribed(true)} />
+                ) : (
+                        <span>Thank you for subscribing!</span>
+                    )}
 
             </div>
 
-            {/* Floating element/components */}
-            <Mobile>
-                <ShippingDeliveryModal width="80%" />
-            </Mobile>
-
-            <Tablet>
-                <ShippingDeliveryModal width="60%" />
-            </Tablet>
-
-            <Desktop>
-                <ShippingDeliveryModal width="40%" />
-            </Desktop>
         </div>
     )
 }
