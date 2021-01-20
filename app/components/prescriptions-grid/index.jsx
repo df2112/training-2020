@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import Button from 'progressive-web-sdk/dist/components/button'
@@ -21,7 +21,7 @@ export const validate = (values) => {
 }
 
 const PrescriptionsGrid = (props) => {
-    const { analyticsManager, listItems } = props
+    const { analyticsManager, doctors, listItems } = props
     const [value, setValue] = useState('')
     const [error, setError] = useState(false)
     const [isShippingSheetOpen, setIsShippingSheetOpen] = useState(false)
@@ -121,7 +121,9 @@ const PrescriptionsGrid = (props) => {
 
                 {/* Row 2: Modal button */}
                 <ListTile className="pw--instructional-block">
-                    <div className="u-margin-bottom-lg">Set up a modal with with example:</div>
+                    <div className="u-margin-bottom-lg">
+                        Set up a modal with with example:
+                    </div>
 
                     <Button className="t-product-details__modal-button pw--primary qa-modal-button"
                         onClick={() => setIsShippingSheetOpen(!isShippingSheetOpen)}>
@@ -131,12 +133,23 @@ const PrescriptionsGrid = (props) => {
 
                 {/* Row 3+: Dynamic items */}
                 {listItems.map((item) => (
-                    <ListTile
-                        key={item.field2} className="pw--instructional-block"
+                    <ListTile className="pw--instructional-block"
+                        key={item.field2} 
                         startAction={<Button className="pw--blank" icon="user" />}
                         endAction={<Button className="pw--blank" icon="chevron-right" />}
                     >
-                        {item.field2} : { item.field1}
+                        <div>
+                            {item.field2} : {item.field1}
+                        </div>
+
+                        {/* <select value={this.state.value} onChange={this.handleChange}> */}
+                        <select>
+                            {doctors && doctors.length > 0 && doctors.map((doctor) => (
+                                <Fragment key={doctor.age}>
+                                    <option value={doctor.age}>{doctor.name}</option>
+                                </Fragment>
+                            ))}
+                        </select>
                     </ListTile>
                 ))}
             </List>

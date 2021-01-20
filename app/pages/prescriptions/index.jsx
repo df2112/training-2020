@@ -18,6 +18,33 @@ import { Desktop } from '../../components/media-queries'
 const analyticsManager = getAnalyticsManager()
 const PRODUCT_SKELETON_COUNT = 6
 
+const doctors = [
+    {
+        name: 'Tim Brown',
+        age: 41
+    },
+    {
+        name: 'Dave Foley',
+        age: 42
+    },
+    {
+        name: 'Olivier Lafont',
+        age: 43
+    },
+    {
+        name: 'Nupur Marwaha',
+        age: 44
+    },
+    {
+        name: 'Nat Pavic',
+        age: 45
+    },
+    {
+        name: 'Amulya Pradhan',
+        age: 46
+    }
+]
+
 const listItems = [
     {
         field1: 'Hear me roar!',
@@ -150,6 +177,7 @@ const Prescriptions = (props) => {
                 {!isSubscribed ? (
                     <PrescriptionsGrid 
                         analyticsManager={analyticsManager}
+                        doctors={doctors}
                         listItems={listItems}
                         onSubmit={() => setIsSubscribed(true)} />
                 ) : (
