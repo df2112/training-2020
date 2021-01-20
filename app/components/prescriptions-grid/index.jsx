@@ -12,6 +12,25 @@ import { Desktop, Mobile, Tablet } from '../../components/media-queries'
 const analyticsManager = getAnalyticsManager()
 const EMAIL_SUBSCRIBE_FORM_NAME = 'email-subscribe'
 
+const listItems = [
+    {
+        field1: 'Hear me roar!',
+        field2: 'A'
+    },
+    {
+        field1: 'Foobar',
+        field2: 'B'
+    },
+    {
+        field1: 'Quotes and stuff',
+        field2: 'C'
+    },
+    {
+        field1: 'Lorem ipsum',
+        field2: 'D'
+    }
+]
+
 export const validate = (values) => {
     const errors = {}
     if ((values.email || '').search(/@mobify.com$/) < 0) {
@@ -125,30 +144,15 @@ const PrescriptionsGrid = (props) => {
                 </ListTile>
 
                 {/* Row 3+: Dynamic items */}
-                <ListTile className="pw--instructional-block"
-                    startAction={<Button className="pw--blank" icon="user" />}
-                    endAction={<Button className="pw--blank" icon="chevron-right" />}
-                >
-                    <div>
-                        ListItem with <code>startAction</code> and <code>endAction</code>
-                    </div>
-                </ListTile>
-                <ListTile className="pw--instructional-block"
-                    startAction={<Button className="pw--blank" icon="user" />}
-                    endAction={<Button className="pw--blank" icon="chevron-right" />}
-                >
-                    <div>
-                        ListItem with <code>startAction</code> and <code>endAction</code>
-                    </div>
-                </ListTile>
-                <ListTile className="pw--instructional-block"
-                    startAction={<Button className="pw--blank" icon="user" />}
-                    endAction={<Button className="pw--blank" icon="chevron-right" />}
-                >
-                    <div>
-                        ListItem with <code>startAction</code> and <code>endAction</code>
-                    </div>
-                </ListTile>
+                {listItems.map((item) => (
+                    <ListTile
+                        key={item.field2} className="pw--instructional-block"
+                        startAction={<Button className="pw--blank" icon="user" />}
+                        endAction={<Button className="pw--blank" icon="chevron-right" />}
+                    >
+                        {item.field2} : { item.field1}
+                    </ListTile>
+                ))}
             </List>
 
             {/* Floating element/components */}
@@ -163,7 +167,6 @@ const PrescriptionsGrid = (props) => {
             <Desktop>
                 <ShippingDeliveryModal width="40%" />
             </Desktop>
-
         </div>
     )
 }
