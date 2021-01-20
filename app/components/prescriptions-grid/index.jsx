@@ -39,52 +39,42 @@ const PrescriptionsGrid = (props) => {
     }
 
     return (
-        <form id={EMAIL_SUBSCRIBE_FORM_NAME} 
-            className="c-email-subscribe" 
-            data-analytics-name={EMAIL_SUBSCRIBE_FORM_NAME}
-            onSubmit={handleSubmit}
-        >
-            <div className="c-email-subscribe__form-field-row u-flexbox">
-                <div className={`c-email-subscribe__form-field u-flex ${error ? 'c-email-subscribe__form-field-error' : ''}`}>
-                    <div className="c-email-subscribe__form-field-inner">
-                        <div className="c-email-subscribe__form-field-label-wrap">
-                            <label className="c-email-subscribe__form-field-label" htmlFor="email">
-                                {'Email Address'}
-                            </label>
-                        </div>
-                        <div className="c-email-subscribe__form-field-input">
-                            <input
-                                id="email"
-                                type="email"
-                                data-analytics-name="email"
-                                className="u-flex"
-                                required
-                                onChange={handleChange}
-                                value={value}
-                            />
-                        </div>
-                        {error && (
-                            <div className="c-email-subscribe__form-field-error-text">
-                                {error}
-                            </div>
-                        )}
-                    </div>
-                </div>
-                <div className="c-email-subscribe__form-field c-email-subscribe__button u-flex-none u-margin-start-0">
-                    <div className="c-email-subscribe__form-field-inner">
-                        <div className="c-email-subscribe__form-field-input">
-                            <div className="c-email-subscribe__form-field-label" aria-hidden="true">
-                                {'Email Address'}
-                            </div>
+        <div>
+            <form id={EMAIL_SUBSCRIBE_FORM_NAME}
+                className="c-email-subscribe"
+                data-analytics-name={EMAIL_SUBSCRIBE_FORM_NAME}
+                onSubmit={handleSubmit}>
 
-                            <Button type="submit" className="pw--primary">
-                                Submit
-                            </Button>
+                {/* Email address row */}
+                <div className="c-email-subscribe__form-field-row u-flexbox">
+                    <div className={`c-email-subscribe__form-field u-flex ${error ? 'c-email-subscribe__form-field-error' : ''}`}>
+                        <div className="c-email-subscribe__form-field-inner">
+                            <div className="c-email-subscribe__form-field-label-wrap">
+                                <label className="c-email-subscribe__form-field-label" htmlFor="email">{'Email Address'}</label>
+                            </div>
+                            <div className="c-email-subscribe__form-field-input">
+                                <input id="email" type="email" data-analytics-name="email" className="u-flex" 
+                                    required onChange={handleChange} value={value}/>
+                            </div>
+                            {error && (
+                                <div className="c-email-subscribe__form-field-error-text">
+                                    {error}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                    <div className="c-email-subscribe__form-field c-email-subscribe__button u-flex-none u-margin-start-0">
+                        <div className="c-email-subscribe__form-field-inner">
+                            <div className="c-email-subscribe__form-field-input">
+                                <div className="c-email-subscribe__form-field-label" aria-hidden="true">{'Email Address'}</div>
+                                <Button type="submit" className="pw--primary">Submit</Button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
+
+            </form>
+        </div>
     )
 }
 
