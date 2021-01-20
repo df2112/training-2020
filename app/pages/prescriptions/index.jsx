@@ -18,6 +18,25 @@ import { Desktop } from '../../components/media-queries'
 const analyticsManager = getAnalyticsManager()
 const PRODUCT_SKELETON_COUNT = 6
 
+const listItems = [
+    {
+        field1: 'Hear me roar!',
+        field2: 'A'
+    },
+    {
+        field1: 'Foobar',
+        field2: 'B'
+    },
+    {
+        field1: 'Quotes and stuff',
+        field2: 'C'
+    },
+    {
+        field1: 'Lorem ipsum',
+        field2: 'D'
+    }
+]
+
 const Prescriptions = (props) => {
     const { errorMessage, productSearch, category } = props
     const [isSubscribed, setIsSubscribed] = useState(false)
@@ -128,12 +147,10 @@ const Prescriptions = (props) => {
                         )}
                 </div>
 
-                <div className="u-margin-bottom-lg">
-                    This is the Prescriptions Grid component:
-                    </div>
-
                 {!isSubscribed ? (
-                    <PrescriptionsGrid analyticsManager={analyticsManager}
+                    <PrescriptionsGrid 
+                        analyticsManager={analyticsManager}
+                        listItems={listItems}
                         onSubmit={() => setIsSubscribed(true)} />
                 ) : (
                         <span>Thank you for subscribing!</span>

@@ -12,25 +12,6 @@ import { Desktop, Mobile, Tablet } from '../../components/media-queries'
 const analyticsManager = getAnalyticsManager()
 const EMAIL_SUBSCRIBE_FORM_NAME = 'email-subscribe'
 
-const listItems = [
-    {
-        field1: 'Hear me roar!',
-        field2: 'A'
-    },
-    {
-        field1: 'Foobar',
-        field2: 'B'
-    },
-    {
-        field1: 'Quotes and stuff',
-        field2: 'C'
-    },
-    {
-        field1: 'Lorem ipsum',
-        field2: 'D'
-    }
-]
-
 export const validate = (values) => {
     const errors = {}
     if ((values.email || '').search(/@mobify.com$/) < 0) {
@@ -40,6 +21,7 @@ export const validate = (values) => {
 }
 
 const PrescriptionsGrid = (props) => {
+    const { analyticsManager, listItems } = props
     const [value, setValue] = useState('')
     const [error, setError] = useState(false)
     const [isShippingSheetOpen, setIsShippingSheetOpen] = useState(false)
@@ -95,6 +77,10 @@ const PrescriptionsGrid = (props) => {
 
     return (
         <div>
+            <div className="u-margin-bottom-lg">
+                This is the Prescriptions Grid component:
+            </div>
+
             <List>
                 {/* Row 1: Email address */}
                 <ListTile className="pw--instructional-block">
