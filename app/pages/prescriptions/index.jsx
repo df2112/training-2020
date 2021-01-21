@@ -61,25 +61,6 @@ const doctors = [
     }
 ]
 
-const listItems = [
-    {
-        field1: 'Hear me roar!',
-        field2: 'A'
-    },
-    {
-        field1: 'Foobar',
-        field2: 'B'
-    },
-    {
-        field1: 'Quotes and stuff',
-        field2: 'C'
-    },
-    {
-        field1: 'Lorem ipsum',
-        field2: 'D'
-    }
-]
-
 const Prescriptions = (props) => {
     const { errorMessage, productSearch, category } = props
     const [isSubscribed, setIsSubscribed] = useState(false)
@@ -194,7 +175,6 @@ const Prescriptions = (props) => {
                     <PrescriptionsGrid 
                         analyticsManager={analyticsManager}
                         doctors={doctors}
-                        listItems={listItems}
                         onSubmit={() => setIsSubscribed(true)} />
                 ) : (
                         <span>Thank you for subscribing!</span>
