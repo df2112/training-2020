@@ -22,9 +22,13 @@ export const validate = (values) => {
 
 const PrescriptionsGrid = (props) => {
     const { analyticsManager, doctors, listItems } = props
+
     const [emailValue, setEmailValue] = useState('')
     const [error, setError] = useState(false)
     const [isShippingSheetOpen, setIsShippingSheetOpen] = useState(false)
+    const [selectedDoctor, setSelectedDoctor] = useState('999')
+
+    const handleDoctorChange = (event) => setSelectedDoctor(event.target.value)
 
     const handleEmailChange = (event) => setEmailValue(event.target.value)
 
@@ -142,11 +146,10 @@ const PrescriptionsGrid = (props) => {
                             {item.field2} : {item.field1}
                         </div>
 
-                        {/* <select value={this.state.value} onChange={this.handleChange}> */}
-                        <select>
+                        <select value={selectedDoctor} onChange={handleDoctorChange}>
                             {doctors && doctors.length > 0 && doctors.map((doctor) => (
-                                <Fragment key={doctor.age}>
-                                    <option value={doctor.age}>{doctor.name}</option>
+                                <Fragment key={doctor._doctorKey}>
+                                    <option value={doctor._doctorKey}>{doctor.name}</option>
                                 </Fragment>
                             ))}
                         </select>

@@ -20,26 +20,42 @@ const PRODUCT_SKELETON_COUNT = 6
 
 const doctors = [
     {
+        _doctorKey: '999',
+        name: 'Select doctor ...',
+        age: 99,
+    },
+    {
+        _doctorKey: '000',
+        name: 'Add New Doctor',
+        age: 40,
+    },
+    {
+        _doctorKey: '001',
         name: 'Tim Brown',
-        age: 41
+        age: 41,
     },
     {
+        _doctorKey: '002',
         name: 'Dave Foley',
-        age: 42
+        age: 42,
     },
     {
+        _doctorKey: '003',
         name: 'Olivier Lafont',
-        age: 43
+        age: 43,
     },
     {
+        _doctorKey: '004',
         name: 'Nupur Marwaha',
-        age: 44
+        age: 44,
     },
     {
+        _doctorKey: '005',
         name: 'Nat Pavic',
-        age: 45
+        age: 45,
     },
     {
+        _doctorKey: '006',
         name: 'Amulya Pradhan',
         age: 46
     }
