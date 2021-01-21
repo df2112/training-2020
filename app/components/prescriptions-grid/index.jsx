@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import Button from 'progressive-web-sdk/dist/components/button'
@@ -20,13 +20,22 @@ export const validate = (values) => {
     return errors
 }
 
-const PrescriptionsGrid = (props) => {
-    const { analyticsManager, doctors, listItems } = props
+const gridRows = [
+    {
+        _gridRowKey: 1,
+        field1: 'Hear me roar!!!',
+        field2: 'A'
+    }
+]
 
+const PrescriptionsGrid = (props) => {
+    const { analyticsManager, doctors } = props
     const [emailValue, setEmailValue] = useState('')
     const [error, setError] = useState(false)
     const [isShippingSheetOpen, setIsShippingSheetOpen] = useState(false)
     const [selectedDoctor, setSelectedDoctor] = useState('999')
+    const [lastRowKey, setLastRowKey] = useState(gridRows[0]._gridRowKey)
+    const lastRowKeyRef = useRef(lastRowKey)
 
     const handleDoctorChange = (event) => setSelectedDoctor(event.target.value)
 
@@ -47,6 +56,19 @@ const PrescriptionsGrid = (props) => {
         }
 
         if (onSubmit) onSubmit()
+    }
+
+    const handleAddGridRow = (newRowKey) => {
+        lastRowKeyRef.current = newRowKey
+        setLastRowKey(newRowKey)
+
+        const newGridRow = {
+            _gridRowKey: lastRowKeyRef.current,
+            field1: 'Hear me roar again!!!',
+            field2: lastRowKeyRef.current
+        }
+
+        gridRows.push(newGridRow)
     }
 
     const ShippingDeliveryModal = ({ width }) => (
@@ -136,15 +158,20 @@ const PrescriptionsGrid = (props) => {
                 </ListTile>
 
                 {/* Row 3+: Dynamic items */}
-                {listItems.map((item) => (
+                {gridRows.map((item) => (
                     <ListTile className="pw--instructional-block"
-                        key={item.field2} 
-                        startAction={<Button className="pw--blank" icon="user" />}
-                        endAction={<Button className="pw--blank" icon="chevron-right" />}
+                        key={item._gridRowKey}
+                        endAction={
+                            <Button 
+                                className="pw--blank" 
+                                icon="trash" 
+                                onClick={() => handleAddGridRow(lastRowKey + 1)} 
+                            />
+                        }
                     >
-                        <div>
+                        <span>
                             {item.field2} : {item.field1}
-                        </div>
+                        </span>
 
                         <select value={selectedDoctor} onChange={handleDoctorChange}>
                             {doctors && doctors.length > 0 && doctors.map((doctor) => (
