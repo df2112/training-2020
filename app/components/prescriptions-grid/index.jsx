@@ -22,15 +22,15 @@ export const validate = (values) => {
 
 const PrescriptionsGrid = (props) => {
     const { analyticsManager, doctors, listItems } = props
-    const [value, setValue] = useState('')
+    const [emailValue, setEmailValue] = useState('')
     const [error, setError] = useState(false)
     const [isShippingSheetOpen, setIsShippingSheetOpen] = useState(false)
 
-    const handleChange = (event) => setValue(event.target.value)
+    const handleEmailChange = (event) => setEmailValue(event.target.value)
 
     const handleSubmit = (event) => {
         const { onSubmit } = props
-        const emailError = validate({ email: value }).email
+        const emailError = validate({ email: emailValue }).email
 
         if (emailError) {
             event.preventDefault()
@@ -97,7 +97,7 @@ const PrescriptionsGrid = (props) => {
                                     </div>
                                     <div className="c-email-subscribe__form-field-input">
                                         <input id="email" type="email" data-analytics-name="email" className="u-flex"
-                                            required onChange={handleChange} value={value} />
+                                            required onChange={handleEmailChange} value={emailValue} />
                                     </div>
                                     {error && (
                                         <div className="c-email-subscribe__form-field-error-text">
