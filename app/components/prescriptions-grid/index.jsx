@@ -115,7 +115,7 @@ const PrescriptionsGrid = (props) => {
             </div>
 
             <List>
-                {/* Row 1: Email address */}
+                {/* Section 1: Email address */}
                 <ListTile className="pw--instructional-block">
                     <form id={EMAIL_SUBSCRIBE_FORM_NAME}
                         className="c-email-subscribe"
@@ -152,7 +152,7 @@ const PrescriptionsGrid = (props) => {
                     </form>
                 </ListTile>
 
-                {/* Row 2: Modal button */}
+                {/* Section 2: Modal button */}
                 <ListTile className="pw--instructional-block">
                     <div className="u-margin-bottom-lg">
                         Set up a modal with with example:
@@ -164,12 +164,11 @@ const PrescriptionsGrid = (props) => {
                     </Button>
                 </ListTile>
 
-                {/* Row 3+: Dynamic items */}
+                {/* Section 3: Prescription Rows */}
                 {gridRows.map((item) => (
                     <ListTile
                         className="pw--instructional-block"
                         key={item._gridRowKey}
-                        startAction={<Button className="pw--blank" icon="user" onClick={() => handleAddGridRow(lastRowKey + 1)} />}
                         endAction={<Button className="pw--blank" icon="trash" onClick={() => handleRemoveGridRow(item._gridRowKey)} />}
                     >
                         <span>
@@ -185,6 +184,15 @@ const PrescriptionsGrid = (props) => {
                         </select>
                     </ListTile>
                 ))}
+
+                {/* Section 4: Add New Prescription button */}
+                <ListTile className="pw--instructional-block">
+                    <Button className="t-product-details__modal-button pw--primary qa-modal-button"
+                        onClick={() => handleAddGridRow(lastRowKey + 1)}>
+                        Add New Prescription
+                    </Button>
+                </ListTile>
+
             </List>
 
             {/* Floating element/components */}
