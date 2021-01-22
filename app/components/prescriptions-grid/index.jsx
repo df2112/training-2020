@@ -20,7 +20,7 @@ export const validate = (values) => {
     return errors
 }
 
-const gridRows = [
+const initGridRows = [
     {
         _gridRowKey: 1,
         field1: 'Hear me roar!!!',
@@ -30,11 +30,13 @@ const gridRows = [
 
 const PrescriptionsGrid = (props) => {
     const { analyticsManager, doctors } = props
+
     const [emailValue, setEmailValue] = useState('')
     const [error, setError] = useState(false)
+    const [gridRows, setGridRows] = useState(initGridRows)
     const [isShippingSheetOpen, setIsShippingSheetOpen] = useState(false)
     const [selectedDoctor, setSelectedDoctor] = useState('999')
-    const [lastRowKey, setLastRowKey] = useState(gridRows[0]._gridRowKey)
+    const [lastRowKey, setLastRowKey] = useState(initGridRows[0]._gridRowKey)
     const lastRowKeyRef = useRef(lastRowKey)
 
     const handleDoctorChange = (event) => setSelectedDoctor(event.target.value)
@@ -68,7 +70,12 @@ const PrescriptionsGrid = (props) => {
             field2: lastRowKeyRef.current
         }
 
-        gridRows.push(newGridRow)
+        setGridRows(gridRows.concat(newGridRow))
+    }
+
+    const handleRemoveGridRow = (rowKey) => {
+        const newGridRows = gridRows.filter(el => el._gridRowKey != rowKey)
+        setGridRows(newGridRows)
     }
 
     const ShippingDeliveryModal = ({ width }) => (
@@ -159,15 +166,11 @@ const PrescriptionsGrid = (props) => {
 
                 {/* Row 3+: Dynamic items */}
                 {gridRows.map((item) => (
-                    <ListTile className="pw--instructional-block"
+                    <ListTile
+                        className="pw--instructional-block"
                         key={item._gridRowKey}
-                        endAction={
-                            <Button 
-                                className="pw--blank" 
-                                icon="trash" 
-                                onClick={() => handleAddGridRow(lastRowKey + 1)} 
-                            />
-                        }
+                        startAction={<Button className="pw--blank" icon="user" onClick={() => handleAddGridRow(lastRowKey + 1)} />}
+                        endAction={<Button className="pw--blank" icon="trash" onClick={() => handleRemoveGridRow(item._gridRowKey)} />}
                     >
                         <span>
                             {item.field2} : {item.field1}
