@@ -50,30 +50,17 @@ class DoctorSearch extends React.PureComponent {
                 data-analytics-name={DOCTOR_SEARCH_FORM_NAME}
                 onSubmit={this.handleSubmit}
             >
+
+                {/* Name */}
                 <div className="c-doctor-search__form-field-row u-flexbox">
-                    <div
-                        className={`c-doctor-search__form-field u-flex ${this.state.error ? 'c-doctor-search__form-field-error' : ''
-                            }`}
-                    >
+                    <div className={`c-doctor-search__form-field u-flex ${this.state.error ? 'c-doctor-search__form-field-error' : ''}`}>
                         <div className="c-doctor-search__form-field-inner">
                             <div className="c-doctor-search__form-field-label-wrap">
-                                <label
-                                    className="c-doctor-search__form-field-label"
-                                    htmlFor="email"
-                                >
-                                    {'Email Address'}
-                                </label>
+                                <label className="c-doctor-search__form-field-label" htmlFor="email">{'Name'}</label>
                             </div>
                             <div className="c-doctor-search__form-field-input">
-                                <input
-                                    id="email"
-                                    type="email"
-                                    data-analytics-name="email"
-                                    className="u-flex"
-                                    required
-                                    onChange={this.handleChange}
-                                    value={this.state.value}
-                                />
+                                <input id="name" type="email" data-analytics-name="email" className="u-flex"
+                                    required onChange={this.handleChange} value={this.state.value} />
                             </div>
                             {this.state.error && (
                                 <div className="c-doctor-search__form-field-error-text">
@@ -82,22 +69,80 @@ class DoctorSearch extends React.PureComponent {
                             )}
                         </div>
                     </div>
+                </div>
+
+                {/* City */}
+                <div className="c-doctor-search__form-field-row u-flexbox">
+                    <div className={`c-doctor-search__form-field u-flex ${this.state.error ? 'c-doctor-search__form-field-error' : ''}`}>
+                        <div className="c-doctor-search__form-field-inner">
+                            <div className="c-doctor-search__form-field-label-wrap">
+                                <label className="c-doctor-search__form-field-label" htmlFor="email">{'City'}</label>
+                            </div>
+                            <div className="c-doctor-search__form-field-input">
+                                <input id="city" type="email" data-analytics-name="email" className="u-flex"
+                                    required onChange={this.handleChange} value={this.state.value} />
+                            </div>
+                            {this.state.error && (
+                                <div className="c-doctor-search__form-field-error-text">
+                                    {this.state.error}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+
+                {/* State */}
+                <div className="c-doctor-search__form-field-row u-flexbox">
+                    <div className={`c-doctor-search__form-field u-flex ${this.state.error ? 'c-doctor-search__form-field-error' : ''}`}>
+                        <div className="c-doctor-search__form-field-inner">
+                            <div className="c-doctor-search__form-field-label-wrap">
+                                <label className="c-doctor-search__form-field-label" htmlFor="email">{'State'}</label>
+                            </div>
+                            <div className="c-doctor-search__form-field-input">
+                                <input id="state" type="email" data-analytics-name="email" className="u-flex"
+                                    required onChange={this.handleChange} value={this.state.value} />
+                            </div>
+                            {this.state.error && (
+                                <div className="c-doctor-search__form-field-error-text">
+                                    {this.state.error}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Zip */}
+                <div className="c-doctor-search__form-field-row u-flexbox">
+                    <div className={`c-doctor-search__form-field u-flex ${this.state.error ? 'c-doctor-search__form-field-error' : ''}`}>
+                        <div className="c-doctor-search__form-field-inner">
+                            <div className="c-doctor-search__form-field-label-wrap">
+                                <label className="c-doctor-search__form-field-label" htmlFor="email">{'Zip'}</label>
+                            </div>
+                            <div className="c-doctor-search__form-field-input">
+                                <input id="zip" type="email" data-analytics-name="email" className="u-flex"
+                                    required onChange={this.handleChange} value={this.state.value} />
+                            </div>
+                            {this.state.error && (
+                                <div className="c-doctor-search__form-field-error-text">
+                                    {this.state.error}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Submit Button */}
+                <div className="c-doctor-search__form-field-row u-flexbox">
                     <div className="c-doctor-search__form-field c-doctor-search__button u-flex-none u-margin-start-0">
                         <div className="c-doctor-search__form-field-inner">
                             <div className="c-doctor-search__form-field-input">
-                                <div
-                                    className="c-doctor-search__form-field-label"
-                                    aria-hidden="true"
-                                >
-                                    {'Email Address'}
-                                </div>
-                                <Button type="submit" className="pw--primary">
-                                    Submit
-                                </Button>
+                                <div className="c-doctor-search__form-field-label" aria-hidden="true"></div>
+                                <Button type="submit" className="pw--primary">Search Doctors</Button>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </form>
         )
     }
