@@ -35,11 +35,20 @@ const PrescriptionsGrid = (props) => {
     const [error, setError] = useState(false)
     const [gridRows, setGridRows] = useState(initGridRows)
     const [isShippingSheetOpen, setIsShippingSheetOpen] = useState(false)
+    const [isDoctorModalOpen, setIsDoctorModalOpen] = useState(false)
     const [selectedDoctor, setSelectedDoctor] = useState('999')
     const [lastRowKey, setLastRowKey] = useState(initGridRows[0]._gridRowKey)
     const lastRowKeyRef = useRef(lastRowKey)
 
-    const handleDoctorChange = (event) => setSelectedDoctor(event.target.value)
+    const handleDoctorChange = (event) => {
+        console.log(event.target.value)
+
+        if (event.target.value === '000') {
+            setIsDoctorModalOpen(!isDoctorModalOpen)
+        } else {
+            setSelectedDoctor(event.target.value)
+        }
+    }
 
     const handleEmailChange = (event) => setEmailValue(event.target.value)
 
@@ -94,6 +103,36 @@ const PrescriptionsGrid = (props) => {
                     <HeaderBarActions>
                         <Button innerClassName="u-padding-0" icon="close"
                             onClick={() => setIsShippingSheetOpen(!isShippingSheetOpen)}
+                        />
+                    </HeaderBarActions>
+                </HeaderBar>
+            }
+        >
+            <div className="t-product-details__shipping-delivery-modal-content">
+                <span>
+                    Receive free Standard Shipping within Canada for purchases of $150+,
+                    excluding taxes, when signed into a Mobify.com account.
+                </span>
+            </div>
+        </Sheet>
+    )
+
+    const DoctorModal = ({ width }) => (
+        <Sheet
+            className="pw--no-shadow t-product-details__shipping-delivery-info-modal"
+            coverage={width}
+            open={isDoctorModalOpen}
+            effect="modal-center"
+            shrinkToContent
+            headerContent={
+                <HeaderBar>
+                    <HeaderBarTitle className="u-flex u-padding-start-md u-text-align-start u-text-size-big">
+                        Add Doctor
+                    </HeaderBarTitle>
+
+                    <HeaderBarActions>
+                        <Button innerClassName="u-padding-0" icon="close"
+                            onClick={() => setIsDoctorModalOpen(!isDoctorModalOpen)}
                         />
                     </HeaderBarActions>
                 </HeaderBar>
@@ -197,14 +236,17 @@ const PrescriptionsGrid = (props) => {
 
             {/* Floating element/components */}
             <Mobile>
+                <DoctorModal width="80%" />
                 <ShippingDeliveryModal width="80%" />
             </Mobile>
 
             <Tablet>
+                <DoctorModal width="60%" />
                 <ShippingDeliveryModal width="60%" />
             </Tablet>
 
             <Desktop>
+                <DoctorModal width="40%" />
                 <ShippingDeliveryModal width="40%" />
             </Desktop>
         </div>
