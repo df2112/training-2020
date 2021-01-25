@@ -9,6 +9,8 @@ import Sheet from 'progressive-web-sdk/dist/components/sheet'
 import { Tabs, TabsPanel } from 'progressive-web-sdk/dist/components/tabs'
 import { getAnalyticsManager } from '../../analytics'
 import { Desktop, Mobile, Tablet } from '../../components/media-queries'
+import DoctorAddNew from '../doctor-add-new'
+import DoctorSearch from '../doctor-search'
 
 const analyticsManager = getAnalyticsManager()
 const EMAIL_SUBSCRIBE_FORM_NAME = 'email-subscribe'
@@ -40,6 +42,9 @@ const PrescriptionsGrid = (props) => {
     const [lastRowKey, setLastRowKey] = useState(initGridRows[0]._gridRowKey)
     const lastRowKeyRef = useRef(lastRowKey)
 
+    const [isDave, setIsDave] = useState(false)
+
+
     const handleDoctorChange = (event) => {
         console.log(event.target.value)
 
@@ -51,6 +56,8 @@ const PrescriptionsGrid = (props) => {
     }
 
     const handleEmailChange = (event) => setEmailValue(event.target.value)
+
+    const handleDoctorSearchSubmit = (event) => setIsDave(true)
 
     const handleSubmit = (event) => {
         const { onSubmit } = props
@@ -110,11 +117,21 @@ const PrescriptionsGrid = (props) => {
                 <Tabs activeIndex={0}>
                     <TabsPanel title="Search Doctors">
                         <br />
-                        <p>Content for tab A</p>
+
+                        {!isDave ? (
+                            <DoctorSearch analyticsManager={analyticsManager} onSubmit={handleDoctorSearchSubmit} />
+                        ) : (<span>Hello Dave!</span>)
+                        }
+
                     </TabsPanel>
                     <TabsPanel title="Add New Doctor">
                         <br />
-                        <p>Content for tab B</p>
+
+                        {!isDave ? (
+                            <DoctorAddNew analyticsManager={analyticsManager} onSubmit={handleDoctorSearchSubmit} />
+                        ) : (<span>Hello Dave!</span>)
+                        }
+
                     </TabsPanel>
                 </Tabs>
             </div>
@@ -128,8 +145,17 @@ const PrescriptionsGrid = (props) => {
             </div>
 
             <List>
+                {/* <ListTile className="pw--instructional-block">
+                    <div className="u-margin-bottom-lg">Dave's form!</div>
+
+                    {!isDave ? (
+                        <DoctorSearch analyticsManager={analyticsManager} onSubmit={handleDoctorSearchSubmit}/>
+                    ) : (<span>Hello Dave!</span>)
+                    }
+                </ListTile> */}
+
                 {/* Section 1: Email address */}
-                <ListTile className="pw--instructional-block">
+                {/* <ListTile className="pw--instructional-block">
                     <form id={EMAIL_SUBSCRIBE_FORM_NAME}
                         className="c-email-subscribe"
                         data-analytics-name={EMAIL_SUBSCRIBE_FORM_NAME}
@@ -163,7 +189,7 @@ const PrescriptionsGrid = (props) => {
                         </div>
 
                     </form>
-                </ListTile>
+                </ListTile> */}
 
                 {/* Section 3: Prescription Rows */}
                 {gridRows.map((item) => (
