@@ -6,3 +6,4 @@ tests/e2e
 jest.config.js
 webpack
 scripts/generator/assets
+app
