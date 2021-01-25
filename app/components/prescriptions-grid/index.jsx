@@ -34,7 +34,6 @@ const PrescriptionsGrid = (props) => {
     const [emailValue, setEmailValue] = useState('')
     const [error, setError] = useState(false)
     const [gridRows, setGridRows] = useState(initGridRows)
-    const [isShippingSheetOpen, setIsShippingSheetOpen] = useState(false)
     const [isDoctorModalOpen, setIsDoctorModalOpen] = useState(false)
     const [selectedDoctor, setSelectedDoctor] = useState('999')
     const [lastRowKey, setLastRowKey] = useState(initGridRows[0]._gridRowKey)
@@ -86,36 +85,6 @@ const PrescriptionsGrid = (props) => {
         const newGridRows = gridRows.filter(el => el._gridRowKey != rowKey)
         setGridRows(newGridRows)
     }
-
-    const ShippingDeliveryModal = ({ width }) => (
-        <Sheet
-            className="pw--no-shadow t-product-details__shipping-delivery-info-modal"
-            coverage={width}
-            open={isShippingSheetOpen}
-            effect="modal-center"
-            shrinkToContent
-            headerContent={
-                <HeaderBar>
-                    <HeaderBarTitle className="u-flex u-padding-start-md u-text-align-start u-text-size-big">
-                        Shipping & Delivery Info
-                    </HeaderBarTitle>
-
-                    <HeaderBarActions>
-                        <Button innerClassName="u-padding-0" icon="close"
-                            onClick={() => setIsShippingSheetOpen(!isShippingSheetOpen)}
-                        />
-                    </HeaderBarActions>
-                </HeaderBar>
-            }
-        >
-            <div className="t-product-details__shipping-delivery-modal-content">
-                <span>
-                    Receive free Standard Shipping within Canada for purchases of $150+,
-                    excluding taxes, when signed into a Mobify.com account.
-                </span>
-            </div>
-        </Sheet>
-    )
 
     const DoctorModal = ({ width }) => (
         <Sheet
@@ -191,18 +160,6 @@ const PrescriptionsGrid = (props) => {
                     </form>
                 </ListTile>
 
-                {/* Section 2: Modal button */}
-                <ListTile className="pw--instructional-block">
-                    <div className="u-margin-bottom-lg">
-                        Set up a modal with with example:
-                    </div>
-
-                    <Button className="t-product-details__modal-button pw--primary qa-modal-button"
-                        onClick={() => setIsShippingSheetOpen(!isShippingSheetOpen)}>
-                        Modal Button
-                    </Button>
-                </ListTile>
-
                 {/* Section 3: Prescription Rows */}
                 {gridRows.map((item) => (
                     <ListTile
@@ -237,17 +194,14 @@ const PrescriptionsGrid = (props) => {
             {/* Floating element/components */}
             <Mobile>
                 <DoctorModal width="80%" />
-                <ShippingDeliveryModal width="80%" />
             </Mobile>
 
             <Tablet>
                 <DoctorModal width="60%" />
-                <ShippingDeliveryModal width="60%" />
             </Tablet>
 
             <Desktop>
                 <DoctorModal width="40%" />
-                <ShippingDeliveryModal width="40%" />
             </Desktop>
         </div>
     )
