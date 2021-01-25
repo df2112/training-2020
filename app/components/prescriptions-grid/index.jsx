@@ -6,7 +6,7 @@ import { HeaderBar, HeaderBarActions, HeaderBarTitle } from 'progressive-web-sdk
 import List from 'progressive-web-sdk/dist/components/list'
 import ListTile from 'progressive-web-sdk/dist/components/list-tile'
 import Sheet from 'progressive-web-sdk/dist/components/sheet'
-import {Tabs, TabsPanel} from 'progressive-web-sdk/dist/components/tabs'
+import { Tabs, TabsPanel } from 'progressive-web-sdk/dist/components/tabs'
 import { getAnalyticsManager } from '../../analytics'
 import { Desktop, Mobile, Tablet } from '../../components/media-queries'
 
