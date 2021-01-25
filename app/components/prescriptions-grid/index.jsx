@@ -6,6 +6,7 @@ import { HeaderBar, HeaderBarActions, HeaderBarTitle } from 'progressive-web-sdk
 import List from 'progressive-web-sdk/dist/components/list'
 import ListTile from 'progressive-web-sdk/dist/components/list-tile'
 import Sheet from 'progressive-web-sdk/dist/components/sheet'
+import {Tabs, TabsPanel} from 'progressive-web-sdk/dist/components/tabs'
 import { getAnalyticsManager } from '../../analytics'
 import { Desktop, Mobile, Tablet } from '../../components/media-queries'
 
@@ -95,9 +96,7 @@ const PrescriptionsGrid = (props) => {
             shrinkToContent
             headerContent={
                 <HeaderBar>
-                    <HeaderBarTitle className="u-flex u-padding-start-md u-text-align-start u-text-size-big">
-                        Add Doctor
-                    </HeaderBarTitle>
+                    <HeaderBarTitle className="u-flex u-padding-start-md u-text-align-start u-text-size-big">Add Doctor</HeaderBarTitle>
 
                     <HeaderBarActions>
                         <Button innerClassName="u-padding-0" icon="close"
@@ -108,10 +107,16 @@ const PrescriptionsGrid = (props) => {
             }
         >
             <div className="t-product-details__shipping-delivery-modal-content">
-                <span>
-                    Receive free Standard Shipping within Canada for purchases of $150+,
-                    excluding taxes, when signed into a Mobify.com account.
-                </span>
+                <Tabs activeIndex={0}>
+                    <TabsPanel title="Search Doctors">
+                        <br />
+                        <p>Content for tab A</p>
+                    </TabsPanel>
+                    <TabsPanel title="Add New Doctor">
+                        <br />
+                        <p>Content for tab B</p>
+                    </TabsPanel>
+                </Tabs>
             </div>
         </Sheet>
     )
