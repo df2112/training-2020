@@ -50,7 +50,7 @@ const PrescriptionsGrid = (props) => {
         console.log(event.target.value)
 
         if (event.target.value === '000') {
-            setIsDoctorModalOpen(!isDoctorModalOpen)
+            setIsDoctorModalOpen(true)
         } else {
             setSelectedDoctor(event.target.value)
         }
@@ -116,7 +116,7 @@ const PrescriptionsGrid = (props) => {
 
                     <HeaderBarActions>
                         <Button innerClassName="u-padding-0" icon="close"
-                            onClick={() => setIsDoctorModalOpen(!isDoctorModalOpen)}
+                            onClick={() => setIsDoctorModalOpen(false)}
                         />
                     </HeaderBarActions>
                 </HeaderBar>
