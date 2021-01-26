@@ -42,7 +42,8 @@ const PrescriptionsGrid = (props) => {
     const [lastRowKey, setLastRowKey] = useState(initGridRows[0]._gridRowKey)
     const lastRowKeyRef = useRef(lastRowKey)
 
-    const [isDave, setIsDave] = useState(false)
+    const [isDoctorSearchSubmitted, setisDoctorSearchSubmitted] = useState(false)
+    const [isDoctorSelectSubmitted, setisDoctorSelectSubmitted] = useState(false)
 
 
     const handleDoctorChange = (event) => {
@@ -57,7 +58,15 @@ const PrescriptionsGrid = (props) => {
 
     const handleEmailChange = (event) => setEmailValue(event.target.value)
 
-    const handleDoctorSearchSubmit = (event) => setIsDave(true)
+    const handleDoctorSearchSubmit = (event) => {
+        console.log('handleDoctorSearchSubmit()')
+        setisDoctorSearchSubmitted(true)
+    }
+
+    const handleDoctorSelectSubmit = (event) => {
+        console.log('handleDoctorSelectSubmit()')
+        setisDoctorSelectSubmitted(true)
+    }
 
     const handleSubmit = (event) => {
         const { onSubmit } = props
@@ -118,7 +127,7 @@ const PrescriptionsGrid = (props) => {
                     <TabsPanel title="Search Doctors">
                         <br />
 
-                        {!isDave ? (
+                        {!isDoctorSearchSubmitted ? (
                             <DoctorSearch analyticsManager={analyticsManager} onSubmit={handleDoctorSearchSubmit} />
                         ) : (<span>Hello Dave!</span>)
                         }
@@ -127,8 +136,8 @@ const PrescriptionsGrid = (props) => {
                     <TabsPanel title="Add New Doctor">
                         <br />
 
-                        {!isDave ? (
-                            <DoctorAddNew analyticsManager={analyticsManager} onSubmit={handleDoctorSearchSubmit} />
+                        {!isDoctorSelectSubmitted ? (
+                            <DoctorAddNew analyticsManager={analyticsManager} onSubmit={handleDoctorSelectSubmit} />
                         ) : (<span>Hello Dave!</span>)
                         }
 
@@ -145,51 +154,6 @@ const PrescriptionsGrid = (props) => {
             </div>
 
             <List>
-                {/* <ListTile className="pw--instructional-block">
-                    <div className="u-margin-bottom-lg">Dave's form!</div>
-
-                    {!isDave ? (
-                        <DoctorSearch analyticsManager={analyticsManager} onSubmit={handleDoctorSearchSubmit}/>
-                    ) : (<span>Hello Dave!</span>)
-                    }
-                </ListTile> */}
-
-                {/* Section 1: Email address */}
-                {/* <ListTile className="pw--instructional-block">
-                    <form id={EMAIL_SUBSCRIBE_FORM_NAME}
-                        className="c-email-subscribe"
-                        data-analytics-name={EMAIL_SUBSCRIBE_FORM_NAME}
-                        onSubmit={handleSubmit}>
-
-                        <div className="c-email-subscribe__form-field-row u-flexbox">
-                            <div className={`c-email-subscribe__form-field u-flex ${error ? 'c-email-subscribe__form-field-error' : ''}`}>
-                                <div className="c-email-subscribe__form-field-inner">
-                                    <div className="c-email-subscribe__form-field-label-wrap">
-                                        <label className="c-email-subscribe__form-field-label" htmlFor="email">{'Email Address'}</label>
-                                    </div>
-                                    <div className="c-email-subscribe__form-field-input">
-                                        <input id="email" type="email" data-analytics-name="email" className="u-flex"
-                                            required onChange={handleEmailChange} value={emailValue} />
-                                    </div>
-                                    {error && (
-                                        <div className="c-email-subscribe__form-field-error-text">
-                                            {error}
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                            <div className="c-email-subscribe__form-field c-email-subscribe__button u-flex-none u-margin-start-0">
-                                <div className="c-email-subscribe__form-field-inner">
-                                    <div className="c-email-subscribe__form-field-input">
-                                        <div className="c-email-subscribe__form-field-label" aria-hidden="true">{'Email Address'}</div>
-                                        <Button type="submit" className="pw--primary">Submit</Button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </form>
-                </ListTile> */}
 
                 {/* Section 3: Prescription Rows */}
                 {gridRows.map((item) => (
