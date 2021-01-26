@@ -47,7 +47,7 @@ const PrescriptionsGrid = (props) => {
 
 
     const handleDoctorChange = (event) => {
-        console.log(event.target.value)
+        console.log('handleDoctorChange()')
 
         if (event.target.value === '000') {
             setIsDoctorModalOpen(true)
@@ -61,6 +61,7 @@ const PrescriptionsGrid = (props) => {
     const handleDoctorSearchSubmit = (event) => {
         console.log('handleDoctorSearchSubmit()')
         setisDoctorSearchSubmitted(true)
+        setIsDoctorModalOpen(false)
     }
 
     const handleDoctorSelectSubmit = (event) => {
@@ -69,6 +70,7 @@ const PrescriptionsGrid = (props) => {
     }
 
     const handleSubmit = (event) => {
+        console.log('handleSubmit()')
         const { onSubmit } = props
         const emailError = validate({ email: emailValue }).email
 
@@ -83,9 +85,11 @@ const PrescriptionsGrid = (props) => {
         }
 
         if (onSubmit) onSubmit()
+        setIsDoctorModalOpen(false)
     }
 
     const handleAddGridRow = (newRowKey) => {
+        console.log('handleAddGridRow()')
         lastRowKeyRef.current = newRowKey
         setLastRowKey(newRowKey)
 
@@ -99,6 +103,7 @@ const PrescriptionsGrid = (props) => {
     }
 
     const handleRemoveGridRow = (rowKey) => {
+        console.log('handleRemoveGridRow()')        
         const newGridRows = gridRows.filter(el => el._gridRowKey != rowKey)
         setGridRows(newGridRows)
     }
@@ -127,10 +132,11 @@ const PrescriptionsGrid = (props) => {
                     <TabsPanel title="Search Doctors">
                         <br />
 
-                        {!isDoctorSearchSubmitted ? (
+                        {/* {!isDoctorSearchSubmitted ? (
                             <DoctorSearch analyticsManager={analyticsManager} onSubmit={handleDoctorSearchSubmit} />
                         ) : (<span>Hello Dave!</span>)
-                        }
+                        } */}
+                        <DoctorSearch analyticsManager={analyticsManager} onSubmit={handleDoctorSearchSubmit} />
 
                     </TabsPanel>
                     <TabsPanel title="Add New Doctor">
