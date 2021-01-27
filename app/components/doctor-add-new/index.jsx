@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import Button from 'progressive-web-sdk/dist/components/button'
@@ -15,40 +15,29 @@ export const validate = (values) => {
     return errors
 }
 
-class DoctorAddNew extends React.PureComponent {
-    constructor(props) {
-        super(props)
-        this.state = { value: '', error: null }
-        this.handleSubmit = this.handleSubmit.bind(this)
-        this.handleChange = this.handleChange.bind(this)
-    }
-    handleChange(event) {
-        this.setState({ value: event.target.value })
-    }
+const DoctorAddNew = (props) => {
+    const { onDoctorAddNewSubmit } = props
+    const [error, setError] = useState(false)
+    const [emailValue, setEmailValue] = useState('')
 
-    handleSubmit(event) {
-        const { onSubmit } = this.props
-        const error = validate({ email: this.state.value }).email
-        if (error) {
-            event.preventDefault()
-            this.setState({ error })
-            analyticsManager.track('error', {
-                name: 'doctorAddNew_form',
-                content: error
-            })
-            return
+    const handleEmailChange = (event) => {
+        console.log('DoctorAddNew: handleEmailChange()')
+        return setEmailValue(event.target.value)
         }
 
-        if (onSubmit) onSubmit()
+    const handleDoctorAddNewSubmit = (event) => {
+        console.log('DoctorAddNew: handleDoctorAddNewSubmit()')
+        const formData = new FormData(event.target)
+        
+        if (onDoctorAddNewSubmit) onDoctorAddNewSubmit(formData)
     }
 
-    render() {
         return (
             <form
                 id={DOCTOR_ADD_NEW_FORM_NAME}
                 className="c-doctor-add-new"
                 data-analytics-name={DOCTOR_ADD_NEW_FORM_NAME}
-                onSubmit={this.handleSubmit}
+            onSubmit={handleDoctorAddNewSubmit}
             >
 
                 {/* Name */}
@@ -145,14 +134,14 @@ class DoctorAddNew extends React.PureComponent {
 
             </form>
         )
-    }
+
 }
 
 DoctorAddNew.propTypes = {
     /**
      * Handler that is triggers when the form is submitted
      */
-    onSubmit: PropTypes.func
+    onDoctorAddNewSubmit: PropTypes.func
 }
 
 export default DoctorAddNew
