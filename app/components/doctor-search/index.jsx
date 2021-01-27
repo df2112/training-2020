@@ -87,7 +87,7 @@ const DoctorSearch = (props) => {
                             <label className="c-doctor-search__form-field-label" htmlFor="email">{'Name'}</label>
                         </div>
                         <div className="c-doctor-search__form-field-input">
-                            <input id="name" type="email" data-analytics-name="email" className="u-flex"
+                            <input id="doctor-search-name" type="email" data-analytics-name="email" className="u-flex"
                                 required onChange={handleEmailChange} value={emailValue} />
                         </div>
                         {error && (
@@ -107,7 +107,7 @@ const DoctorSearch = (props) => {
                             <label className="c-doctor-search__form-field-label" htmlFor="email">{'City'}</label>
                         </div>
                         <div className="c-doctor-search__form-field-input">
-                            <input id="city" type="email" data-analytics-name="email" className="u-flex"
+                            <input id="doctor-search-city" type="email" data-analytics-name="email" className="u-flex"
                                 required onChange={handleEmailChange} value={emailValue} />
                         </div>
                         {error && (
@@ -127,7 +127,7 @@ const DoctorSearch = (props) => {
                             <label className="c-doctor-search__form-field-label" htmlFor="email">{'State'}</label>
                         </div>
                         <div className="c-doctor-search__form-field-input">
-                            <input id="state" type="email" data-analytics-name="email" className="u-flex"
+                            <input id="doctor-search-state" type="email" data-analytics-name="email" className="u-flex"
                                 required onChange={handleEmailChange} value={emailValue} />
                         </div>
                         {error && (
@@ -147,7 +147,7 @@ const DoctorSearch = (props) => {
                             <label className="c-doctor-search__form-field-label" htmlFor="email">{'Zip'}</label>
                         </div>
                         <div className="c-doctor-search__form-field-input">
-                            <input id="zip" type="email" data-analytics-name="email" className="u-flex"
+                            <input id="doctor-search-zip" type="email" data-analytics-name="email" className="u-flex"
                                 required onChange={handleEmailChange} value={emailValue} />
                         </div>
                         {error && (
