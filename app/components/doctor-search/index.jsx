@@ -65,10 +65,10 @@ const DoctorSearch = (props) => {
         //if (onDoctorSearchSubmit) onDoctorSearchSubmit()
     }
 
-    const handleDoctorSelectSubmit = (event) => {
+    const handleDoctorSelectSubmit = (doctorId) => {
         console.log('DoctorSearch: handleDoctorSelectSubmit()')
         
-        if (onDoctorSelectSubmit) onDoctorSelectSubmit(event.target.parentElement.value)
+        if (onDoctorSelectSubmit) onDoctorSelectSubmit(doctorId)
     }
 
     return (
@@ -178,10 +178,12 @@ const DoctorSearch = (props) => {
                         className="pw--instructional-block"
                         key={item._doctorKey}
                         endAction={
-                            <Button className="pw--blank" icon="trash"
-                                value={item._doctorKey} 
-                                onClick={handleDoctorSelectSubmit} 
-                            />}
+                            <Button 
+                                className="pw--blank" 
+                                icon="trash" 
+                                onClick={() => handleDoctorSelectSubmit(item._doctorKey)} 
+                            />
+                        }
                     >
                         <span>
                             {item.name} : {item.age}
