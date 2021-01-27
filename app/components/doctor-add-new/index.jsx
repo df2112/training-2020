@@ -7,22 +7,32 @@ import { getAnalyticsManager } from '../../analytics'
 const analyticsManager = getAnalyticsManager()
 const DOCTOR_ADD_NEW_FORM_NAME = 'doctor-add-new'
 
-export const validate = (values) => {
-    const errors = {}
-    if ((values.email || '').search(/@mobify.com$/) < 0) {
-        errors.email = 'Must be a @mobify.com email address'
-    }
-    return errors
-}
-
 const DoctorAddNew = (props) => {
     const { onDoctorAddNewSubmit } = props
     const [error, setError] = useState(false)
-    const [emailValue, setEmailValue] = useState('')
+    const [nameValue, setNameValue] = useState('')
+    const [cityValue, setCityValue] = useState('')
+    const [stateValue, setStateValue] = useState('')
+    const [zipValue, setZipValue] = useState('')
 
-    const handleEmailChange = (event) => {
-        console.log('DoctorAddNew: handleEmailChange()')
-        return setEmailValue(event.target.value)
+    const handleNameChange = (event) => {
+        console.log('DoctorAddNew: handleNameChange()')
+        return setNameValue(event.target.value)
+    }
+
+    const handleCityChange = (event) => {
+        console.log('DoctorAddNew: handleCityChange()')
+        return setCityValue(event.target.value)
+    }
+
+    const handleStateChange = (event) => {
+        console.log('DoctorAddNew: handleStateChange()')
+        return setStateValue(event.target.value)
+    }
+
+    const handleZipChange = (event) => {
+        console.log('DoctorAddNew: handleZipChange()')
+        return setZipValue(event.target.value)
     }
 
     const handleDoctorAddNewSubmit = (event) => {
@@ -45,11 +55,11 @@ const DoctorAddNew = (props) => {
                 <div className={`c-doctor-add-new__form-field u-flex ${error ? 'c-doctor-add-new__form-field-error' : ''}`}>
                     <div className="c-doctor-add-new__form-field-inner">
                         <div className="c-doctor-add-new__form-field-label-wrap">
-                            <label className="c-doctor-add-new__form-field-label" htmlFor="email">{'Name'}</label>
+                            <label className="c-doctor-add-new__form-field-label" htmlFor="doctor-add-new-name">{'Name'}</label>
                         </div>
                         <div className="c-doctor-add-new__form-field-input">
-                            <input id="doctor-add-new-name" name="name" type="email" data-analytics-name="email" className="u-flex"
-                                required onChange={handleEmailChange} value={emailValue} />
+                            <input id="doctor-add-new-name" name="name" type="text" data-analytics-name="email" className="u-flex"
+                                required onChange={handleNameChange} value={nameValue} />
                         </div>
                         {error && (
                             <div className="c-doctor-add-new__form-field-error-text">
@@ -65,11 +75,11 @@ const DoctorAddNew = (props) => {
                 <div className={`c-doctor-add-new__form-field u-flex ${error ? 'c-doctor-add-new__form-field-error' : ''}`}>
                     <div className="c-doctor-add-new__form-field-inner">
                         <div className="c-doctor-add-new__form-field-label-wrap">
-                            <label className="c-doctor-add-new__form-field-label" htmlFor="email">{'City'}</label>
+                            <label className="c-doctor-add-new__form-field-label" htmlFor="doctor-add-new-city">{'City'}</label>
                         </div>
                         <div className="c-doctor-add-new__form-field-input">
-                            <input id="doctor-add-new-city" name="city" type="email" data-analytics-name="email" className="u-flex"
-                                required onChange={handleEmailChange} value={emailValue} />
+                            <input id="doctor-add-new-city" name="city" type="text" data-analytics-name="email" className="u-flex"
+                                required onChange={handleCityChange} value={cityValue} />
                         </div>
                         {error && (
                             <div className="c-doctor-add-new__form-field-error-text">
@@ -85,11 +95,11 @@ const DoctorAddNew = (props) => {
                 <div className={`c-doctor-add-new__form-field u-flex ${error ? 'c-doctor-add-new__form-field-error' : ''}`}>
                     <div className="c-doctor-add-new__form-field-inner">
                         <div className="c-doctor-add-new__form-field-label-wrap">
-                            <label className="c-doctor-add-new__form-field-label" htmlFor="email">{'State'}</label>
+                            <label className="c-doctor-add-new__form-field-label" htmlFor="doctor-add-new-state">{'State'}</label>
                         </div>
                         <div className="c-doctor-add-new__form-field-input">
-                            <input id="doctor-add-new-state" name="state" type="email" data-analytics-name="email" className="u-flex"
-                                required onChange={handleEmailChange} value={emailValue} />
+                            <input id="doctor-add-new-state" name="state" type="text" data-analytics-name="email" className="u-flex"
+                                required onChange={handleStateChange} value={stateValue} />
                         </div>
                         {error && (
                             <div className="c-doctor-add-new__form-field-error-text">
@@ -105,11 +115,11 @@ const DoctorAddNew = (props) => {
                 <div className={`c-doctor-add-new__form-field u-flex ${error ? 'c-doctor-add-new__form-field-error' : ''}`}>
                     <div className="c-doctor-add-new__form-field-inner">
                         <div className="c-doctor-add-new__form-field-label-wrap">
-                            <label className="c-doctor-add-new__form-field-label" htmlFor="email">{'Zip'}</label>
+                            <label className="c-doctor-add-new__form-field-label" htmlFor="doctor-add-new-zip">{'Zip'}</label>
                         </div>
                         <div className="c-doctor-add-new__form-field-input">
-                            <input id="doctor-add-new-zip" name="zip" type="email" data-analytics-name="email" className="u-flex"
-                                required onChange={handleEmailChange} value={emailValue} />
+                            <input id="doctor-add-new-zip" name="zip" type="text" data-analytics-name="email" className="u-flex"
+                                required onChange={handleZipChange} value={zipValue} />
                         </div>
                         {error && (
                             <div className="c-doctor-add-new__form-field-error-text">

@@ -38,27 +38,45 @@ const fakeDoctors = [
 const DoctorSearch = (props) => {
     const { onDoctorSearchSubmit, onDoctorSelectSubmit } = props
     const [error, setError] = useState(false)
-    const [emailValue, setEmailValue] = useState('')
+    const [nameValue, setNameValue] = useState('')
+    const [cityValue, setCityValue] = useState('')
+    const [stateValue, setStateValue] = useState('')
+    const [zipValue, setZipValue] = useState('')
     const [doctorSearchResults, setDoctorSearchResults] = useState([])
 
-    const handleEmailChange = (event) => {
-        console.log('DoctorSearch: handleEmailChange()')
-        return setEmailValue(event.target.value)
+    const handleNameChange = (event) => {
+        console.log('DoctorSearch: handleNameChange()')
+        return setNameValue(event.target.value)
+    }
+
+    const handleCityChange = (event) => {
+        console.log('DoctorSearch: handleCityChange()')
+        return setCityValue(event.target.value)
+    }
+
+    const handleStateChange = (event) => {
+        console.log('DoctorSearch: handleStateChange()')
+        return setStateValue(event.target.value)
+    }
+
+    const handleZipChange = (event) => {
+        console.log('DoctorSearch: handleZipChange()')
+        return setZipValue(event.target.value)
     }
 
     const handleDoctorSearchSubmit = (event) => {
         console.log('DoctorSearch: handleDoctorSearchSubmit()')        
-        const validationError = validate({ email: emailValue }).email
+        // const validationError = validate({ email: emailValue }).email
 
-        if (validationError) {
-            event.preventDefault()
-            setError(validationError)
-            analyticsManager.track('error', {
-                name: 'doctorSearch_form',
-                content: error
-            })
-            return
-        }
+        // if (validationError) {
+        //     event.preventDefault()
+        //     setError(validationError)
+        //     analyticsManager.track('error', {
+        //         name: 'doctorSearch_form',
+        //         content: error
+        //     })
+        //     return
+        // }
 
         event.preventDefault() //TODO: This needs to be reviewed
         setDoctorSearchResults(fakeDoctors)
@@ -84,11 +102,11 @@ const DoctorSearch = (props) => {
                 <div className={`c-doctor-search__form-field u-flex ${error ? 'c-doctor-search__form-field-error' : ''}`}>
                     <div className="c-doctor-search__form-field-inner">
                         <div className="c-doctor-search__form-field-label-wrap">
-                            <label className="c-doctor-search__form-field-label" htmlFor="email">{'Name'}</label>
+                            <label className="c-doctor-search__form-field-label" htmlFor="doctor-search-name">{'Name'}</label>
                         </div>
                         <div className="c-doctor-search__form-field-input">
-                            <input id="doctor-search-name" type="email" data-analytics-name="email" className="u-flex"
-                                required onChange={handleEmailChange} value={emailValue} />
+                            <input id="doctor-search-name" type="text" data-analytics-name="email" className="u-flex"
+                                required onChange={handleNameChange} value={nameValue} />
                         </div>
                         {error && (
                             <div className="c-doctor-search__form-field-error-text">
@@ -104,11 +122,11 @@ const DoctorSearch = (props) => {
                 <div className={`c-doctor-search__form-field u-flex ${error ? 'c-doctor-search__form-field-error' : ''}`}>
                     <div className="c-doctor-search__form-field-inner">
                         <div className="c-doctor-search__form-field-label-wrap">
-                            <label className="c-doctor-search__form-field-label" htmlFor="email">{'City'}</label>
+                            <label className="c-doctor-search__form-field-label" htmlFor="doctor-search-city">{'City'}</label>
                         </div>
                         <div className="c-doctor-search__form-field-input">
-                            <input id="doctor-search-city" type="email" data-analytics-name="email" className="u-flex"
-                                required onChange={handleEmailChange} value={emailValue} />
+                            <input id="doctor-search-city" type="text" data-analytics-name="email" className="u-flex"
+                                required onChange={handleCityChange} value={cityValue} />
                         </div>
                         {error && (
                             <div className="c-doctor-search__form-field-error-text">
@@ -124,11 +142,11 @@ const DoctorSearch = (props) => {
                 <div className={`c-doctor-search__form-field u-flex ${error ? 'c-doctor-search__form-field-error' : ''}`}>
                     <div className="c-doctor-search__form-field-inner">
                         <div className="c-doctor-search__form-field-label-wrap">
-                            <label className="c-doctor-search__form-field-label" htmlFor="email">{'State'}</label>
+                            <label className="c-doctor-search__form-field-label" htmlFor="doctor-search-state">{'State'}</label>
                         </div>
                         <div className="c-doctor-search__form-field-input">
-                            <input id="doctor-search-state" type="email" data-analytics-name="email" className="u-flex"
-                                required onChange={handleEmailChange} value={emailValue} />
+                            <input id="doctor-search-state" type="text" data-analytics-name="email" className="u-flex"
+                                required onChange={handleStateChange} value={stateValue} />
                         </div>
                         {error && (
                             <div className="c-doctor-search__form-field-error-text">
@@ -144,11 +162,11 @@ const DoctorSearch = (props) => {
                 <div className={`c-doctor-search__form-field u-flex ${error ? 'c-doctor-search__form-field-error' : ''}`}>
                     <div className="c-doctor-search__form-field-inner">
                         <div className="c-doctor-search__form-field-label-wrap">
-                            <label className="c-doctor-search__form-field-label" htmlFor="email">{'Zip'}</label>
+                            <label className="c-doctor-search__form-field-label" htmlFor="doctor-search-zip">{'Zip'}</label>
                         </div>
                         <div className="c-doctor-search__form-field-input">
-                            <input id="doctor-search-zip" type="email" data-analytics-name="email" className="u-flex"
-                                required onChange={handleEmailChange} value={emailValue} />
+                            <input id="doctor-search-zip" type="text" data-analytics-name="email" className="u-flex"
+                                required onChange={handleZipChange} value={zipValue} />
                         </div>
                         {error && (
                             <div className="c-doctor-search__form-field-error-text">
