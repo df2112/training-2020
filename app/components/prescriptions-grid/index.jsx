@@ -32,9 +32,28 @@ const initGridRows = [
     }
 ]
 
+const fakeDoctors = [
+    {
+        _doctorKey: '601',
+        name: 'Fake Doctor 1',
+        age: 99,
+    },
+    {
+        _doctorKey: '602',
+        name: 'Fake Doctor 2',
+        age: 40,
+    },
+    {
+        _doctorKey: '603',
+        name: 'Fake Doctor 3',
+        age: 41,
+    }
+]
+
 const PrescriptionsGrid = (props) => {
     const { analyticsManager, doctors } = props
 
+    const [doctorsList, setDoctorsList] = useState(doctors)
     const [emailValue, setEmailValue] = useState('')
     const [error, setError] = useState(false)
     const [gridRows, setGridRows] = useState(initGridRows)
@@ -70,7 +89,7 @@ const PrescriptionsGrid = (props) => {
     const handleDoctorSelectSubmit = (selectedDoctorId) => {
         console.log('PrescriptionsGrid: handleDoctorSelectSubmit()')
         console.log(selectedDoctorId)
-        setisDoctorSelectSubmitted(true)
+        setDoctorsList([...doctorsList, ...fakeDoctors.filter(el => el._doctorKey == selectedDoctorId)])
         setIsDoctorModalOpen(false)
     }
 
@@ -182,7 +201,7 @@ const PrescriptionsGrid = (props) => {
                         </span>
 
                         <select value={selectedDoctor} onChange={handleDoctorChange}>
-                            {doctors && doctors.length > 0 && doctors.map((doctor) => (
+                            {doctorsList && doctorsList.length > 0 && doctorsList.map((doctor) => (
                                 <Fragment key={doctor._doctorKey}>
                                     <option value={doctor._doctorKey}>{doctor.name}</option>
                                 </Fragment>
