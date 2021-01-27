@@ -141,14 +141,18 @@ const PrescriptionsGrid = (props) => {
                             <DoctorSearch analyticsManager={analyticsManager} onSubmit={handleDoctorSearchSubmit} />
                         ) : (<span>Hello Dave!</span>)
                         } */}
-                        <DoctorSearch analyticsManager={analyticsManager} onSubmit={handleDoctorSearchSubmit} />
+                        <DoctorSearch 
+                            analyticsManager={analyticsManager} 
+                            onDoctorSearchSubmit={handleDoctorSearchSubmit} 
+                            onDoctorSelectSubmit={handleDoctorSelectSubmit} 
+                        />
 
                     </TabsPanel>
                     <TabsPanel title="Add New Doctor">
                         <br />
 
                         {!isDoctorSelectSubmitted ? (
-                            <DoctorAddNew analyticsManager={analyticsManager} onSubmit={handleDoctorSelectSubmit} />
+                            <DoctorAddNew analyticsManager={analyticsManager} onDoctorSearchSubmit={handleDoctorSelectSubmit} />
                         ) : (<span>Hello Dave!</span>)
                         }
 

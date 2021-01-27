@@ -36,15 +36,18 @@ const fakeDoctors = [
 ]
 
 const DoctorSearch = (props) => {
-    const { onSubmit } = props
+    const { onDoctorSearchSubmit, onDoctorSelectSubmit } = props
     const [error, setError] = useState(false)
     const [emailValue, setEmailValue] = useState('')
     const [doctorSearchResults, setDoctorSearchResults] = useState([])
 
-    const handleEmailChange = (event) => setEmailValue(event.target.value)
+    const handleEmailChange = (event) => {
+        console.log('DoctorSearch: handleEmailChange()')
+        return setEmailValue(event.target.value)
+    }
 
-    const handleSubmit = (event) => {
-        console.log('DoctorSearch: handleSubmit()')        
+    const handleDoctorSearchSubmit = (event) => {
+        console.log('DoctorSearch: handleDoctorSearchSubmit()')        
         const validationError = validate({ email: emailValue }).email
 
         if (validationError) {
@@ -59,7 +62,13 @@ const DoctorSearch = (props) => {
 
         event.preventDefault() //TODO: This needs to be reviewed
         setDoctorSearchResults(fakeDoctors)
-        //if (onSubmit) onSubmit()
+        //if (onDoctorSearchSubmit) onDoctorSearchSubmit()
+    }
+
+    const handleDoctorSelectSubmit = (event) => {
+        console.log('DoctorSearch: handleDoctorSelectSubmit()')
+        
+        if (onDoctorSelectSubmit) onDoctorSelectSubmit(event.target.parentElement.value)
     }
 
     return (
@@ -67,7 +76,7 @@ const DoctorSearch = (props) => {
             id={DOCTOR_SEARCH_FORM_NAME}
             className="c-doctor-search"
             data-analytics-name={DOCTOR_SEARCH_FORM_NAME}
-            onSubmit={handleSubmit}
+            onSubmit={handleDoctorSearchSubmit}
         >
 
             {/* Name */}
@@ -168,7 +177,11 @@ const DoctorSearch = (props) => {
                     <ListTile
                         className="pw--instructional-block"
                         key={item._doctorKey}
-                        endAction={<Button className="pw--blank" icon="trash" onClick={() => console.log('Yo!')} />}
+                        endAction={
+                            <Button className="pw--blank" icon="trash"
+                                value={item._doctorKey} 
+                                onClick={handleDoctorSelectSubmit} 
+                            />}
                     >
                         <span>
                             {item.name} : {item.age}
@@ -185,7 +198,8 @@ DoctorSearch.propTypes = {
     /**
      * Handler that is triggers when the form is submitted
      */
-    onSubmit: PropTypes.func
+    onDoctorSearchSubmit: PropTypes.func,
+    onDoctorSelectSubmit: PropTypes.func
 }
 
 export default DoctorSearch
