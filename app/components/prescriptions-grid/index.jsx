@@ -16,6 +16,7 @@ const analyticsManager = getAnalyticsManager()
 const EMAIL_SUBSCRIBE_FORM_NAME = 'email-subscribe'
 
 export const validate = (values) => {
+    console.log('PrescriptionsGrid: validate()')
     const errors = {}
     if ((values.email || '').search(/@mobify.com$/) < 0) {
         errors.email = 'Must be a @mobify.com email address'
@@ -47,7 +48,7 @@ const PrescriptionsGrid = (props) => {
 
 
     const handleDoctorChange = (event) => {
-        console.log('handleDoctorChange()')
+        console.log('PrescriptionsGrid: handleDoctorChange()')
 
         if (event.target.value === '000') {
             setIsDoctorModalOpen(true)
@@ -56,21 +57,25 @@ const PrescriptionsGrid = (props) => {
         }
     }
 
-    const handleEmailChange = (event) => setEmailValue(event.target.value)
+    const handleEmailChange = (event) => {
+        console.log('PrescriptionsGrid: handleEmailChange()')
+        return setEmailValue(event.target.value)
+    }
 
     const handleDoctorSearchSubmit = (event) => {
-        console.log('handleDoctorSearchSubmit()')
+        console.log('PrescriptionsGrid: handleDoctorSearchSubmit()')
         setisDoctorSearchSubmitted(true)
+    }
+
+    const handleDoctorSelectSubmit = (selectedDoctorId) => {
+        console.log('PrescriptionsGrid: handleDoctorSelectSubmit()')
+        console.log(selectedDoctorId)
+        setisDoctorSelectSubmitted(true)
         setIsDoctorModalOpen(false)
     }
 
-    const handleDoctorSelectSubmit = (event) => {
-        console.log('handleDoctorSelectSubmit()')
-        setisDoctorSelectSubmitted(true)
-    }
-
     const handleSubmit = (event) => {
-        console.log('handleSubmit()')
+        console.log('PrescriptionsGrid: handleSubmit()')
         const { onSubmit } = props
         const emailError = validate({ email: emailValue }).email
 
@@ -89,7 +94,7 @@ const PrescriptionsGrid = (props) => {
     }
 
     const handleAddGridRow = (newRowKey) => {
-        console.log('handleAddGridRow()')
+        console.log('PrescriptionsGrid: handleAddGridRow()')
         lastRowKeyRef.current = newRowKey
         setLastRowKey(newRowKey)
 
@@ -103,7 +108,7 @@ const PrescriptionsGrid = (props) => {
     }
 
     const handleRemoveGridRow = (rowKey) => {
-        console.log('handleRemoveGridRow()')        
+        console.log('PrescriptionsGrid: handleRemoveGridRow()')        
         const newGridRows = gridRows.filter(el => el._gridRowKey != rowKey)
         setGridRows(newGridRows)
     }
