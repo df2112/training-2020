@@ -89,6 +89,21 @@ const PrescriptionsGrid = (props) => {
         setIsDoctorModalOpen(false)
     }
 
+    const handleDoctorAddNewSubmit = (formData) => {
+        console.log('PrescriptionsGrid: handleDoctorAddNewSubmit(formData)')
+        console.log('--- formData parameter: ')
+        console.log(Object.fromEntries(formData.entries()))
+
+        const newDoctor = {
+            _doctorKey: '888',
+            name: formData.get('name'),
+            age: 2112
+        }
+
+        setDoctorsList([...doctorsList, newDoctor])
+        setIsDoctorModalOpen(false)
+    }
+
     const handleSubmit = (event) => {
         console.log('PrescriptionsGrid: handleSubmit()')
         const { onSubmit } = props
@@ -160,7 +175,10 @@ const PrescriptionsGrid = (props) => {
                     </TabsPanel>
                     <TabsPanel title="Add New Doctor">
                         <br />
-                        <DoctorAddNew analyticsManager={analyticsManager} onDoctorSearchSubmit={handleDoctorSelectSubmit} />
+                        <DoctorAddNew 
+                            analyticsManager={analyticsManager} 
+                            onDoctorAddNewSubmit={handleDoctorAddNewSubmit} 
+                        />
                     </TabsPanel>
                 </Tabs>
             </div>
