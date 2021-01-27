@@ -58,13 +58,10 @@ const PrescriptionsGrid = (props) => {
     const [error, setError] = useState(false)
     const [gridRows, setGridRows] = useState(initGridRows)
     const [isDoctorModalOpen, setIsDoctorModalOpen] = useState(false)
-    const [selectedDoctor, setSelectedDoctor] = useState('999')
     const [lastRowKey, setLastRowKey] = useState(initGridRows[0]._gridRowKey)
+    const [selectedDoctor, setSelectedDoctor] = useState('999')
+
     const lastRowKeyRef = useRef(lastRowKey)
-
-    const [isDoctorSearchSubmitted, setisDoctorSearchSubmitted] = useState(false)
-    const [isDoctorSelectSubmitted, setisDoctorSelectSubmitted] = useState(false)
-
 
     const handleDoctorChange = (event) => {
         console.log('PrescriptionsGrid: handleDoctorChange()')
@@ -83,7 +80,6 @@ const PrescriptionsGrid = (props) => {
 
     const handleDoctorSearchSubmit = (event) => {
         console.log('PrescriptionsGrid: handleDoctorSearchSubmit()')
-        setisDoctorSearchSubmitted(true)
     }
 
     const handleDoctorSelectSubmit = (selectedDoctorId) => {
@@ -155,11 +151,6 @@ const PrescriptionsGrid = (props) => {
                 <Tabs activeIndex={0}>
                     <TabsPanel title="Search Doctors">
                         <br />
-
-                        {/* {!isDoctorSearchSubmitted ? (
-                            <DoctorSearch analyticsManager={analyticsManager} onSubmit={handleDoctorSearchSubmit} />
-                        ) : (<span>Hello Dave!</span>)
-                        } */}
                         <DoctorSearch 
                             analyticsManager={analyticsManager} 
                             onDoctorSearchSubmit={handleDoctorSearchSubmit} 
@@ -169,12 +160,7 @@ const PrescriptionsGrid = (props) => {
                     </TabsPanel>
                     <TabsPanel title="Add New Doctor">
                         <br />
-
-                        {!isDoctorSelectSubmitted ? (
-                            <DoctorAddNew analyticsManager={analyticsManager} onDoctorSearchSubmit={handleDoctorSelectSubmit} />
-                        ) : (<span>Hello Dave!</span>)
-                        }
-
+                        <DoctorAddNew analyticsManager={analyticsManager} onDoctorSearchSubmit={handleDoctorSelectSubmit} />
                     </TabsPanel>
                 </Tabs>
             </div>
