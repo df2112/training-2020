@@ -180,7 +180,13 @@ const PrescriptionsGrid = (props) => {
                     <ListTile
                         className="pw--instructional-block"
                         key={item._gridRowKey}
-                        endAction={<Button className="pw--blank" icon="trash" onClick={() => handleRemoveGridRow(item._gridRowKey)} />}
+                        endAction={
+                            <Button 
+                                className="pw--blank" 
+                                icon="trash" 
+                                onClick={() => handleRemoveGridRow(item._gridRowKey)} 
+                            />
+                        }
                     >
                         <span>
                             {item.field2} : {item.field1}
