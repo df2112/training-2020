@@ -7,7 +7,7 @@ import ListTile from 'progressive-web-sdk/dist/components/list-tile'
 import { getAnalyticsManager } from '../../analytics'
 
 const analyticsManager = getAnalyticsManager()
-const DOCTOR_SEARCH_FORM_NAME = 'doctor-search'
+const DRUG_SEARCH_FORM_NAME = 'drug-search'
 
 export const validate = (values) => {
     const errors = {}
@@ -17,63 +17,63 @@ export const validate = (values) => {
     return errors
 }
 
-const fakeDoctors = [
+const fakeDrugs = [
     {
-        _doctorKey: '601',
-        name: 'Fake Doctor 1',
+        _drugKey: '601',
+        name: 'Fake Drug 1',
         age: 99,
     },
     {
-        _doctorKey: '602',
-        name: 'Fake Doctor 2',
+        _drugKey: '602',
+        name: 'Fake Drug 2',
         age: 40,
     },
     {
-        _doctorKey: '603',
-        name: 'Fake Doctor 3',
+        _drugKey: '603',
+        name: 'Fake Drug 3',
         age: 41,
     }
 ]
 
-const DoctorSearch = (props) => {
-    const { onDoctorSelectSubmit } = props
+const DrugSearch = (props) => {
+    const { onDrugSelectSubmit } = props
     const [error, setError] = useState(false)
-    const [doctorSearchResults, setDoctorSearchResults] = useState([])
+    const [drugSearchResults, setDrugSearchResults] = useState([])
 
-    const handleDoctorSearchSubmit = (event) => {
-        console.log('DoctorSearch: handleDoctorSearchSubmit()')
+    const handleDrugSearchSubmit = (event) => {
+        console.log('DrugSearch: handleDrugSearchSubmit()')
 
         const formData = new FormData(event.target)
         // TODO: Validate formData
 
         // TODO: 
-        // Fix this filter of fakeDoctors against the input search fields
+        // Fix this filter of fakeDrugs against the input search fields
         //
-        // Need to update all of the various hardcoded doctors arrays in
+        // Need to update all of the various hardcoded drugs arrays in
         // all components/pages so that they have fields for city, state, zip etc
         //
 
-        const doctorSearchResults = fakeDoctors.filter(el => 
-            el._doctorKey == formData.get('name') ||
+        const drugSearchResults = fakeDrugs.filter(el => 
+            el._drugKey == formData.get('name') ||
             el.name == formData.get('name') ||
             el.age == formData.get('name'))
 
         event.preventDefault() //TODO: This needs to be reviewed
-        setDoctorSearchResults(doctorSearchResults)
+        setDrugSearchResults(drugSearchResults)
     }
 
-    const handleDoctorSelectSubmit = (doctorId) => {
-        console.log('DoctorSearch: handleDoctorSelectSubmit()')
+    const handleDrugSelectSubmit = (drugId) => {
+        console.log('DrugSearch: handleDrugSelectSubmit()')
         
-        if (onDoctorSelectSubmit) onDoctorSelectSubmit(doctorId)
+        if (onDrugSelectSubmit) onDrugSelectSubmit(drugId)
     }
 
     return (
         <form
-            id={DOCTOR_SEARCH_FORM_NAME}
+            id={DRUG_SEARCH_FORM_NAME}
             className="c-drug-search"
-            data-analytics-name={DOCTOR_SEARCH_FORM_NAME}
-            onSubmit={handleDoctorSearchSubmit}
+            data-analytics-name={DRUG_SEARCH_FORM_NAME}
+            onSubmit={handleDrugSearchSubmit}
         >
 
             {/* Name */}
@@ -81,10 +81,10 @@ const DoctorSearch = (props) => {
                 <div className={`c-drug-search__form-field u-flex ${error ? 'c-drug-search__form-field-error' : ''}`}>
                     <div className="c-drug-search__form-field-inner">
                         <div className="c-drug-search__form-field-label-wrap">
-                            <label className="c-drug-search__form-field-label" htmlFor="doctor-search-name">{'Name'}</label>
+                            <label className="c-drug-search__form-field-label" htmlFor="drug-search-name">{'Name'}</label>
                         </div>
                         <div className="c-drug-search__form-field-input">
-                            <input id="doctor-search-name" name="name" type="text" data-analytics-name="email" className="u-flex"
+                            <input id="drug-search-name" name="name" type="text" data-analytics-name="email" className="u-flex"
                                 required />
                         </div>
                         {error && (
@@ -101,10 +101,10 @@ const DoctorSearch = (props) => {
                 <div className={`c-drug-search__form-field u-flex ${error ? 'c-drug-search__form-field-error' : ''}`}>
                     <div className="c-drug-search__form-field-inner">
                         <div className="c-drug-search__form-field-label-wrap">
-                            <label className="c-drug-search__form-field-label" htmlFor="doctor-search-city">{'City'}</label>
+                            <label className="c-drug-search__form-field-label" htmlFor="drug-search-city">{'City'}</label>
                         </div>
                         <div className="c-drug-search__form-field-input">
-                            <input id="doctor-search-city" name="city" type="text" data-analytics-name="email" className="u-flex"
+                            <input id="drug-search-city" name="city" type="text" data-analytics-name="email" className="u-flex"
                                 required />
                         </div>
                         {error && (
@@ -121,10 +121,10 @@ const DoctorSearch = (props) => {
                 <div className={`c-drug-search__form-field u-flex ${error ? 'c-drug-search__form-field-error' : ''}`}>
                     <div className="c-drug-search__form-field-inner">
                         <div className="c-drug-search__form-field-label-wrap">
-                            <label className="c-drug-search__form-field-label" htmlFor="doctor-search-state">{'State'}</label>
+                            <label className="c-drug-search__form-field-label" htmlFor="drug-search-state">{'State'}</label>
                         </div>
                         <div className="c-drug-search__form-field-input">
-                            <input id="doctor-search-state" name="state" type="text" data-analytics-name="email" className="u-flex"
+                            <input id="drug-search-state" name="state" type="text" data-analytics-name="email" className="u-flex"
                                 required />
                         </div>
                         {error && (
@@ -141,10 +141,10 @@ const DoctorSearch = (props) => {
                 <div className={`c-drug-search__form-field u-flex ${error ? 'c-drug-search__form-field-error' : ''}`}>
                     <div className="c-drug-search__form-field-inner">
                         <div className="c-drug-search__form-field-label-wrap">
-                            <label className="c-drug-search__form-field-label" htmlFor="doctor-search-zip">{'Zip'}</label>
+                            <label className="c-drug-search__form-field-label" htmlFor="drug-search-zip">{'Zip'}</label>
                         </div>
                         <div className="c-drug-search__form-field-input">
-                            <input id="doctor-search-zip" name="zip" type="text" data-analytics-name="email" className="u-flex"
+                            <input id="drug-search-zip" name="zip" type="text" data-analytics-name="email" className="u-flex"
                                 required />
                         </div>
                         {error && (
@@ -162,23 +162,23 @@ const DoctorSearch = (props) => {
                     <div className="c-drug-search__form-field-inner">
                         <div className="c-drug-search__form-field-input">
                             <div className="c-drug-search__form-field-label" aria-hidden="true"></div>
-                            <Button type="submit" className="pw--primary">Search Doctors</Button>
+                            <Button type="submit" className="pw--primary">Search Drugs</Button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            {/* Fake Doctor Search Results */}
+            {/* Fake Drug Search Results */}
             <List>
-                {doctorSearchResults.map((item) => (
+                {drugSearchResults.map((item) => (
                     <ListTile
                         className="pw--instructional-block"
-                        key={item._doctorKey}
+                        key={item._drugKey}
                         endAction={
                             <Button 
                                 className="pw--blank" 
                                 icon="trash" 
-                                onClick={() => handleDoctorSelectSubmit(item._doctorKey)} 
+                                onClick={() => handleDrugSelectSubmit(item._drugKey)} 
                             />
                         }
                     >
@@ -193,11 +193,11 @@ const DoctorSearch = (props) => {
     )
 }
 
-DoctorSearch.propTypes = {
+DrugSearch.propTypes = {
     /**
      * Handler that is triggers when the form is submitted
      */
-    onDoctorSelectSubmit: PropTypes.func
+    onDrugSelectSubmit: PropTypes.func
 }
 
-export default DoctorSearch
+export default DrugSearch
