@@ -38,34 +38,13 @@ const fakeDoctors = [
 const DoctorSearch = (props) => {
     const { onDoctorSelectSubmit } = props
     const [error, setError] = useState(false)
-    const [nameValue, setNameValue] = useState('')
-    const [cityValue, setCityValue] = useState('')
-    const [stateValue, setStateValue] = useState('')
-    const [zipValue, setZipValue] = useState('')
     const [doctorSearchResults, setDoctorSearchResults] = useState([])
-
-    const handleNameChange = (event) => {
-        console.log('DoctorSearch: handleNameChange()')
-        return setNameValue(event.target.value)
-    }
-
-    const handleCityChange = (event) => {
-        console.log('DoctorSearch: handleCityChange()')
-        return setCityValue(event.target.value)
-    }
-
-    const handleStateChange = (event) => {
-        console.log('DoctorSearch: handleStateChange()')
-        return setStateValue(event.target.value)
-    }
-
-    const handleZipChange = (event) => {
-        console.log('DoctorSearch: handleZipChange()')
-        return setZipValue(event.target.value)
-    }
 
     const handleDoctorSearchSubmit = (event) => {
         console.log('DoctorSearch: handleDoctorSearchSubmit()')
+
+        const formData = new FormData(event.target)
+        // TODO: Validate formData
 
         // TODO: 
         // Fix this filter of fakeDoctors against the input search fields
@@ -73,7 +52,6 @@ const DoctorSearch = (props) => {
         // Need to update all of the various hardcoded doctors arrays in
         // all components/pages so that they have fields for city, state, zip etc
         //
-        const formData = new FormData(event.target)
 
         const doctorSearchResults = fakeDoctors.filter(el => 
             el._doctorKey == formData.get('name') ||
@@ -107,7 +85,7 @@ const DoctorSearch = (props) => {
                         </div>
                         <div className="c-doctor-search__form-field-input">
                             <input id="doctor-search-name" name="name" type="text" data-analytics-name="email" className="u-flex"
-                                required onChange={handleNameChange} value={nameValue} />
+                                required />
                         </div>
                         {error && (
                             <div className="c-doctor-search__form-field-error-text">
@@ -127,7 +105,7 @@ const DoctorSearch = (props) => {
                         </div>
                         <div className="c-doctor-search__form-field-input">
                             <input id="doctor-search-city" name="city" type="text" data-analytics-name="email" className="u-flex"
-                                required onChange={handleCityChange} value={cityValue} />
+                                required />
                         </div>
                         {error && (
                             <div className="c-doctor-search__form-field-error-text">
@@ -147,7 +125,7 @@ const DoctorSearch = (props) => {
                         </div>
                         <div className="c-doctor-search__form-field-input">
                             <input id="doctor-search-state" name="state" type="text" data-analytics-name="email" className="u-flex"
-                                required onChange={handleStateChange} value={stateValue} />
+                                required />
                         </div>
                         {error && (
                             <div className="c-doctor-search__form-field-error-text">
@@ -167,7 +145,7 @@ const DoctorSearch = (props) => {
                         </div>
                         <div className="c-doctor-search__form-field-input">
                             <input id="doctor-search-zip" name="zip" type="text" data-analytics-name="email" className="u-flex"
-                                required onChange={handleZipChange} value={zipValue} />
+                                required />
                         </div>
                         {error && (
                             <div className="c-doctor-search__form-field-error-text">
