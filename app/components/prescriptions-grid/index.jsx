@@ -58,6 +58,7 @@ const PrescriptionsGrid = (props) => {
     const [error, setError] = useState(false)
     const [gridRows, setGridRows] = useState(initGridRows)
     const [isDoctorModalOpen, setIsDoctorModalOpen] = useState(false)
+    const [isGenericsModalOpen, setIsGenericsModalOpen] = useState(false)
     const [lastRowKey, setLastRowKey] = useState(initGridRows[0]._gridRowKey)
     const [selectedDoctor, setSelectedDoctor] = useState('999')
 
@@ -117,6 +118,12 @@ const PrescriptionsGrid = (props) => {
         }
     }
 
+    const handleContinueToGenerics = (event) => {
+        console.log('PrescriptionsGrid: handleContinueToGenerics()')
+        setIsDoctorModalOpen(false)
+        setIsGenericsModalOpen(true)
+    }
+
     const DoctorModal = ({ width }) => (
         <Sheet
             className="pw--no-shadow t-product-details__shipping-delivery-info-modal"
@@ -131,6 +138,47 @@ const PrescriptionsGrid = (props) => {
                     <HeaderBarActions>
                         <Button innerClassName="u-padding-0" icon="close"
                             onClick={() => setIsDoctorModalOpen(false)}
+                        />
+                    </HeaderBarActions>
+                </HeaderBar>
+            }
+        >
+            <div className="t-product-details__shipping-delivery-modal-content">
+                <Tabs activeIndex={0}>
+                    <TabsPanel title="Search Doctors">
+                        <br />
+                        <DoctorSearch 
+                            analyticsManager={analyticsManager} 
+                            onDoctorSelectSubmit={handleDoctorSelectSubmit} 
+                        />
+
+                    </TabsPanel>
+                    <TabsPanel title="Add New Doctor">
+                        <br />
+                        <DoctorAddNew 
+                            analyticsManager={analyticsManager} 
+                            onDoctorAddNewSubmit={handleDoctorAddNewSubmit} 
+                        />
+                    </TabsPanel>
+                </Tabs>
+            </div>
+        </Sheet>
+    )
+
+    const GenericsModal = ({ width }) => (
+        <Sheet
+            className="pw--no-shadow t-product-details__shipping-delivery-info-modal"
+            coverage={width}
+            open={isGenericsModalOpen}
+            effect="modal-center"
+            shrinkToContent
+            headerContent={
+                <HeaderBar>
+                    <HeaderBarTitle className="u-flex u-padding-start-md u-text-align-start u-text-size-big">Generics Modal WIP</HeaderBarTitle>
+
+                    <HeaderBarActions>
+                        <Button innerClassName="u-padding-0" icon="close"
+                            onClick={() => setIsGenericsModalOpen(false)}
                         />
                     </HeaderBarActions>
                 </HeaderBar>
@@ -187,8 +235,7 @@ const PrescriptionsGrid = (props) => {
             </div>
 
             <List>
-
-                {/* Section 3: Prescription Rows */}
+                {/* Prescription Rows */}
                 {gridRows.map((item) => (
                     <ListTile
                         className="pw--instructional-block"
@@ -215,7 +262,7 @@ const PrescriptionsGrid = (props) => {
                     </ListTile>
                 ))}
 
-                {/* Section 4: Add New Prescription button */}
+                {/* Add New Prescription button */}
                 <ListTile className="pw--instructional-block">
                     <Button className="t-product-details__modal-button pw--primary qa-modal-button"
                         onClick={() => handleAddNewPrescription(lastRowKey + 1)}>
@@ -225,17 +272,30 @@ const PrescriptionsGrid = (props) => {
 
             </List>
 
+            <List>
+                {/* Continue To Generics button */}
+                <ListTile className="pw--instructional-block">
+                    <Button className="t-product-details__modal-button pw--primary qa-modal-button"
+                        onClick={() => handleContinueToGenerics()}>
+                        Continue to Generics
+                    </Button>
+                </ListTile>
+            </List>
+
             {/* Floating element/components */}
             <Mobile>
                 <DoctorModal width="80%" />
+                <GenericsModal width="80%" />
             </Mobile>
 
             <Tablet>
                 <DoctorModal width="60%" />
+                <GenericsModal width="60%" />
             </Tablet>
 
             <Desktop>
                 <DoctorModal width="40%" />
+                <GenericsModal width="60%" />
             </Desktop>
         </div>
     )
