@@ -63,41 +63,9 @@ const PrescriptionsGrid = (props) => {
 
     const lastRowKeyRef = useRef(lastRowKey)
 
-    const handleDoctorChange = (event) => {
-        console.log('PrescriptionsGrid: handleDoctorChange()')
-
-        if (event.target.value === '000') {
-            setIsDoctorModalOpen(true)
-        } else {
-            setSelectedDoctor(event.target.value)
-        }
-    }
-
     const handleEmailChange = (event) => {
         console.log('PrescriptionsGrid: handleEmailChange()')
         return setEmailValue(event.target.value)
-    }
-
-    const handleDoctorSelectSubmit = (selectedDoctorId) => {
-        console.log('PrescriptionsGrid: handleDoctorSelectSubmit()')
-        console.log(selectedDoctorId)
-        setDoctorsList([...doctorsList, ...fakeDoctors.filter(el => el._doctorKey == selectedDoctorId)])
-        setIsDoctorModalOpen(false)
-    }
-
-    const handleDoctorAddNewSubmit = (formData) => {
-        console.log('PrescriptionsGrid: handleDoctorAddNewSubmit(formData)')
-        console.log('--- formData parameter: ')
-        console.log(Object.fromEntries(formData.entries()))
-
-        const newDoctor = {
-            _doctorKey: '888',
-            name: formData.get('name'),
-            age: 2112
-        }
-
-        setDoctorsList([...doctorsList, newDoctor])
-        setIsDoctorModalOpen(false)
     }
 
     const handleSubmit = (event) => {
@@ -119,8 +87,8 @@ const PrescriptionsGrid = (props) => {
         setIsDoctorModalOpen(false)
     }
 
-    const handleAddGridRow = (newRowKey) => {
-        console.log('PrescriptionsGrid: handleAddGridRow()')
+    const handleAddNewPrescription = (newRowKey) => {
+        console.log('PrescriptionsGrid: handleAddNewPrescription()')
         lastRowKeyRef.current = newRowKey
         setLastRowKey(newRowKey)
 
@@ -133,10 +101,20 @@ const PrescriptionsGrid = (props) => {
         setGridRows(gridRows.concat(newGridRow))
     }
 
-    const handleRemoveGridRow = (rowKey) => {
-        console.log('PrescriptionsGrid: handleRemoveGridRow()')        
+    const handleRemovePrescription = (rowKey) => {
+        console.log('PrescriptionsGrid: handleRemovePrescription()')        
         const newGridRows = gridRows.filter(el => el._gridRowKey != rowKey)
         setGridRows(newGridRows)
+    }
+
+    const handleDoctorChange = (event) => {
+        console.log('PrescriptionsGrid: handleDoctorChange()')
+
+        if (event.target.value === '000') {
+            setIsDoctorModalOpen(true)
+        } else {
+            setSelectedDoctor(event.target.value)
+        }
     }
 
     const DoctorModal = ({ width }) => (
@@ -180,6 +158,28 @@ const PrescriptionsGrid = (props) => {
         </Sheet>
     )
 
+    const handleDoctorSelectSubmit = (selectedDoctorId) => {
+        console.log('PrescriptionsGrid: handleDoctorSelectSubmit()')
+        console.log(selectedDoctorId)
+        setDoctorsList([...doctorsList, ...fakeDoctors.filter(el => el._doctorKey == selectedDoctorId)])
+        setIsDoctorModalOpen(false)
+    }
+
+    const handleDoctorAddNewSubmit = (formData) => {
+        console.log('PrescriptionsGrid: handleDoctorAddNewSubmit(formData)')
+        console.log('--- formData parameter: ')
+        console.log(Object.fromEntries(formData.entries()))
+
+        const newDoctor = {
+            _doctorKey: '888',
+            name: formData.get('name'),
+            age: 2112
+        }
+
+        setDoctorsList([...doctorsList, newDoctor])
+        setIsDoctorModalOpen(false)
+    }
+
     return (
         <div>
             <div className="u-margin-bottom-lg">
@@ -197,7 +197,7 @@ const PrescriptionsGrid = (props) => {
                             <Button 
                                 className="pw--blank" 
                                 icon="trash" 
-                                onClick={() => handleRemoveGridRow(item._gridRowKey)} 
+                                onClick={() => handleRemovePrescription(item._gridRowKey)} 
                             />
                         }
                     >
@@ -218,7 +218,7 @@ const PrescriptionsGrid = (props) => {
                 {/* Section 4: Add New Prescription button */}
                 <ListTile className="pw--instructional-block">
                     <Button className="t-product-details__modal-button pw--primary qa-modal-button"
-                        onClick={() => handleAddGridRow(lastRowKey + 1)}>
+                        onClick={() => handleAddNewPrescription(lastRowKey + 1)}>
                         Add New Prescription
                     </Button>
                 </ListTile>
