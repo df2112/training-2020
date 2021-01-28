@@ -1,21 +1,9 @@
-import React, { Fragment, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-import Button from 'progressive-web-sdk/dist/components/button'
-import List from 'progressive-web-sdk/dist/components/list'
-import ListTile from 'progressive-web-sdk/dist/components/list-tile'
-import { getAnalyticsManager } from '../../analytics'
+import Search from 'progressive-web-sdk/dist/components/search'
 
-const analyticsManager = getAnalyticsManager()
 const DRUG_SEARCH_FORM_NAME = 'drug-search'
-
-export const validate = (values) => {
-    const errors = {}
-    if ((values.email || '').search(/@mobify.com$/) < 0) {
-        errors.email = 'Must be a @mobify.com email address'
-    }
-    return errors
-}
 
 const fakeDrugs = [
     {
@@ -35,169 +23,68 @@ const fakeDrugs = [
     }
 ]
 
+const fakeTermSuggestions = [{ href: '#', children: 'test' }, { children: 'search' }]
+
+const fakeProductSuggestions = [
+    {
+        isSimple: true,
+        imageProps: {
+            src:
+                'https://i.pinimg.com/564x/72/4b/6d/724b6dbf91c378a53d6890bb525c1aa9.jpg',
+            width: '88px',
+            height: '88px',
+            alt: 'cat'
+        },
+        title: 'Product Title',
+        price: '$2000',
+        onClick: () => {
+            console.log('clicked')
+        }
+    },
+    {
+        isSimple: true,
+        imageProps: {
+            src:
+                'https://i.pinimg.com/564x/72/4b/6d/724b6dbf91c378a53d6890bb525c1aa9.jpg',
+            width: '88px',
+            height: '88px',
+            alt: 'cat'
+        },
+        href: '#',
+        price: '$2000',
+        title: 'Product Title2'
+    }
+]
+
 const DrugSearch = (props) => {
-    const { onDrugSelectSubmit } = props
-    const [error, setError] = useState(false)
-    const [drugSearchResults, setDrugSearchResults] = useState([])
+    // const [termSuggestions, setTermSuggestions] = useState(null)
+    const [productSuggestions, setProductSuggestions] = useState([fakeProductSuggestions])
 
-    const handleDrugSearchSubmit = (event) => {
-        console.log('DrugSearch: handleDrugSearchSubmit()')
+    const addSuggestions = (event) => {
 
-        const formData = new FormData(event.target)
-        // TODO: Validate formData
-
-        // TODO: 
-        // Fix this filter of fakeDrugs against the input search fields
-        //
-        // Need to update all of the various hardcoded drugs arrays in
-        // all components/pages so that they have fields for city, state, zip etc
-        //
-
-        const drugSearchResults = fakeDrugs.filter(el => 
-            el._drugKey == formData.get('name') ||
-            el.name == formData.get('name') ||
-            el.age == formData.get('name'))
-
-        event.preventDefault() //TODO: This needs to be reviewed
-        setDrugSearchResults(drugSearchResults)
+        if (event.target.value == '') {
+            clearSuggestions()
+        } else {
+            setProductSuggestions(fakeProductSuggestions)
+        }
+        //setTermSuggestions(fakeTermSuggestions)
     }
 
-    const handleDrugSelectSubmit = (drugId) => {
-        console.log('DrugSearch: handleDrugSelectSubmit()')
-        
-        if (onDrugSelectSubmit) onDrugSelectSubmit(drugId)
+    const clearSuggestions = () => {
+        //setTermSuggestions([])
+        setProductSuggestions([])
     }
 
     return (
-        <form
-            id={DRUG_SEARCH_FORM_NAME}
-            className="c-drug-search"
-            data-analytics-name={DRUG_SEARCH_FORM_NAME}
-            onSubmit={handleDrugSearchSubmit}
-        >
-
-            {/* Name */}
-            <div className="c-drug-search__form-field-row u-flexbox">
-                <div className={`c-drug-search__form-field u-flex ${error ? 'c-drug-search__form-field-error' : ''}`}>
-                    <div className="c-drug-search__form-field-inner">
-                        <div className="c-drug-search__form-field-label-wrap">
-                            <label className="c-drug-search__form-field-label" htmlFor="drug-search-name">{'Name'}</label>
-                        </div>
-                        <div className="c-drug-search__form-field-input">
-                            <input id="drug-search-name" name="name" type="text" data-analytics-name="email" className="u-flex"
-                                required />
-                        </div>
-                        {error && (
-                            <div className="c-drug-search__form-field-error-text">
-                                {error}
-                            </div>
-                        )}
-                    </div>
-                </div>
-            </div>
-
-            {/* City */}
-            <div className="c-drug-search__form-field-row u-flexbox">
-                <div className={`c-drug-search__form-field u-flex ${error ? 'c-drug-search__form-field-error' : ''}`}>
-                    <div className="c-drug-search__form-field-inner">
-                        <div className="c-drug-search__form-field-label-wrap">
-                            <label className="c-drug-search__form-field-label" htmlFor="drug-search-city">{'City'}</label>
-                        </div>
-                        <div className="c-drug-search__form-field-input">
-                            <input id="drug-search-city" name="city" type="text" data-analytics-name="email" className="u-flex"
-                                required />
-                        </div>
-                        {error && (
-                            <div className="c-drug-search__form-field-error-text">
-                                {error}
-                            </div>
-                        )}
-                    </div>
-                </div>
-            </div>
-
-            {/* State */}
-            <div className="c-drug-search__form-field-row u-flexbox">
-                <div className={`c-drug-search__form-field u-flex ${error ? 'c-drug-search__form-field-error' : ''}`}>
-                    <div className="c-drug-search__form-field-inner">
-                        <div className="c-drug-search__form-field-label-wrap">
-                            <label className="c-drug-search__form-field-label" htmlFor="drug-search-state">{'State'}</label>
-                        </div>
-                        <div className="c-drug-search__form-field-input">
-                            <input id="drug-search-state" name="state" type="text" data-analytics-name="email" className="u-flex"
-                                required />
-                        </div>
-                        {error && (
-                            <div className="c-drug-search__form-field-error-text">
-                                {error}
-                            </div>
-                        )}
-                    </div>
-                </div>
-            </div>
-
-            {/* Zip */}
-            <div className="c-drug-search__form-field-row u-flexbox">
-                <div className={`c-drug-search__form-field u-flex ${error ? 'c-drug-search__form-field-error' : ''}`}>
-                    <div className="c-drug-search__form-field-inner">
-                        <div className="c-drug-search__form-field-label-wrap">
-                            <label className="c-drug-search__form-field-label" htmlFor="drug-search-zip">{'Zip'}</label>
-                        </div>
-                        <div className="c-drug-search__form-field-input">
-                            <input id="drug-search-zip" name="zip" type="text" data-analytics-name="email" className="u-flex"
-                                required />
-                        </div>
-                        {error && (
-                            <div className="c-drug-search__form-field-error-text">
-                                {error}
-                            </div>
-                        )}
-                    </div>
-                </div>
-            </div>
-
-            {/* Submit Button */}
-            <div className="c-drug-search__form-field-row u-flexbox">
-                <div className="c-drug-search__form-field c-drug-search__button u-flex-none u-margin-start-0">
-                    <div className="c-drug-search__form-field-inner">
-                        <div className="c-drug-search__form-field-input">
-                            <div className="c-drug-search__form-field-label" aria-hidden="true"></div>
-                            <Button type="submit" className="pw--primary">Search Drugs</Button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {/* Fake Drug Search Results */}
-            <List>
-                {drugSearchResults.map((item) => (
-                    <ListTile
-                        className="pw--instructional-block"
-                        key={item._drugKey}
-                        endAction={
-                            <Button 
-                                className="pw--blank" 
-                                icon="trash" 
-                                onClick={() => handleDrugSelectSubmit(item._drugKey)} 
-                            />
-                        }
-                    >
-                        <span>
-                            {item.name} : {item.age}
-                        </span>
-                    </ListTile>
-                ))}
-            </List>
-
-        </form>
-    )
-}
-
-DrugSearch.propTypes = {
-    /**
-     * Handler that is triggers when the form is submitted
-     */
-    onDrugSelectSubmit: PropTypes.func
+        <Search
+            // termSuggestions={termSuggestions}
+            productSuggestions={productSuggestions}
+            onChange={addSuggestions}
+            onClose={clearSuggestions}
+            onClear={clearSuggestions}
+            onClickSuggestion={clearSuggestions}
+            suggestedProductsHeading=''
+        />)
 }
 
 export default DrugSearch
