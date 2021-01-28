@@ -36,7 +36,7 @@ const fakeDoctors = [
 ]
 
 const DoctorSearch = (props) => {
-    const { onDoctorSearchSubmit, onDoctorSelectSubmit } = props
+    const { onDoctorSelectSubmit } = props
     const [error, setError] = useState(false)
     const [nameValue, setNameValue] = useState('')
     const [cityValue, setCityValue] = useState('')
@@ -65,22 +65,12 @@ const DoctorSearch = (props) => {
     }
 
     const handleDoctorSearchSubmit = (event) => {
-        console.log('DoctorSearch: handleDoctorSearchSubmit()')        
-        // const validationError = validate({ email: emailValue }).email
+        console.log('DoctorSearch: handleDoctorSearchSubmit()')
 
-        // if (validationError) {
-        //     event.preventDefault()
-        //     setError(validationError)
-        //     analyticsManager.track('error', {
-        //         name: 'doctorSearch_form',
-        //         content: error
-        //     })
-        //     return
-        // }
+        // TODO: Filter fakeDoctors against the input search fields
 
         event.preventDefault() //TODO: This needs to be reviewed
         setDoctorSearchResults(fakeDoctors)
-        //if (onDoctorSearchSubmit) onDoctorSearchSubmit()
     }
 
     const handleDoctorSelectSubmit = (doctorId) => {
@@ -218,7 +208,6 @@ DoctorSearch.propTypes = {
     /**
      * Handler that is triggers when the form is submitted
      */
-    onDoctorSearchSubmit: PropTypes.func,
     onDoctorSelectSubmit: PropTypes.func
 }
 

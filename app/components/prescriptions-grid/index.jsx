@@ -78,10 +78,6 @@ const PrescriptionsGrid = (props) => {
         return setEmailValue(event.target.value)
     }
 
-    const handleDoctorSearchSubmit = (event) => {
-        console.log('PrescriptionsGrid: handleDoctorSearchSubmit()')
-    }
-
     const handleDoctorSelectSubmit = (selectedDoctorId) => {
         console.log('PrescriptionsGrid: handleDoctorSelectSubmit()')
         console.log(selectedDoctorId)
@@ -168,7 +164,6 @@ const PrescriptionsGrid = (props) => {
                         <br />
                         <DoctorSearch 
                             analyticsManager={analyticsManager} 
-                            onDoctorSearchSubmit={handleDoctorSearchSubmit} 
                             onDoctorSelectSubmit={handleDoctorSelectSubmit} 
                         />
 
