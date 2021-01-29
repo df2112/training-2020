@@ -62,6 +62,7 @@ const PrescriptionsGrid = (props) => {
     const [isDoctorModalOpen, setIsDoctorModalOpen] = useState(false)
     const [isDrugModalOpen, setIsDrugModalOpen] = useState(false)
     const [lastRowKey, setLastRowKey] = useState(initGridRows[0]._gridRowKey)
+    const [activeRowKey, setActiveRowKey] = useState(initGridRows[0]._gridRowKey)
     const [selectedDoctor, setSelectedDoctor] = useState('999')
 
     const lastRowKeyRef = useRef(lastRowKey)
@@ -222,6 +223,13 @@ const PrescriptionsGrid = (props) => {
         setIsDrugModalOpen(true)
     }
 
+    // TODO on Saturday 01/30
+    //
+    // Take the formData and update the CURRENTLY SELECTED GRID ROW fields
+    //
+    // - will need a useState for holding the currently-selected grid row?
+    // - etc
+    //
     const handlePrescriptionConfigureSubmit = (formData) => {
         console.log('PrescriptionsGrid: handlePrescriptionConfigureSubmit()')
         console.log('--- formData parameter: ')
