@@ -12,6 +12,7 @@ import { Desktop, Mobile, Tablet } from '../../components/media-queries'
 import DoctorAddNew from '../doctor-add-new'
 import DoctorSearch from '../doctor-search'
 import DrugSearch from '../drug-search'
+import PrescriptionConfigure from '../prescription-configure'
 
 const analyticsManager = getAnalyticsManager()
 const EMAIL_SUBSCRIBE_FORM_NAME = 'email-subscribe'
