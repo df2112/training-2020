@@ -249,6 +249,9 @@ const PrescriptionsGrid = (props) => {
                             />
                         }
                     >
+                        
+                        <DrugSearch />
+
                         <span>
                             {item.field2} : {item.field1}
                         </span>
@@ -260,8 +263,6 @@ const PrescriptionsGrid = (props) => {
                                 </Fragment>
                             ))}
                         </select>
-
-                        <DrugSearch />
                     </ListTile>
                 ))}
 
