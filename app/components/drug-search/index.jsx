@@ -23,11 +23,11 @@ const fakeDrugs = [
     }
 ]
 
-const fakeTermSuggestions = [{ href: '#', children: 'test' }, { children: 'search' }]
-
 const fakeProductSuggestions = [
     {
-        isSimple: true,
+        className: 'id_2112',
+        isSimple: false,
+        isfull: true,
         imageProps: {
             src:
                 'https://i.pinimg.com/564x/72/4b/6d/724b6dbf91c378a53d6890bb525c1aa9.jpg',
@@ -35,6 +35,12 @@ const fakeProductSuggestions = [
             height: '88px',
             alt: 'cat'
         },
+        href: '#',
+        options: [
+            {
+                label: 'Dave ID 2112'
+            }
+        ],
         title: 'Product Title',
         price: '$2000',
         onClick: () => {
@@ -42,6 +48,7 @@ const fakeProductSuggestions = [
         }
     },
     {
+        className: 'id_5150',
         isSimple: true,
         imageProps: {
             src:
@@ -51,38 +58,49 @@ const fakeProductSuggestions = [
             alt: 'cat'
         },
         href: '#',
+        options: [
+            {
+                label: 'Dave ID 5150'
+            }
+        ],
         price: '$2000',
         title: 'Product Title2'
     }
 ]
 
 const DrugSearch = (props) => {
-    // const [termSuggestions, setTermSuggestions] = useState(null)
-    const [productSuggestions, setProductSuggestions] = useState([fakeProductSuggestions])
+    const [productSuggestions, setProductSuggestions] = useState([])
 
     const addSuggestions = (event) => {
+        console.log('DrugSearch: addSuggestions() ' + event.target.value)
 
         if (event.target.value == '') {
             clearSuggestions()
         } else {
-            setProductSuggestions(fakeProductSuggestions)
+            const regex = new RegExp(event.target.value, 'i')
+            const drugSearchResults = fakeProductSuggestions.filter(el => regex.test(el.title))
+            setProductSuggestions(drugSearchResults)
         }
-        //setTermSuggestions(fakeTermSuggestions)
     }
 
     const clearSuggestions = () => {
-        //setTermSuggestions([])
+        console.log('DrugSearch: clearSuggestions()')
+        setProductSuggestions([])
+    }
+
+    const clickSuggestion = (event) => {
+        console.log('DrugSearch: clickSuggestion()')
+        console.log(event.target.closest('article'))
         setProductSuggestions([])
     }
 
     return (
         <Search
-            // termSuggestions={termSuggestions}
             productSuggestions={productSuggestions}
             onChange={addSuggestions}
             onClose={clearSuggestions}
             onClear={clearSuggestions}
-            onClickSuggestion={clearSuggestions}
+            onClickSuggestion={clickSuggestion}
             suggestedProductsHeading=''
         />)
 }
