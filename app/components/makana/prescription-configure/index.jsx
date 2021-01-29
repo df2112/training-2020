@@ -154,7 +154,9 @@ const PrescriptionConfigure = (props) => {
                     <div className="c-prescription-configure__form-field-inner">
                         <div className="c-prescription-configure__form-field-input">
                             <div className="c-prescription-configure__form-field-label" aria-hidden="true"></div>
-                            <Button type="submit" className="pw--primary">Save Prescription</Button>
+                            <Button type="submit" className="pw--primary">
+                                Save Prescription
+                            </Button>
                         </div>
                     </div>
                 </div>
