@@ -69,6 +69,7 @@ const fakeProductSuggestions = [
 ]
 
 const DrugSearch = (props) => {
+    const { onDrugSelectSubmit } = props
     const [productSuggestions, setProductSuggestions] = useState([])
 
     const addSuggestions = (event) => {
@@ -92,6 +93,8 @@ const DrugSearch = (props) => {
         console.log('DrugSearch: clickSuggestion()')
         console.log(event.target.closest('article'))
         setProductSuggestions([])
+        
+        if (onDrugSelectSubmit) onDrugSelectSubmit('dumdum')
     }
 
     return (
@@ -103,6 +106,10 @@ const DrugSearch = (props) => {
             onClickSuggestion={clickSuggestion}
             suggestedProductsHeading=''
         />)
+}
+
+DrugSearch.propTypes = {
+    onDrugSelectSubmit: PropTypes.func
 }
 
 export default DrugSearch
