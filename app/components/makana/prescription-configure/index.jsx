@@ -7,14 +7,14 @@ import ListTile from 'progressive-web-sdk/dist/components/list-tile'
 import { getAnalyticsManager } from '../../../analytics'
 
 const analyticsManager = getAnalyticsManager()
-const DOCTOR_SEARCH_FORM_NAME = 'prescription-configure'
+const PRESCRIPTION_CONFIGURATION_FORM_NAME = 'prescription-configure'
 
 const PrescriptionConfigure = (props) => {
     const { onPrescriptionConfigureSubmit } = props
     const [error, setError] = useState(false)
 
-    const handleDoctorSearchSubmit = (event) => {
-        console.log('DoctorSearch: handleDoctorSearchSubmit()')
+    const handlePrescriptionSaveSubmit = (event) => {
+        console.log('PrescriptionConfigure: handlePrescriptionSaveSubmit()')
 
         const formData = new FormData(event.target)
         if (onPrescriptionConfigureSubmit) onPrescriptionConfigureSubmit(formData)
@@ -22,10 +22,10 @@ const PrescriptionConfigure = (props) => {
 
     return (
         <form
-            id={DOCTOR_SEARCH_FORM_NAME}
+            id={PRESCRIPTION_CONFIGURATION_FORM_NAME}
             className="c-prescription-configure"
-            data-analytics-name={DOCTOR_SEARCH_FORM_NAME}
-            onSubmit={handleDoctorSearchSubmit}
+            data-analytics-name={PRESCRIPTION_CONFIGURATION_FORM_NAME}
+            onSubmit={handlePrescriptionSaveSubmit}
         >
             <List>
                 <ListTile className="c-prescription-configure__form-field-row u-flexbox">
