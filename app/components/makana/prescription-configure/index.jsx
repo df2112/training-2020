@@ -4,10 +4,10 @@ import PropTypes from 'prop-types'
 import Button from 'progressive-web-sdk/dist/components/button'
 import List from 'progressive-web-sdk/dist/components/list'
 import ListTile from 'progressive-web-sdk/dist/components/list-tile'
-import { getAnalyticsManager } from '../../analytics'
+import { getAnalyticsManager } from '../../../analytics'
 
 const analyticsManager = getAnalyticsManager()
-const DOCTOR_SEARCH_FORM_NAME = 'doctor-search'
+const DOCTOR_SEARCH_FORM_NAME = 'prescription-configure'
 
 export const validate = (values) => {
     const errors = {}
@@ -35,7 +35,7 @@ const fakeDoctors = [
     }
 ]
 
-const DoctorSearch = (props) => {
+const PrescriptionConfigure = (props) => {
     const { onDoctorSelectSubmit } = props
     const [error, setError] = useState(false)
     const [doctorSearchResults, setDoctorSearchResults] = useState([])
@@ -71,24 +71,24 @@ const DoctorSearch = (props) => {
     return (
         <form
             id={DOCTOR_SEARCH_FORM_NAME}
-            className="c-doctor-search"
+            className="c-prescription-configure"
             data-analytics-name={DOCTOR_SEARCH_FORM_NAME}
             onSubmit={handleDoctorSearchSubmit}
         >
 
             {/* Name */}
-            <div className="c-doctor-search__form-field-row u-flexbox">
-                <div className={`c-doctor-search__form-field u-flex ${error ? 'c-doctor-search__form-field-error' : ''}`}>
-                    <div className="c-doctor-search__form-field-inner">
-                        <div className="c-doctor-search__form-field-label-wrap">
-                            <label className="c-doctor-search__form-field-label" htmlFor="doctor-search-name">{'Name'}</label>
+            <div className="c-prescription-configure__form-field-row u-flexbox">
+                <div className={`c-prescription-configure__form-field u-flex ${error ? 'c-prescription-configure__form-field-error' : ''}`}>
+                    <div className="c-prescription-configure__form-field-inner">
+                        <div className="c-prescription-configure__form-field-label-wrap">
+                            <label className="c-prescription-configure__form-field-label" htmlFor="prescription-configure-name">{'Name'}</label>
                         </div>
-                        <div className="c-doctor-search__form-field-input">
-                            <input id="doctor-search-name" name="name" type="text" data-analytics-name="email" className="u-flex"
+                        <div className="c-prescription-configure__form-field-input">
+                            <input id="prescription-configure-name" name="name" type="text" data-analytics-name="email" className="u-flex"
                                 required />
                         </div>
                         {error && (
-                            <div className="c-doctor-search__form-field-error-text">
+                            <div className="c-prescription-configure__form-field-error-text">
                                 {error}
                             </div>
                         )}
@@ -97,18 +97,18 @@ const DoctorSearch = (props) => {
             </div>
 
             {/* City */}
-            <div className="c-doctor-search__form-field-row u-flexbox">
-                <div className={`c-doctor-search__form-field u-flex ${error ? 'c-doctor-search__form-field-error' : ''}`}>
-                    <div className="c-doctor-search__form-field-inner">
-                        <div className="c-doctor-search__form-field-label-wrap">
-                            <label className="c-doctor-search__form-field-label" htmlFor="doctor-search-city">{'City'}</label>
+            <div className="c-prescription-configure__form-field-row u-flexbox">
+                <div className={`c-prescription-configure__form-field u-flex ${error ? 'c-prescription-configure__form-field-error' : ''}`}>
+                    <div className="c-prescription-configure__form-field-inner">
+                        <div className="c-prescription-configure__form-field-label-wrap">
+                            <label className="c-prescription-configure__form-field-label" htmlFor="prescription-configure-city">{'City'}</label>
                         </div>
-                        <div className="c-doctor-search__form-field-input">
-                            <input id="doctor-search-city" name="city" type="text" data-analytics-name="email" className="u-flex"
+                        <div className="c-prescription-configure__form-field-input">
+                            <input id="prescription-configure-city" name="city" type="text" data-analytics-name="email" className="u-flex"
                                 required />
                         </div>
                         {error && (
-                            <div className="c-doctor-search__form-field-error-text">
+                            <div className="c-prescription-configure__form-field-error-text">
                                 {error}
                             </div>
                         )}
@@ -117,18 +117,18 @@ const DoctorSearch = (props) => {
             </div>
 
             {/* State */}
-            <div className="c-doctor-search__form-field-row u-flexbox">
-                <div className={`c-doctor-search__form-field u-flex ${error ? 'c-doctor-search__form-field-error' : ''}`}>
-                    <div className="c-doctor-search__form-field-inner">
-                        <div className="c-doctor-search__form-field-label-wrap">
-                            <label className="c-doctor-search__form-field-label" htmlFor="doctor-search-state">{'State'}</label>
+            <div className="c-prescription-configure__form-field-row u-flexbox">
+                <div className={`c-prescription-configure__form-field u-flex ${error ? 'c-prescription-configure__form-field-error' : ''}`}>
+                    <div className="c-prescription-configure__form-field-inner">
+                        <div className="c-prescription-configure__form-field-label-wrap">
+                            <label className="c-prescription-configure__form-field-label" htmlFor="prescription-configure-state">{'State'}</label>
                         </div>
-                        <div className="c-doctor-search__form-field-input">
-                            <input id="doctor-search-state" name="state" type="text" data-analytics-name="email" className="u-flex"
+                        <div className="c-prescription-configure__form-field-input">
+                            <input id="prescription-configure-state" name="state" type="text" data-analytics-name="email" className="u-flex"
                                 required />
                         </div>
                         {error && (
-                            <div className="c-doctor-search__form-field-error-text">
+                            <div className="c-prescription-configure__form-field-error-text">
                                 {error}
                             </div>
                         )}
@@ -137,18 +137,18 @@ const DoctorSearch = (props) => {
             </div>
 
             {/* Zip */}
-            <div className="c-doctor-search__form-field-row u-flexbox">
-                <div className={`c-doctor-search__form-field u-flex ${error ? 'c-doctor-search__form-field-error' : ''}`}>
-                    <div className="c-doctor-search__form-field-inner">
-                        <div className="c-doctor-search__form-field-label-wrap">
-                            <label className="c-doctor-search__form-field-label" htmlFor="doctor-search-zip">{'Zip'}</label>
+            <div className="c-prescription-configure__form-field-row u-flexbox">
+                <div className={`c-prescription-configure__form-field u-flex ${error ? 'c-prescription-configure__form-field-error' : ''}`}>
+                    <div className="c-prescription-configure__form-field-inner">
+                        <div className="c-prescription-configure__form-field-label-wrap">
+                            <label className="c-prescription-configure__form-field-label" htmlFor="prescription-configure-zip">{'Zip'}</label>
                         </div>
-                        <div className="c-doctor-search__form-field-input">
-                            <input id="doctor-search-zip" name="zip" type="text" data-analytics-name="email" className="u-flex"
+                        <div className="c-prescription-configure__form-field-input">
+                            <input id="prescription-configure-zip" name="zip" type="text" data-analytics-name="email" className="u-flex"
                                 required />
                         </div>
                         {error && (
-                            <div className="c-doctor-search__form-field-error-text">
+                            <div className="c-prescription-configure__form-field-error-text">
                                 {error}
                             </div>
                         )}
@@ -157,11 +157,11 @@ const DoctorSearch = (props) => {
             </div>
 
             {/* Submit Button */}
-            <div className="c-doctor-search__form-field-row u-flexbox">
-                <div className="c-doctor-search__form-field c-doctor-search__button u-flex-none u-margin-start-0">
-                    <div className="c-doctor-search__form-field-inner">
-                        <div className="c-doctor-search__form-field-input">
-                            <div className="c-doctor-search__form-field-label" aria-hidden="true"></div>
+            <div className="c-prescription-configure__form-field-row u-flexbox">
+                <div className="c-prescription-configure__form-field c-prescription-configure__button u-flex-none u-margin-start-0">
+                    <div className="c-prescription-configure__form-field-inner">
+                        <div className="c-prescription-configure__form-field-input">
+                            <div className="c-prescription-configure__form-field-label" aria-hidden="true"></div>
                             <Button type="submit" className="pw--primary">Search Doctors</Button>
                         </div>
                     </div>
@@ -193,11 +193,11 @@ const DoctorSearch = (props) => {
     )
 }
 
-DoctorSearch.propTypes = {
+PrescriptionConfigure.propTypes = {
     /**
      * Handler that is triggers when the form is submitted
      */
     onDoctorSelectSubmit: PropTypes.func
 }
 
-export default DoctorSearch
+export default PrescriptionConfigure

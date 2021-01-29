@@ -2,7 +2,7 @@ import React, { Fragment, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import Button from 'progressive-web-sdk/dist/components/button'
-import { getAnalyticsManager } from '../../analytics'
+import { getAnalyticsManager } from '../../../analytics'
 
 const analyticsManager = getAnalyticsManager()
 const DOCTOR_ADD_NEW_FORM_NAME = 'doctor-add-new'
