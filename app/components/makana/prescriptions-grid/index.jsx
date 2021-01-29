@@ -206,9 +206,9 @@ const PrescriptionsGrid = (props) => {
         >
             <div className="t-product-details__shipping-delivery-modal-content">
                 <br />
-                <DoctorSearch
+                <PrescriptionConfigure
                     analyticsManager={analyticsManager}
-                    onDoctorSelectSubmit={handleDoctorSelectSubmit}
+                    onPrescriptionConfigureSubmit={handlePrescriptionConfigureSubmit}
                 />
 
             </div>
@@ -220,6 +220,13 @@ const PrescriptionsGrid = (props) => {
         console.log(event)
         setIsDoctorModalOpen(false)
         setIsDrugModalOpen(true)
+    }
+
+    const handlePrescriptionConfigureSubmit = (event) => {
+        console.log('PrescriptionsGrid: handlePrescriptionConfigureSubmit()')
+        console.log(event)
+        setIsDoctorModalOpen(false)
+        setIsDrugModalOpen(false)
     }
 
     return (

@@ -9,14 +9,6 @@ import { getAnalyticsManager } from '../../../analytics'
 const analyticsManager = getAnalyticsManager()
 const DOCTOR_SEARCH_FORM_NAME = 'prescription-configure'
 
-export const validate = (values) => {
-    const errors = {}
-    if ((values.email || '').search(/@mobify.com$/) < 0) {
-        errors.email = 'Must be a @mobify.com email address'
-    }
-    return errors
-}
-
 const fakeDoctors = [
     {
         _doctorKey: '601',
@@ -36,7 +28,7 @@ const fakeDoctors = [
 ]
 
 const PrescriptionConfigure = (props) => {
-    const { onDoctorSelectSubmit } = props
+    const { onPrescriptionConfigureSubmit } = props
     const [error, setError] = useState(false)
     const [doctorSearchResults, setDoctorSearchResults] = useState([])
 
@@ -65,7 +57,7 @@ const PrescriptionConfigure = (props) => {
     const handleDoctorSelectSubmit = (doctorId) => {
         console.log('DoctorSearch: handleDoctorSelectSubmit()')
         
-        if (onDoctorSelectSubmit) onDoctorSelectSubmit(doctorId)
+        if (onPrescriptionConfigureSubmit) onPrescriptionConfigureSubmit('yoyo')
     }
 
     return (
@@ -162,7 +154,7 @@ const PrescriptionConfigure = (props) => {
                     <div className="c-prescription-configure__form-field-inner">
                         <div className="c-prescription-configure__form-field-input">
                             <div className="c-prescription-configure__form-field-label" aria-hidden="true"></div>
-                            <Button type="submit" className="pw--primary">Search Doctors</Button>
+                            <Button type="submit" className="pw--primary">Save Prescription</Button>
                         </div>
                     </div>
                 </div>
@@ -197,7 +189,7 @@ PrescriptionConfigure.propTypes = {
     /**
      * Handler that is triggers when the form is submitted
      */
-    onDoctorSelectSubmit: PropTypes.func
+    onPrescriptionConfigureSubmit: PropTypes.func
 }
 
 export default PrescriptionConfigure
