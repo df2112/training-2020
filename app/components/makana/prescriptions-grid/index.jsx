@@ -222,9 +222,10 @@ const PrescriptionsGrid = (props) => {
         setIsDrugModalOpen(true)
     }
 
-    const handlePrescriptionConfigureSubmit = (event) => {
+    const handlePrescriptionConfigureSubmit = (formData) => {
         console.log('PrescriptionsGrid: handlePrescriptionConfigureSubmit()')
-        console.log(event)
+        console.log('--- formData parameter: ')
+        console.log(Object.fromEntries(formData.entries()))
         setIsDoctorModalOpen(false)
         setIsDrugModalOpen(false)
     }

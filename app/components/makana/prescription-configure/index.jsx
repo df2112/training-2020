@@ -2,6 +2,8 @@ import React, { Fragment, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import Button from 'progressive-web-sdk/dist/components/button'
+import List from 'progressive-web-sdk/dist/components/list'
+import ListTile from 'progressive-web-sdk/dist/components/list-tile'
 import { getAnalyticsManager } from '../../../analytics'
 
 const analyticsManager = getAnalyticsManager()
@@ -15,9 +17,7 @@ const PrescriptionConfigure = (props) => {
         console.log('DoctorSearch: handleDoctorSearchSubmit()')
 
         const formData = new FormData(event.target)
-
-        event.preventDefault() //TODO: This needs to be reviewed
-        if (onPrescriptionConfigureSubmit) onPrescriptionConfigureSubmit('yoyo2')
+        if (onPrescriptionConfigureSubmit) onPrescriptionConfigureSubmit(formData)
     }
 
     return (
@@ -27,87 +27,40 @@ const PrescriptionConfigure = (props) => {
             data-analytics-name={DOCTOR_SEARCH_FORM_NAME}
             onSubmit={handleDoctorSearchSubmit}
         >
+            <List>
+                <ListTile className="c-prescription-configure__form-field-row u-flexbox">
+                    <select name="drug" >
+                        <option value='1'>Atorvastatin (generic)</option>
+                        <option value='2'>Lipitor (brand)</option>
+                    </select>
+                </ListTile>
 
-            {/* Name */}
-            <div className="c-prescription-configure__form-field-row u-flexbox">
-                <div className={`c-prescription-configure__form-field u-flex ${error ? 'c-prescription-configure__form-field-error' : ''}`}>
-                    <div className="c-prescription-configure__form-field-inner">
-                        <div className="c-prescription-configure__form-field-label-wrap">
-                            <label className="c-prescription-configure__form-field-label" htmlFor="prescription-configure-name">{'Name'}</label>
-                        </div>
-                        <div className="c-prescription-configure__form-field-input">
-                            <input id="prescription-configure-name" name="name" type="text" data-analytics-name="email" className="u-flex"
-                                required />
-                        </div>
-                        {error && (
-                            <div className="c-prescription-configure__form-field-error-text">
-                                {error}
-                            </div>
-                        )}
-                    </div>
-                </div>
-            </div>
+                <ListTile className="c-prescription-configure__form-field-row u-flexbox">
+                    <div>Form</div>
+                    <select name="form">
+                        <option value='1'>Tablet</option>
+                    </select>
+                </ListTile>
 
-            {/* City */}
-            <div className="c-prescription-configure__form-field-row u-flexbox">
-                <div className={`c-prescription-configure__form-field u-flex ${error ? 'c-prescription-configure__form-field-error' : ''}`}>
-                    <div className="c-prescription-configure__form-field-inner">
-                        <div className="c-prescription-configure__form-field-label-wrap">
-                            <label className="c-prescription-configure__form-field-label" htmlFor="prescription-configure-city">{'City'}</label>
-                        </div>
-                        <div className="c-prescription-configure__form-field-input">
-                            <input id="prescription-configure-city" name="city" type="text" data-analytics-name="email" className="u-flex"
-                                required />
-                        </div>
-                        {error && (
-                            <div className="c-prescription-configure__form-field-error-text">
-                                {error}
-                            </div>
-                        )}
-                    </div>
-                </div>
-            </div>
-
-            {/* State */}
-            <div className="c-prescription-configure__form-field-row u-flexbox">
-                <div className={`c-prescription-configure__form-field u-flex ${error ? 'c-prescription-configure__form-field-error' : ''}`}>
-                    <div className="c-prescription-configure__form-field-inner">
-                        <div className="c-prescription-configure__form-field-label-wrap">
-                            <label className="c-prescription-configure__form-field-label" htmlFor="prescription-configure-state">{'State'}</label>
-                        </div>
-                        <div className="c-prescription-configure__form-field-input">
-                            <input id="prescription-configure-state" name="state" type="text" data-analytics-name="email" className="u-flex"
-                                required />
-                        </div>
-                        {error && (
-                            <div className="c-prescription-configure__form-field-error-text">
-                                {error}
-                            </div>
-                        )}
-                    </div>
-                </div>
-            </div>
-
-            {/* Zip */}
-            <div className="c-prescription-configure__form-field-row u-flexbox">
-                <div className={`c-prescription-configure__form-field u-flex ${error ? 'c-prescription-configure__form-field-error' : ''}`}>
-                    <div className="c-prescription-configure__form-field-inner">
-                        <div className="c-prescription-configure__form-field-label-wrap">
-                            <label className="c-prescription-configure__form-field-label" htmlFor="prescription-configure-zip">{'Zip'}</label>
-                        </div>
-                        <div className="c-prescription-configure__form-field-input">
-                            <input id="prescription-configure-zip" name="zip" type="text" data-analytics-name="email" className="u-flex"
-                                required />
-                        </div>
-                        {error && (
-                            <div className="c-prescription-configure__form-field-error-text">
-                                {error}
-                            </div>
-                        )}
-                    </div>
-                </div>
-            </div>
-
+                <ListTile className="c-prescription-configure__form-field-row u-flexbox">
+                    <div>Dosage</div>
+                    <select name="dosage">
+                        <option value='1'>10mg</option>
+                        <option value='2'>20mg</option>
+                        <option value='3'>40mg</option>
+                    </select>
+                </ListTile>
+                
+                <ListTile className="c-prescription-configure__form-field-row u-flexbox">
+                    <div>Quantity</div>
+                    <select name="quantity">
+                        <option value='1'>10mg</option>
+                        <option value='2'>20mg</option>
+                        <option value='3'>40mg</option>
+                    </select>
+                </ListTile>
+            </List>
+            
             {/* Submit Button */}
             <div className="c-prescription-configure__form-field-row u-flexbox">
                 <div className="c-prescription-configure__form-field c-prescription-configure__button u-flex-none u-margin-start-0">
@@ -121,7 +74,6 @@ const PrescriptionConfigure = (props) => {
                     </div>
                 </div>
             </div>
-
         </form>
     )
 }

@@ -15,8 +15,7 @@ const DoctorAddNew = (props) => {
         console.log('DoctorAddNew: handleDoctorAddNewSubmit()')
 
         const formData = new FormData(event.target)
-        // TODO: Validate formData
-        
+        // TODO: Validate formData        
         if (onDoctorAddNewSubmit) onDoctorAddNewSubmit(formData)
     }
 
