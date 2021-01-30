@@ -234,6 +234,8 @@ const PrescriptionsGrid = (props) => {
         console.log('PrescriptionsGrid: handlePrescriptionConfigureSubmit()')
         console.log('--- formData parameter: ')
         console.log(Object.fromEntries(formData.entries()))
+        console.log('--- activeRowKey state variable: ')
+        console.log(activeRowKey)
         setIsDoctorModalOpen(false)
         setIsDrugModalOpen(false)
     }
@@ -248,6 +250,7 @@ const PrescriptionsGrid = (props) => {
                 {/* Prescription Rows */}
                 {gridRows.map((item) => (
                     <ListTile
+                        onClick={() => setActiveRowKey(item._gridRowKey)}
                         className="pw--instructional-block"
                         key={item._gridRowKey}
                         endAction={
