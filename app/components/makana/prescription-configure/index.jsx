@@ -4,14 +4,11 @@ import PropTypes from 'prop-types'
 import Button from 'progressive-web-sdk/dist/components/button'
 import List from 'progressive-web-sdk/dist/components/list'
 import ListTile from 'progressive-web-sdk/dist/components/list-tile'
-import { getAnalyticsManager } from '../../../analytics'
 
-const analyticsManager = getAnalyticsManager()
 const PRESCRIPTION_CONFIGURATION_FORM_NAME = 'prescription-configure'
 
 const PrescriptionConfigure = (props) => {
     const { onPrescriptionConfigureSubmit } = props
-    const [error, setError] = useState(false)
 
     const handlePrescriptionSaveSubmit = (event) => {
         console.log('PrescriptionConfigure: handlePrescriptionSaveSubmit()')
