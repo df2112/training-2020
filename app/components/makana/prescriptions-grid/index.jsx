@@ -29,7 +29,7 @@ export const validate = (values) => {
 const initGridRows = [
     {
         _gridRowKey: 1,
-        field1: 'Hear me roar!!!',
+        field1: 'Initial dummy row!!!',
         field2: 'A'
     }
 ]
@@ -98,7 +98,7 @@ const PrescriptionsGrid = (props) => {
 
         const newGridRow = {
             _gridRowKey: lastRowKeyRef.current,
-            field1: 'Hear me roar again!!!',
+            field1: 'Additional dummy row!!!',
             field2: lastRowKeyRef.current
         }
 
