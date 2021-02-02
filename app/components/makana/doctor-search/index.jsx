@@ -104,8 +104,7 @@ const DoctorSearch = (props) => {
                             <label className="c-doctor-search__form-field-label" htmlFor="doctor-search-city">{'City'}</label>
                         </div>
                         <div className="c-doctor-search__form-field-input">
-                            <input id="doctor-search-city" name="city" type="text" data-analytics-name="email" className="u-flex"
-                                required />
+                            <input id="doctor-search-city" name="city" type="text" data-analytics-name="email" className="u-flex" />
                         </div>
                         {error && (
                             <div className="c-doctor-search__form-field-error-text">
@@ -124,8 +123,7 @@ const DoctorSearch = (props) => {
                             <label className="c-doctor-search__form-field-label" htmlFor="doctor-search-state">{'State'}</label>
                         </div>
                         <div className="c-doctor-search__form-field-input">
-                            <input id="doctor-search-state" name="state" type="text" data-analytics-name="email" className="u-flex"
-                                required />
+                            <input id="doctor-search-state" name="state" type="text" data-analytics-name="email" className="u-flex" />
                         </div>
                         {error && (
                             <div className="c-doctor-search__form-field-error-text">
@@ -144,8 +142,7 @@ const DoctorSearch = (props) => {
                             <label className="c-doctor-search__form-field-label" htmlFor="doctor-search-zip">{'Zip'}</label>
                         </div>
                         <div className="c-doctor-search__form-field-input">
-                            <input id="doctor-search-zip" name="zip" type="text" data-analytics-name="email" className="u-flex"
-                                required />
+                            <input id="doctor-search-zip" name="zip" type="text" data-analytics-name="email" className="u-flex" />
                         </div>
                         {error && (
                             <div className="c-doctor-search__form-field-error-text">

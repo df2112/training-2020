@@ -55,8 +55,7 @@ const DoctorAddNew = (props) => {
                             <label className="c-doctor-add-new__form-field-label" htmlFor="doctor-add-new-city">{'City'}</label>
                         </div>
                         <div className="c-doctor-add-new__form-field-input">
-                            <input id="doctor-add-new-city" name="city" type="text" data-analytics-name="email" className="u-flex"
-                                required />
+                            <input id="doctor-add-new-city" name="city" type="text" data-analytics-name="email" className="u-flex" />
                         </div>
                         {error && (
                             <div className="c-doctor-add-new__form-field-error-text">
@@ -75,8 +74,7 @@ const DoctorAddNew = (props) => {
                             <label className="c-doctor-add-new__form-field-label" htmlFor="doctor-add-new-state">{'State'}</label>
                         </div>
                         <div className="c-doctor-add-new__form-field-input">
-                            <input id="doctor-add-new-state" name="state" type="text" data-analytics-name="email" className="u-flex"
-                                required />
+                            <input id="doctor-add-new-state" name="state" type="text" data-analytics-name="email" className="u-flex" />
                         </div>
                         {error && (
                             <div className="c-doctor-add-new__form-field-error-text">
@@ -95,8 +93,7 @@ const DoctorAddNew = (props) => {
                             <label className="c-doctor-add-new__form-field-label" htmlFor="doctor-add-new-zip">{'Zip'}</label>
                         </div>
                         <div className="c-doctor-add-new__form-field-input">
-                            <input id="doctor-add-new-zip" name="zip" type="text" data-analytics-name="email" className="u-flex"
-                                required />
+                            <input id="doctor-add-new-zip" name="zip" type="text" data-analytics-name="email" className="u-flex" />
                         </div>
                         {error && (
                             <div className="c-doctor-add-new__form-field-error-text">
