@@ -241,7 +241,7 @@ const PrescriptionsGrid = (props) => {
     }
 
     return (
-        <div>
+        <div className="c-prescriptions-grid">
             <div className="u-margin-bottom-lg">
                 This is the Prescriptions Grid component:
             </div>
@@ -262,19 +262,68 @@ const PrescriptionsGrid = (props) => {
                         }
                     >
 
-                        <DrugSearch onDrugSelectSubmit={handleDrugSelectSubmit} />
+                        <div className="c-prescriptions-grid__form-field-row">
+                            <div className="u-flex">
+                                <div className="c-prescriptions-grid__form-field-inner">
+                                    <div className="c-prescriptions-grid__form-field-label-wrap">
+                                        <label className="c-prescriptions-grid__form-field-label" htmlFor="drug-search">
+                                            {'Drug Search'}
+                                        </label>
+                                    </div>
+                                    <div className="c-prescriptions-grid__form-field-input">
+                                        <DrugSearch id="drug-search" onDrugSelectSubmit={handleDrugSelectSubmit} />
+                                    </div>
+                                </div>
+                            </div>
 
-                        <span>
-                            {item.field2} : {item.field1}
-                        </span>
+                            <div className="u-flex">
+                                <div className="c-prescriptions-grid__form-field-inner">
+                                    <div className="c-prescriptions-grid__form-field-label-wrap">
+                                        <label className="c-prescriptions-grid__form-field-label" htmlFor="field2">
+                                            {'Field2'}
+                                        </label>
+                                    </div>
 
-                        <select value={selectedDoctor} onChange={handleDoctorChange}>
-                            {doctorsList && doctorsList.length > 0 && doctorsList.map((doctor) => (
-                                <Fragment key={doctor._doctorKey}>
-                                    <option value={doctor._doctorKey}>{doctor.name}</option>
-                                </Fragment>
-                            ))}
-                        </select>
+                                    <div className="c-prescriptions-grid__form-field-input">
+                                        <span id="field2">{item.field2}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="u-flex">
+                                <div className="c-prescriptions-grid__form-field-inner">
+                                    <div className="c-prescriptions-grid__form-field-label-wrap">
+                                        <label className="c-prescriptions-grid__form-field-label" htmlFor="field1">
+                                            {'Field1'}
+                                        </label>
+                                    </div>
+
+                                    <div className="c-prescriptions-grid__form-field-input">
+                                        <span id="field1">{item.field1}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="u-flex">
+                                <div className="c-prescriptions-grid__form-field-inner">
+                                    <div className="c-prescriptions-grid__form-field-label-wrap">
+                                        <label className="c-prescriptions-grid__form-field-label" htmlFor="doctor-select">
+                                            {'Doctor Select'}
+                                        </label>
+                                    </div>
+                                    <div className="c-prescriptions-grid__form-field-input">
+                                        <select id="doctor-select" value={selectedDoctor} onChange={handleDoctorChange}>
+                                            {doctorsList && doctorsList.length > 0 && doctorsList.map((doctor) => (
+                                                <Fragment key={doctor._doctorKey}>
+                                                    <option value={doctor._doctorKey}>{doctor.name}</option>
+                                                </Fragment>
+                                            ))}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </ListTile>
                 ))}
 

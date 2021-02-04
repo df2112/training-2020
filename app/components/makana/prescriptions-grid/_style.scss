@@ -4,8 +4,21 @@
 // 1. Ensure that button align with input field
 // 2. Override flex style
 
-.c-prescriptions-grid__form-field-input {
-    display: block; // 2
+// .c-prescriptions-grid {
+//     //float: left;
+//     display: inline-block;
+//     width: span(4);
+//     //margin-right: gutter();
+// }
+
+.c-prescriptions-grid__form-field-row {
+    max-width: 50em;
+}
+
+@include susy-breakpoint($large-breakpoint, $large-layout) {
+    .c-prescriptions-grid__form-field-row {
+        display: inline-flex;
+    }
 }
 
 .c-prescriptions-grid__form-field-inner {
@@ -27,16 +40,8 @@
     line-height: 1em;
 }
 
-.c-prescriptions-grid__form-field-error-text {
-    margin-top: $sub-unit;
-
-    color: $error-color;
-    font-size: $small-font-size;
-    line-height: $small-line-height;
-}
-
-.c-prescriptions-grid__form-field-row {
-    max-width: 25em;
+.c-prescriptions-grid__form-field-input {
+    display: block; // 2
 }
 
 .c-prescriptions-grid__form-field-error {
@@ -56,6 +61,14 @@
             box-shadow: 0 0 4px 0 $error-color;
         }
     }
+}
+
+.c-prescriptions-grid__form-field-error-text {
+    margin-top: $sub-unit;
+
+    color: $error-color;
+    font-size: $small-font-size;
+    line-height: $small-line-height;
 }
 
 .c-prescriptions-grid__button {
