@@ -15,3 +15,9 @@
         background: susy-svg-grid(); // 2
     }
 }
+
+@include susy-breakpoint($large-breakpoint, $large-layout) {
+    .t-home {
+        background: susy-svg-grid(); // 2
+    }
+}
