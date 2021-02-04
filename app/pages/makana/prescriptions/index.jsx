@@ -11,9 +11,9 @@ import Tile from 'progressive-web-sdk/dist/components/tile'
 import SkeletonBlock from 'progressive-web-sdk/dist/components/skeleton-block'
 import SkeletonText from 'progressive-web-sdk/dist/components/skeleton-text'
 
-import { getAnalyticsManager } from '../../analytics'
-import PrescriptionsGrid from '../../components/makana/prescriptions-grid'
-import { Desktop } from '../../components/media-queries'
+import { getAnalyticsManager } from '../../../analytics'
+import PrescriptionsGrid from '../../../components/makana/prescriptions-grid'
+import { Desktop } from '../../../components/media-queries'
 
 const analyticsManager = getAnalyticsManager()
 const PRODUCT_SKELETON_COUNT = 6
