@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import Button from 'progressive-web-sdk/dist/components/button'
 import { HeaderBar, HeaderBarActions, HeaderBarTitle } from 'progressive-web-sdk/dist/components/header-bar'
+import Divider from 'progressive-web-sdk/dist/components/divider'
 import List from 'progressive-web-sdk/dist/components/list'
 import ListTile from 'progressive-web-sdk/dist/components/list-tile'
 import Sheet from 'progressive-web-sdk/dist/components/sheet'
@@ -250,48 +251,51 @@ const PrescriptionsGrid = (props) => {
                 <TabsPanel title="Prescriptions">
 
                     {/* Revised  */}
-                    <List>
-                        <ListTile
-                            endAction={
-                                <div>
-                                    <Button
-                                        className="pw--blank"
-                                        icon="more"
-                                        onClick={() => setIsDrugModalOpen(true)}
-                                    />
-                                </div>
-                            }
-                        >
-                            <div style={{ fontWeight: 'bold' }}>Atorvastatin</div>
-                            <div>30 tablets 40mg</div>
-                        </ListTile>
-                        <ListTile
-                            endAction={
-                                <Button
-                                    className="pw--blank"
-                                    icon="more"
-                                    onClick={() => setIsDrugModalOpen(true)}
-                                />
-                            }
-                        >
-                            <div style={{ fontWeight: 'bold' }}>Lipitor</div>
-                            <div>90 tablets 10mg</div>
-                        </ListTile>
-                        <ListTile
-                            endAction={
-                                <Button
-                                    className="pw--blank"
-                                    icon="more"
-                                    onClick={() => setIsDrugModalOpen(true)}
-                                />
-                            }
-                        >
-                            <div style={{ fontWeight: 'bold' }}>Cozaar</div>
-                            <div>30 tablets 50mg</div>
-                        </ListTile>
-                    </List>
+                    <div style={{ marginTop: "6px" }}>
+                        <List>
+                            <ListTile
+                                className="pw--instructional-block"
+                                endAction={<Button className="pw--blank" icon="more" onClick={() => setIsDrugModalOpen(true)} />}
+                            >
+                                <div style={{ fontWeight: 'bold' }}>Atorvastatin</div>
+                                <div style={{ marginBottom: "5px" }}>30 tablets 40mg</div>
+                                <Divider />
+                                <ListTile startAction={<img style={{ maxWidth: "70%", marginRight: "5px" }} src="https://cutpcdnwimages.azureedge.net/-/media/images/publix/publix_brandmark.svg?h=50&w=30&la=en&hash=250D8BC8604D4BC2D61677DFBF8E841AB79C327C" />}>
+                                    <div>Piggly Wiggly</div>
+                                </ListTile>
+                            </ListTile>
+                            <ListTile
+                                className="pw--instructional-block"
+                                endAction={<Button className="pw--blank" icon="more" onClick={() => setIsDrugModalOpen(true)} />}
+                            >
+                                <div style={{ fontWeight: 'bold' }}>Lipitor</div>
+                                <div style={{ marginBottom: "5px" }}>90 tablets 10mg</div>
+                                <Divider />
+                                <ListTile startAction={<img style={{ maxWidth: "70%", marginRight: "5px" }} src="https://cutpcdnwimages.azureedge.net/-/media/images/publix/publix_brandmark.svg?h=50&w=30&la=en&hash=250D8BC8604D4BC2D61677DFBF8E841AB79C327C" />}>
+                                    <div>Publix</div>
+                                </ListTile>
+                            </ListTile>
+                            <ListTile
+                                className="pw--instructional-block"
+                                endAction={<Button className="pw--blank" icon="more" onClick={() => setIsDrugModalOpen(true)} />}
+                            >
+                                <div style={{ fontWeight: 'bold' }}>Cozaar</div>
+                                <div style={{ marginBottom: "5px" }}>30 tablets 50mg</div>
+                                <Divider />
+                                <ListTile startAction={<img style={{ maxWidth: "70%", marginRight: "5px" }} src="https://cutpcdnwimages.azureedge.net/-/media/images/publix/publix_brandmark.svg?h=50&w=30&la=en&hash=250D8BC8604D4BC2D61677DFBF8E841AB79C327C" />}>
+                                    <div>Walmart</div>
+                                </ListTile>
+                            </ListTile>
+                            {/* Add New Prescription button */}
+                            <ListTile className="pw--instructional-block">
+                                <Button className="t-product-details__modal-button pw--primary qa-modal-button"
+                                    onClick={() => handleAddNewPrescription(lastRowKey + 1)}>
+                                    Add New Prescription
+                                </Button>
+                            </ListTile>
 
-
+                        </List>
+                    </div>
 
                     <List>
                         {/* Prescription Rows */}
@@ -418,30 +422,30 @@ const PrescriptionsGrid = (props) => {
             </Tabs>
 
 
-                {/* Floating element/components */}
-                <Mobile>
-                    <DoctorModal width="80%" />
-                    <DrugModal width="80%" />
-                </Mobile>
+            {/* Floating element/components */}
+            <Mobile>
+                <DoctorModal width="80%" />
+                <DrugModal width="80%" />
+            </Mobile>
 
-                <Tablet>
-                    <DoctorModal width="60%" />
-                    <DrugModal width="60%" />
-                </Tablet>
+            <Tablet>
+                <DoctorModal width="60%" />
+                <DrugModal width="60%" />
+            </Tablet>
 
-                <Desktop>
-                    <DoctorModal width="40%" />
-                    <DrugModal width="60%" />
-                </Desktop>
+            <Desktop>
+                <DoctorModal width="40%" />
+                <DrugModal width="60%" />
+            </Desktop>
         </div>
     )
 }
 
 PrescriptionsGrid.propTypes = {
-                /**
-                 * Handler that is triggers when the form is submitted
-                 */
-                onSubmit: PropTypes.func
+    /**
+     * Handler that is triggers when the form is submitted
+     */
+    onSubmit: PropTypes.func
 }
 
 export default PrescriptionsGrid
