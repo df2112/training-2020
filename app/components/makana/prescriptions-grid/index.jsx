@@ -246,127 +246,202 @@ const PrescriptionsGrid = (props) => {
                 This is the Prescriptions Grid component:
             </div>
 
-            <List>
-                {/* Prescription Rows */}
-                {gridRows.map((item, index) => (
-                    <ListTile
-                        onClick={() => setActiveRowKey(item._gridRowKey)}
-                        className="pw--instructional-block"
-                        key={item._gridRowKey}
-                        endAction={
-                            <Button
-                                className="pw--blank"
-                                icon="trash"
-                                onClick={() => handleRemovePrescription(item._gridRowKey)}
-                            />
-                        }
-                    >
+            <Tabs activeIndex={0}>
+                <TabsPanel title="Prescriptions">
 
-                        <div className="c-prescriptions-grid__form-field-row">
-                            <div className="u-flex">
-                                <div className="c-prescriptions-grid__form-field-inner">
-                                    {(index === 0 || Mobile ) &&
-                                        <div className="c-prescriptions-grid__form-field-label-wrap">
-                                            <label className="c-prescriptions-grid__form-field-label" htmlFor="drug-search">
-                                                {'Drug Search'}
-                                            </label>
+                    {/* Revised  */}
+                    <List>
+                        <ListTile
+                            endAction={
+                                <div>
+                                    <Button
+                                        className="pw--blank"
+                                        icon="more"
+                                        onClick={() => setIsDrugModalOpen(true)}
+                                    />
+                                </div>
+                            }
+                        >
+                            <div style={{ fontWeight: 'bold' }}>Atorvastatin</div>
+                            <div>30 tablets 40mg</div>
+                        </ListTile>
+                        <ListTile
+                            endAction={
+                                <Button
+                                    className="pw--blank"
+                                    icon="more"
+                                    onClick={() => setIsDrugModalOpen(true)}
+                                />
+                            }
+                        >
+                            <div style={{ fontWeight: 'bold' }}>Lipitor</div>
+                            <div>90 tablets 10mg</div>
+                        </ListTile>
+                        <ListTile
+                            endAction={
+                                <Button
+                                    className="pw--blank"
+                                    icon="more"
+                                    onClick={() => setIsDrugModalOpen(true)}
+                                />
+                            }
+                        >
+                            <div style={{ fontWeight: 'bold' }}>Cozaar</div>
+                            <div>30 tablets 50mg</div>
+                        </ListTile>
+                    </List>
+
+
+
+                    <List>
+                        {/* Prescription Rows */}
+                        {gridRows.map((item, index) => (
+                            <ListTile
+                                onClick={() => setActiveRowKey(item._gridRowKey)}
+                                className="pw--instructional-block"
+                                key={item._gridRowKey}
+                                endAction={
+                                    <Button
+                                        className="pw--blank"
+                                        icon="trash"
+                                        onClick={() => handleRemovePrescription(item._gridRowKey)}
+                                    />
+                                }
+                            >
+
+                                <div className="c-prescriptions-grid__form-field-row">
+                                    <div className="u-flex">
+                                        <div className="c-prescriptions-grid__form-field-inner">
+                                            {(index === 0 || Mobile) &&
+                                                <div className="c-prescriptions-grid__form-field-label-wrap">
+                                                    <label className="c-prescriptions-grid__form-field-label" htmlFor="drug-search">
+                                                        {'Drug Search'}
+                                                    </label>
+                                                </div>
+                                            }
+                                            <div className="c-prescriptions-grid__form-field-input">
+                                                <DrugSearch id="drug-search" onDrugSelectSubmit={handleDrugSelectSubmit} />
+                                            </div>
                                         </div>
-                                    }
-                                    <div className="c-prescriptions-grid__form-field-input">
-                                        <DrugSearch id="drug-search" onDrugSelectSubmit={handleDrugSelectSubmit} />
+                                    </div>
+
+                                    <div className="u-flex">
+                                        <div className="c-prescriptions-grid__form-field-inner">
+                                            {(index === 0 || Mobile) &&
+                                                <div className="c-prescriptions-grid__form-field-label-wrap">
+                                                    <label className="c-prescriptions-grid__form-field-label" htmlFor="field2">
+                                                        {'Field2'}
+                                                    </label>
+                                                </div>
+                                            }
+                                            <div className="c-prescriptions-grid__form-field-input">
+                                                <span id="field2">{item.field2}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="u-flex">
+                                        <div className="c-prescriptions-grid__form-field-inner">
+                                            {(index === 0 || Mobile) &&
+                                                <div className="c-prescriptions-grid__form-field-label-wrap">
+                                                    <label className="c-prescriptions-grid__form-field-label" htmlFor="field1">
+                                                        {'Field1'}
+                                                    </label>
+                                                </div>
+                                            }
+                                            <div className="c-prescriptions-grid__form-field-input">
+                                                <span id="field1">{item.field1}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="u-flex">
+                                        <div className="c-prescriptions-grid__form-field-inner">
+                                            {(index === 0 || Mobile) &&
+                                                <div className="c-prescriptions-grid__form-field-label-wrap">
+                                                    <label className="c-prescriptions-grid__form-field-label" htmlFor="doctor-select">
+                                                        {'Doctor Select'}
+                                                    </label>
+                                                </div>
+                                            }
+                                            <div className="c-prescriptions-grid__form-field-input">
+                                                <select id="doctor-select" value={selectedDoctor} onChange={handleDoctorChange}>
+                                                    {doctorsList && doctorsList.length > 0 && doctorsList.map((doctor) => (
+                                                        <Fragment key={doctor._doctorKey}>
+                                                            <option value={doctor._doctorKey}>{doctor.name}</option>
+                                                        </Fragment>
+                                                    ))}
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div className="u-flex">
-                                <div className="c-prescriptions-grid__form-field-inner">
-                                    {(index === 0 || Mobile ) &&
-                                        <div className="c-prescriptions-grid__form-field-label-wrap">
-                                            <label className="c-prescriptions-grid__form-field-label" htmlFor="field2">
-                                                {'Field2'}
-                                            </label>
-                                        </div>
-                                    }
-                                    <div className="c-prescriptions-grid__form-field-input">
-                                        <span id="field2">{item.field2}</span>
-                                    </div>
-                                </div>
-                            </div>
+                            </ListTile>
+                        ))}
 
-                            <div className="u-flex">
-                                <div className="c-prescriptions-grid__form-field-inner">
-                                    {(index === 0 || Mobile ) &&
-                                        <div className="c-prescriptions-grid__form-field-label-wrap">
-                                            <label className="c-prescriptions-grid__form-field-label" htmlFor="field1">
-                                                {'Field1'}
-                                            </label>
-                                        </div>
-                                    }
-                                    <div className="c-prescriptions-grid__form-field-input">
-                                        <span id="field1">{item.field1}</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="u-flex">
-                                <div className="c-prescriptions-grid__form-field-inner">
-                                    {(index === 0 || Mobile ) &&
-                                        <div className="c-prescriptions-grid__form-field-label-wrap">
-                                            <label className="c-prescriptions-grid__form-field-label" htmlFor="doctor-select">
-                                                {'Doctor Select'}
-                                            </label>
-                                        </div>
-                                    }
-                                    <div className="c-prescriptions-grid__form-field-input">
-                                        <select id="doctor-select" value={selectedDoctor} onChange={handleDoctorChange}>
-                                            {doctorsList && doctorsList.length > 0 && doctorsList.map((doctor) => (
-                                                <Fragment key={doctor._doctorKey}>
-                                                    <option value={doctor._doctorKey}>{doctor.name}</option>
-                                                </Fragment>
-                                            ))}
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </ListTile>
-                ))}
-
-                {/* Add New Prescription button */}
-                <ListTile className="pw--instructional-block">
-                    <Button className="t-product-details__modal-button pw--primary qa-modal-button"
-                        onClick={() => handleAddNewPrescription(lastRowKey + 1)}>
-                        Add New Prescription
+                        {/* Add New Prescription button */}
+                        <ListTile className="pw--instructional-block">
+                            <Button className="t-product-details__modal-button pw--primary qa-modal-button"
+                                onClick={() => handleAddNewPrescription(lastRowKey + 1)}>
+                                Add New Prescription
                     </Button>
-                </ListTile>
+                        </ListTile>
 
-            </List>
+                    </List>
+                </TabsPanel>
 
-            {/* Floating element/components */}
-            <Mobile>
-                <DoctorModal width="80%" />
-                <DrugModal width="80%" />
-            </Mobile>
+                <TabsPanel title="Pharmacies">
+                </TabsPanel>
 
-            <Tablet>
-                <DoctorModal width="60%" />
-                <DrugModal width="60%" />
-            </Tablet>
+                <TabsPanel title="Doctors">
+                    <List>
+                        {doctorsList && doctorsList.length > 0 && doctorsList.map((doctor) => (
+                            <ListTile
+                                key={doctor._doctorKey}
+                                endAction={
+                                    <div>
+                                        <Button
+                                            className="pw--blank"
+                                            icon="star"
+                                            onClick={() => setIsDrugModalOpen(true)}
+                                        />
+                                    </div>
+                                }
+                            >
+                                <div style={{ fontWeight: 'bold' }}>{doctor.name}</div>
+                                <div>1000 Central Avenue</div>
+                            </ListTile>
+                        ))}
+                    </List>
+                </TabsPanel>
+            </Tabs>
 
-            <Desktop>
-                <DoctorModal width="40%" />
-                <DrugModal width="60%" />
-            </Desktop>
+
+                {/* Floating element/components */}
+                <Mobile>
+                    <DoctorModal width="80%" />
+                    <DrugModal width="80%" />
+                </Mobile>
+
+                <Tablet>
+                    <DoctorModal width="60%" />
+                    <DrugModal width="60%" />
+                </Tablet>
+
+                <Desktop>
+                    <DoctorModal width="40%" />
+                    <DrugModal width="60%" />
+                </Desktop>
         </div>
     )
 }
 
 PrescriptionsGrid.propTypes = {
-    /**
-     * Handler that is triggers when the form is submitted
-     */
-    onSubmit: PropTypes.func
+                /**
+                 * Handler that is triggers when the form is submitted
+                 */
+                onSubmit: PropTypes.func
 }
 
 export default PrescriptionsGrid
