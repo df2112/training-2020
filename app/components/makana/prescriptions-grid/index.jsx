@@ -248,7 +248,7 @@ const PrescriptionsGrid = (props) => {
 
             <List>
                 {/* Prescription Rows */}
-                {gridRows.map((item) => (
+                {gridRows.map((item, index) => (
                     <ListTile
                         onClick={() => setActiveRowKey(item._gridRowKey)}
                         className="pw--instructional-block"
@@ -265,11 +265,13 @@ const PrescriptionsGrid = (props) => {
                         <div className="c-prescriptions-grid__form-field-row">
                             <div className="u-flex">
                                 <div className="c-prescriptions-grid__form-field-inner">
-                                    <div className="c-prescriptions-grid__form-field-label-wrap">
-                                        <label className="c-prescriptions-grid__form-field-label" htmlFor="drug-search">
-                                            {'Drug Search'}
-                                        </label>
-                                    </div>
+                                    {(index === 0 || Mobile ) &&
+                                        <div className="c-prescriptions-grid__form-field-label-wrap">
+                                            <label className="c-prescriptions-grid__form-field-label" htmlFor="drug-search">
+                                                {'Drug Search'}
+                                            </label>
+                                        </div>
+                                    }
                                     <div className="c-prescriptions-grid__form-field-input">
                                         <DrugSearch id="drug-search" onDrugSelectSubmit={handleDrugSelectSubmit} />
                                     </div>
@@ -278,12 +280,13 @@ const PrescriptionsGrid = (props) => {
 
                             <div className="u-flex">
                                 <div className="c-prescriptions-grid__form-field-inner">
-                                    <div className="c-prescriptions-grid__form-field-label-wrap">
-                                        <label className="c-prescriptions-grid__form-field-label" htmlFor="field2">
-                                            {'Field2'}
-                                        </label>
-                                    </div>
-
+                                    {(index === 0 || Mobile ) &&
+                                        <div className="c-prescriptions-grid__form-field-label-wrap">
+                                            <label className="c-prescriptions-grid__form-field-label" htmlFor="field2">
+                                                {'Field2'}
+                                            </label>
+                                        </div>
+                                    }
                                     <div className="c-prescriptions-grid__form-field-input">
                                         <span id="field2">{item.field2}</span>
                                     </div>
@@ -292,12 +295,13 @@ const PrescriptionsGrid = (props) => {
 
                             <div className="u-flex">
                                 <div className="c-prescriptions-grid__form-field-inner">
-                                    <div className="c-prescriptions-grid__form-field-label-wrap">
-                                        <label className="c-prescriptions-grid__form-field-label" htmlFor="field1">
-                                            {'Field1'}
-                                        </label>
-                                    </div>
-
+                                    {(index === 0 || Mobile ) &&
+                                        <div className="c-prescriptions-grid__form-field-label-wrap">
+                                            <label className="c-prescriptions-grid__form-field-label" htmlFor="field1">
+                                                {'Field1'}
+                                            </label>
+                                        </div>
+                                    }
                                     <div className="c-prescriptions-grid__form-field-input">
                                         <span id="field1">{item.field1}</span>
                                     </div>
@@ -306,11 +310,13 @@ const PrescriptionsGrid = (props) => {
 
                             <div className="u-flex">
                                 <div className="c-prescriptions-grid__form-field-inner">
-                                    <div className="c-prescriptions-grid__form-field-label-wrap">
-                                        <label className="c-prescriptions-grid__form-field-label" htmlFor="doctor-select">
-                                            {'Doctor Select'}
-                                        </label>
-                                    </div>
+                                    {(index === 0 || Mobile ) &&
+                                        <div className="c-prescriptions-grid__form-field-label-wrap">
+                                            <label className="c-prescriptions-grid__form-field-label" htmlFor="doctor-select">
+                                                {'Doctor Select'}
+                                            </label>
+                                        </div>
+                                    }
                                     <div className="c-prescriptions-grid__form-field-input">
                                         <select id="doctor-select" value={selectedDoctor} onChange={handleDoctorChange}>
                                             {doctorsList && doctorsList.length > 0 && doctorsList.map((doctor) => (
