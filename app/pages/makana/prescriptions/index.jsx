@@ -94,13 +94,15 @@ const Prescriptions = (props) => {
                 </Helmet>
             )}
 
-            {category ? (
-                <Fragment>
-                    <h1 className="u-margin-bottom-lg">{category.name}</h1>
-                </Fragment>
-            ) : (
-                    <SkeletonText type="h1" width="50%" />
-                )}
+            <Desktop>
+                {category ? (
+                    <Fragment>
+                        <h1 className="u-margin-bottom-lg">My {category.name}</h1>
+                    </Fragment>
+                ) : (
+                        <SkeletonText type="h1" width="50%" />
+                    )}
+            </Desktop>
 
             <Desktop>
                 <Divider className="u-margin-bottom-md" />
@@ -172,7 +174,7 @@ const Prescriptions = (props) => {
                 </div>
 
                 {!isSubscribed ? (
-                    <PrescriptionsGrid 
+                    <PrescriptionsGrid
                         analyticsManager={analyticsManager}
                         doctors={doctors}
                         onSubmit={() => setIsSubscribed(true)} />

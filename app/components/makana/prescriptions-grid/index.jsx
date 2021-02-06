@@ -276,6 +276,10 @@ const PrescriptionsGrid = (props) => {
         console.log(Object.fromEntries(formData.entries()))
         console.log('--- activeRowKey state variable: ')
         console.log(activeRowKey)
+
+        // TODO: Instead of updating in place, use setState to do it instead
+        newGridRows[activeRowKey].drugQuantity = formData.get('quantity')
+        
         setIsDoctorModalOpen(false)
         setIsDrugModalOpen(false)
     }
