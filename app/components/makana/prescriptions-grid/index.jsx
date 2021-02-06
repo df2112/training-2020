@@ -282,45 +282,39 @@ const PrescriptionsGrid = (props) => {
 
     return (
         <div className="c-prescriptions-grid">
-            <div className="u-margin-bottom-lg">
-                This is the Prescriptions Grid component:
-            </div>
-
             <Tabs activeIndex={0}>
                 <TabsPanel title="Prescriptions">
 
                     {/* Revised  */}
                     <div style={{ marginTop: "6px" }}>
                         <List>
-                        {newGridRows.map((item, index) => (
-
-
-                            <ListTile
-                                key={item._gridRowKey}
-                                className="pw--instructional-block"
-                                endAction={<Button className="pw--blank" icon="more" onClick={() => setIsDrugModalOpen(true)} />}
-                            >
-                                <div style={{ fontWeight: 'bold' }}>{item.drugName}</div>
-                                <div style={{ marginBottom: "5px" }}>{item.drugQuantity} {item.drugForm} {item.drugDosage}</div>
-                                <Divider />
-                                <ListTile 
-                                    startAction={<img style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} src={item.pharmacyLogoUrl} />}>
-                                    <div>{item.pharmacyChain}</div>
-                                </ListTile>
-                            </ListTile>                            
-                        ))}
-                            
-                            {/* Add New Prescription button */}
                             <ListTile className="pw--instructional-block">
-                                <Button className="t-product-details__modal-button pw--primary qa-modal-button"
-                                    onClick={() => handleAddNewPrescription(lastRowKey + 1)}>
+                                <Button 
+                                    className="t-product-details__modal-button pw--primary qa-modal-button"
+                                    onClick={() => setIsDrugModalOpen(true)}>
                                     Add New Prescription
                                 </Button>
                             </ListTile>
 
+                            {newGridRows.map((item, index) => (
+                                <ListTile
+                                    key={item._gridRowKey}
+                                    className="pw--instructional-block"
+                                    endAction={<Button className="pw--blank" icon="more" onClick={() => setIsDrugModalOpen(true)} />}
+                                >
+                                    <div style={{ fontWeight: 'bold' }}>{item.drugName}</div>
+                                    <div style={{ marginBottom: "5px" }}>{item.drugQuantity} {item.drugForm} {item.drugDosage}</div>
+                                    <Divider />
+                                    <ListTile
+                                        startAction={<img style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} src={item.pharmacyLogoUrl} />}>
+                                        <div>{item.pharmacyChain}</div>
+                                    </ListTile>
+                                </ListTile>
+                            ))}
                         </List>
                     </div>
 
+                    {/* TODO: This is the old stuff ... to be removed */}
                     <List>
                         {/* Prescription Rows */}
                         {gridRows.map((item, index) => (
