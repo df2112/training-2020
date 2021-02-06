@@ -35,6 +35,45 @@ const initGridRows = [
     }
 ]
 
+const newGridRows = [
+    {
+        _gridRowKey: 1,
+        drugKey: '',
+        drugName: 'Atorvastatin',
+        drugForm: 'tablets',
+        drugDosage: '40mg',
+        drugQuantity: '30',
+        pharmacyKey: '',
+        pharmacyChain: 'Piggly Wiggly',
+        pharmacyLogoUrl: 'https://www.pigglywigglyfl.com/wp-content/uploads/2018/11/logo-footer@2x.png.webp',
+        pharmacyCity: 'St. Petersburg'
+    },
+    {
+        _gridRowKey: 2,
+        drugKey: '',
+        drugName: 'Lipitor',
+        drugForm: 'tablets',
+        drugDosage: '10mg',
+        drugQuantity: '90',
+        pharmacyKey: '',
+        pharmacyChain: 'Publix',
+        pharmacyLogoUrl: 'https://cutpcdnwimages.azureedge.net/-/media/images/publix/publix_brandmark.svg?h=50&w=30&la=en&hash=250D8BC8604D4BC2D61677DFBF8E841AB79C327C',
+        pharmacyCity: 'Tampa'
+    },
+    {
+        _gridRowKey: 3,
+        drugKey: '',
+        drugName: 'Cozaar',
+        drugForm: 'tablets',
+        drugDosage: '50mg',
+        drugQuantity: '10',
+        pharmacyKey: '',
+        pharmacyChain: 'Walmart',
+        pharmacyLogoUrl: 'https://www.logolynx.com/images/logolynx/72/72228f020dfabd8322585148af496eb5.png',
+        pharmacyCity: 'Clearwater'
+    }
+]
+
 const fakeDoctors = [
     {
         _doctorKey: '601',
@@ -253,39 +292,24 @@ const PrescriptionsGrid = (props) => {
                     {/* Revised  */}
                     <div style={{ marginTop: "6px" }}>
                         <List>
+                        {newGridRows.map((item, index) => (
+
+
                             <ListTile
+                                key={item._gridRowKey}
                                 className="pw--instructional-block"
                                 endAction={<Button className="pw--blank" icon="more" onClick={() => setIsDrugModalOpen(true)} />}
                             >
-                                <div style={{ fontWeight: 'bold' }}>Atorvastatin</div>
-                                <div style={{ marginBottom: "5px" }}>30 tablets 40mg</div>
+                                <div style={{ fontWeight: 'bold' }}>{item.drugName}</div>
+                                <div style={{ marginBottom: "5px" }}>{item.drugQuantity} {item.drugForm} {item.drugDosage}</div>
                                 <Divider />
-                                <ListTile startAction={<img style={{ maxWidth: "70%", marginRight: "5px" }} src="https://cutpcdnwimages.azureedge.net/-/media/images/publix/publix_brandmark.svg?h=50&w=30&la=en&hash=250D8BC8604D4BC2D61677DFBF8E841AB79C327C" />}>
-                                    <div>Piggly Wiggly</div>
+                                <ListTile 
+                                    startAction={<img style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} src={item.pharmacyLogoUrl} />}>
+                                    <div>{item.pharmacyChain}</div>
                                 </ListTile>
-                            </ListTile>
-                            <ListTile
-                                className="pw--instructional-block"
-                                endAction={<Button className="pw--blank" icon="more" onClick={() => setIsDrugModalOpen(true)} />}
-                            >
-                                <div style={{ fontWeight: 'bold' }}>Lipitor</div>
-                                <div style={{ marginBottom: "5px" }}>90 tablets 10mg</div>
-                                <Divider />
-                                <ListTile startAction={<img style={{ maxWidth: "70%", marginRight: "5px" }} src="https://cutpcdnwimages.azureedge.net/-/media/images/publix/publix_brandmark.svg?h=50&w=30&la=en&hash=250D8BC8604D4BC2D61677DFBF8E841AB79C327C" />}>
-                                    <div>Publix</div>
-                                </ListTile>
-                            </ListTile>
-                            <ListTile
-                                className="pw--instructional-block"
-                                endAction={<Button className="pw--blank" icon="more" onClick={() => setIsDrugModalOpen(true)} />}
-                            >
-                                <div style={{ fontWeight: 'bold' }}>Cozaar</div>
-                                <div style={{ marginBottom: "5px" }}>30 tablets 50mg</div>
-                                <Divider />
-                                <ListTile startAction={<img style={{ maxWidth: "70%", marginRight: "5px" }} src="https://cutpcdnwimages.azureedge.net/-/media/images/publix/publix_brandmark.svg?h=50&w=30&la=en&hash=250D8BC8604D4BC2D61677DFBF8E841AB79C327C" />}>
-                                    <div>Walmart</div>
-                                </ListTile>
-                            </ListTile>
+                            </ListTile>                            
+                        ))}
+                            
                             {/* Add New Prescription button */}
                             <ListTile className="pw--instructional-block">
                                 <Button className="t-product-details__modal-button pw--primary qa-modal-button"
