@@ -300,6 +300,7 @@ const PrescriptionsGrid = (props) => {
                                 <ListTile
                                     key={item._gridRowKey}
                                     className="pw--instructional-block"
+                                    onClick={() => setActiveRowKey(item._gridRowKey)}
                                     endAction={<Button className="pw--blank" icon="more" onClick={() => setIsDrugModalOpen(true)} />}
                                 >
                                     <div style={{ fontWeight: 'bold' }}>{item.drugName}</div>
