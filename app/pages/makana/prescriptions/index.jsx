@@ -31,32 +31,32 @@ const doctors = [
     },
     {
         _doctorKey: '001',
-        name: 'Tim Brown',
+        name: 'Tim Brown, MD',
         age: 41,
     },
     {
         _doctorKey: '002',
-        name: 'Dave Foley',
+        name: 'Dave Foley, DO',
         age: 42,
     },
     {
         _doctorKey: '003',
-        name: 'Olivier Lafont',
+        name: 'Olivier Lafont, DSE',
         age: 43,
     },
     {
         _doctorKey: '004',
-        name: 'Nupur Marwaha',
+        name: 'Nupur Marwaha, MD',
         age: 44,
     },
     {
         _doctorKey: '005',
-        name: 'Nat Pavic',
+        name: 'Nat Pavic, DMD',
         age: 45,
     },
     {
         _doctorKey: '006',
-        name: 'Amulya Pradhan',
+        name: 'Amulya Pradhan, DO',
         age: 46
     }
 ]

@@ -305,6 +305,8 @@ const PrescriptionsGrid = (props) => {
                                     <div style={{ fontWeight: 'bold' }}>{item.drugName}</div>
                                     <div style={{ marginBottom: "5px" }}>{item.drugQuantity} {item.drugForm} {item.drugDosage}</div>
                                     <Divider />
+                                    <div style={{ fontWeight: 'bold', marginBottom: "5px", marginTop: "5px" }}>{doctorsList[item._gridRowKey + 1].name}</div>
+                                    <Divider />
                                     <ListTile
                                         startAction={<img style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} src={item.pharmacyLogoUrl} />}>
                                         <div>{item.pharmacyChain}</div>
