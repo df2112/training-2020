@@ -27,33 +27,33 @@ const PrescriptionConfigure = (props) => {
             <List>
                 <ListTile className="c-prescription-configure__form-field-row u-flexbox">
                     <select name="drug" >
-                        <option value='1'>Atorvastatin (generic)</option>
-                        <option value='2'>Lipitor (brand)</option>
+                        <option>Atorvastatin (generic)</option>
+                        <option>Lipitor (brand)</option>
                     </select>
                 </ListTile>
 
                 <ListTile className="c-prescription-configure__form-field-row u-flexbox">
                     <div>Form</div>
                     <select name="form">
-                        <option value='1'>Tablet</option>
+                        <option>Tablet</option>
                     </select>
                 </ListTile>
 
                 <ListTile className="c-prescription-configure__form-field-row u-flexbox">
                     <div>Dosage</div>
                     <select name="dosage">
-                        <option value='1'>10mg</option>
-                        <option value='2'>20mg</option>
-                        <option value='3'>40mg</option>
+                        <option>10mg</option>
+                        <option>20mg</option>
+                        <option>40mg</option>
                     </select>
                 </ListTile>
                 
                 <ListTile className="c-prescription-configure__form-field-row u-flexbox">
                     <div>Quantity</div>
                     <select name="quantity">
-                        <option value='1'>10mg</option>
-                        <option value='2'>20mg</option>
-                        <option value='3'>40mg</option>
+                        <option>10</option>
+                        <option>20</option>
+                        <option>40</option>
                     </select>
                 </ListTile>
             </List>

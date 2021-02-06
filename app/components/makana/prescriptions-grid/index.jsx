@@ -29,7 +29,7 @@ export const validate = (values) => {
 
 const initGridRows = [
     {
-        _gridRowKey: 1,
+        _gridRowKey: 0,
         field1: 'Initial dummy row!!!',
         field2: 'A'
     }
@@ -37,7 +37,7 @@ const initGridRows = [
 
 const newGridRows = [
     {
-        _gridRowKey: 1,
+        _gridRowKey: 0,
         drugKey: '',
         drugName: 'Atorvastatin',
         drugForm: 'tablets',
@@ -49,7 +49,7 @@ const newGridRows = [
         pharmacyCity: 'St. Petersburg'
     },
     {
-        _gridRowKey: 2,
+        _gridRowKey: 1,
         drugKey: '',
         drugName: 'Lipitor',
         drugForm: 'tablets',
@@ -61,7 +61,7 @@ const newGridRows = [
         pharmacyCity: 'Tampa'
     },
     {
-        _gridRowKey: 3,
+        _gridRowKey: 2,
         drugKey: '',
         drugName: 'Cozaar',
         drugForm: 'tablets',
@@ -278,7 +278,10 @@ const PrescriptionsGrid = (props) => {
         console.log(activeRowKey)
 
         // TODO: Instead of updating in place, use setState to do it instead
+        newGridRows[activeRowKey].drugName = formData.get('drug')
         newGridRows[activeRowKey].drugQuantity = formData.get('quantity')
+        newGridRows[activeRowKey].drugForm = formData.get('form')
+        newGridRows[activeRowKey].drugDosage = formData.get('dosage')
         
         setIsDoctorModalOpen(false)
         setIsDrugModalOpen(false)
@@ -310,7 +313,7 @@ const PrescriptionsGrid = (props) => {
                                     <div style={{ fontWeight: 'bold' }}>{item.drugName}</div>
                                     <div style={{ marginBottom: "5px" }}>{item.drugQuantity} {item.drugForm} {item.drugDosage}</div>
                                     <Divider />
-                                    <div style={{ fontWeight: 'bold', marginBottom: "5px", marginTop: "5px" }}>{doctorsList[item._gridRowKey + 1].name}</div>
+                                    <div style={{ fontWeight: 'bold', marginBottom: "5px", marginTop: "5px" }}>{doctorsList[item._gridRowKey + 2].name}</div>
                                     <Divider />
                                     <ListTile
                                         startAction={<img style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} src={item.pharmacyLogoUrl} />}>
