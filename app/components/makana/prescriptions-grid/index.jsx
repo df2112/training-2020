@@ -38,7 +38,7 @@ const initGridRows = [
 const newGridRows = [
     {
         _gridRowKey: 0,
-        drugKey: '',
+        drugKey: '0',
         drugName: 'Atorvastatin',
         drugForm: 'tablets',
         drugDosage: '40mg',
@@ -50,7 +50,7 @@ const newGridRows = [
     },
     {
         _gridRowKey: 1,
-        drugKey: '',
+        drugKey: '1',
         drugName: 'Lipitor',
         drugForm: 'tablets',
         drugDosage: '10mg',
@@ -62,7 +62,7 @@ const newGridRows = [
     },
     {
         _gridRowKey: 2,
-        drugKey: '',
+        drugKey: '2',
         drugName: 'Cozaar',
         drugForm: 'tablets',
         drugDosage: '50mg',
