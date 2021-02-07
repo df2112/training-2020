@@ -30,14 +30,6 @@ export const validate = (values) => {
 const initGridRows = [
     {
         _gridRowKey: 0,
-        field1: 'Initial dummy row!!!',
-        field2: 'A'
-    }
-]
-
-const newGridRows = [
-    {
-        _gridRowKey: 0,
         drugKey: '0',
         drugName: 'Atorvastatin',
         drugForm: 'tablets',
@@ -282,7 +274,7 @@ const PrescriptionsGrid = (props) => {
         newGridRows[activeRowKey].drugQuantity = formData.get('quantity')
         newGridRows[activeRowKey].drugForm = formData.get('form')
         newGridRows[activeRowKey].drugDosage = formData.get('dosage')
-        
+
         setIsDoctorModalOpen(false)
         setIsDrugModalOpen(false)
     }
@@ -296,19 +288,24 @@ const PrescriptionsGrid = (props) => {
                     <div style={{ marginTop: "6px" }}>
                         <List>
                             <ListTile className="pw--instructional-block">
-                                <Button 
+                                <Button
                                     className="t-product-details__modal-button pw--primary qa-modal-button"
                                     onClick={() => setIsDrugModalOpen(true)}>
                                     Add New Prescription
                                 </Button>
                             </ListTile>
 
-                            {newGridRows.map((item, index) => (
+                            {gridRows.map((item, index) => (
                                 <ListTile
                                     key={item._gridRowKey}
                                     className="pw--instructional-block"
                                     onClick={() => setActiveRowKey(item._gridRowKey)}
-                                    endAction={<Button className="pw--blank" icon="more" onClick={() => setIsDrugModalOpen(true)} />}
+                                    endAction={
+                                        <div>
+                                            <Button className="pw--blank" icon="more" onClick={() => setIsDrugModalOpen(true)} />
+                                            <Button className="pw--blank" icon="trash" onClick={() => handleRemovePrescription(item._gridRowKey)} />
+                                        </div>
+                                    }
                                 >
                                     <div style={{ fontWeight: 'bold' }}>{item.drugName}</div>
                                     <div style={{ marginBottom: "5px" }}>{item.drugQuantity} {item.drugForm} {item.drugDosage}</div>
@@ -327,7 +324,7 @@ const PrescriptionsGrid = (props) => {
                     {/* TODO: This is the old stuff ... to be removed */}
                     <List>
                         {/* Prescription Rows */}
-                        {gridRows.map((item, index) => (
+                        {/* {gridRows.map((item, index) => (
                             <ListTile
                                 onClick={() => setActiveRowKey(item._gridRowKey)}
                                 className="pw--instructional-block"
@@ -410,15 +407,15 @@ const PrescriptionsGrid = (props) => {
                                 </div>
 
                             </ListTile>
-                        ))}
+                        ))} */}
 
                         {/* Add New Prescription button */}
-                        <ListTile className="pw--instructional-block">
+                        {/* <ListTile className="pw--instructional-block">
                             <Button className="t-product-details__modal-button pw--primary qa-modal-button"
                                 onClick={() => handleAddNewPrescription(lastRowKey + 1)}>
                                 Add New Prescription
-                    </Button>
-                        </ListTile>
+                            </Button>
+                        </ListTile> */}
 
                     </List>
                 </TabsPanel>
