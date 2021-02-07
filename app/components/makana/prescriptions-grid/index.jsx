@@ -356,18 +356,6 @@ const PrescriptionsGrid = (props) => {
                     <List>
                         {/* Prescription Rows */}
                         {/* {gridRows.map((item, index) => (
-                            <ListTile
-                                onClick={() => setActiveRowKey(item._gridRowKey)}
-                                className="pw--instructional-block"
-                                key={item._gridRowKey}
-                                endAction={
-                                    <Button
-                                        className="pw--blank"
-                                        icon="trash"
-                                        onClick={() => handleRemovePrescription(item._gridRowKey)}
-                                    />
-                                }
-                            >
 
                                 <div className="c-prescriptions-grid__form-field-row">
                                     <div className="u-flex">
