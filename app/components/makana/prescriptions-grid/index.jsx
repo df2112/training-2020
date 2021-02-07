@@ -93,8 +93,9 @@ const PrescriptionsGrid = (props) => {
     const [gridRows, setGridRows] = useState(initGridRows)
     const [isDoctorModalOpen, setIsDoctorModalOpen] = useState(false)
     const [isDrugModalOpen, setIsDrugModalOpen] = useState(false)
-    const [lastRowKey, setLastRowKey] = useState(initGridRows[0]._gridRowKey)
-    const [activeRowKey, setActiveRowKey] = useState(initGridRows[0]._gridRowKey)
+    const [drugModalMode, setDrugModalMode] = useState()
+    const [lastRowKey, setLastRowKey] = useState(initGridRows[2]._gridRowKey)
+    const [activeRowKey, setActiveRowKey] = useState(initGridRows[2]._gridRowKey)
     const [selectedDoctor, setSelectedDoctor] = useState('999')
 
     const lastRowKeyRef = useRef(lastRowKey)
@@ -123,20 +124,74 @@ const PrescriptionsGrid = (props) => {
         setIsDoctorModalOpen(false)
     }
 
-    const handleAddNewPrescription = (newRowKey) => {
-        console.log('PrescriptionsGrid: handleAddNewPrescription()')
+    //
+    // ADD PRESCRIPTION (a) - Show the modal
+    //
+    const handleAddPrescriptionSelect = (newRowKey) => {
+        console.log('PrescriptionsGrid: handleAddPrescriptionSelect()')
         lastRowKeyRef.current = newRowKey
         setLastRowKey(newRowKey)
+        setDrugModalMode('add')
+        setIsDrugModalOpen(true)
+    }
+
+    //
+    // ADD PRESCRIPTION (b) - Submit the modal
+    //
+    const handleAddPrescriptionSubmit = (formData) => {
+        console.log('PrescriptionsGrid: handleAddPrescriptionSubmit()')
+        console.log('--- formData parameter: ')
+        console.log(Object.fromEntries(formData.entries()))
+        console.log('--- activeRowKey state variable: ')
+        console.log(activeRowKey)
 
         const newGridRow = {
             _gridRowKey: lastRowKeyRef.current,
-            field1: 'Additional dummy row!!!',
-            field2: lastRowKeyRef.current
+            drugName: formData.get('drug'),
+            drugQuantity: formData.get('quantity'),
+            drugForm: formData.get('form'),
+            drugDosage: formData.get('dosage')
         }
 
         setGridRows(gridRows.concat(newGridRow))
+
+        setIsDoctorModalOpen(false)
+        setIsDrugModalOpen(false)
     }
 
+    //
+    // EDIT PRESCRIPTION (a) - Show the modal
+    //
+    const handleEditPrescriptionSelect = () => {
+        console.log('PrescriptionsGrid: handleEditPrescriptionSelect()')
+        setDrugModalMode('edit')
+        setIsDrugModalOpen(true)
+    }
+
+    //
+    // EDIT PRESCRIPTION (b) - Submit the modal
+    //
+    const handleEditPrescriptionSubmit = (formData) => {
+        console.log('PrescriptionsGrid: handleEditPrescriptionSubmit()')
+        console.log('--- formData parameter: ')
+        console.log(Object.fromEntries(formData.entries()))
+        console.log('--- activeRowKey state variable: ')
+        console.log(activeRowKey)
+
+        // TODO: Instead of updating in place, use setState to do it instead
+        const gridRow = gridRows.find(element => element._gridRowKey == activeRowKey)
+        gridRow.drugName = formData.get('drug')
+        gridRow.drugQuantity = formData.get('quantity')
+        gridRow.drugForm = formData.get('form')
+        gridRow.drugDosage = formData.get('dosage')
+
+        setIsDoctorModalOpen(false)
+        setIsDrugModalOpen(false)
+    }
+
+    //
+    // REMOVE PRESCRIPTION
+    //
     const handleRemovePrescription = (rowKey) => {
         console.log('PrescriptionsGrid: handleRemovePrescription()')
         const newGridRows = gridRows.filter(el => el._gridRowKey != rowKey)
@@ -226,7 +281,7 @@ const PrescriptionsGrid = (props) => {
             headerContent={
                 <HeaderBar>
                     <HeaderBarTitle className="u-flex u-padding-start-md u-text-align-start u-text-size-big">
-                        Configure Prescription
+                        Prescription {drugModalMode}
                     </HeaderBarTitle>
 
                     <HeaderBarActions>
@@ -241,7 +296,7 @@ const PrescriptionsGrid = (props) => {
                 <br />
                 <PrescriptionConfigure
                     analyticsManager={analyticsManager}
-                    onPrescriptionConfigureSubmit={handlePrescriptionConfigureSubmit}
+                    onPrescriptionConfigureSubmit={drugModalMode === 'add' ? handleAddPrescriptionSubmit : handleEditPrescriptionSubmit}
                 />
 
             </div>
@@ -255,30 +310,6 @@ const PrescriptionsGrid = (props) => {
         setIsDrugModalOpen(true)
     }
 
-    // TODO on Saturday 01/30
-    //
-    // Take the formData and update the CURRENTLY SELECTED GRID ROW fields
-    //
-    // - will need a useState for holding the currently-selected grid row?
-    // - etc
-    //
-    const handlePrescriptionConfigureSubmit = (formData) => {
-        console.log('PrescriptionsGrid: handlePrescriptionConfigureSubmit()')
-        console.log('--- formData parameter: ')
-        console.log(Object.fromEntries(formData.entries()))
-        console.log('--- activeRowKey state variable: ')
-        console.log(activeRowKey)
-
-        // TODO: Instead of updating in place, use setState to do it instead
-        newGridRows[activeRowKey].drugName = formData.get('drug')
-        newGridRows[activeRowKey].drugQuantity = formData.get('quantity')
-        newGridRows[activeRowKey].drugForm = formData.get('form')
-        newGridRows[activeRowKey].drugDosage = formData.get('dosage')
-
-        setIsDoctorModalOpen(false)
-        setIsDrugModalOpen(false)
-    }
-
     return (
         <div className="c-prescriptions-grid">
             <Tabs activeIndex={0}>
@@ -290,7 +321,7 @@ const PrescriptionsGrid = (props) => {
                             <ListTile className="pw--instructional-block">
                                 <Button
                                     className="t-product-details__modal-button pw--primary qa-modal-button"
-                                    onClick={() => setIsDrugModalOpen(true)}>
+                                    onClick={() => handleAddPrescriptionSelect(lastRowKey + 1)}>
                                     Add New Prescription
                                 </Button>
                             </ListTile>
@@ -302,7 +333,7 @@ const PrescriptionsGrid = (props) => {
                                     onClick={() => setActiveRowKey(item._gridRowKey)}
                                     endAction={
                                         <div>
-                                            <Button className="pw--blank" icon="more" onClick={() => setIsDrugModalOpen(true)} />
+                                            <Button className="pw--blank" icon="more" onClick={() => handleEditPrescriptionSelect()} />
                                             <Button className="pw--blank" icon="trash" onClick={() => handleRemovePrescription(item._gridRowKey)} />
                                         </div>
                                     }
@@ -358,36 +389,6 @@ const PrescriptionsGrid = (props) => {
                                         <div className="c-prescriptions-grid__form-field-inner">
                                             {(index === 0 || Mobile) &&
                                                 <div className="c-prescriptions-grid__form-field-label-wrap">
-                                                    <label className="c-prescriptions-grid__form-field-label" htmlFor="field2">
-                                                        {'Field2'}
-                                                    </label>
-                                                </div>
-                                            }
-                                            <div className="c-prescriptions-grid__form-field-input">
-                                                <span id="field2">{item.field2}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="u-flex">
-                                        <div className="c-prescriptions-grid__form-field-inner">
-                                            {(index === 0 || Mobile) &&
-                                                <div className="c-prescriptions-grid__form-field-label-wrap">
-                                                    <label className="c-prescriptions-grid__form-field-label" htmlFor="field1">
-                                                        {'Field1'}
-                                                    </label>
-                                                </div>
-                                            }
-                                            <div className="c-prescriptions-grid__form-field-input">
-                                                <span id="field1">{item.field1}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="u-flex">
-                                        <div className="c-prescriptions-grid__form-field-inner">
-                                            {(index === 0 || Mobile) &&
-                                                <div className="c-prescriptions-grid__form-field-label-wrap">
                                                     <label className="c-prescriptions-grid__form-field-label" htmlFor="doctor-select">
                                                         {'Doctor Select'}
                                                     </label>
@@ -409,14 +410,6 @@ const PrescriptionsGrid = (props) => {
                             </ListTile>
                         ))} */}
 
-                        {/* Add New Prescription button */}
-                        {/* <ListTile className="pw--instructional-block">
-                            <Button className="t-product-details__modal-button pw--primary qa-modal-button"
-                                onClick={() => handleAddNewPrescription(lastRowKey + 1)}>
-                                Add New Prescription
-                            </Button>
-                        </ListTile> */}
-
                     </List>
                 </TabsPanel>
 
@@ -430,11 +423,7 @@ const PrescriptionsGrid = (props) => {
                                 key={doctor._doctorKey}
                                 endAction={
                                     <div>
-                                        <Button
-                                            className="pw--blank"
-                                            icon="star"
-                                            onClick={() => setIsDrugModalOpen(true)}
-                                        />
+                                        <Button className="pw--blank" icon="star" onClick={() => setIsDrugModalOpen(true)} />
                                     </div>
                                 }
                             >
