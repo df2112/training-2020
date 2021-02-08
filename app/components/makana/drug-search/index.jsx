@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-import Button from 'progressive-web-sdk/dist/components/button'
 import Search from 'progressive-web-sdk/dist/components/search'
 
 const DRUG_SEARCH_FORM_NAME = 'drug-search'
@@ -26,7 +25,7 @@ const fakeDrugs = [
 
 const fakeProductSuggestions = [
     {
-        className: 'id_2112',
+        className: 'masterId_2112',
         isSimple: false,
         isfull: true,
         imageProps: {
@@ -49,7 +48,7 @@ const fakeProductSuggestions = [
         }
     },
     {
-        className: 'id_5150',
+        className: 'masterId_5150',
         isSimple: true,
         imageProps: {
             src:
@@ -72,7 +71,6 @@ const fakeProductSuggestions = [
 const DrugSearch = (props) => {
     const { onDrugSelectSubmit } = props
     const [productSuggestions, setProductSuggestions] = useState([])
-    const [isOverlayOpen, setIsOverlayOpen] = useState(false)
 
     const addSuggestions = (event) => {
         console.log('DrugSearch: addSuggestions() ' + event.target.value)
@@ -101,18 +99,6 @@ const DrugSearch = (props) => {
 
     return (
         <div>
-            {/* <Search
-                isOverlay
-                isOpen={isOverlayOpen}
-                productSuggestions={productSuggestions}
-                onChange={addSuggestions}
-                onClose={clearSuggestions}
-                onClear={clearSuggestions}
-                onClickSuggestion={clickSuggestion}
-                suggestedProductsHeading=''
-                submitButtonProps={{text:''}}
-            />
-            <button onClick={() => setIsOverlayOpen(true)}>Open search overlay</button> */}
             <Search
                 productSuggestions={productSuggestions}
                 onChange={addSuggestions}
