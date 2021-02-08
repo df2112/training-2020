@@ -4,6 +4,10 @@
 // 1. Ensure that button align with input field
 // 2. Override flex style
 
+.pw-search__button-submit {
+    display: none;
+}
+
 .c-drug-search__form-field-input {
     display: block; // 2
 }
