@@ -306,7 +306,9 @@ const PrescriptionsGrid = (props) => {
     const handleDrugSelectSubmit = (event) => {
         console.log('PrescriptionsGrid: handleDrugSelectSubmit()')
         console.log(event)
-        setIsDoctorModalOpen(false)
+        lastRowKeyRef.current = (lastRowKey + 1)
+        setLastRowKey(lastRowKeyRef.current)
+        setDrugModalMode('add')
         setIsDrugModalOpen(true)
     }
 
@@ -314,17 +316,21 @@ const PrescriptionsGrid = (props) => {
         <div className="c-prescriptions-grid">
             <Tabs activeIndex={0}>
                 <TabsPanel title="Prescriptions">
+                    
+                    <div style={{ marginTop: "6px" }} className="c-prescriptions-grid__form-field-input">
+                        <DrugSearch id="drug-search" onDrugSelectSubmit={handleDrugSelectSubmit} />
+                    </div>
 
                     {/* Revised  */}
                     <div style={{ marginTop: "6px" }}>
                         <List>
-                            <ListTile className="pw--instructional-block">
+                            {/* <ListTile className="pw--instructional-block">
                                 <Button
                                     className="t-product-details__modal-button pw--primary qa-modal-button"
                                     onClick={() => handleAddPrescriptionSelect(lastRowKey + 1)}>
                                     Add New Prescription
                                 </Button>
-                            </ListTile>
+                            </ListTile> */}
 
                             {gridRows.map((item, index) => (
                                 <ListTile
