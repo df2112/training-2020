@@ -3,11 +3,11 @@ const ViewModels = {
     drugSearch: [
         {
             className: 'masterId_2112',
-            isSimple: false,
+            isSimple: true,
             isfull: true,
             imageProps: {
                 src:
-                    'https://i.pinimg.com/564x/72/4b/6d/724b6dbf91c378a53d6890bb525c1aa9.jpg',
+                    'https://www.grxstatic.com/d4fuqqd5l3dbz/products/DrugItem_26204.JPG',
                 width: '88px',
                 height: '88px',
                 alt: 'cat'
@@ -15,18 +15,18 @@ const ViewModels = {
             href: '#',
             options: [
                 {
-                    label: 'Dave ID 2112 yippee'
+                    label: 'Dave ID (a)'
                 }
             ],
-            title: 'Product Title',
-            price: '$2000'
+            title: 'Atorvastatin (generic Lipitor)',
+            price: '$25'
         },
         {
             className: 'masterId_5150',
             isSimple: true,
             imageProps: {
                 src:
-                    'https://i.pinimg.com/564x/72/4b/6d/724b6dbf91c378a53d6890bb525c1aa9.jpg',
+                    'https://www.grxstatic.com/d4fuqqd5l3dbz/products/tms/DrugItem_6931.JPG',
                 width: '88px',
                 height: '88px',
                 alt: 'cat'
@@ -34,11 +34,11 @@ const ViewModels = {
             href: '#',
             options: [
                 {
-                    label: 'Dave ID 5150'
+                    label: 'Dave ID (b)'
                 }
             ],
-            price: '$2000',
-            title: 'Product Title2'
+            price: '$675',
+            title: 'Lipitor'
         }
     ],
     prescriptionConfigure: {
