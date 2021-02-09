@@ -84,6 +84,26 @@ const fakeDoctors = [
     }
 ]
 
+const drugChoices = {
+    variants: [
+        {
+            drugKey: '0',
+            name: 'Atorvastatin (*generic)',
+            generic: true,
+            unitPrice: 2.50
+        },
+        {
+            drugKey: '1',
+            name: 'Lipitor (*brand)',
+            generic: false,
+            unitPrice: 3.75
+        }
+    ],
+    forms: ['tablet', 'liquid'],
+    dosages: ['10mg', '20mg', '30mg'],
+    quantities: [11, 21, 51],
+}
+
 const PrescriptionsGrid = (props) => {
     const { analyticsManager, doctors } = props
 
@@ -295,6 +315,7 @@ const PrescriptionsGrid = (props) => {
             <div className="t-product-details__shipping-delivery-modal-content">
                 <br />
                 <PrescriptionConfigure
+                    drugChoices={drugChoices}
                     analyticsManager={analyticsManager}
                     onPrescriptionConfigureSubmit={drugModalMode === 'add' ? handleAddPrescriptionSubmit : handleEditPrescriptionSubmit}
                 />

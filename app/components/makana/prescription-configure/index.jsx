@@ -7,28 +7,8 @@ import ListTile from 'progressive-web-sdk/dist/components/list-tile'
 
 const PRESCRIPTION_CONFIGURATION_FORM_NAME = 'prescription-configure'
 
-const drugData = {
-    variants: [
-        {
-            drugKey: '0',
-            name: 'Atorvastatin (*generic)',
-            generic: true,
-            unitPrice: 2.50
-        },
-        {
-            drugKey: '1',
-            name: 'Lipitor (*brand)',
-            generic: false,
-            unitPrice: 3.75
-        }
-    ],
-    forms: ['tablet', 'liquid'],
-    dosages: ['10mg', '20mg', '30mg'],
-    quantities: [11, 21, 51],
-}
-
 const PrescriptionConfigure = (props) => {
-    const { onPrescriptionConfigureSubmit } = props
+    const { drugChoices, onPrescriptionConfigureSubmit } = props
 
     const handlePrescriptionSaveSubmit = (event) => {
         console.log('PrescriptionConfigure: handlePrescriptionSaveSubmit()')
@@ -47,7 +27,7 @@ const PrescriptionConfigure = (props) => {
             <List>
                 <ListTile className="c-prescription-configure__form-field-row u-flexbox">
                     <select name="drug" >
-                        {drugData.variants.map((item, index) => (
+                        {drugChoices.variants.map((item, index) => (
                             <option key={index}>{item.name}</option>
                         ))}
                     </select>
@@ -56,7 +36,7 @@ const PrescriptionConfigure = (props) => {
                 <ListTile className="c-prescription-configure__form-field-row u-flexbox">
                     <div>Form</div>
                     <select name="form">
-                        {drugData.forms.map((item, index) => (
+                        {drugChoices.forms.map((item, index) => (
                             <option key={index}>{item}</option>
                         ))}
                     </select>
@@ -65,7 +45,7 @@ const PrescriptionConfigure = (props) => {
                 <ListTile className="c-prescription-configure__form-field-row u-flexbox">
                     <div>Dosage</div>
                     <select name="dosage">
-                        {drugData.dosages.map((item, index) => (
+                        {drugChoices.dosages.map((item, index) => (
                             <option key={index}>{item}</option>
                         ))}
                     </select>
@@ -74,7 +54,7 @@ const PrescriptionConfigure = (props) => {
                 <ListTile className="c-prescription-configure__form-field-row u-flexbox">
                     <div>Quantity</div>
                     <select name="quantity">
-                        {drugData.quantities.map((item, index) => (
+                        {drugChoices.quantities.map((item, index) => (
                             <option key={index}>{item}</option>
                         ))}
                     </select>
@@ -102,6 +82,7 @@ PrescriptionConfigure.propTypes = {
     /**
      * Handler that is triggers when the form is submitted
      */
+    drugChoices: PropTypes.object,
     onPrescriptionConfigureSubmit: PropTypes.func
 }
 
