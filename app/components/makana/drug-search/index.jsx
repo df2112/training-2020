@@ -91,10 +91,15 @@ const DrugSearch = (props) => {
 
     const clickSuggestion = (event) => {
         console.log('DrugSearch: clickSuggestion()')
-        console.log(event.target.closest('article'))
+
+        // TODO: Clean this mess up :-)
+        const bbb = [ ...event.target.closest('article').classList ]
+        const ccc = bbb.find(e => e.includes('masterId_'))
+        const selectedProductId = ccc.replace('masterId_', '')
+
         setProductSuggestions([])
         
-        if (onDrugSelectSubmit) onDrugSelectSubmit('dumdum')
+        if (onDrugSelectSubmit) onDrugSelectSubmit(selectedProductId)
     }
 
     return (
@@ -102,7 +107,7 @@ const DrugSearch = (props) => {
             <Search
                 productSuggestions={productSuggestions}
                 onChange={addSuggestions}
-                onClose={clearSuggestions}
+                //onClose={clearSuggestions}
                 onClear={clearSuggestions}
                 onClickSuggestion={clickSuggestion}
                 suggestedProductsHeading=''
