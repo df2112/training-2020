@@ -9,12 +9,25 @@ const PRESCRIPTION_CONFIGURATION_FORM_NAME = 'prescription-configure'
 
 const PrescriptionConfigure = (props) => {
     const { viewModel, onPrescriptionConfigureSubmit } = props
+    const [processStep, setProcessStep] = useState(1)
 
     const handlePrescriptionSaveSubmit = (event) => {
         console.log('PrescriptionConfigure: handlePrescriptionSaveSubmit()')
 
-        const formData = new FormData(event.target)
-        if (onPrescriptionConfigureSubmit) onPrescriptionConfigureSubmit(formData)
+        switch (processStep) {
+            case 1:
+                event.preventDefault()
+                setProcessStep(2)
+                break
+            case 2:
+                event.preventDefault()
+                setProcessStep(3)
+                break
+            case 3:
+                const formData = new FormData(event.target)
+                if (onPrescriptionConfigureSubmit) onPrescriptionConfigureSubmit(formData)
+                break
+        }
     }
 
     return (
@@ -33,32 +46,50 @@ const PrescriptionConfigure = (props) => {
                     </select>
                 </ListTile>
 
-                <ListTile className="c-prescription-configure__form-field-row u-flexbox">
-                    <div>Form</div>
-                    <select name="form">
-                        {viewModel.forms.map((item, index) => (
-                            <option key={index}>{item}</option>
-                        ))}
-                    </select>
-                </ListTile>
+                <div style={processStep !== 1 ? { display: "none" } : {}}>
+                    <ListTile className="c-prescription-configure__form-field-row u-flexbox">
+                        <div>Form</div>
+                        <select name="form">
+                            {viewModel.forms.map((item, index) => (
+                                <option key={index}>{item}</option>
+                            ))}
+                        </select>
+                    </ListTile>
 
-                <ListTile className="c-prescription-configure__form-field-row u-flexbox">
-                    <div>Dosage</div>
-                    <select name="dosage">
-                        {viewModel.dosages.map((item, index) => (
-                            <option key={index}>{item}</option>
-                        ))}
-                    </select>
-                </ListTile>
+                    <ListTile className="c-prescription-configure__form-field-row u-flexbox">
+                        <div>Dosage</div>
+                        <select name="dosage">
+                            {viewModel.dosages.map((item, index) => (
+                                <option key={index}>{item}</option>
+                            ))}
+                        </select>
+                    </ListTile>
 
-                <ListTile className="c-prescription-configure__form-field-row u-flexbox">
-                    <div>Quantity</div>
-                    <select name="quantity">
-                        {viewModel.quantities.map((item, index) => (
-                            <option key={index}>{item}</option>
-                        ))}
-                    </select>
-                </ListTile>
+                    <ListTile className="c-prescription-configure__form-field-row u-flexbox">
+                        <div>Quantity</div>
+                        <select name="quantity">
+                            {viewModel.quantities.map((item, index) => (
+                                <option key={index}>{item}</option>
+                            ))}
+                        </select>
+                    </ListTile>
+                </div>
+
+                <div style={processStep !== 2 ? { display: "none" } : {}}>
+                    {viewModel.pharmacies.map((item, index) => (
+                        <ListTile key={index}
+                            startAction={<img style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} src={item.pharmacyLogoUrl} />}
+                            endAction={<Button className="pw--success">{item.pharmacyPrice}</Button>}
+                        >
+                            <div>{item.pharmacyChain}</div>
+                            <div>{item.pharmacyCity}</div>
+                        </ListTile>
+                    ))}
+                </div>
+
+                <div style={processStep !== 3 ? { display: "none" } : {}}>
+                    <div>Step 3</div>
+                </div>
             </List>
 
             {/* Submit Button */}
