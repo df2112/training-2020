@@ -84,7 +84,7 @@ const fakeDoctors = [
     }
 ]
 
-const drugChoices = {
+const vmPrescriptionConfigure = {
     variants: [
         {
             drugKey: '0',
@@ -103,6 +103,51 @@ const drugChoices = {
     dosages: ['10mg', '20mg', '30mg'],
     quantities: [11, 21, 51],
 }
+
+const vmDrugSearch = [
+    {
+        className: 'masterId_2112',
+        isSimple: false,
+        isfull: true,
+        imageProps: {
+            src:
+                'https://i.pinimg.com/564x/72/4b/6d/724b6dbf91c378a53d6890bb525c1aa9.jpg',
+            width: '88px',
+            height: '88px',
+            alt: 'cat'
+        },
+        href: '#',
+        options: [
+            {
+                label: 'Dave ID 2112 yo!'
+            }
+        ],
+        title: 'Product Title',
+        price: '$2000',
+        onClick: () => {
+            console.log('clicked')
+        }
+    },
+    {
+        className: 'masterId_5150',
+        isSimple: true,
+        imageProps: {
+            src:
+                'https://i.pinimg.com/564x/72/4b/6d/724b6dbf91c378a53d6890bb525c1aa9.jpg',
+            width: '88px',
+            height: '88px',
+            alt: 'cat'
+        },
+        href: '#',
+        options: [
+            {
+                label: 'Dave ID 5150'
+            }
+        ],
+        price: '$2000',
+        title: 'Product Title2'
+    }
+]
 
 const PrescriptionsGrid = (props) => {
     const { analyticsManager, doctors } = props
@@ -315,7 +360,7 @@ const PrescriptionsGrid = (props) => {
             <div className="t-product-details__shipping-delivery-modal-content">
                 <br />
                 <PrescriptionConfigure
-                    drugChoices={drugChoices}
+                    viewModel={vmPrescriptionConfigure}
                     analyticsManager={analyticsManager}
                     onPrescriptionConfigureSubmit={drugModalMode === 'add' ? handleAddPrescriptionSubmit : handleEditPrescriptionSubmit}
                 />
@@ -337,9 +382,13 @@ const PrescriptionsGrid = (props) => {
         <div className="c-prescriptions-grid">
             <Tabs activeIndex={0}>
                 <TabsPanel title="Prescriptions">
-                    
+
                     <div style={{ marginTop: "6px" }} className="c-prescriptions-grid__form-field-input">
-                        <DrugSearch id="drug-search" onDrugSelectSubmit={handleDrugSelectSubmit} />
+                        <DrugSearch
+                            id="drug-search"
+                            viewModel={vmDrugSearch}
+                            onDrugSelectSubmit={handleDrugSelectSubmit}
+                        />
                     </div>
 
                     {/* Revised  */}

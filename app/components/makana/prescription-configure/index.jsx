@@ -8,7 +8,7 @@ import ListTile from 'progressive-web-sdk/dist/components/list-tile'
 const PRESCRIPTION_CONFIGURATION_FORM_NAME = 'prescription-configure'
 
 const PrescriptionConfigure = (props) => {
-    const { drugChoices, onPrescriptionConfigureSubmit } = props
+    const { viewModel, onPrescriptionConfigureSubmit } = props
 
     const handlePrescriptionSaveSubmit = (event) => {
         console.log('PrescriptionConfigure: handlePrescriptionSaveSubmit()')
@@ -27,7 +27,7 @@ const PrescriptionConfigure = (props) => {
             <List>
                 <ListTile className="c-prescription-configure__form-field-row u-flexbox">
                     <select name="drug" >
-                        {drugChoices.variants.map((item, index) => (
+                        {viewModel.variants.map((item, index) => (
                             <option key={index}>{item.name}</option>
                         ))}
                     </select>
@@ -36,7 +36,7 @@ const PrescriptionConfigure = (props) => {
                 <ListTile className="c-prescription-configure__form-field-row u-flexbox">
                     <div>Form</div>
                     <select name="form">
-                        {drugChoices.forms.map((item, index) => (
+                        {viewModel.forms.map((item, index) => (
                             <option key={index}>{item}</option>
                         ))}
                     </select>
@@ -45,7 +45,7 @@ const PrescriptionConfigure = (props) => {
                 <ListTile className="c-prescription-configure__form-field-row u-flexbox">
                     <div>Dosage</div>
                     <select name="dosage">
-                        {drugChoices.dosages.map((item, index) => (
+                        {viewModel.dosages.map((item, index) => (
                             <option key={index}>{item}</option>
                         ))}
                     </select>
@@ -54,7 +54,7 @@ const PrescriptionConfigure = (props) => {
                 <ListTile className="c-prescription-configure__form-field-row u-flexbox">
                     <div>Quantity</div>
                     <select name="quantity">
-                        {drugChoices.quantities.map((item, index) => (
+                        {viewModel.quantities.map((item, index) => (
                             <option key={index}>{item}</option>
                         ))}
                     </select>
@@ -82,7 +82,7 @@ PrescriptionConfigure.propTypes = {
     /**
      * Handler that is triggers when the form is submitted
      */
-    drugChoices: PropTypes.object,
+    viewModel: PropTypes.object,
     onPrescriptionConfigureSubmit: PropTypes.func
 }
 
