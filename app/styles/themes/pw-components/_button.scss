@@ -52,6 +52,17 @@
 // Themes
 // ---
 
+.pw-button.pw--success {
+    background-color: $success-color;
+
+    color: #fff;
+
+    &:active,
+    &:focus {
+        background-color: $dark-success-color;
+    }
+}
+
 .pw-button.pw--primary {
     background-color: $primary-action-color;
 
