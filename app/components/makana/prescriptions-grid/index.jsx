@@ -114,8 +114,9 @@ const PrescriptionsGrid = (props) => {
     //
     // EDIT PRESCRIPTION (a) - Show the modal
     //
-    const handleEditPrescriptionSelect = () => {
+    const handleEditPrescriptionSelect = (selectedProductId) => {
         console.log('PrescriptionsGrid: handleEditPrescriptionSelect()')
+        setSelectedDrug(selectedProductId)
         setDrugModalMode('edit')
         setIsDrugModalOpen(true)
     }
@@ -289,7 +290,7 @@ const PrescriptionsGrid = (props) => {
                                     onClick={() => setActiveRowKey(item._gridRowKey)}
                                     endAction={
                                         <div>
-                                            <Button className="pw--blank" icon="more" onClick={() => handleEditPrescriptionSelect()} />
+                                            <Button className="pw--blank" icon="more" onClick={() => handleEditPrescriptionSelect(item.masterKey)} />
                                             <Button className="pw--blank" icon="trash" onClick={() => handleRemovePrescription(item._gridRowKey)} />
                                         </div>
                                     }
