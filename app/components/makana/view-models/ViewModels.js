@@ -19,10 +19,7 @@ const ViewModels = {
                 }
             ],
             title: 'Product Title',
-            price: '$2000',
-            onClick: () => {
-                console.log('clicked')
-            }
+            price: '$2000'
         },
         {
             className: 'masterId_5150',
