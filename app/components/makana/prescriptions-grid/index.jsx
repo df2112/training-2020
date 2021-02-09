@@ -87,17 +87,6 @@ const PrescriptionsGrid = (props) => {
     }
 
     //
-    // ADD PRESCRIPTION (a) - Show the modal
-    //
-    const handleAddPrescriptionSelect = (newRowKey) => {
-        console.log('PrescriptionsGrid: handleAddPrescriptionSelect()')
-        lastRowKeyRef.current = newRowKey
-        setLastRowKey(newRowKey)
-        setDrugModalMode('add')
-        setIsDrugModalOpen(true)
-    }
-
-    //
     // ADD PRESCRIPTION (b) - Submit the modal
     //
     const handleAddPrescriptionSubmit = (formData) => {
@@ -291,14 +280,6 @@ const PrescriptionsGrid = (props) => {
                     {/* Revised  */}
                     <div style={{ marginTop: "6px" }}>
                         <List>
-                            {/* <ListTile className="pw--instructional-block">
-                                <Button
-                                    className="t-product-details__modal-button pw--primary qa-modal-button"
-                                    onClick={() => handleAddPrescriptionSelect(lastRowKey + 1)}>
-                                    Add New Prescription
-                                </Button>
-                            </ListTile> */}
-
                             {gridRows.map((item, index) => (
                                 <ListTile
                                     key={item._gridRowKey}
