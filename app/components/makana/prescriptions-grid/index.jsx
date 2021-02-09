@@ -102,7 +102,14 @@ const PrescriptionsGrid = (props) => {
             drugName: formData.get('drug'),
             drugQuantity: formData.get('quantity'),
             drugForm: formData.get('form'),
-            drugDosage: formData.get('dosage')
+            drugDosage: formData.get('dosage'),
+            // TODO: fix all the below so that it comes from the form not hardcoded
+            masterKey: '2112',
+            pharmacyKey: '',
+            pharmacyChain: 'Piggly Wiggly',
+            pharmacyLogoUrl: 'https://www.pigglywigglyfl.com/wp-content/uploads/2018/11/logo-footer@2x.png.webp',
+            pharmacyCity: '** Just Added **'
+
         }
 
         setGridRows(gridRows.concat(newGridRow))
