@@ -59,6 +59,7 @@ const PrescriptionsGrid = (props) => {
     const [lastRowKey, setLastRowKey] = useState(ViewModels.prescriptionsGrid[2]._gridRowKey)
     const [activeRowKey, setActiveRowKey] = useState(ViewModels.prescriptionsGrid[2]._gridRowKey)
     const [selectedDoctor, setSelectedDoctor] = useState('999')
+    const [selectedDrug, setSelectedDrug] = useState()
 
     const lastRowKeyRef = useRef(lastRowKey)
 
@@ -246,7 +247,7 @@ const PrescriptionsGrid = (props) => {
             <div className="t-product-details__shipping-delivery-modal-content">
                 <br />
                 <PrescriptionConfigure
-                    viewModel={ViewModels.prescriptionConfigure}
+                    viewModel={ViewModels.prescriptionConfigure.find(el => el.masterKey === selectedDrug)}
                     analyticsManager={analyticsManager}
                     onPrescriptionConfigureSubmit={drugModalMode === 'add' ? handleAddPrescriptionSubmit : handleEditPrescriptionSubmit}
                 />
@@ -255,10 +256,11 @@ const PrescriptionsGrid = (props) => {
         </Sheet>
     )
 
-    const handleDrugSelectSubmit = (event) => {
+    const handleDrugSelectSubmit = (selectedProductId) => {
         console.log('PrescriptionsGrid: handleDrugSelectSubmit()')
-        console.log(event)
+        console.log(selectedProductId)
         lastRowKeyRef.current = (lastRowKey + 1)
+        setSelectedDrug(selectedProductId)
         setLastRowKey(lastRowKeyRef.current)
         setDrugModalMode('add')
         setIsDrugModalOpen(true)

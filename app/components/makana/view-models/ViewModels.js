@@ -18,11 +18,11 @@ const ViewModels = {
                     label: 'Dave ID (a)'
                 }
             ],
-            title: 'Atorvastatin (generic Lipitor)',
+            title: 'Atorvastatin (generic Lipitor) 2112',
             price: '$25'
         },
         {
-            className: 'masterId_5150',
+            className: 'masterId_2112',
             isSimple: true,
             imageProps: {
                 src:
@@ -38,30 +38,92 @@ const ViewModels = {
                 }
             ],
             price: '$675',
-            title: 'Lipitor'
+            title: 'Lipitor 2112'
+        },
+        {
+            className: 'masterId_8118',
+            isSimple: true,
+            isfull: true,
+            imageProps: {
+                src:
+                    'https://www.grxstatic.com/d4fuqqd5l3dbz/products/DrugItem_26204.JPG',
+                width: '88px',
+                height: '88px',
+                alt: 'cat'
+            },
+            href: '#',
+            options: [
+                {
+                    label: 'Dave ID (x)'
+                }
+            ],
+            title: 'Atorvastatin (generic Lipitor) 8118',
+            price: '$125'
+        },
+        {
+            className: 'masterId_8118',
+            isSimple: true,
+            imageProps: {
+                src:
+                    'https://www.grxstatic.com/d4fuqqd5l3dbz/products/tms/DrugItem_6931.JPG',
+                width: '88px',
+                height: '88px',
+                alt: 'cat'
+            },
+            href: '#',
+            options: [
+                {
+                    label: 'Dave ID (y)'
+                }
+            ],
+            price: '$1675',
+            title: 'Lipitor 8118'
         }
     ],
 
-    prescriptionConfigure: {
-        variants: [
-            {
-                drugKey: '0',
-                name: 'Atorvastatin (*generic) yo~',
-                generic: true,
-                unitPrice: 2.50
-            },
-            {
-                drugKey: '1',
-                name: 'Lipitor (*brand)',
-                generic: false,
-                unitPrice: 3.75
-            }
-        ],
-        forms: ['tablet', 'liquid'],
-        dosages: ['10mg', '20mg', '30mg'],
-        quantities: [11, 21, 51],
-    },
-    
+    prescriptionConfigure: [
+        {
+            masterKey: '2112',
+            variants: [
+                {
+                    drugKey: '0',
+                    name: 'Atorvastatin (*generic) 2112',
+                    generic: true,
+                    unitPrice: 25
+                },
+                {
+                    drugKey: '1',
+                    name: 'Lipitor (*brand) 2112',
+                    generic: false,
+                    unitPrice: 675
+                }
+            ],
+            forms: ['tablet', 'liquid'],
+            dosages: ['10mg', '20mg', '30mg'],
+            quantities: [11, 21, 51],
+        },
+        {
+            masterKey: '8118',
+            variants: [
+                {
+                    drugKey: '0',
+                    name: 'Atorvastatin (*generic) 8118',
+                    generic: true,
+                    unitPrice: 125
+                },
+                {
+                    drugKey: '1',
+                    name: 'Lipitor (*brand) 8118',
+                    generic: false,
+                    unitPrice: 1675
+                }
+            ],
+            forms: ['tablet', 'liquid'],
+            dosages: ['10mg', '20mg', '30mg'],
+            quantities: [11, 21, 51],
+        }
+    ],
+
     prescriptionsGrid: [
         {
             _gridRowKey: 0,
@@ -100,7 +162,6 @@ const ViewModels = {
             pharmacyCity: 'Clearwater'
         }
     ]
-
 
 }
 
