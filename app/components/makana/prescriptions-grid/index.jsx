@@ -237,7 +237,6 @@ const PrescriptionsGrid = (props) => {
             coverage={width}
             open={isDrugModalOpen}
             effect="modal-center"
-            shrinkToContent
             headerContent={
                 <HeaderBar>
                     <HeaderBarTitle className="u-flex u-padding-start-md u-text-align-start u-text-size-big">
