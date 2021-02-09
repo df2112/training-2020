@@ -79,7 +79,7 @@ const PrescriptionConfigure = (props) => {
                     {viewModel.pharmacies.map((item, index) => (
                         <ListTile key={index}
                             startAction={<img style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} src={item.pharmacyLogoUrl} />}
-                            endAction={<Button className="pw--success">{item.pharmacyPrice}</Button>}
+                            endAction={<Button type="submit" className="pw--success">{item.pharmacyPrice}</Button>}
                         >
                             <div>{item.pharmacyChain}</div>
                             <div>{item.pharmacyCity}</div>
@@ -93,13 +93,13 @@ const PrescriptionConfigure = (props) => {
             </List>
 
             {/* Submit Button */}
-            <div className="c-prescription-configure__form-field-row u-flexbox">
+            <div style={processStep === 2 ? { display: "none" } : {}} className="c-prescription-configure__form-field-row u-flexbox">
                 <div className="c-prescription-configure__form-field c-prescription-configure__button u-flex-none u-margin-start-0">
                     <div className="c-prescription-configure__form-field-inner">
                         <div className="c-prescription-configure__form-field-input">
                             <div className="c-prescription-configure__form-field-label" aria-hidden="true"></div>
                             <Button type="submit" className="pw--primary">
-                                Save Prescription
+                                {processStep === 1 ? 'Check Prices' : 'Save Prescription'}                                
                             </Button>
                         </div>
                     </div>
