@@ -41,6 +41,7 @@ const ViewModels = {
             title: 'Lipitor'
         }
     ],
+
     prescriptionConfigure: {
         variants: [
             {
@@ -60,6 +61,7 @@ const ViewModels = {
         dosages: ['10mg', '20mg', '30mg'],
         quantities: [11, 21, 51],
     },
+    
     prescriptionsGrid: [
         {
             _gridRowKey: 0,
