@@ -93,6 +93,16 @@ const PrescriptionConfigure = (props) => {
 
                 <div style={processStep !== 3 ? { display: "none" } : {}}>
                     <div>Step 3</div>
+                    {viewModel.doctors.map((item, index) => (
+                        <ListTile 
+                            key={index}
+                            className="pw--instructional-block"
+                            endAction={<Button type="submit" className="pw--success">Select</Button>}
+                            
+                        >
+                            <div>{item.name}</div>
+                        </ListTile>
+                    ))}
                 </div>
             </List>
 
