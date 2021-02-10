@@ -92,7 +92,6 @@ const PrescriptionConfigure = (props) => {
                 </div>
 
                 <div style={processStep !== 3 ? { display: "none" } : {}}>
-                    <div>Step 3</div>
                     {viewModel.doctors.map((item, index) => (
                         <ListTile 
                             key={index}

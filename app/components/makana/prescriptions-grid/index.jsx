@@ -275,50 +275,47 @@ const PrescriptionsGrid = (props) => {
 
     return (
         <div className="c-prescriptions-grid">
-            <Tabs activeIndex={0}>
-                <TabsPanel title="Prescriptions">
+            <div style={{ marginTop: "6px" }} className="c-prescriptions-grid__form-field-input">
+                <DrugSearch
+                    id="drug-search"
+                    viewModel={ViewModels.drugSearch}
+                    onDrugSelectSubmit={handleDrugSelectSubmit}
+                />
+            </div>
 
-                    <div style={{ marginTop: "6px" }} className="c-prescriptions-grid__form-field-input">
-                        <DrugSearch
-                            id="drug-search"
-                            viewModel={ViewModels.drugSearch}
-                            onDrugSelectSubmit={handleDrugSelectSubmit}
-                        />
-                    </div>
+            {/* Revised  */}
+            <div style={{ marginTop: "6px" }}>
+                <List>
+                    {gridRows.map((item, index) => (
+                        <ListTile
+                            key={item._gridRowKey}
+                            className="pw--instructional-block"
+                            onClick={() => setActiveRowKey(item._gridRowKey)}
+                            endAction={
+                                <div>
+                                    <Button className="pw--blank" icon="more" onClick={() => handleEditPrescriptionSelect(item.masterKey)} />
+                                    <Button className="pw--blank" icon="trash" onClick={() => handleRemovePrescription(item._gridRowKey)} />
+                                </div>
+                            }
+                        >
+                            <div style={{ fontWeight: 'bold' }}>{item.drugName}</div>
+                            <div style={{ marginBottom: "5px" }}>{item.drugQuantity} {item.drugForm} {item.drugDosage}</div>
+                            <Divider />
+                            <div style={{ fontWeight: 'bold', marginBottom: "5px", marginTop: "5px" }}>{doctorsList[item._gridRowKey + 2].name}</div>
+                            <Divider />
+                            <ListTile
+                                startAction={<img style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} src={item.pharmacyLogoUrl} />}>
+                                <div>{item.pharmacyChain}</div>
+                            </ListTile>
+                        </ListTile>
+                    ))}
+                </List>
+            </div>
 
-                    {/* Revised  */}
-                    <div style={{ marginTop: "6px" }}>
-                        <List>
-                            {gridRows.map((item, index) => (
-                                <ListTile
-                                    key={item._gridRowKey}
-                                    className="pw--instructional-block"
-                                    onClick={() => setActiveRowKey(item._gridRowKey)}
-                                    endAction={
-                                        <div>
-                                            <Button className="pw--blank" icon="more" onClick={() => handleEditPrescriptionSelect(item.masterKey)} />
-                                            <Button className="pw--blank" icon="trash" onClick={() => handleRemovePrescription(item._gridRowKey)} />
-                                        </div>
-                                    }
-                                >
-                                    <div style={{ fontWeight: 'bold' }}>{item.drugName}</div>
-                                    <div style={{ marginBottom: "5px" }}>{item.drugQuantity} {item.drugForm} {item.drugDosage}</div>
-                                    <Divider />
-                                    <div style={{ fontWeight: 'bold', marginBottom: "5px", marginTop: "5px" }}>{doctorsList[item._gridRowKey + 2].name}</div>
-                                    <Divider />
-                                    <ListTile
-                                        startAction={<img style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} src={item.pharmacyLogoUrl} />}>
-                                        <div>{item.pharmacyChain}</div>
-                                    </ListTile>
-                                </ListTile>
-                            ))}
-                        </List>
-                    </div>
-
-                    {/* TODO: This is the old stuff ... to be removed */}
-                    <List>
-                        {/* Prescription Rows */}
-                        {/* {gridRows.map((item, index) => (
+            {/* TODO: This is the old stuff ... to be removed */}
+            <List>
+                {/* Prescription Rows */}
+                {/* {gridRows.map((item, index) => (
 
                                 <div className="c-prescriptions-grid__form-field-row">
                                     <div className="u-flex">
@@ -361,31 +358,7 @@ const PrescriptionsGrid = (props) => {
                             </ListTile>
                         ))} */}
 
-                    </List>
-                </TabsPanel>
-
-                <TabsPanel title="Pharmacies">
-                </TabsPanel>
-
-                <TabsPanel title="Doctors">
-                    <List>
-                        {doctorsList && doctorsList.length > 0 && doctorsList.map((doctor) => (
-                            <ListTile
-                                key={doctor._doctorKey}
-                                endAction={
-                                    <div>
-                                        <Button className="pw--blank" icon="star" onClick={() => setIsDrugModalOpen(true)} />
-                                    </div>
-                                }
-                            >
-                                <div style={{ fontWeight: 'bold' }}>{doctor.name}</div>
-                                <div>1000 Central Avenue</div>
-                            </ListTile>
-                        ))}
-                    </List>
-                </TabsPanel>
-            </Tabs>
-
+            </List>
 
             {/* Floating element/components */}
             <Mobile>
