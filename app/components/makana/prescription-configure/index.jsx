@@ -106,13 +106,13 @@ const PrescriptionConfigure = (props) => {
             </List>
 
             {/* Submit Button */}
-            <div style={processStep === 2 ? { display: "none" } : {}} className="c-prescription-configure__form-field-row u-flexbox">
+            <div style={processStep !== 1 ? { display: "none" } : {}} className="c-prescription-configure__form-field-row u-flexbox">
                 <div className="c-prescription-configure__form-field c-prescription-configure__button u-flex-none u-margin-start-0">
                     <div className="c-prescription-configure__form-field-inner">
                         <div className="c-prescription-configure__form-field-input">
                             <div className="c-prescription-configure__form-field-label" aria-hidden="true"></div>
                             <Button type="submit" className="pw--primary">
-                                {processStep === 1 ? 'Check Prices' : 'Save Prescription'}                                
+                                Check Prices                                
                             </Button>
                         </div>
                     </div>

@@ -360,6 +360,10 @@ const PrescriptionsGrid = (props) => {
 
             </List>
 
+            <Button className="pw--primary">
+                Checkout!
+            </Button>
+
             {/* Floating element/components */}
             <Mobile>
                 <DoctorModal width="80%" />
