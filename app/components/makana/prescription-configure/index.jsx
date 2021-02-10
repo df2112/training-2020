@@ -110,23 +110,19 @@ const PrescriptionConfigure = (props) => {
                 </div>
             </form>
 
-            {/* STEP 2 FORM - Configure Prescription */}
-            <form
-                style={processStep !== 2 ? { display: "none" } : {}}
-                id={PRESCRIPTION_CONFIGURATION_FORM2_NAME}
-                className="c-prescription-configure"
-                data-analytics-name={PRESCRIPTION_CONFIGURATION_FORM2_NAME}
-                onSubmit={handlePrescriptionSaveSubmit}
-            >
-                <div>
-                    <List>
-                        {viewModel.pharmacies.map((item, index) => (
+            {/* STEP 2 MULTIPLE FORMS - Select Pharmacy */}
+            <div style={processStep !== 2 ? { display: "none" } : {}}>
+                <List>
+                    {viewModel.pharmacies.map((item, index) => (
+                        <form key={index} id={`${PRESCRIPTION_CONFIGURATION_FORM2_NAME} ${index}`}
+                            className="c-prescription-configure"
+                            data-analytics-name={PRESCRIPTION_CONFIGURATION_FORM2_NAME}
+                            onSubmit={handlePrescriptionSaveSubmit}>
+
                             <ListTile
-                                key={index}
                                 className="pw--instructional-block"
                                 startAction={<img style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} src={item.pharmacyLogoUrl} />}
                                 endAction={<Button type="submit" className="pw--success"><Price current={`$${item.pharmacyPrice}`} /></Button>}
-
                             >
                                 <div>{item.pharmacyChain}</div>
                                 <input name="pharmacy-chain" type="hidden" value={item.pharmacyChain} />
@@ -134,24 +130,23 @@ const PrescriptionConfigure = (props) => {
                                 <div>{item.pharmacyCity}</div>
                                 <input name="pharmacy-city" type="hidden" value={item.pharmacyCity} />
                             </ListTile>
-                        ))}
-                    </List>
-                </div>
-            </form>
+                        </form>
+                    ))}
+                </List>
+            </div>
 
-            {/* STEP 3 MULTIPLE FORMS - Configure Prescription */}
+            {/* STEP 3 MULTIPLE FORMS - Select Doctor */}
             <div style={processStep !== 3 ? { display: "none" } : {}}>
                 <List>
-                    {viewModel.doctors.map((item, index) => (
+                    {viewModel.doctors.map((item, index) => (                        
                         <form key={index} id={`${PRESCRIPTION_CONFIGURATION_FORM3_NAME} ${index}`}
                             className="c-prescription-configure"
                             data-analytics-name={PRESCRIPTION_CONFIGURATION_FORM3_NAME}
                             onSubmit={handlePrescriptionSaveSubmit}>
-                            <ListTile
 
+                            <ListTile
                                 className="pw--instructional-block"
                                 endAction={<Button type="submit" className="pw--success">Select</Button>}
-
                             >
                                 <div>{item.name}</div>
                                 <input id="doctor-name" name="doctor-name" type="text" value={item.name} readOnly />
@@ -160,7 +155,7 @@ const PrescriptionConfigure = (props) => {
                     ))}
                 </List>
             </div>
-
+            
         </div >
     )
 }
