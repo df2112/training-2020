@@ -106,10 +106,9 @@ const PrescriptionsGrid = (props) => {
             // TODO: fix all the below so that it comes from the form not hardcoded
             masterKey: '2112',
             pharmacyKey: '',
-            pharmacyChain: 'Piggly Wiggly',
+            pharmacyChain: formData.get('pharmacy-chain'),
             pharmacyLogoUrl: 'https://www.pigglywigglyfl.com/wp-content/uploads/2018/11/logo-footer@2x.png.webp',
-            pharmacyCity: '** Just Added **'
-
+            pharmacyCity: formData.get('pharmacy-city')
         }
 
         setGridRows(gridRows.concat(newGridRow))
@@ -144,6 +143,8 @@ const PrescriptionsGrid = (props) => {
         gridRow.drugQuantity = formData.get('quantity')
         gridRow.drugForm = formData.get('form')
         gridRow.drugDosage = formData.get('dosage')
+        gridRow.pharmacyChain = formData.get('pharmacy-chain')
+        gridRow.pharmacyCity = formData.get('pharmacy-city')
 
         setIsDoctorModalOpen(false)
         setIsDrugModalOpen(false)
