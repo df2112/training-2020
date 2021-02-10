@@ -77,7 +77,9 @@ const PrescriptionConfigure = (props) => {
 
                 <div style={processStep !== 2 ? { display: "none" } : {}}>
                     {viewModel.pharmacies.map((item, index) => (
-                        <ListTile key={index}
+                        <ListTile 
+                            key={index}
+                            className="pw--instructional-block"
                             startAction={<img style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} src={item.pharmacyLogoUrl} />}
                             endAction={<Button type="submit" className="pw--success">{item.pharmacyPrice}</Button>}
                         >
