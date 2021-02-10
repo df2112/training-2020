@@ -149,7 +149,7 @@ const PrescriptionConfigure = (props) => {
                                 endAction={<Button type="submit" className="pw--success">Select</Button>}
                             >
                                 <div>{item.name}</div>
-                                <input id="doctor-name" name="doctor-name" type="text" value={item.name} readOnly />
+                                <input id="doctor-name" name="doctor-name" type="hidden" value={item.name} />
                             </ListTile>
                         </form>
                     ))}
