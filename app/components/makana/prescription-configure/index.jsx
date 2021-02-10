@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import Button from 'progressive-web-sdk/dist/components/button'
 import List from 'progressive-web-sdk/dist/components/list'
 import ListTile from 'progressive-web-sdk/dist/components/list-tile'
+import Price from 'progressive-web-sdk/dist/components/price'
 
 const PRESCRIPTION_CONFIGURATION_FORM_NAME = 'prescription-configure'
 
@@ -81,7 +82,8 @@ const PrescriptionConfigure = (props) => {
                             key={index}
                             className="pw--instructional-block"
                             startAction={<img style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} src={item.pharmacyLogoUrl} />}
-                            endAction={<Button type="submit" className="pw--success">{item.pharmacyPrice}</Button>}
+                            endAction={<Button type="submit" className="pw--success"><Price current={`$${item.pharmacyPrice}`} /></Button>}
+                            
                         >
                             <div>{item.pharmacyChain}</div>
                             <div>{item.pharmacyCity}</div>
