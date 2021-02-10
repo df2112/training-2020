@@ -1,4 +1,4 @@
-import React, { Fragment, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 import Button from 'progressive-web-sdk/dist/components/button'
@@ -48,6 +48,7 @@ const PrescriptionConfigure = (props) => {
 
     return (
         <div>
+
             {/* STEP 1 FORM - Configure Prescription */}
             <form
                 style={processStep !== 1 ? { display: "none" } : {}}
@@ -56,6 +57,7 @@ const PrescriptionConfigure = (props) => {
                 data-analytics-name={PRESCRIPTION_CONFIGURATION_FORM1_NAME}
                 onSubmit={handlePrescriptionSaveSubmit}
             >
+                <h2>Configure Prescription</h2>
                 <List>
                     <ListTile className="c-prescription-configure__form-field-row u-flexbox">
                         <select name="drug" >
@@ -112,6 +114,7 @@ const PrescriptionConfigure = (props) => {
 
             {/* STEP 2 MULTIPLE FORMS - Select Pharmacy */}
             <div style={processStep !== 2 ? { display: "none" } : {}}>
+                <h2>Select Pharmacy</h2>
                 <List>
                     {viewModel.pharmacies.map((item, index) => (
                         <form key={index} id={`${PRESCRIPTION_CONFIGURATION_FORM2_NAME} ${index}`}
@@ -137,6 +140,7 @@ const PrescriptionConfigure = (props) => {
 
             {/* STEP 3 MULTIPLE FORMS - Select Doctor */}
             <div style={processStep !== 3 ? { display: "none" } : {}}>
+                <h2>Select Physician</h2>
                 <List>
                     {viewModel.doctors.map((item, index) => (                        
                         <form key={index} id={`${PRESCRIPTION_CONFIGURATION_FORM3_NAME} ${index}`}
@@ -154,8 +158,8 @@ const PrescriptionConfigure = (props) => {
                         </form>
                     ))}
                 </List>
-            </div>
-            
+            </div>            
+
         </div >
     )
 }
