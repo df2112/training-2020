@@ -76,16 +76,23 @@ const PrescriptionsGrid = (props) => {
                 setIsDrugModalOpen(false)
                 return state.concat(newGridRow)
 
-            case 'REMOVE_ITEM':
-                console.log('cartReducer: REMOVE_ITEM')
-                return state.filter((item) => item._gridRowKey !== action.id)
+            case 'EDIT_ITEM': {
+                console.log('cartReducer: EDIT_ITEM')
+                console.log('--- formData parameter: ')
+                console.log(Object.fromEntries(action.formData.entries()))
 
-            case 'UPDATE_ITEM': {
-                const newList = state.list.map((item) => {
-                    if (item.id === action.id) {
+                const newList = state.map((item) => {
+
+                    if (item._gridRowKey === activeRowKey) {
                         const updatedItem = {
                             ...item,
-                            isComplete: !item.isComplete
+                            drugName: action.formData.get('drug'),
+                            drugQuantity: action.formData.get('quantity'),
+                            drugForm: action.formData.get('form'),
+                            drugDosage: action.formData.get('dosage'),
+                            doctorName: action.formData.get('doctor-name'),
+                            pharmacyChain: action.formData.get('pharmacy-chain'),
+                            pharmacyCity: action.formData.get('pharmacy-city')                    
                         }
                         return updatedItem
                     } else {
@@ -93,46 +100,26 @@ const PrescriptionsGrid = (props) => {
                     }
                 })
 
-                return {
-                    ...state,
-                    list: newList
-                }
+                setIsDrugModalOpen(false)
+                return newList                
             }
+
+            case 'REMOVE_ITEM':
+                console.log('cartReducer: REMOVE_ITEM')
+
+                return state.filter((item) => item._gridRowKey !== action.id)
 
             default:
                 throw new Error();
         }
     }
 
-    const [cartState, cartAction] = useReducer(cartReducer, ViewModels.prescriptionsGrid)
-
-    const handleCartRemoveItem = (id) => {
-        cartAction({ type: 'REMOVE_ITEM', id })
-    }
-
-    const handleCartAddItem = (formData) => {
-        cartAction({ type: 'ADD_ITEM', formData })
-    }
-
-    //
-    // EDIT PRESCRIPTION (a) - Show the modal
-    //
-    const handleEditPrescriptionSelect = (selectedProductId) => {
-        console.log('PrescriptionsGrid: handleEditPrescriptionSelect()')
-        setSelectedDrug(selectedProductId)
-        setDrugModalMode('edit')
-        setIsDrugModalOpen(true)
-    }
-
     //
     // EDIT PRESCRIPTION (b) - Submit the modal
     //
     const handleEditPrescriptionSubmit = (formData) => {
-        console.log('PrescriptionsGrid: handleEditPrescriptionSubmit()')
-        console.log('--- formData parameter: ')
-        console.log(Object.fromEntries(formData.entries()))
-        console.log('--- activeRowKey state variable: ')
-        console.log(activeRowKey)
+        // console.log('--- activeRowKey state variable: ')
+        // console.log(activeRowKey)
 
         // TODO: Instead of updating in place, use setState to do it instead
         const gridRow = gridRows.find(element => element._gridRowKey == activeRowKey)
@@ -145,6 +132,30 @@ const PrescriptionsGrid = (props) => {
 
         setIsDoctorModalOpen(false)
         setIsDrugModalOpen(false)
+    }
+
+    const [cartState, cartAction] = useReducer(cartReducer, ViewModels.prescriptionsGrid)
+
+    const handleCartRemoveItem = (id) => {
+        cartAction({ type: 'REMOVE_ITEM', id })
+    }
+
+    const handleCartAddItem = (formData) => {
+        cartAction({ type: 'ADD_ITEM', formData })
+    }
+
+    const handleCartEditItem = (formData) => {
+        cartAction({ type: 'EDIT_ITEM', formData })
+    }
+
+    //
+    // EDIT PRESCRIPTION (a) - Show the modal
+    //
+    const handleEditPrescriptionSelect = (selectedProductId) => {
+        console.log('PrescriptionsGrid: handleEditPrescriptionSelect()')
+        setSelectedDrug(selectedProductId)
+        setDrugModalMode('edit')
+        setIsDrugModalOpen(true)
     }
 
     const handleDoctorChange = (event) => {
@@ -233,8 +244,8 @@ const PrescriptionsGrid = (props) => {
                     </HeaderBarTitle>
 
                     <HeaderBarActions>
-                        <Button 
-                            innerClassName="u-padding-0" 
+                        <Button
+                            innerClassName="u-padding-0"
                             icon="close"
                             onClick={() => setIsDrugModalOpen(false)}
                         />
@@ -247,7 +258,7 @@ const PrescriptionsGrid = (props) => {
                 <PrescriptionConfigure
                     viewModel={ViewModels.prescriptionConfigure.find(el => el.masterKey === selectedDrug)}
                     analyticsManager={analyticsManager}
-                    onPrescriptionConfigureSubmit={drugModalMode === 'add' ? handleCartAddItem : handleEditPrescriptionSubmit}
+                    onPrescriptionConfigureSubmit={drugModalMode === 'add' ? handleCartAddItem : handleCartEditItem}
                 />
 
             </div>
