@@ -44,7 +44,7 @@ const PrescriptionsGrid = (props) => {
     const [isDrugModalOpen, setIsDrugModalOpen] = useState(false)
     const [drugModalMode, setDrugModalMode] = useState()
     const [lastRowKey, setLastRowKey] = useState(ViewModels.prescriptionsGrid[2]._gridRowKey)
-    const [activeRowKey, setActiveRowKey] = useState(ViewModels.prescriptionsGrid[2]._gridRowKey)
+    const [activeRowKey, setActiveRowKey] = useState()
     const [selectedDoctor, setSelectedDoctor] = useState('999')
     const [selectedDrug, setSelectedDrug] = useState()
 
@@ -114,31 +114,7 @@ const PrescriptionsGrid = (props) => {
         }
     }
 
-    //
-    // EDIT PRESCRIPTION (b) - Submit the modal
-    //
-    const handleEditPrescriptionSubmit = (formData) => {
-        // console.log('--- activeRowKey state variable: ')
-        // console.log(activeRowKey)
-
-        // TODO: Instead of updating in place, use setState to do it instead
-        const gridRow = gridRows.find(element => element._gridRowKey == activeRowKey)
-        gridRow.drugName = formData.get('drug')
-        gridRow.drugQuantity = formData.get('quantity')
-        gridRow.drugForm = formData.get('form')
-        gridRow.drugDosage = formData.get('dosage')
-        gridRow.pharmacyChain = formData.get('pharmacy-chain')
-        gridRow.pharmacyCity = formData.get('pharmacy-city')
-
-        setIsDoctorModalOpen(false)
-        setIsDrugModalOpen(false)
-    }
-
     const [cartState, cartAction] = useReducer(cartReducer, ViewModels.prescriptionsGrid)
-
-    const handleCartRemoveItem = (id) => {
-        cartAction({ type: 'REMOVE_ITEM', id })
-    }
 
     const handleCartAddItem = (formData) => {
         cartAction({ type: 'ADD_ITEM', formData })
@@ -146,6 +122,10 @@ const PrescriptionsGrid = (props) => {
 
     const handleCartEditItem = (formData) => {
         cartAction({ type: 'EDIT_ITEM', formData })
+    }
+
+    const handleCartRemoveItem = (id) => {
+        cartAction({ type: 'REMOVE_ITEM', id })
     }
 
     //
