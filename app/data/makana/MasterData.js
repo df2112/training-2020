@@ -2,7 +2,7 @@ const MasterData = {
     doctors: [
         {
             _doctorKey: '000',
-            name: 'Tim Brown, MD',
+            name: 'Tim Brown, MDX',
             age: 41,
         },
         {
@@ -33,11 +33,39 @@ const MasterData = {
     ],
 
     drugs: [
-
+        {
+            drugKey: '001',
+            drugName: 'AtorvastatinXX',
+        },
+        {
+            drugKey: '002',
+            drugName: 'Lipitor',
+        },
+        {
+            drugKey: '003',
+            drugName: 'Cozaar',
+        }
     ],
     
     pharmacies: [
-
+        {
+            pharmacyKey: '001',
+            pharmacyChain: 'Piggly Wiggly',
+            pharmacyLogoUrl: 'https://www.pigglywigglyfl.com/wp-content/uploads/2018/11/logo-footer@2x.png.webp',
+            pharmacyCity: 'St. Petersburg'
+        },
+        {
+            pharmacyKey: '002',
+            pharmacyChain: 'Publix',
+            pharmacyLogoUrl: 'https://cutpcdnwimages.azureedge.net/-/media/images/publix/publix_brandmark.svg?h=50&w=30&la=en&hash=250D8BC8604D4BC2D61677DFBF8E841AB79C327C',
+            pharmacyCity: 'Tampa'
+        },
+        {
+            pharmacyKey: '003',
+            pharmacyChain: 'Walmart',
+            pharmacyLogoUrl: 'https://www.logolynx.com/images/logolynx/72/72228f020dfabd8322585148af496eb5.png',
+            pharmacyCity: 'Clearwater'
+        }
     ]
 }
 
