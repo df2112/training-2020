@@ -21,9 +21,6 @@ import { v4 as uuidv4 } from 'uuid'
 const analyticsManager = getAnalyticsManager()
 const EMAIL_SUBSCRIBE_FORM_NAME = 'email-subscribe'
 
-
-
-
 export const validate = (values) => {
     console.log('PrescriptionsGrid: validate()')
     const errors = {}
@@ -399,8 +396,7 @@ const PrescriptionsGrid = (props) => {
                             endAction={
                                 <div>
                                     <Button className="pw--blank" icon="more" onClick={() => handleEditPrescriptionSelect(item.masterKey)} />
-                                    <Button className="pw--blank" icon="trash" onClick={() => handleRemovePrescription(item._gridRowKey)} />
-                                    <Button className="pw--blank" icon="cart" onClick={() => handleCartRemoveItem(item._gridRowKey)} />
+                                    <Button className="pw--blank" icon="trash" onClick={() => handleCartRemoveItem(item._gridRowKey)} />
                                 </div>
                             }
                         >
