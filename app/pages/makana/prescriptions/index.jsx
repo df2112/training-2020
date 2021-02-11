@@ -15,51 +15,10 @@ import { getAnalyticsManager } from '../../../analytics'
 import PrescriptionsGrid from '../../../components/makana/prescriptions-grid'
 import { Desktop } from '../../../components/media-queries'
 
+import MasterData from '../../../data/makana/MasterData'
+
 const analyticsManager = getAnalyticsManager()
 const PRODUCT_SKELETON_COUNT = 6
-
-const doctors = [
-    {
-        _doctorKey: '999',
-        name: 'Select doctor ...',
-        age: 99,
-    },
-    {
-        _doctorKey: '998',
-        name: 'Add New Doctor',
-        age: 40,
-    },
-    {
-        _doctorKey: '000',
-        name: 'Tim Brown, MD',
-        age: 41,
-    },
-    {
-        _doctorKey: '001',
-        name: 'Dave Foley, DO',
-        age: 42,
-    },
-    {
-        _doctorKey: '002',
-        name: 'Olivier Lafont, DSE',
-        age: 43,
-    },
-    {
-        _doctorKey: '003',
-        name: 'Nupur Marwaha, MD',
-        age: 44,
-    },
-    {
-        _doctorKey: '004',
-        name: 'Nat Pavic, DMD',
-        age: 45,
-    },
-    {
-        _doctorKey: '005',
-        name: 'Amulya Pradhan, DO',
-        age: 46
-    }
-]
 
 const Prescriptions = (props) => {
     const { errorMessage, productSearch, category } = props
@@ -176,7 +135,7 @@ const Prescriptions = (props) => {
                 {!isSubscribed ? (
                     <PrescriptionsGrid
                         analyticsManager={analyticsManager}
-                        doctors={doctors}
+                        doctors={MasterData.doctors}
                         onSubmit={() => setIsSubscribed(true)} />
                 ) : (
                         <span>Thank you for subscribing!</span>
