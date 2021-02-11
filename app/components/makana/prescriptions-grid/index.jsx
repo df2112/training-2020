@@ -51,6 +51,44 @@ const fakeDoctors = [
     }
 ]
 
+const cartReducer = (state, action) => {
+    switch (action.type) {
+
+        case 'ADD_ITEM':
+            return {
+                ...state, 
+                list: state.list.concat({ name: action.name, id: action.id }) 
+            }
+
+        case 'REMOVE_ITEM':
+            console.log('cartReducer: REMOVE_ITEM')
+            return state.filter((item) => item._gridRowKey !== action.id)
+            
+
+        case 'UPDATE_ITEM': {
+            const newList = state.list.map((item) => {
+                if (item.id === action.id) {
+                    const updatedItem = {
+                        ...item,
+                        isComplete: !item.isComplete
+                    }
+                    return updatedItem
+                } else {
+                    return item
+                }
+            })
+       
+            return {
+                ...state, 
+                list: newList 
+            }
+        }
+
+        default:
+            throw new Error();
+    }
+}
+
 const PrescriptionsGrid = (props) => {
     const { analyticsManager, doctors } = props
 
@@ -67,6 +105,21 @@ const PrescriptionsGrid = (props) => {
     const [selectedDrug, setSelectedDrug] = useState()
 
     const lastRowKeyRef = useRef(lastRowKey)
+
+    const [cartState, cartAction] = useReducer(cartReducer, ViewModels.prescriptionsGrid)
+        
+    function handleCartRemoveItem(id) {
+        cartAction({ type: 'REMOVE_ITEM', id })
+    }
+
+
+    // const [listData, dispatchListData] = 
+    //     useReducer(listReducer, { 
+    //         list: initialList, 
+    //         isShowList: true 
+    //     }
+    // )
+
 
     const handleEmailChange = (event) => {
         console.log('PrescriptionsGrid: handleEmailChange()')
@@ -316,7 +369,7 @@ const PrescriptionsGrid = (props) => {
 
     function handleToggleComplete(id) {
         dispatchListData({ type: 'UPDATE_ITEM', id })
-    }    
+    }
 
     return (
 
@@ -338,7 +391,7 @@ const PrescriptionsGrid = (props) => {
 
             <div style={{ marginTop: "6px" }}>
                 <List>
-                    {gridRows.map((item, index) => (
+                    {cartState.map((item, index) => (
                         <ListTile
                             key={item._gridRowKey}
                             className="pw--instructional-block"
@@ -347,6 +400,7 @@ const PrescriptionsGrid = (props) => {
                                 <div>
                                     <Button className="pw--blank" icon="more" onClick={() => handleEditPrescriptionSelect(item.masterKey)} />
                                     <Button className="pw--blank" icon="trash" onClick={() => handleRemovePrescription(item._gridRowKey)} />
+                                    <Button className="pw--blank" icon="cart" onClick={() => handleCartRemoveItem(item._gridRowKey)} />
                                 </div>
                             }
                         >
