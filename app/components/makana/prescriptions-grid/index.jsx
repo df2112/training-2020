@@ -1,4 +1,4 @@
-import React, { Fragment, useRef, useState } from 'react'
+import React, { Fragment, useRef, useState, useReducer } from 'react'
 import PropTypes from 'prop-types'
 
 import Button from 'progressive-web-sdk/dist/components/button'
@@ -16,8 +16,13 @@ import DrugSearch from '../drug-search'
 import PrescriptionConfigure from '../prescription-configure'
 import ViewModels from '../../../data/makana/ViewModels'
 
+import { v4 as uuidv4 } from 'uuid'
+
 const analyticsManager = getAnalyticsManager()
 const EMAIL_SUBSCRIBE_FORM_NAME = 'email-subscribe'
+
+
+
 
 export const validate = (values) => {
     console.log('PrescriptionsGrid: validate()')
@@ -274,7 +279,46 @@ const PrescriptionsGrid = (props) => {
         setIsDrugModalOpen(true)
     }
 
+    const initialList = [
+        {
+            id: 'a',
+            name: 'Robin',
+        },
+        {
+            id: 'b',
+            name: 'Dennis',
+        }
+    ]
+
+    const [listData, dispatchListData] = useReducer(
+        listReducer, 
+        { list: initialList, isShowList: true }
+    )
+
+    const [name, setName] = useState('')
+
+    function handleChange(event) {
+        setName(event.target.value)
+    }
+     
+    function handleAdd() {
+        dispatchListData({ type: 'ADD_ITEM', name, id: uuidv4() })        
+        setName('')
+    }
+
+    function handleRemove(id) {
+        dispatchListData({ type: 'REMOVE_ITEM', id })
+    }
+
     return (
+
+<div>
+    <div>
+        <AddItem name={name} onChange={handleChange} onAdd={handleAdd} />
+
+        <List2 list={listData.list} onRemove={handleRemove} />
+    </div>
+
         <div className="c-prescriptions-grid">
             <div style={{ marginTop: "6px" }} className="c-prescriptions-grid__form-field-input">
                 <DrugSearch
@@ -381,8 +425,52 @@ const PrescriptionsGrid = (props) => {
                 <DrugModal width="60%" />
             </Desktop>
         </div>
-    )
+</div>
+)
 }
+
+const listReducer = (state, action) => {
+    switch (action.type) {
+        case 'ADD_ITEM':
+            return {
+                ...state, 
+                list: state.list.concat({ name: action.name, id: action.id }) 
+            }
+        case 'REMOVE_ITEM':
+            return {
+                ...state,
+                list: state.list.filter((item) => item.id !== action.id)
+            }
+        default:
+            throw new Error();
+    }
+}
+
+const AddItem = ({ name, onChange, onAdd }) => (
+    <div>
+        <input type="text" value={name} onChange={onChange} />
+
+        <button type="button" onClick={onAdd}>
+            Add
+        </button>
+    </div>
+)
+   
+const List2 = ({ list, onRemove }) => (
+    <ul>
+        {list.map((item) => (
+            <li key={item.id}>
+                {item.name}
+
+                <button type="button" onClick={() => onRemove(item.id)}>
+                    Remove
+                </button>
+            </li>
+        ))}
+    </ul>
+);
+
+
 
 PrescriptionsGrid.propTypes = {
     /**
