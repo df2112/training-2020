@@ -283,16 +283,20 @@ const PrescriptionsGrid = (props) => {
         {
             id: 'a',
             name: 'Robin',
+            isComplete: false
         },
         {
             id: 'b',
             name: 'Dennis',
+            isComplete: true
         }
     ]
 
-    const [listData, dispatchListData] = useReducer(
-        listReducer, 
-        { list: initialList, isShowList: true }
+    const [listData, dispatchListData] = 
+        useReducer(listReducer, { 
+            list: initialList, 
+            isShowList: true 
+        }
     )
 
     const [name, setName] = useState('')
@@ -310,13 +314,17 @@ const PrescriptionsGrid = (props) => {
         dispatchListData({ type: 'REMOVE_ITEM', id })
     }
 
+    function handleToggleComplete(id) {
+        dispatchListData({ type: 'UPDATE_ITEM', id })
+    }    
+
     return (
 
 <div>
     <div>
         <AddItem name={name} onChange={handleChange} onAdd={handleAdd} />
 
-        <List2 list={listData.list} onRemove={handleRemove} />
+        <List2 list={listData.list} onRemove={handleRemove} onToggleComplete={handleToggleComplete} />
     </div>
 
         <div className="c-prescriptions-grid">
@@ -431,16 +439,38 @@ const PrescriptionsGrid = (props) => {
 
 const listReducer = (state, action) => {
     switch (action.type) {
+
         case 'ADD_ITEM':
             return {
                 ...state, 
                 list: state.list.concat({ name: action.name, id: action.id }) 
             }
+
         case 'REMOVE_ITEM':
             return {
                 ...state,
                 list: state.list.filter((item) => item.id !== action.id)
             }
+
+        case 'UPDATE_ITEM': {
+            const newList = state.list.map((item) => {
+                if (item.id === action.id) {
+                    const updatedItem = {
+                        ...item,
+                        isComplete: !item.isComplete
+                    }
+                    return updatedItem
+                } else {
+                    return item
+                }
+            })
+       
+            return {
+                ...state, 
+                list: newList 
+            }
+        }
+
         default:
             throw new Error();
     }
@@ -456,11 +486,17 @@ const AddItem = ({ name, onChange, onAdd }) => (
     </div>
 )
    
-const List2 = ({ list, onRemove }) => (
+const List2 = ({ list, onRemove, onToggleComplete }) => (
     <ul>
         {list.map((item) => (
             <li key={item.id}>
-                {item.name}
+                <span style={{ textDecoration: item.isComplete ? 'line-through' : 'none' }}>
+                    {item.name}
+                </span>
+
+                <button type="button" onClick={() => onToggleComplete(item.id)}>
+                    {item.isComplete ? 'Undo' : 'Done'}
+                </button>                
 
                 <button type="button" onClick={() => onRemove(item.id)}>
                     Remove
@@ -469,8 +505,6 @@ const List2 = ({ list, onRemove }) => (
         ))}
     </ul>
 );
-
-
 
 PrescriptionsGrid.propTypes = {
     /**
