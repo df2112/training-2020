@@ -69,7 +69,7 @@ const PrescriptionsGrid = (props) => {
                     masterKey: '2112',
                     pharmacyKey: '',
                     pharmacyChain: action.formData.get('pharmacy-chain'),
-                    pharmacyLogoUrl: 'https://www.pigglywigglyfl.com/wp-content/uploads/2018/11/logo-footer@2x.png.webp',
+                    pharmacyLogoUrl: action.formData.get('pharmacy-logo-url'),
                     pharmacyCity: action.formData.get('pharmacy-city')
                 }
 
@@ -92,6 +92,7 @@ const PrescriptionsGrid = (props) => {
                             drugDosage: action.formData.get('dosage'),
                             doctorName: action.formData.get('doctor-name'),
                             pharmacyChain: action.formData.get('pharmacy-chain'),
+                            pharmacyLogoUrl: action.formData.get('pharmacy-logo-url'),
                             pharmacyCity: action.formData.get('pharmacy-city')                    
                         }
                         return updatedItem

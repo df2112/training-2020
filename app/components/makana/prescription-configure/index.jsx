@@ -17,19 +17,21 @@ const PrescriptionConfigure = (props) => {
     const [formData2, setFormData2] = useState()
 
     const handlePrescriptionSaveSubmit = (event) => {
-        console.log('PrescriptionConfigure: handlePrescriptionSaveSubmit()')
         event.preventDefault()
 
         switch (processStep) {
             case 1:
+                console.log('PrescriptionConfigure: handlePrescriptionSaveSubmit() : Step 1')
                 setFormData1(new FormData(event.target))
                 setProcessStep(2)
                 break
             case 2:
+                console.log('PrescriptionConfigure: handlePrescriptionSaveSubmit() : Step 2')
                 setFormData2(new FormData(event.target))
                 setProcessStep(3)
                 break
             case 3:
+                console.log('PrescriptionConfigure: handlePrescriptionSaveSubmit() : Step 3')
                 const formData3 = new FormData(event.target)
 
                 for (var kv of formData1.entries()) {
@@ -126,6 +128,9 @@ const PrescriptionConfigure = (props) => {
                                 startAction={<img style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} src={item.pharmacyLogoUrl} />}
                                 endAction={<Button type="submit" className="pw--success"><Price current={`$${item.pharmacyPrice}`} /></Button>}
                             >
+                                <input name="pharmacy-logo-url" type="hidden" value={item.pharmacyLogoUrl} />
+                                <input name="pharmacy-price" type="hidden" value={item.pharmacyPrice} />
+
                                 <div>{item.pharmacyChain}</div>
                                 <input name="pharmacy-chain" type="hidden" value={item.pharmacyChain} />
 
