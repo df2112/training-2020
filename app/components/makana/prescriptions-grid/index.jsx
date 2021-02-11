@@ -106,11 +106,11 @@ const PrescriptionsGrid = (props) => {
 
     const [cartState, cartAction] = useReducer(cartReducer, ViewModels.prescriptionsGrid)
 
-    function handleCartRemoveItem(id) {
+    const handleCartRemoveItem = (id) => {
         cartAction({ type: 'REMOVE_ITEM', id })
     }
 
-    function handleCartAddItem(formData) {
+    const handleCartAddItem = (formData) => {
         cartAction({ type: 'ADD_ITEM', formData })
     }
 
