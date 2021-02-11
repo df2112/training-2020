@@ -323,6 +323,7 @@ const ViewModels = {
             drugForm: 'tablets',
             drugDosage: '40mg',
             drugQuantity: '30',
+            doctorName: 'Tim Brown, MDX',
             masterKey: '2112', //TODO: fix masterKey 
             pharmacyKey: '',
             pharmacyChain: 'Piggly Wiggly',
@@ -336,6 +337,7 @@ const ViewModels = {
             drugForm: 'tablets',
             drugDosage: '10mg',
             drugQuantity: '90',
+            doctorName: 'Dave Foley, DO',
             masterKey: '8118', //TODO: fix masterKey 
             pharmacyKey: '',
             pharmacyChain: 'Publix',
@@ -349,6 +351,7 @@ const ViewModels = {
             drugForm: 'tablets',
             drugDosage: '50mg',
             drugQuantity: '10',
+            doctorName: 'Olivier Lafont, DSE',
             masterKey: '2112', //TODO: fix masterKey 
             pharmacyKey: '',
             pharmacyChain: 'Walmart',

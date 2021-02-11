@@ -18,16 +18,15 @@ const PrescriptionConfigure = (props) => {
 
     const handlePrescriptionSaveSubmit = (event) => {
         console.log('PrescriptionConfigure: handlePrescriptionSaveSubmit()')
+        event.preventDefault()
 
         switch (processStep) {
             case 1:
                 setFormData1(new FormData(event.target))
-                event.preventDefault()
                 setProcessStep(2)
                 break
             case 2:
                 setFormData2(new FormData(event.target))
-                event.preventDefault()
                 setProcessStep(3)
                 break
             case 3:

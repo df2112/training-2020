@@ -1,34 +1,21 @@
 import React, { Fragment, useRef, useState, useReducer } from 'react'
 import PropTypes from 'prop-types'
+import { v4 as uuidv4 } from 'uuid'
 
 import Button from 'progressive-web-sdk/dist/components/button'
-import { HeaderBar, HeaderBarActions, HeaderBarTitle } from 'progressive-web-sdk/dist/components/header-bar'
 import Divider from 'progressive-web-sdk/dist/components/divider'
+import { HeaderBar, HeaderBarActions, HeaderBarTitle } from 'progressive-web-sdk/dist/components/header-bar'
 import List from 'progressive-web-sdk/dist/components/list'
 import ListTile from 'progressive-web-sdk/dist/components/list-tile'
 import Sheet from 'progressive-web-sdk/dist/components/sheet'
 import { Tabs, TabsPanel } from 'progressive-web-sdk/dist/components/tabs'
-import { getAnalyticsManager } from '../../../analytics'
+
 import { Desktop, Mobile, Tablet } from '../../media-queries'
 import DoctorAddNew from '../doctor-add-new'
 import DoctorSearch from '../doctor-search'
 import DrugSearch from '../drug-search'
 import PrescriptionConfigure from '../prescription-configure'
 import ViewModels from '../../../data/makana/ViewModels'
-
-import { v4 as uuidv4 } from 'uuid'
-
-const analyticsManager = getAnalyticsManager()
-const EMAIL_SUBSCRIBE_FORM_NAME = 'email-subscribe'
-
-export const validate = (values) => {
-    console.log('PrescriptionsGrid: validate()')
-    const errors = {}
-    if ((values.email || '').search(/@mobify.com$/) < 0) {
-        errors.email = 'Must be a @mobify.com email address'
-    }
-    return errors
-}
 
 const fakeDoctors = [
     {
@@ -48,50 +35,10 @@ const fakeDoctors = [
     }
 ]
 
-const cartReducer = (state, action) => {
-    switch (action.type) {
-
-        case 'ADD_ITEM':
-            return {
-                ...state, 
-                list: state.list.concat({ name: action.name, id: action.id }) 
-            }
-
-        case 'REMOVE_ITEM':
-            console.log('cartReducer: REMOVE_ITEM')
-            return state.filter((item) => item._gridRowKey !== action.id)
-            
-
-        case 'UPDATE_ITEM': {
-            const newList = state.list.map((item) => {
-                if (item.id === action.id) {
-                    const updatedItem = {
-                        ...item,
-                        isComplete: !item.isComplete
-                    }
-                    return updatedItem
-                } else {
-                    return item
-                }
-            })
-       
-            return {
-                ...state, 
-                list: newList 
-            }
-        }
-
-        default:
-            throw new Error();
-    }
-}
-
 const PrescriptionsGrid = (props) => {
     const { analyticsManager, doctors } = props
 
     const [doctorsList, setDoctorsList] = useState(doctors)
-    const [emailValue, setEmailValue] = useState('')
-    const [error, setError] = useState(false)
     const [gridRows, setGridRows] = useState(ViewModels.prescriptionsGrid)
     const [isDoctorModalOpen, setIsDoctorModalOpen] = useState(false)
     const [isDrugModalOpen, setIsDrugModalOpen] = useState(false)
@@ -103,73 +50,68 @@ const PrescriptionsGrid = (props) => {
 
     const lastRowKeyRef = useRef(lastRowKey)
 
+    const cartReducer = (state, action) => {
+        switch (action.type) {
+
+            case 'ADD_ITEM':
+                console.log('cartReducer: ADD_ITEM')
+                console.log('--- formData parameter: ')
+                console.log(Object.fromEntries(action.formData.entries()))
+
+                const newGridRow = {
+                    _gridRowKey: uuidv4(),
+                    drugName: action.formData.get('drug'),
+                    drugQuantity: action.formData.get('quantity'),
+                    drugForm: action.formData.get('form'),
+                    drugDosage: action.formData.get('dosage'),
+                    doctorName: action.formData.get('doctor-name'),
+                    // TODO: fix all the below so that it comes from the form not hardcoded
+                    masterKey: '2112',
+                    pharmacyKey: '',
+                    pharmacyChain: action.formData.get('pharmacy-chain'),
+                    pharmacyLogoUrl: 'https://www.pigglywigglyfl.com/wp-content/uploads/2018/11/logo-footer@2x.png.webp',
+                    pharmacyCity: action.formData.get('pharmacy-city')
+                }
+
+                setIsDrugModalOpen(false)
+                return state.concat(newGridRow)
+
+            case 'REMOVE_ITEM':
+                console.log('cartReducer: REMOVE_ITEM')
+                return state.filter((item) => item._gridRowKey !== action.id)
+
+            case 'UPDATE_ITEM': {
+                const newList = state.list.map((item) => {
+                    if (item.id === action.id) {
+                        const updatedItem = {
+                            ...item,
+                            isComplete: !item.isComplete
+                        }
+                        return updatedItem
+                    } else {
+                        return item
+                    }
+                })
+
+                return {
+                    ...state,
+                    list: newList
+                }
+            }
+
+            default:
+                throw new Error();
+        }
+    }
+
     const [cartState, cartAction] = useReducer(cartReducer, ViewModels.prescriptionsGrid)
-        
+
     function handleCartRemoveItem(id) {
         cartAction({ type: 'REMOVE_ITEM', id })
     }
 
-
-    // const [listData, dispatchListData] = 
-    //     useReducer(listReducer, { 
-    //         list: initialList, 
-    //         isShowList: true 
-    //     }
-    // )
-
-
-    const handleEmailChange = (event) => {
-        console.log('PrescriptionsGrid: handleEmailChange()')
-        return setEmailValue(event.target.value)
-    }
-
-    const handleSubmit = (event) => {
-        console.log('PrescriptionsGrid: handleSubmit()')
-        const { onSubmit } = props
-        const emailError = validate({ email: emailValue }).email
-
-        if (emailError) {
-            event.preventDefault()
-            setError(emailError)
-            analyticsManager.track('error', {
-                name: 'PrescriptionsGrid_form',
-                content: emailError
-            })
-            return
-        }
-
-        if (onSubmit) onSubmit()
-        setIsDoctorModalOpen(false)
-    }
-
-    //
-    // ADD PRESCRIPTION (b) - Submit the modal
-    //
-    const handleAddPrescriptionSubmit = (formData) => {
-        console.log('PrescriptionsGrid: handleAddPrescriptionSubmit()')
-        console.log('--- formData parameter: ')
-        console.log(Object.fromEntries(formData.entries()))
-        console.log('--- activeRowKey state variable: ')
-        console.log(activeRowKey)
-
-        const newGridRow = {
-            _gridRowKey: lastRowKeyRef.current,
-            drugName: formData.get('drug'),
-            drugQuantity: formData.get('quantity'),
-            drugForm: formData.get('form'),
-            drugDosage: formData.get('dosage'),
-            // TODO: fix all the below so that it comes from the form not hardcoded
-            masterKey: '2112',
-            pharmacyKey: '',
-            pharmacyChain: formData.get('pharmacy-chain'),
-            pharmacyLogoUrl: 'https://www.pigglywigglyfl.com/wp-content/uploads/2018/11/logo-footer@2x.png.webp',
-            pharmacyCity: formData.get('pharmacy-city')
-        }
-
-        setGridRows(gridRows.concat(newGridRow))
-
-        setIsDoctorModalOpen(false)
-        setIsDrugModalOpen(false)
+    function handleCartAddItem(formData) {
+        cartAction({ type: 'ADD_ITEM', formData })
     }
 
     //
@@ -203,15 +145,6 @@ const PrescriptionsGrid = (props) => {
 
         setIsDoctorModalOpen(false)
         setIsDrugModalOpen(false)
-    }
-
-    //
-    // REMOVE PRESCRIPTION
-    //
-    const handleRemovePrescription = (rowKey) => {
-        console.log('PrescriptionsGrid: handleRemovePrescription()')
-        const newGridRows = gridRows.filter(el => el._gridRowKey != rowKey)
-        setGridRows(newGridRows)
     }
 
     const handleDoctorChange = (event) => {
@@ -300,7 +233,9 @@ const PrescriptionsGrid = (props) => {
                     </HeaderBarTitle>
 
                     <HeaderBarActions>
-                        <Button innerClassName="u-padding-0" icon="close"
+                        <Button 
+                            innerClassName="u-padding-0" 
+                            icon="close"
                             onClick={() => setIsDrugModalOpen(false)}
                         />
                     </HeaderBarActions>
@@ -312,7 +247,7 @@ const PrescriptionsGrid = (props) => {
                 <PrescriptionConfigure
                     viewModel={ViewModels.prescriptionConfigure.find(el => el.masterKey === selectedDrug)}
                     analyticsManager={analyticsManager}
-                    onPrescriptionConfigureSubmit={drugModalMode === 'add' ? handleAddPrescriptionSubmit : handleEditPrescriptionSubmit}
+                    onPrescriptionConfigureSubmit={drugModalMode === 'add' ? handleCartAddItem : handleEditPrescriptionSubmit}
                 />
 
             </div>
@@ -329,54 +264,7 @@ const PrescriptionsGrid = (props) => {
         setIsDrugModalOpen(true)
     }
 
-    const initialList = [
-        {
-            id: 'a',
-            name: 'Robin',
-            isComplete: false
-        },
-        {
-            id: 'b',
-            name: 'Dennis',
-            isComplete: true
-        }
-    ]
-
-    const [listData, dispatchListData] = 
-        useReducer(listReducer, { 
-            list: initialList, 
-            isShowList: true 
-        }
-    )
-
-    const [name, setName] = useState('')
-
-    function handleChange(event) {
-        setName(event.target.value)
-    }
-     
-    function handleAdd() {
-        dispatchListData({ type: 'ADD_ITEM', name, id: uuidv4() })        
-        setName('')
-    }
-
-    function handleRemove(id) {
-        dispatchListData({ type: 'REMOVE_ITEM', id })
-    }
-
-    function handleToggleComplete(id) {
-        dispatchListData({ type: 'UPDATE_ITEM', id })
-    }
-
     return (
-
-<div>
-    <div>
-        <AddItem name={name} onChange={handleChange} onAdd={handleAdd} />
-
-        <List2 list={listData.list} onRemove={handleRemove} onToggleComplete={handleToggleComplete} />
-    </div>
-
         <div className="c-prescriptions-grid">
             <div style={{ marginTop: "6px" }} className="c-prescriptions-grid__form-field-input">
                 <DrugSearch
@@ -403,7 +291,7 @@ const PrescriptionsGrid = (props) => {
                             <div style={{ fontWeight: 'bold' }}>{item.drugName}</div>
                             <div style={{ marginBottom: "5px" }}>{item.drugQuantity} {item.drugForm} {item.drugDosage}</div>
                             <Divider />
-                            <div style={{ fontWeight: 'bold', marginBottom: "5px", marginTop: "5px" }}>{doctorsList[item._gridRowKey + 2].name}</div>
+                            <div style={{ fontWeight: 'bold', marginBottom: "5px", marginTop: "5px" }}>{item.doctorName}</div>
                             <Divider />
                             <ListTile
                                 startAction={<img style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} src={item.pharmacyLogoUrl} />}>
@@ -482,78 +370,8 @@ const PrescriptionsGrid = (props) => {
                 <DrugModal width="60%" />
             </Desktop>
         </div>
-</div>
-)
+    )
 }
-
-const listReducer = (state, action) => {
-    switch (action.type) {
-
-        case 'ADD_ITEM':
-            return {
-                ...state, 
-                list: state.list.concat({ name: action.name, id: action.id }) 
-            }
-
-        case 'REMOVE_ITEM':
-            return {
-                ...state,
-                list: state.list.filter((item) => item.id !== action.id)
-            }
-
-        case 'UPDATE_ITEM': {
-            const newList = state.list.map((item) => {
-                if (item.id === action.id) {
-                    const updatedItem = {
-                        ...item,
-                        isComplete: !item.isComplete
-                    }
-                    return updatedItem
-                } else {
-                    return item
-                }
-            })
-       
-            return {
-                ...state, 
-                list: newList 
-            }
-        }
-
-        default:
-            throw new Error();
-    }
-}
-
-const AddItem = ({ name, onChange, onAdd }) => (
-    <div>
-        <input type="text" value={name} onChange={onChange} />
-
-        <button type="button" onClick={onAdd}>
-            Add
-        </button>
-    </div>
-)
-   
-const List2 = ({ list, onRemove, onToggleComplete }) => (
-    <ul>
-        {list.map((item) => (
-            <li key={item.id}>
-                <span style={{ textDecoration: item.isComplete ? 'line-through' : 'none' }}>
-                    {item.name}
-                </span>
-
-                <button type="button" onClick={() => onToggleComplete(item.id)}>
-                    {item.isComplete ? 'Undo' : 'Done'}
-                </button>                
-
-                <button type="button" onClick={() => onRemove(item.id)}>
-                    Remove
-                </button>
-            </li>
-        ))}
-    </ul>
-);
 
 PrescriptionsGrid.propTypes = {
     /**
