@@ -336,7 +336,6 @@ const PrescriptionsGrid = (props) => {
                 />
             </div>
 
-            {/* Revised  */}
             <div style={{ marginTop: "6px" }}>
                 <List>
                     {gridRows.map((item, index) => (
