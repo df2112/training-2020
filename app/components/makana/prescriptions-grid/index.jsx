@@ -34,6 +34,10 @@ const fakeDoctors = [
     }
 ]
 
+const vmDrugSearch = ViewModels.drugSearch
+const vmPrescriptionConfigure = ViewModels.prescriptionConfigure
+const vmPrescriptionsGrid = ViewModels.prescriptionsGrid
+
 const PrescriptionsGrid = (props) => {
     const { analyticsManager, doctors } = props
 
@@ -109,7 +113,7 @@ const PrescriptionsGrid = (props) => {
         }
     }
 
-    const [cartState, cartAction] = useReducer(cartReducer, ViewModels.prescriptionsGrid)
+    const [cartState, cartAction] = useReducer(cartReducer, vmPrescriptionsGrid)
 
     const handleCartAddItem = (formData) => {
         cartAction({ type: 'ADD_ITEM', formData })
@@ -210,7 +214,7 @@ const PrescriptionsGrid = (props) => {
             <div className="t-product-details__shipping-delivery-modal-content">
                 <br />
                 <PrescriptionConfigure
-                    viewModel={ViewModels.prescriptionConfigure.find(el => el.masterKey === selectedDrug)}
+                    viewModel={vmPrescriptionConfigure.find(el => el.masterKey === selectedDrug)}
                     analyticsManager={analyticsManager}
                     onPrescriptionConfigureSubmit={drugModalMode === 'add' ? handleCartAddItem : handleCartEditItem}
                 />
@@ -224,7 +228,7 @@ const PrescriptionsGrid = (props) => {
             <div style={{ marginTop: "6px" }} className="c-prescriptions-grid__form-field-input">
                 <DrugSearch
                     id="drug-search"
-                    viewModel={ViewModels.drugSearch}
+                    viewModel={vmDrugSearch}
                     onDrugSelectSubmit={showCartAddItemModal}
                 />
             </div>
