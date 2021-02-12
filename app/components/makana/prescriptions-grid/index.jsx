@@ -11,7 +11,6 @@ import Sheet from 'progressive-web-sdk/dist/components/sheet'
 import { Tabs, TabsPanel } from 'progressive-web-sdk/dist/components/tabs'
 
 import { Desktop, Mobile, Tablet } from '../../media-queries'
-import DoctorAddNew from '../doctor-add-new'
 import DoctorSearch from '../doctor-search'
 import DrugSearch from '../drug-search'
 import PrescriptionConfigure from '../prescription-configure'
@@ -173,13 +172,6 @@ const PrescriptionsGrid = (props) => {
                         />
 
                     </TabsPanel>
-                    <TabsPanel title="Add New Doctor">
-                        <br />
-                        <DoctorAddNew
-                            analyticsManager={analyticsManager}
-                            onDoctorAddNewSubmit={handleDoctorAddNewSubmit}
-                        />
-                    </TabsPanel>
                 </Tabs>
             </div>
         </Sheet>
@@ -189,21 +181,6 @@ const PrescriptionsGrid = (props) => {
         console.log('PrescriptionsGrid: handleDoctorSelectSubmit()')
         console.log(selectedDoctorId)
         setDoctorsList([...doctorsList, ...fakeDoctors.filter(el => el._doctorKey == selectedDoctorId)])
-        setIsDoctorModalOpen(false)
-    }
-
-    const handleDoctorAddNewSubmit = (formData) => {
-        console.log('PrescriptionsGrid: handleDoctorAddNewSubmit(formData)')
-        console.log('--- formData parameter: ')
-        console.log(Object.fromEntries(formData.entries()))
-
-        const newDoctor = {
-            _doctorKey: '888',
-            name: formData.get('name'),
-            age: 2112
-        }
-
-        setDoctorsList([...doctorsList, newDoctor])
         setIsDoctorModalOpen(false)
     }
 
