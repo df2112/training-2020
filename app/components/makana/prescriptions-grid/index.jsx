@@ -72,7 +72,7 @@ const PrescriptionsGrid = (props) => {
                 setIsDrugModalOpen(false)
                 return state.concat(newGridRow)
 
-            case 'EDIT_ITEM': {
+            case 'EDIT_ITEM':
                 console.log('cartReducer: EDIT_ITEM')
                 console.log('--- formData parameter: ')
                 console.log(Object.fromEntries(action.formData.entries()))
@@ -98,8 +98,7 @@ const PrescriptionsGrid = (props) => {
                 })
 
                 setIsDrugModalOpen(false)
-                return newList                
-            }
+                return newList
 
             case 'REMOVE_ITEM':
                 console.log('cartReducer: REMOVE_ITEM')
