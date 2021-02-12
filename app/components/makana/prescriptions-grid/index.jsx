@@ -43,12 +43,9 @@ const PrescriptionsGrid = (props) => {
     const [isDoctorModalOpen, setIsDoctorModalOpen] = useState(false)
     const [isDrugModalOpen, setIsDrugModalOpen] = useState(false)
     const [drugModalMode, setDrugModalMode] = useState()
-    // const [lastRowKey, setLastRowKey] = useState(ViewModels.prescriptionsGrid[2]._gridRowKey)
     const [activeRowKey, setActiveRowKey] = useState()
     const [selectedDoctor, setSelectedDoctor] = useState('999')
     const [selectedDrug, setSelectedDrug] = useState()
-
-    // const lastRowKeyRef = useRef(lastRowKey)
 
     const cartReducer = (state, action) => {
         switch (action.type) {
@@ -249,9 +246,7 @@ const PrescriptionsGrid = (props) => {
     const handleDrugSelectSubmit = (selectedProductId) => {
         console.log('PrescriptionsGrid: handleDrugSelectSubmit()')
         console.log(selectedProductId)
-        // lastRowKeyRef.current = (lastRowKey + 1)
         setSelectedDrug(selectedProductId)
-        // setLastRowKey(lastRowKeyRef.current)
         setDrugModalMode('add')
         setIsDrugModalOpen(true)
     }
