@@ -87,8 +87,7 @@ const ViewModels = {
             isSimple: true,
             isfull: true,
             imageProps: {
-                src:
-                    'https://www.grxstatic.com/d4fuqqd5l3dbz/products/DrugItem_26204.JPG',
+                src: 'https://www.grxstatic.com/d4fuqqd5l3dbz/products/DrugItem_26204.JPG',
                 width: '88px',
                 height: '88px',
                 alt: 'cat'
@@ -106,8 +105,7 @@ const ViewModels = {
             className: 'masterId_2112',
             isSimple: true,
             imageProps: {
-                src:
-                    'https://www.grxstatic.com/d4fuqqd5l3dbz/products/tms/DrugItem_6931.JPG',
+                src: 'https://www.grxstatic.com/d4fuqqd5l3dbz/products/tms/DrugItem_6931.JPG',
                 width: '88px',
                 height: '88px',
                 alt: 'cat'
@@ -126,8 +124,7 @@ const ViewModels = {
             isSimple: true,
             isfull: true,
             imageProps: {
-                src:
-                    'https://www.grxstatic.com/d4fuqqd5l3dbz/products/DrugItem_26204.JPG',
+                src: 'https://www.grxstatic.com/d4fuqqd5l3dbz/products/DrugItem_26204.JPG',
                 width: '88px',
                 height: '88px',
                 alt: 'cat'
@@ -145,8 +142,7 @@ const ViewModels = {
             className: 'masterId_8118',
             isSimple: true,
             imageProps: {
-                src:
-                    'https://www.grxstatic.com/d4fuqqd5l3dbz/products/tms/DrugItem_6931.JPG',
+                src: 'https://www.grxstatic.com/d4fuqqd5l3dbz/products/tms/DrugItem_6931.JPG',
                 width: '88px',
                 height: '88px',
                 alt: 'cat'
