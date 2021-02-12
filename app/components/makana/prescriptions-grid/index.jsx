@@ -1,4 +1,4 @@
-import React, { Fragment, useRef, useState, useReducer } from 'react'
+import React, { useState, useReducer } from 'react'
 import PropTypes from 'prop-types'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -8,9 +8,9 @@ import { HeaderBar, HeaderBarActions, HeaderBarTitle } from 'progressive-web-sdk
 import List from 'progressive-web-sdk/dist/components/list'
 import ListTile from 'progressive-web-sdk/dist/components/list-tile'
 import Sheet from 'progressive-web-sdk/dist/components/sheet'
-import { Tabs, TabsPanel } from 'progressive-web-sdk/dist/components/tabs'
 
 import { Desktop, Mobile, Tablet } from '../../media-queries'
+
 import DoctorSearch from '../doctor-search'
 import DrugSearch from '../drug-search'
 import PrescriptionConfigure from '../prescription-configure'
@@ -88,7 +88,7 @@ const PrescriptionsGrid = (props) => {
                             doctorName: action.formData.get('doctor-name'),
                             pharmacyChain: action.formData.get('pharmacy-chain'),
                             pharmacyLogoUrl: action.formData.get('pharmacy-logo-url'),
-                            pharmacyCity: action.formData.get('pharmacy-city')                    
+                            pharmacyCity: action.formData.get('pharmacy-city')
                         }
                         return updatedItem
                     } else {
@@ -163,16 +163,10 @@ const PrescriptionsGrid = (props) => {
             }
         >
             <div className="t-product-details__shipping-delivery-modal-content">
-                <Tabs activeIndex={0}>
-                    <TabsPanel title="Search Doctors">
-                        <br />
-                        <DoctorSearch
-                            analyticsManager={analyticsManager}
-                            onDoctorSelectSubmit={handleDoctorSelectSubmit}
-                        />
-
-                    </TabsPanel>
-                </Tabs>
+                <DoctorSearch
+                    analyticsManager={analyticsManager}
+                    onDoctorSelectSubmit={handleDoctorSelectSubmit}
+                />
             </div>
         </Sheet>
     )
