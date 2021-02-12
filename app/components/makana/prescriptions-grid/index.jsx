@@ -299,22 +299,6 @@ const PrescriptionsGrid = (props) => {
                 {/* Prescription Rows */}
                 {/* {gridRows.map((item, index) => (
 
-                                <div className="c-prescriptions-grid__form-field-row">
-                                    <div className="u-flex">
-                                        <div className="c-prescriptions-grid__form-field-inner">
-                                            {(index === 0 || Mobile) &&
-                                                <div className="c-prescriptions-grid__form-field-label-wrap">
-                                                    <label className="c-prescriptions-grid__form-field-label" htmlFor="drug-search">
-                                                        {'Drug Search'}
-                                                    </label>
-                                                </div>
-                                            }
-                                            <div className="c-prescriptions-grid__form-field-input">
-                                                <DrugSearch id="drug-search" onDrugSelectSubmit={handleDrugSelectSubmit} />
-                                            </div>
-                                        </div>
-                                    </div>
-
                                     <div className="u-flex">
                                         <div className="c-prescriptions-grid__form-field-inner">
                                             {(index === 0 || Mobile) &&
