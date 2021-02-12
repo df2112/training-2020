@@ -39,7 +39,6 @@ const PrescriptionsGrid = (props) => {
     const { analyticsManager, doctors } = props
 
     const [doctorsList, setDoctorsList] = useState(doctors)
-    const [gridRows, setGridRows] = useState(ViewModels.prescriptionsGrid)
     const [isDoctorModalOpen, setIsDoctorModalOpen] = useState(false)
     const [isDrugModalOpen, setIsDrugModalOpen] = useState(false)
     const [drugModalMode, setDrugModalMode] = useState()
