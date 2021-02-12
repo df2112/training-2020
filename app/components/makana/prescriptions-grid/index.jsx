@@ -123,11 +123,18 @@ const PrescriptionsGrid = (props) => {
         cartAction({ type: 'REMOVE_ITEM', id })
     }
 
-    //
-    // EDIT PRESCRIPTION (a) - Show the modal
-    //
-    const handleEditPrescriptionSelect = (selectedProductId) => {
-        console.log('PrescriptionsGrid: handleEditPrescriptionSelect()')
+    const showCartAddItemModal = (selectedProductId) => {
+        console.log('PrescriptionsGrid: showCartAddItemModal()')
+        console.log(selectedProductId)
+        // TODO: set up vmPrescriptionConfigure
+        setSelectedDrug(selectedProductId)
+        setDrugModalMode('add')
+        setIsDrugModalOpen(true)
+    }
+
+    const showCartEditItemModal = (selectedProductId) => {
+        console.log('PrescriptionsGrid: showCartEditItemModal()')
+        // TODO: set up vmPrescriptionConfigure
         setSelectedDrug(selectedProductId)
         setDrugModalMode('edit')
         setIsDrugModalOpen(true)
@@ -212,21 +219,13 @@ const PrescriptionsGrid = (props) => {
         </Sheet>
     )
 
-    const handleDrugSelectSubmit = (selectedProductId) => {
-        console.log('PrescriptionsGrid: handleDrugSelectSubmit()')
-        console.log(selectedProductId)
-        setSelectedDrug(selectedProductId)
-        setDrugModalMode('add')
-        setIsDrugModalOpen(true)
-    }
-
     return (
         <div className="c-prescriptions-grid">
             <div style={{ marginTop: "6px" }} className="c-prescriptions-grid__form-field-input">
                 <DrugSearch
                     id="drug-search"
                     viewModel={ViewModels.drugSearch}
-                    onDrugSelectSubmit={handleDrugSelectSubmit}
+                    onDrugSelectSubmit={showCartAddItemModal}
                 />
             </div>
 
@@ -239,7 +238,8 @@ const PrescriptionsGrid = (props) => {
                             onClick={() => setActiveGridRowKey(item._gridRowKey)}
                             endAction={
                                 <div>
-                                    <Button className="pw--blank" icon="more" onClick={() => handleEditPrescriptionSelect(item.masterKey)} />
+                                    {/* TODO: align these to use same key */}
+                                    <Button className="pw--blank" icon="more" onClick={() => showCartEditItemModal(item.masterKey)} />
                                     <Button className="pw--blank" icon="trash" onClick={() => handleCartRemoveItem(item._gridRowKey)} />
                                 </div>
                             }
