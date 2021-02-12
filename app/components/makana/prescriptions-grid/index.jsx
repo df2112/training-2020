@@ -41,7 +41,7 @@ const PrescriptionsGrid = (props) => {
     const [isDoctorModalOpen, setIsDoctorModalOpen] = useState(false)
     const [isDrugModalOpen, setIsDrugModalOpen] = useState(false)
     const [drugModalMode, setDrugModalMode] = useState()
-    const [activeRowKey, setActiveRowKey] = useState()
+    const [activeGridRowKey, setActiveGridRowKey] = useState()
     const [selectedDoctor, setSelectedDoctor] = useState('999')
     const [selectedDrug, setSelectedDrug] = useState()
 
@@ -78,7 +78,7 @@ const PrescriptionsGrid = (props) => {
 
                 const newList = state.map((item) => {
 
-                    if (item._gridRowKey === activeRowKey) {
+                    if (item._gridRowKey === activeGridRowKey) {
                         const updatedItem = {
                             ...item,
                             drugName: action.formData.get('drug'),
@@ -242,7 +242,7 @@ const PrescriptionsGrid = (props) => {
                         <ListTile
                             key={item._gridRowKey}
                             className="pw--instructional-block"
-                            onClick={() => setActiveRowKey(item._gridRowKey)}
+                            onClick={() => setActiveGridRowKey(item._gridRowKey)}
                             endAction={
                                 <div>
                                     <Button className="pw--blank" icon="more" onClick={() => handleEditPrescriptionSelect(item.masterKey)} />
