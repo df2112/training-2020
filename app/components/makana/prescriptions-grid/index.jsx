@@ -15,6 +15,7 @@ import DoctorSearch from '../doctor-search'
 import DrugSearch from '../drug-search'
 import PrescriptionConfigure from '../prescription-configure'
 import ViewModels from '../../../data/makana/ViewModels'
+import MasterData from '../../../data/makana/MasterData'
 
 const fakeDoctors = [
     {
@@ -36,10 +37,10 @@ const fakeDoctors = [
 
 const vmDrugSearch = ViewModels.drugSearch
 const vmPrescriptionConfigure = ViewModels.prescriptionConfigure
-const vmPrescriptionsGrid = ViewModels.cartModel
+//const vmPrescriptionsGrid = ViewModels.cartModel
 
 const PrescriptionsGrid = (props) => {
-    const { analyticsManager, doctors } = props
+    const { analyticsManager, doctors, viewModel } = props
 
     const [doctorsList, setDoctorsList] = useState(doctors)
     const [isDoctorModalOpen, setIsDoctorModalOpen] = useState(false)
@@ -59,17 +60,25 @@ const PrescriptionsGrid = (props) => {
 
                 const newGridRow = {
                     _gridRowKey: uuidv4(),
-                    drugName: action.formData.get('drug'),
-                    drugQuantity: action.formData.get('quantity'),
-                    drugForm: action.formData.get('form'),
-                    drugDosage: action.formData.get('dosage'),
-                    doctorName: action.formData.get('doctor-name'),
                     // TODO: fix all the below so that it comes from the form not hardcoded
                     masterKey: '2112',
-                    pharmacyKey: '',
-                    pharmacyChain: action.formData.get('pharmacy-chain'),
-                    pharmacyLogoUrl: action.formData.get('pharmacy-logo-url'),
-                    pharmacyCity: action.formData.get('pharmacy-city')
+                    //doctor: MasterData.doctors.find(el => el.doctorName === action.formData.get('doctor-name')),
+                    doctor: MasterData.doctors.find(el => el.doctorKey === '005'),
+                    drug: {
+                        //...MasterData.drugs.find(el => el.drugKey === action.formData.get('drug')),
+                        ...MasterData.drugs.find(el => el.drugKey === '003'),
+                        drugForm: action.formData.get('form'),
+                        drugDosage: action.formData.get('dosage'),
+                        drugQuantity: action.formData.get('quantity'),
+                    },
+                    //pharmacy: MasterData.pharmacies.find(el => el.pharmacyKey === action.formData.get('pharmacy-key')),
+                    pharmacy: MasterData.pharmacies.find(el => el.pharmacyKey === '003'),
+
+                    //drugName: action.formData.get('drug'),
+                    // pharmacyKey: '',
+                    // pharmacyChain: action.formData.get('pharmacy-chain'),
+                    // pharmacyLogoUrl: action.formData.get('pharmacy-logo-url'),
+                    // pharmacyCity: action.formData.get('pharmacy-city')
                 }
 
                 setIsDrugModalOpen(false)
@@ -113,7 +122,7 @@ const PrescriptionsGrid = (props) => {
         }
     }
 
-    const [cartState, cartAction] = useReducer(cartReducer, vmPrescriptionsGrid)
+    const [cartState, cartAction] = useReducer(cartReducer, viewModel)
 
     const handleCartAddItem = (formData) => {
         cartAction({ type: 'ADD_ITEM', formData })
@@ -235,27 +244,27 @@ const PrescriptionsGrid = (props) => {
 
             <div style={{ marginTop: "6px" }}>
                 <List>
-                    {cartState.map((item, index) => (
+                    {cartState.map((lineItem, index) => (
                         <ListTile
-                            key={item._gridRowKey}
+                            key={lineItem._gridRowKey}
                             className="pw--instructional-block"
-                            onClick={() => setActiveGridRowKey(item._gridRowKey)}
+                            onClick={() => setActiveGridRowKey(lineItem._gridRowKey)}
                             endAction={
                                 <div>
                                     {/* TODO: align these to use same key */}
-                                    <Button className="pw--blank" icon="more" onClick={() => showCartEditItemModal(item.masterKey)} />
-                                    <Button className="pw--blank" icon="trash" onClick={() => handleCartRemoveItem(item._gridRowKey)} />
+                                    <Button className="pw--blank" icon="more" onClick={() => showCartEditItemModal(lineItem.masterKey)} />
+                                    <Button className="pw--blank" icon="trash" onClick={() => handleCartRemoveItem(lineItem._gridRowKey)} />
                                 </div>
                             }
                         >
-                            <div style={{ fontWeight: 'bold' }}>{item.drugName}</div>
-                            <div style={{ marginBottom: "5px" }}>{item.drugQuantity} {item.drugForm} {item.drugDosage}</div>
+                            <div style={{ fontWeight: 'bold' }}>{lineItem.drug.drugName}</div>
+                            <div style={{ marginBottom: "5px" }}>{lineItem.drug.drugQuantity} {lineItem.drug.drugForm} {lineItem.drug.drugDosage}</div>
                             <Divider />
-                            <div style={{ fontWeight: 'bold', marginBottom: "5px", marginTop: "5px" }}>{item.doctorName}</div>
+                            <div style={{ fontWeight: 'bold', marginBottom: "5px", marginTop: "5px" }}>{lineItem.doctor.name}</div>
                             <Divider />
                             <ListTile
-                                startAction={<img style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} src={item.pharmacyLogoUrl} />}>
-                                <div>{item.pharmacyChain}</div>
+                                startAction={<img style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} src={lineItem.pharmacy.pharmacyLogoUrl} />}>
+                                <div>{lineItem.pharmacy.pharmacyChain}</div>
                             </ListTile>
                         </ListTile>
                     ))}
@@ -321,7 +330,8 @@ PrescriptionsGrid.propTypes = {
     /**
      * Handler that is triggers when the form is submitted
      */
-    onSubmit: PropTypes.func
+    onSubmit: PropTypes.func,
+    viewModel: PropTypes.array
 }
 
 export default PrescriptionsGrid

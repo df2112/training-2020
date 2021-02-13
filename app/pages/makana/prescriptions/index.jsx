@@ -16,9 +16,25 @@ import PrescriptionsGrid from '../../../components/makana/prescriptions-grid'
 import { Desktop } from '../../../components/media-queries'
 
 import MasterData from '../../../data/makana/MasterData'
+import UserData from '../../../data/makana/UserData'
 
 const analyticsManager = getAnalyticsManager()
 const PRODUCT_SKELETON_COUNT = 6
+
+const vmPrescriptionsGrid = UserData.cart.map((value, index) => ({
+    _gridRowKey: value._gridRowKey,
+    masterKey: value.masterKey,
+    doctor: MasterData.doctors.find(el => el.doctorKey === value.doctorKey),
+    drug: {
+        ...MasterData.drugs.find(el => el.drugKey === value.drugKey),
+        drugForm: value.drugForm,
+        drugDosage: value.drugDosage,
+        drugQuantity: value.drugQuantity
+    },
+    pharmacy: MasterData.pharmacies.find(el => el.pharmacyKey === value.pharmacyKey)
+}))
+
+console.log(vmPrescriptionsGrid)
 
 const Prescriptions = (props) => {
     const { errorMessage, productSearch, category } = props
@@ -136,6 +152,7 @@ const Prescriptions = (props) => {
                     <PrescriptionsGrid
                         analyticsManager={analyticsManager}
                         doctors={MasterData.doctors}
+                        viewModel={vmPrescriptionsGrid}
                         onSubmit={() => setIsSubscribed(true)} />
                 ) : (
                         <span>Thank you for subscribing!</span>
