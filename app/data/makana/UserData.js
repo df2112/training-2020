@@ -11,11 +11,12 @@ const UserData = {
 
     ],
 
-    shoppingCart: [
+    cart: [
         {
             _gridRowKey: 0,
+            doctorKey: '000',            
             drugKey: '001',
-            drugName: 'AtorvastatinQQ',
+            //drugName: 'AtorvastatinQQ',
             drugForm: 'tablets',
             drugDosage: '40mg',
             drugQuantity: '30',
@@ -24,8 +25,9 @@ const UserData = {
         },
         {
             _gridRowKey: 1,
+            doctorKey: '001',            
             drugKey: '002',
-            drugName: 'Lipitor',
+            //drugName: 'Lipitor',
             drugForm: 'tablets',
             drugDosage: '10mg',
             drugQuantity: '90',
@@ -34,8 +36,8 @@ const UserData = {
         },
         {
             _gridRowKey: 2,
+            doctorKey: '003',            
             drugKey: '003',
-            drugName: 'Cozaar',
             drugForm: 'tablets',
             drugDosage: '50mg',
             drugQuantity: '10',

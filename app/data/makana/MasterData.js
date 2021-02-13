@@ -1,32 +1,32 @@
 const MasterData = {
     doctors: [
         {
-            _doctorKey: '000',
+            doctorKey: '000',
             name: 'Tim Brown, MDX',
             age: 41,
         },
         {
-            _doctorKey: '001',
+            doctorKey: '001',
             name: 'Dave Foley, DO',
             age: 42,
         },
         {
-            _doctorKey: '002',
+            doctorKey: '002',
             name: 'Olivier Lafont, DSE',
             age: 43,
         },
         {
-            _doctorKey: '003',
+            doctorKey: '003',
             name: 'Nupur Marwaha, MD',
             age: 44,
         },
         {
-            _doctorKey: '004',
+            doctorKey: '004',
             name: 'Nat Pavic, DMD',
             age: 45,
         },
         {
-            _doctorKey: '005',
+            doctorKey: '005',
             name: 'Amulya Pradhan, DO',
             age: 46
         }    
@@ -39,11 +39,11 @@ const MasterData = {
         },
         {
             drugKey: '002',
-            drugName: 'Lipitor',
+            drugName: 'LipitorXX',
         },
         {
             drugKey: '003',
-            drugName: 'Cozaar',
+            drugName: 'CozaarXX',
         }
     ],
     
