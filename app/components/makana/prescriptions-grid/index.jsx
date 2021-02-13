@@ -90,7 +90,6 @@ const PrescriptionsGrid = (props) => {
                 console.log(Object.fromEntries(action.formData.entries()))
 
                 const newList = state.map((item) => {
-
                     if (item._gridRowKey === activeGridRowKey) {
                         const updatedItem = {
                             ...item,
@@ -130,10 +129,6 @@ const PrescriptionsGrid = (props) => {
 
     const handleCartEditItem = (formData) => {
         cartAction({ type: 'EDIT_ITEM', formData })
-    }
-
-    const handleCartRemoveItem = (id) => {
-        cartAction({ type: 'REMOVE_ITEM', id })
     }
 
     const showCartAddItemModal = (selectedProductId) => {
@@ -253,7 +248,7 @@ const PrescriptionsGrid = (props) => {
                                 <div>
                                     {/* TODO: align these to use same key */}
                                     <Button className="pw--blank" icon="more" onClick={() => showCartEditItemModal(lineItem.masterKey)} />
-                                    <Button className="pw--blank" icon="trash" onClick={() => handleCartRemoveItem(lineItem._gridRowKey)} />
+                                    <Button className="pw--blank" icon="trash" onClick={() => cartAction({ type: 'REMOVE_ITEM', id: lineItem._gridRowKey })} />
                                 </div>
                             }
                         >
