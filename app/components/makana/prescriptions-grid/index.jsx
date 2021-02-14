@@ -37,7 +37,6 @@ const fakeDoctors = [
 
 const vmDrugSearch = ViewModels.drugSearch
 const vmPrescriptionConfigure = ViewModels.prescriptionConfigure
-//const vmPrescriptionsGrid = ViewModels.cartModel
 
 const PrescriptionsGrid = (props) => {
     const { analyticsManager, doctors, viewModel } = props
