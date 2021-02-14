@@ -106,24 +106,6 @@ const PrescriptionsGrid = (props) => {
 
                 return state.filter((item) => item._gridRowKey !== action.id)
 
-            case 'SHOW_ADD_ITEM_MODAL':
-                console.log('cartReducer: SHOW_ADD_ITEM_MODAL')
-                console.log(action.id)
-                // TODO: set up vmPrescriptionConfigure
-                setSelectedDrug(action.id)
-                setDrugModalMode('add')
-                setIsDrugModalOpen(true)
-                return state
-
-            case 'SHOW_EDIT_ITEM_MODAL':
-                console.log('cartReducer: SHOW_EDIT_ITEM_MODAL')
-                console.log(action.id)
-                // TODO: set up vmPrescriptionConfigure
-                setSelectedDrug(action.id)
-                setDrugModalMode('edit')
-                setIsDrugModalOpen(true)
-                return state
-
             default:
                 throw new Error();
         }
@@ -135,7 +117,23 @@ const PrescriptionsGrid = (props) => {
 
     const handleCartEditItem = (formData) => cartAction({ type: 'EDIT_ITEM', formData })
 
-    const handleDrugSelectSubmit = (id) => cartAction({ type: 'SHOW_ADD_ITEM_MODAL', id })
+    const showAddItemModal = (id) => {
+        console.log('showAddItemModal')
+        console.log(id)
+        // TODO: set up vmPrescriptionConfigure
+        setSelectedDrug(id)
+        setDrugModalMode('add')
+        setIsDrugModalOpen(true)
+    }
+
+    const showEditItemModal = (id) => {
+        console.log('showEditItemModal')
+        console.log(id)
+        // TODO: set up vmPrescriptionConfigure
+        setSelectedDrug(id)
+        setDrugModalMode('edit')
+        setIsDrugModalOpen(true)
+    }
 
     const handleDoctorChange = (event) => {
         console.log('PrescriptionsGrid: handleDoctorChange()')
@@ -222,7 +220,7 @@ const PrescriptionsGrid = (props) => {
                 <DrugSearch
                     id="drug-search"
                     viewModel={vmDrugSearch}
-                    onDrugSelectSubmit={handleDrugSelectSubmit}
+                    onDrugSelectSubmit={showAddItemModal}
                 />
             </div>
 
@@ -236,7 +234,7 @@ const PrescriptionsGrid = (props) => {
                             endAction={
                                 <div>
                                     {/* TODO: align these to use same key */}
-                                    <Button className="pw--blank" icon="more" onClick={() => cartAction({ type: 'SHOW_EDIT_ITEM_MODAL', id: lineItem.masterKey })} />
+                                    <Button className="pw--blank" icon="more" onClick={() => showEditItemModal(lineItem.masterKey)} />
                                     <Button className="pw--blank" icon="trash" onClick={() => cartAction({ type: 'REMOVE_ITEM', id: lineItem._gridRowKey })} />
                                 </div>
                             }
