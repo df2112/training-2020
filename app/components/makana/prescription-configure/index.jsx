@@ -128,14 +128,11 @@ const PrescriptionConfigure = (props) => {
                                 startAction={<img style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} src={item.pharmacyLogoUrl} />}
                                 endAction={<Button type="submit" className="pw--success"><Price current={`$${item.pharmacyPrice}`} /></Button>}
                             >
-                                <input name="pharmacy-logo-url" type="hidden" value={item.pharmacyLogoUrl} />
-                                <input name="pharmacy-price" type="hidden" value={item.pharmacyPrice} />
+                                <input name="pharmacy-key" type="hidden" value={item.pharmacyKey} />
 
                                 <div>{item.pharmacyChain}</div>
-                                <input name="pharmacy-chain" type="hidden" value={item.pharmacyChain} />
 
                                 <div>{item.pharmacyCity}</div>
-                                <input name="pharmacy-city" type="hidden" value={item.pharmacyCity} />
                             </ListTile>
                         </form>
                     ))}

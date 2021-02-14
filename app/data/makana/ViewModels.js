@@ -180,21 +180,21 @@ const ViewModels = {
             quantities: [11, 21, 51],
             pharmacies: [
                 {
-                    pharmacyKey: '',
+                    pharmacyKey: '001',
                     pharmacyChain: 'Piggly Wiggly',
                     pharmacyLogoUrl: 'https://www.pigglywigglyfl.com/wp-content/uploads/2018/11/logo-footer@2x.png.webp',
                     pharmacyCity: 'St. Petersburg',
                     pharmacyPrice: 200
                 },
                 {
-                    pharmacyKey: '',
+                    pharmacyKey: '002',
                     pharmacyChain: 'Publix',
                     pharmacyLogoUrl: 'https://cutpcdnwimages.azureedge.net/-/media/images/publix/publix_brandmark.svg?h=50&w=30&la=en&hash=250D8BC8604D4BC2D61677DFBF8E841AB79C327C',
                     pharmacyCity: 'Tampa',
                     pharmacyPrice: 201
                 },
                 {
-                    pharmacyKey: '',
+                    pharmacyKey: '003',
                     pharmacyChain: 'Walmart',
                     pharmacyLogoUrl: 'https://www.logolynx.com/images/logolynx/72/72228f020dfabd8322585148af496eb5.png',
                     pharmacyCity: 'Clearwater',
@@ -255,21 +255,21 @@ const ViewModels = {
             quantities: [11, 21, 51],
             pharmacies: [
                 {
-                    pharmacyKey: '',
+                    pharmacyKey: '001',
                     pharmacyChain: 'Piggly Wiggly',
                     pharmacyLogoUrl: 'https://www.pigglywigglyfl.com/wp-content/uploads/2018/11/logo-footer@2x.png.webp',
                     pharmacyCity: 'St. Petersburg',
                     pharmacyPrice: 100
                 },
                 {
-                    pharmacyKey: '',
+                    pharmacyKey: '002',
                     pharmacyChain: 'Publix',
                     pharmacyLogoUrl: 'https://cutpcdnwimages.azureedge.net/-/media/images/publix/publix_brandmark.svg?h=50&w=30&la=en&hash=250D8BC8604D4BC2D61677DFBF8E841AB79C327C',
                     pharmacyCity: 'Tampa',
                     pharmacyPrice: 101
                 },
                 {
-                    pharmacyKey: '',
+                    pharmacyKey: '003',
                     pharmacyChain: 'Walmart',
                     pharmacyLogoUrl: 'https://www.logolynx.com/images/logolynx/72/72228f020dfabd8322585148af496eb5.png',
                     pharmacyCity: 'Clearwater',
