@@ -145,7 +145,7 @@ const PrescriptionsGrid = (props) => {
 
     const handleCartEditItem = (formData) => cartAction({ type: 'EDIT_ITEM', formData })
 
-    const handleDrugSelectSubmit = (selectedProductId) => cartAction({ type: 'SHOW_ADD_ITEM_MODAL', id: selectedProductId })
+    const handleDrugSelectSubmit = (id) => cartAction({ type: 'SHOW_ADD_ITEM_MODAL', id })
 
     const handleDoctorChange = (event) => {
         console.log('PrescriptionsGrid: handleDoctorChange()')
