@@ -61,11 +61,6 @@ const PrescriptionConfigure = (props) => {
                 <h2>Configure Prescription</h2>
                 <List>
                     <ListTile className="c-prescription-configure__form-field-row u-flexbox">
-                        {/* <select name="drug-key" >
-                            {viewModel.variants.map((item, index) => (
-                                <option key={index} value={item.drugKey}>{item.name}</option>
-                            ))}
-                        </select> */}
                         <select name="drug-key" >
                             {viewModel.drug.drugNames.map((item, index) => (
                                 <option key={index} value={viewModel.drug.drugKey}>{item}</option>
@@ -76,11 +71,6 @@ const PrescriptionConfigure = (props) => {
                     <div>
                         <ListTile className="c-prescription-configure__form-field-row u-flexbox">
                             <div>Form</div>
-                            {/* <select name="drug-form">
-                                {viewModel.forms.map((item, index) => (
-                                    <option key={index}>{item}</option>
-                                ))}
-                            </select> */}
                             <select name="drug-form">
                                 {viewModel.drug.forms.map((item, index) => (
                                     <option key={index}>{item}</option>

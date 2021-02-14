@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react'
+import React, { useEffect, useState, useReducer } from 'react'
 import PropTypes from 'prop-types'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -48,6 +48,7 @@ const PrescriptionsGrid = (props) => {
     const [activeGridRowKey, setActiveGridRowKey] = useState()
     const [selectedDoctor, setSelectedDoctor] = useState('999')
     const [selectedDrug, setSelectedDrug] = useState()
+    const [vm2, setVm2] = useState()
 
     const cartReducer = (state, action) => {
         switch (action.type) {
@@ -149,7 +150,7 @@ const PrescriptionsGrid = (props) => {
             <div className="t-product-details__shipping-delivery-modal-content">
                 <br />
                 <PrescriptionConfigure
-                    viewModel={vmPrescriptionConfigure.find(el => el.masterKey === selectedDrug)}
+                    viewModel={vmPrescriptionConfigure.find(el => el.drug.drugKey === selectedDrug)}
                     analyticsManager={analyticsManager}
                     onPrescriptionConfigureSubmit={drugModalMode === 'add' ? handleCartAddItem : handleCartEditItem}
                 />
@@ -223,7 +224,7 @@ const PrescriptionsGrid = (props) => {
                             endAction={
                                 <div>
                                     {/* TODO: align these to use same key */}
-                                    <Button className="pw--blank" icon="more" onClick={() => showDrugModal('edit', lineItem.masterKey)} />
+                                    <Button className="pw--blank" icon="more" onClick={() => showDrugModal('edit', lineItem.drug.drugKey)} />
                                     <Button className="pw--blank" icon="trash" onClick={() => cartAction({ type: 'REMOVE_ITEM', id: lineItem._gridRowKey })} />
                                 </div>
                             }
