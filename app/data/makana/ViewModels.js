@@ -79,7 +79,6 @@ const ViewModels = {
 
     prescriptionConfigure: [
         {
-            masterKey: '2112',
             drug: {
                 drugKey: '001',
                 drugName: 'Metformin',
@@ -145,7 +144,6 @@ const ViewModels = {
             ]
         },
         {
-            masterKey: '8118',
             drug: {
                 drugKey: '002',
                 drugName: 'Lipitor',
@@ -211,7 +209,6 @@ const ViewModels = {
             ]
         },
         {
-            masterKey: '8118',
             drug: {
                 drugKey: '003',
                 drugName: 'Lipitor',

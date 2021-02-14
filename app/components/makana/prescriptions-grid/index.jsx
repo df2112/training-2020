@@ -60,7 +60,6 @@ const PrescriptionsGrid = (props) => {
 
                 const newGridRow = {
                     _gridRowKey: uuidv4(),
-                    masterKey: '2112', // TODO: wtf?
                     doctor: MasterData.doctors.find(el => el.doctorKey === action.formData.get('doctor-key')),
                     drug: {
                         ...MasterData.drugs.find(el => el.drugKey === action.formData.get('drug-key')),

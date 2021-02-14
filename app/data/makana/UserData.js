@@ -19,7 +19,6 @@ const UserData = {
             drugForm: 'tablet',
             drugDosage: '10mg',
             drugQuantity: '51',
-            masterKey: '2112', //TODO: fix masterKey 
             pharmacyKey: '001'
         },
         {
@@ -29,7 +28,6 @@ const UserData = {
             drugForm: 'capsule',
             drugDosage: '30mg',
             drugQuantity: '32',
-            masterKey: '8118', //TODO: fix masterKey 
             pharmacyKey: '002'
         },
         {
@@ -39,7 +37,6 @@ const UserData = {
             drugForm: 'syrup',
             drugDosage: '50mg',
             drugQuantity: '11',
-            masterKey: '2112', //TODO: fix masterKey 
             pharmacyKey: '003'
         }        
     ],

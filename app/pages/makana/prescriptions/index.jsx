@@ -18,8 +18,6 @@ const analyticsManager = getAnalyticsManager()
 const vmPrescriptionsGrid = UserData.cart.map((value, index) => ({
     _gridRowKey: value._gridRowKey,
 
-    masterKey: value.masterKey,
-
     doctor: MasterData.doctors.find(el => el.doctorKey === value.doctorKey),
 
     drug: {
