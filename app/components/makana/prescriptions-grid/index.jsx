@@ -147,24 +147,6 @@ const PrescriptionsGrid = (props) => {
 
     const handleDrugSelectSubmit = (selectedProductId) => cartAction({ type: 'SHOW_ADD_ITEM_MODAL', id: selectedProductId })
 
-    // const showCartAddItemModal = (selectedProductId) => {
-    //     console.log('PrescriptionsGrid: showCartAddItemModal()')
-    //     console.log(selectedProductId)
-    //     // TODO: set up vmPrescriptionConfigure
-    //     setSelectedDrug(selectedProductId)
-    //     setDrugModalMode('add')
-    //     setIsDrugModalOpen(true)
-    // }
-
-    // const showCartEditItemModal = (selectedProductId) => {
-    //     console.log('PrescriptionsGrid: showCartEditItemModal()')
-    //     console.log(selectedProductId)
-    //     // TODO: set up vmPrescriptionConfigure
-    //     setSelectedDrug(selectedProductId)
-    //     setDrugModalMode('edit')
-    //     setIsDrugModalOpen(true)
-    // }
-
     const handleDoctorChange = (event) => {
         console.log('PrescriptionsGrid: handleDoctorChange()')
 
