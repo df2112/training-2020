@@ -134,6 +134,40 @@ const PrescriptionsGrid = (props) => {
         setIsDrugModalOpen(true)
     }
 
+    const DrugModal = ({ width }) => (
+        <Sheet
+            className="pw--no-shadow t-product-details__shipping-delivery-info-modal"
+            coverage={width}
+            open={isDrugModalOpen}
+            effect="modal-center"
+            headerContent={
+                <HeaderBar>
+                    <HeaderBarTitle className="u-flex u-padding-start-md u-text-align-start u-text-size-big">
+                        Prescription {drugModalMode}
+                    </HeaderBarTitle>
+
+                    <HeaderBarActions>
+                        <Button
+                            innerClassName="u-padding-0"
+                            icon="close"
+                            onClick={() => setIsDrugModalOpen(false)}
+                        />
+                    </HeaderBarActions>
+                </HeaderBar>
+            }
+        >
+            <div className="t-product-details__shipping-delivery-modal-content">
+                <br />
+                <PrescriptionConfigure
+                    viewModel={vmPrescriptionConfigure.find(el => el.masterKey === selectedDrug)}
+                    analyticsManager={analyticsManager}
+                    onPrescriptionConfigureSubmit={drugModalMode === 'add' ? handleCartAddItem : handleCartEditItem}
+                />
+
+            </div>
+        </Sheet>
+    )
+
     const handleDoctorChange = (event) => {
         console.log('PrescriptionsGrid: handleDoctorChange()')
 
@@ -178,40 +212,6 @@ const PrescriptionsGrid = (props) => {
         setDoctorsList([...doctorsList, ...fakeDoctors.filter(el => el._doctorKey == selectedDoctorId)])
         setIsDoctorModalOpen(false)
     }
-
-    const DrugModal = ({ width }) => (
-        <Sheet
-            className="pw--no-shadow t-product-details__shipping-delivery-info-modal"
-            coverage={width}
-            open={isDrugModalOpen}
-            effect="modal-center"
-            headerContent={
-                <HeaderBar>
-                    <HeaderBarTitle className="u-flex u-padding-start-md u-text-align-start u-text-size-big">
-                        Prescription {drugModalMode}
-                    </HeaderBarTitle>
-
-                    <HeaderBarActions>
-                        <Button
-                            innerClassName="u-padding-0"
-                            icon="close"
-                            onClick={() => setIsDrugModalOpen(false)}
-                        />
-                    </HeaderBarActions>
-                </HeaderBar>
-            }
-        >
-            <div className="t-product-details__shipping-delivery-modal-content">
-                <br />
-                <PrescriptionConfigure
-                    viewModel={vmPrescriptionConfigure.find(el => el.masterKey === selectedDrug)}
-                    analyticsManager={analyticsManager}
-                    onPrescriptionConfigureSubmit={drugModalMode === 'add' ? handleCartAddItem : handleCartEditItem}
-                />
-
-            </div>
-        </Sheet>
-    )
 
     return (
         <div className="c-prescriptions-grid">
