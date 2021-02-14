@@ -62,8 +62,7 @@ const PrescriptionsGrid = (props) => {
                     _gridRowKey: uuidv4(),
                     // TODO: fix all the below so that it comes from the form not hardcoded
                     masterKey: '2112',
-                    //doctor: MasterData.doctors.find(el => el.doctorName === action.formData.get('doctor-name')),
-                    doctor: MasterData.doctors.find(el => el.doctorKey === '005'),
+                    doctor: MasterData.doctors.find(el => el.doctorKey === action.formData.get('doctor-key')),
                     drug: {
                         //...MasterData.drugs.find(el => el.drugKey === action.formData.get('drug')),
                         ...MasterData.drugs.find(el => el.drugKey === '003'),
@@ -71,14 +70,7 @@ const PrescriptionsGrid = (props) => {
                         drugDosage: action.formData.get('dosage'),
                         drugQuantity: action.formData.get('quantity'),
                     },
-                    //pharmacy: MasterData.pharmacies.find(el => el.pharmacyKey === action.formData.get('pharmacy-key')),
-                    pharmacy: MasterData.pharmacies.find(el => el.pharmacyKey === '003'),
-
-                    //drugName: action.formData.get('drug'),
-                    // pharmacyKey: '',
-                    // pharmacyChain: action.formData.get('pharmacy-chain'),
-                    // pharmacyLogoUrl: action.formData.get('pharmacy-logo-url'),
-                    // pharmacyCity: action.formData.get('pharmacy-city')
+                    pharmacy: MasterData.pharmacies.find(el => el.pharmacyKey === action.formData.get('pharmacy-key')),
                 }
 
                 setIsDrugModalOpen(false)
@@ -93,14 +85,12 @@ const PrescriptionsGrid = (props) => {
                     if (item._gridRowKey === activeGridRowKey) {
                         const updatedItem = {
                             ...item,
+                            doctor: MasterData.doctors.find(el => el.doctorKey === action.formData.get('doctor-key')),
                             drugName: action.formData.get('drug'),
-                            drugQuantity: action.formData.get('quantity'),
                             drugForm: action.formData.get('form'),
                             drugDosage: action.formData.get('dosage'),
-                            doctorName: action.formData.get('doctor-name'),
-                            pharmacyChain: action.formData.get('pharmacy-chain'),
-                            pharmacyLogoUrl: action.formData.get('pharmacy-logo-url'),
-                            pharmacyCity: action.formData.get('pharmacy-city')
+                            drugQuantity: action.formData.get('quantity'),
+                            pharmacy: MasterData.pharmacies.find(el => el.pharmacyKey === action.formData.get('pharmacy-key'))
                         }
                         return updatedItem
                     } else {
@@ -125,7 +115,7 @@ const PrescriptionsGrid = (props) => {
                 setIsDrugModalOpen(true)
                 return state
 
-            case 'SHOW_EDIT_ITEM_MODAL': 
+            case 'SHOW_EDIT_ITEM_MODAL':
                 console.log('cartReducer: SHOW_EDIT_ITEM_MODAL')
                 console.log(action.id)
                 // TODO: set up vmPrescriptionConfigure
@@ -133,7 +123,7 @@ const PrescriptionsGrid = (props) => {
                 setDrugModalMode('edit')
                 setIsDrugModalOpen(true)
                 return state
-            
+
             default:
                 throw new Error();
         }
