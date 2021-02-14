@@ -94,7 +94,7 @@ const ViewModels = {
                     unitPrice: 675
                 }
             ],
-            forms: ['tablet', 'liquid'],
+            forms: ['tablet', 'capsule'],
             dosages: ['10mg', '20mg', '30mg'],
             quantities: [11, 21, 51],
             pharmacies: [

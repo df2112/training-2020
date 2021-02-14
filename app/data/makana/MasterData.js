@@ -39,7 +39,7 @@ const MasterData = {
         },
         {
             drugKey: '002',
-            drugName: 'LipitorXX',
+            drugName: 'Lipitor',
         },
         {
             drugKey: '003',
