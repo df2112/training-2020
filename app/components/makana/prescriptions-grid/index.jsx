@@ -14,8 +14,8 @@ import { Desktop, Mobile, Tablet } from '../../media-queries'
 import DoctorSearch from '../doctor-search'
 import DrugSearch from '../drug-search'
 import PrescriptionConfigure from '../prescription-configure'
-import ViewModels from '../../../data/makana/ViewModels'
 import MasterData from '../../../data/makana/MasterData'
+import ViewModels from '../../../data/makana/ViewModels'
 
 const fakeDoctors = [
     {
@@ -266,38 +266,6 @@ const PrescriptionsGrid = (props) => {
                     ))}
                 </List>
             </div>
-
-            {/* TODO: This is the old stuff ... to be removed */}
-            <List>
-                {/* Prescription Rows */}
-                {/* {gridRows.map((item, index) => (
-
-                                    <div className="u-flex">
-                                        <div className="c-prescriptions-grid__form-field-inner">
-                                            {(index === 0 || Mobile) &&
-                                                <div className="c-prescriptions-grid__form-field-label-wrap">
-                                                    <label className="c-prescriptions-grid__form-field-label" htmlFor="doctor-select">
-                                                        {'Doctor Select'}
-                                                    </label>
-                                                </div>
-                                            }
-                                            <div className="c-prescriptions-grid__form-field-input">
-                                                <select id="doctor-select" value={selectedDoctor} onChange={handleDoctorChange}>
-                                                    {doctorsList && doctorsList.length > 0 && doctorsList.map((doctor) => (
-                                                        <Fragment key={doctor._doctorKey}>
-                                                            <option value={doctor._doctorKey}>{doctor.name}</option>
-                                                        </Fragment>
-                                                    ))}
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </ListTile>
-                        ))} */}
-
-            </List>
 
             <Button className="pw--primary">
                 Checkout!
