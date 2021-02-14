@@ -169,8 +169,8 @@ PrescriptionConfigure.propTypes = {
     /**
      * Handler that is triggers when the form is submitted
      */
-    viewModel: PropTypes.object,
-    onPrescriptionConfigureSubmit: PropTypes.func
+    onPrescriptionConfigureSubmit: PropTypes.func,
+    viewModel: PropTypes.object
 }
 
 export default PrescriptionConfigure
