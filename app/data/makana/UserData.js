@@ -16,9 +16,9 @@ const UserData = {
             _gridRowKey: 0,
             doctorKey: '000',            
             drugKey: '001',
-            drugForm: 'tablets',
-            drugDosage: '40mg',
-            drugQuantity: '30',
+            drugForm: 'tablet',
+            drugDosage: '10mg',
+            drugQuantity: '51',
             masterKey: '2112', //TODO: fix masterKey 
             pharmacyKey: '001'
         },
@@ -26,9 +26,9 @@ const UserData = {
             _gridRowKey: 1,
             doctorKey: '001',            
             drugKey: '002',
-            drugForm: 'tablets',
-            drugDosage: '10mg',
-            drugQuantity: '90',
+            drugForm: 'capsule',
+            drugDosage: '30mg',
+            drugQuantity: '32',
             masterKey: '8118', //TODO: fix masterKey 
             pharmacyKey: '002'
         },
@@ -36,9 +36,9 @@ const UserData = {
             _gridRowKey: 2,
             doctorKey: '003',            
             drugKey: '003',
-            drugForm: 'tablets',
+            drugForm: 'syrup',
             drugDosage: '50mg',
-            drugQuantity: '10',
+            drugQuantity: '11',
             masterKey: '2112', //TODO: fix masterKey 
             pharmacyKey: '003'
         }        

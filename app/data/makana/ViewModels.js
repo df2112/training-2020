@@ -94,6 +94,14 @@ const ViewModels = {
                     unitPrice: 675
                 }
             ],
+            drug: {
+                drugKey: '001',
+                drugName: 'Metformin',
+                drugNames: ['Metformin', 'Glucophage (generic)'],
+                forms: ['tablet', 'capsule'],
+                dosages: ['10mg', '20mg', '30mg'],
+                quantities: [11, 31, 51],
+            },            
             forms: ['tablet', 'capsule'],
             dosages: ['10mg', '20mg', '30mg'],
             quantities: [11, 21, 51],
@@ -169,6 +177,14 @@ const ViewModels = {
                     unitPrice: 1675
                 }
             ],
+            drug: {
+                drugKey: '002',
+                drugName: 'Lipitor',
+                drugNames: ['Lipitor', 'Atorvastatin (generic)'],
+                forms: ['tablet', 'capsule'],
+                dosages: ['20mg', '30mg', '40mg'],
+                quantities: [12, 32, 52],
+            },    
             forms: ['tablet', 'liquid'],
             dosages: ['10mg', '20mg', '30mg'],
             quantities: [11, 21, 51],
