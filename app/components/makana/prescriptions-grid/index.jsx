@@ -116,21 +116,11 @@ const PrescriptionsGrid = (props) => {
 
     const handleCartEditItem = (formData) => cartAction({ type: 'EDIT_ITEM', formData })
 
-    const showAddItemModal = (id) => {
-        console.log('showAddItemModal')
-        console.log(id)
+    const showDrugModal = (mode, id) => {
+        console.log(`showDrugModal: ${mode} : ${id} `)
         // TODO: set up vmPrescriptionConfigure
         setSelectedDrug(id)
-        setDrugModalMode('add')
-        setIsDrugModalOpen(true)
-    }
-
-    const showEditItemModal = (id) => {
-        console.log('showEditItemModal')
-        console.log(id)
-        // TODO: set up vmPrescriptionConfigure
-        setSelectedDrug(id)
-        setDrugModalMode('edit')
+        setDrugModalMode(mode)
         setIsDrugModalOpen(true)
     }
 
@@ -219,7 +209,7 @@ const PrescriptionsGrid = (props) => {
                 <DrugSearch
                     id="drug-search"
                     viewModel={vmDrugSearch}
-                    onDrugSelectSubmit={showAddItemModal}
+                    onDrugSelectSubmit={showDrugModal}
                 />
             </div>
 
@@ -233,7 +223,7 @@ const PrescriptionsGrid = (props) => {
                             endAction={
                                 <div>
                                     {/* TODO: align these to use same key */}
-                                    <Button className="pw--blank" icon="more" onClick={() => showEditItemModal(lineItem.masterKey)} />
+                                    <Button className="pw--blank" icon="more" onClick={() => showDrugModal('edit', lineItem.masterKey)} />
                                     <Button className="pw--blank" icon="trash" onClick={() => cartAction({ type: 'REMOVE_ITEM', id: lineItem._gridRowKey })} />
                                 </div>
                             }

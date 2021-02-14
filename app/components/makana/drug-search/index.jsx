@@ -36,7 +36,7 @@ const DrugSearch = (props) => {
 
         setProductSuggestions([])
         
-        if (onDrugSelectSubmit) onDrugSelectSubmit(selectedProductId)
+        if (onDrugSelectSubmit) onDrugSelectSubmit('add', selectedProductId)
     }
 
     return (
