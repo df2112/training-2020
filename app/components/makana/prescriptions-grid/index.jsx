@@ -36,7 +36,6 @@ const fakeDoctors = [
 ]
 
 const vmDrugSearch = ViewModels.drugSearch
-const vmPrescriptionConfigure = ViewModels.prescriptionConfigure
 
 const PrescriptionsGrid = (props) => {
     const { analyticsManager, doctors, viewModel } = props
@@ -45,10 +44,13 @@ const PrescriptionsGrid = (props) => {
     const [isDoctorModalOpen, setIsDoctorModalOpen] = useState(false)
     const [isDrugModalOpen, setIsDrugModalOpen] = useState(false)
     const [drugModalMode, setDrugModalMode] = useState()
+    const [drugModalViewModel, setDrugModalViewModel] = useState({
+        pharmacies: MasterData.pharmacies,
+        doctors: MasterData.doctors
+    })
     const [activeGridRowKey, setActiveGridRowKey] = useState()
     const [selectedDoctor, setSelectedDoctor] = useState('999')
     const [selectedDrug, setSelectedDrug] = useState()
-    const [vm2, setVm2] = useState()
 
     const cartReducer = (state, action) => {
         switch (action.type) {
@@ -118,7 +120,13 @@ const PrescriptionsGrid = (props) => {
 
     const showDrugModal = (mode, id) => {
         console.log(`showDrugModal: ${mode} : ${id} `)
-        // TODO: set up vmPrescriptionConfigure
+
+        const newDrugModalViewModel = {
+            ...drugModalViewModel,
+            drug: MasterData.drugs.find(el => el.drugKey === id)
+        }
+
+        setDrugModalViewModel(newDrugModalViewModel)
         setSelectedDrug(id)
         setDrugModalMode(mode)
         setIsDrugModalOpen(true)
@@ -149,7 +157,7 @@ const PrescriptionsGrid = (props) => {
             <div className="t-product-details__shipping-delivery-modal-content">
                 <br />
                 <PrescriptionConfigure
-                    viewModel={vmPrescriptionConfigure.find(el => el.drug.drugKey === selectedDrug)}
+                    viewModel={drugModalViewModel}
                     analyticsManager={analyticsManager}
                     onPrescriptionConfigureSubmit={drugModalMode === 'add' ? handleCartAddItem : handleCartEditItem}
                 />
