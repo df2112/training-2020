@@ -163,13 +163,13 @@ const ViewModels = {
             masterKey: '2112',
             variants: [
                 {
-                    drugKey: '0',
+                    drugKey: '001',
                     name: 'Atorvastatin (*generic) 2112',
                     generic: true,
                     unitPrice: 25
                 },
                 {
-                    drugKey: '1',
+                    drugKey: '002',
                     name: 'Lipitor (*brand) 2112',
                     generic: false,
                     unitPrice: 675
@@ -238,13 +238,13 @@ const ViewModels = {
             masterKey: '8118',
             variants: [
                 {
-                    drugKey: '0',
+                    drugKey: '001',
                     name: 'Atorvastatin (*generic) 8118',
                     generic: true,
                     unitPrice: 125
                 },
                 {
-                    drugKey: '1',
+                    drugKey: '002',
                     name: 'Lipitor (*brand) 8118',
                     generic: false,
                     unitPrice: 1675

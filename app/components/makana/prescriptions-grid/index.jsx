@@ -60,15 +60,13 @@ const PrescriptionsGrid = (props) => {
 
                 const newGridRow = {
                     _gridRowKey: uuidv4(),
-                    // TODO: fix all the below so that it comes from the form not hardcoded
-                    masterKey: '2112',
+                    masterKey: '2112', // TODO: wtf?
                     doctor: MasterData.doctors.find(el => el.doctorKey === action.formData.get('doctor-key')),
                     drug: {
-                        //...MasterData.drugs.find(el => el.drugKey === action.formData.get('drug')),
-                        ...MasterData.drugs.find(el => el.drugKey === '003'),
-                        drugForm: action.formData.get('form'),
-                        drugDosage: action.formData.get('dosage'),
-                        drugQuantity: action.formData.get('quantity'),
+                        ...MasterData.drugs.find(el => el.drugKey === action.formData.get('drug-key')),
+                        drugForm: action.formData.get('drug-form'),
+                        drugDosage: action.formData.get('drug-dosage'),
+                        drugQuantity: action.formData.get('drug-quantity'),
                     },
                     pharmacy: MasterData.pharmacies.find(el => el.pharmacyKey === action.formData.get('pharmacy-key')),
                 }
@@ -86,10 +84,12 @@ const PrescriptionsGrid = (props) => {
                         const updatedItem = {
                             ...item,
                             doctor: MasterData.doctors.find(el => el.doctorKey === action.formData.get('doctor-key')),
-                            drugName: action.formData.get('drug'),
-                            drugForm: action.formData.get('form'),
-                            drugDosage: action.formData.get('dosage'),
-                            drugQuantity: action.formData.get('quantity'),
+                            drug: {
+                                ...MasterData.drugs.find(el => el.drugKey === action.formData.get('drug-key')),
+                                drugForm: action.formData.get('drug-form'),
+                                drugDosage: action.formData.get('drug-dosage'),
+                                drugQuantity: action.formData.get('drug-quantity'),
+                            },
                             pharmacy: MasterData.pharmacies.find(el => el.pharmacyKey === action.formData.get('pharmacy-key'))
                         }
                         return updatedItem

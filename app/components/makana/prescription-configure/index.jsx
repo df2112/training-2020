@@ -61,9 +61,9 @@ const PrescriptionConfigure = (props) => {
                 <h2>Configure Prescription</h2>
                 <List>
                     <ListTile className="c-prescription-configure__form-field-row u-flexbox">
-                        <select name="drug" >
+                        <select name="drug-key" >
                             {viewModel.variants.map((item, index) => (
-                                <option key={index}>{item.name}</option>
+                                <option key={index} value={item.drugKey}>{item.name}</option>
                             ))}
                         </select>
                     </ListTile>
@@ -71,7 +71,7 @@ const PrescriptionConfigure = (props) => {
                     <div>
                         <ListTile className="c-prescription-configure__form-field-row u-flexbox">
                             <div>Form</div>
-                            <select name="form">
+                            <select name="drug-form">
                                 {viewModel.forms.map((item, index) => (
                                     <option key={index}>{item}</option>
                                 ))}
@@ -80,7 +80,7 @@ const PrescriptionConfigure = (props) => {
 
                         <ListTile className="c-prescription-configure__form-field-row u-flexbox">
                             <div>Dosage</div>
-                            <select name="dosage">
+                            <select name="drug-dosage">
                                 {viewModel.dosages.map((item, index) => (
                                     <option key={index}>{item}</option>
                                 ))}
@@ -89,7 +89,7 @@ const PrescriptionConfigure = (props) => {
 
                         <ListTile className="c-prescription-configure__form-field-row u-flexbox">
                             <div>Quantity</div>
-                            <select name="quantity">
+                            <select name="drug-quantity">
                                 {viewModel.quantities.map((item, index) => (
                                     <option key={index}>{item}</option>
                                 ))}
