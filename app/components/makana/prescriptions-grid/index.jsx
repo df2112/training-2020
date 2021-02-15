@@ -257,7 +257,12 @@ const PrescriptionsGrid = (props) => {
                 />
             </div>
 
-            <div style={{ marginTop: "6px" }}>
+            <div style={{
+                marginTop: "6px",
+                height: "450px",
+                overflowX: "hidden",
+                overflowY: "auto"
+            }}>
                 <List>
                     {cartState.map((lineItem, index) => (
                         <ListTile
@@ -288,9 +293,9 @@ const PrescriptionsGrid = (props) => {
                 </List>
             </div>
 
-            <Button className="pw--primary">
-                Checkout!
-            </Button>
+            <div style={{ marginTop: "50px" }}>
+                <Button className="pw--primary">Checkout!</Button>
+            </div>
 
             {/* Floating element/components */}
             <Mobile>
