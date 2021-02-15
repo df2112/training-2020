@@ -65,9 +65,10 @@ const PrescriptionsGrid = (props) => {
                     doctor: MasterData.doctors.find(el => el.doctorKey === action.formData.get('doctor-key')),
                     drug: {
                         ...MasterData.drugs.find(el => el.drugKey === action.formData.get('drug-key')),
-                        selectedDrugForm: action.formData.get('drug-form'),
-                        selectedDrugDosage: action.formData.get('drug-dosage'),
-                        selectedDrugQuantity: action.formData.get('drug-quantity'),
+                        selectedDrugName: action.formData.get('selected-drug-name'),
+                        selectedDrugForm: action.formData.get('selected-drug-form'),
+                        selectedDrugDosage: action.formData.get('selected-drug-dosage'),
+                        selectedDrugQuantity: action.formData.get('selected-drug-quantity'),
                     },
                     pharmacy: MasterData.pharmacies.find(el => el.pharmacyKey === action.formData.get('pharmacy-key')),
                 }

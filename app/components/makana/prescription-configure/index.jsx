@@ -52,21 +52,10 @@ const PrescriptionConfigure = (props) => {
         }
     }
 
-    const handleDrugDosageChanged = (event) => {
-        setSelectedDrugDosage(event.target.value)
-    }
-
-    const handleDrugFormChanged = (event) => {
-        setSelectedDrugForm(event.target.value)
-    }
-
-    const handleDrugNameChanged = (event) => {
-        setSelectedDrugName(event.target.value)
-    }
-
-    const handleDrugQuantityChanged = (event) => {
-        setSelectedDrugQuantity(event.target.value)
-    }
+    const handleDrugDosageChanged = (event) => setSelectedDrugDosage(event.target.value)
+    const handleDrugFormChanged = (event) => setSelectedDrugForm(event.target.value)
+    const handleDrugNameChanged = (event) => setSelectedDrugName(event.target.value)
+    const handleDrugQuantityChanged = (event) => setSelectedDrugQuantity(event.target.value)
 
     return (
         <div>
