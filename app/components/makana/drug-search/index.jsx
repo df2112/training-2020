@@ -29,10 +29,10 @@ const DrugSearch = (props) => {
     const clickSuggestion = (event) => {
         console.log('DrugSearch: clickSuggestion()')
 
-        // TODO: Clean this mess up :-)
-        const bbb = [ ...event.target.closest('article').classList ]
-        const ccc = bbb.find(e => e.includes('masterId_'))
-        const selectedProductId = ccc.replace('masterId_', '')
+        // This is a colossal hack
+        const outerElement = [ ...event.target.closest('article').classList ]
+        const hackCss = outerElement.find(e => e.includes('masterId_'))
+        const selectedProductId = hackCss.replace('masterId_', '')
 
         setProductSuggestions([])
         

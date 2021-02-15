@@ -37,6 +37,36 @@ const fakeDoctors = [
 
 const vmDrugSearch = ViewModels.drugSearch
 
+const vmDrugSearch2 = MasterData.drugs.map((drug) => {
+
+    return drug.drugNames.map((drugName) => {
+
+        return {
+            className: ('masterId_' + drug.drugKey),
+            isSimple: true,
+            isFull: true,
+            imageProps: {
+                src: drug.imgSrc,
+                width: '88px',
+                height: '88px',
+                alt: 'cat'
+            },
+            href: '#',
+            options: [
+                {
+                    label: 'TODO: Dave ID (a)'
+                }
+            ],
+            title: drugName,
+            price: 'TODO: $25'    
+        }
+    
+    })
+
+}).flat(2)
+
+console.log(vmDrugSearch2)
+
 const PrescriptionsGrid = (props) => {
     const { analyticsManager, doctors, viewModel } = props
 
@@ -252,7 +282,7 @@ const PrescriptionsGrid = (props) => {
             <div style={{ marginTop: "6px" }} className="c-prescriptions-grid__form-field-input">
                 <DrugSearch
                     id="drug-search"
-                    viewModel={vmDrugSearch}
+                    viewModel={vmDrugSearch2}
                     onDrugSelectSubmit={showDrugModalAdd}
                 />
             </div>
