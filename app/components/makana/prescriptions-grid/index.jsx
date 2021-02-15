@@ -15,7 +15,6 @@ import DoctorSearch from '../doctor-search'
 import DrugSearch from '../drug-search'
 import PrescriptionConfigure from '../prescription-configure'
 import MasterData from '../../../data/makana/MasterData'
-import ViewModels from '../../../data/makana/ViewModels'
 
 const fakeDoctors = [
     {
@@ -35,11 +34,9 @@ const fakeDoctors = [
     }
 ]
 
-const vmDrugSearch = ViewModels.drugSearch
+const vmDrugSearch = MasterData.drugs.map((drug) => {
 
-const vmDrugSearch2 = MasterData.drugs.map((drug) => {
-
-    return drug.drugNames.map((drugName) => {
+    return drug.drugNames.map((drugName, index) => {
 
         return {
             className: ('masterId_' + drug.drugKey),
@@ -58,14 +55,14 @@ const vmDrugSearch2 = MasterData.drugs.map((drug) => {
                 }
             ],
             title: drugName,
-            price: 'TODO: $25'    
+            price: index === 0 ? '$100' : '$25',
         }
     
     })
 
 }).flat(2)
 
-console.log(vmDrugSearch2)
+console.log(vmDrugSearch)
 
 const PrescriptionsGrid = (props) => {
     const { analyticsManager, doctors, viewModel } = props
@@ -151,7 +148,7 @@ const PrescriptionsGrid = (props) => {
     const handleCartEditItem = (formData) => cartAction({ type: 'EDIT_ITEM', formData })
 
     const showDrugModalAdd = (id) => {
-        console.log(`showDrugModalAdd: ${id} `)
+        console.log(`showDrugModalAdd: selectedProductId ${id} `)
 
         let drugMaster = MasterData.drugs.find(el => el.drugKey === id)
 
@@ -172,6 +169,7 @@ const PrescriptionsGrid = (props) => {
 
         console.log('Add: viewModel =>')
         console.log(newDrugModalViewModel.prescription.drug)
+        
         setDrugModalViewModel(newDrugModalViewModel)
         setSelectedDrug(id)
         setDrugModalMode('add')
@@ -179,11 +177,10 @@ const PrescriptionsGrid = (props) => {
     }
 
     const showDrugModalEdit = (gridRowKey) => {
-        console.log(`showDrugModalEdit: ${gridRowKey} `)
+        console.log(`showDrugModalEdit: gridRowKey ${gridRowKey} `)
 
         console.log('showDrugModalEdit: cartState =>')
         console.log(cartState)
-        console.log(activeGridRowKey)
 
         const newDrugModalViewModel = {
             ...drugModalViewModel,
@@ -192,6 +189,7 @@ const PrescriptionsGrid = (props) => {
 
         console.log('showDrugModalEdit: viewModel =>')
         console.log(newDrugModalViewModel.prescription.drug)
+
         setDrugModalViewModel(newDrugModalViewModel)
         setSelectedDrug(newDrugModalViewModel.prescription.drug.drugKey)
         setDrugModalMode('edit')
@@ -282,7 +280,7 @@ const PrescriptionsGrid = (props) => {
             <div style={{ marginTop: "6px" }} className="c-prescriptions-grid__form-field-input">
                 <DrugSearch
                     id="drug-search"
-                    viewModel={vmDrugSearch2}
+                    viewModel={vmDrugSearch}
                     onDrugSelectSubmit={showDrugModalAdd}
                 />
             </div>
