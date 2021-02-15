@@ -35,7 +35,6 @@ const MasterData = {
     drugs: [
         {
             drugKey: '001',
-            drugName: 'Metformin',
             drugNames: ['Metformin', 'Glucophage (generic)'],
             forms: ['tablet', 'capsule'],
             dosages: ['10mg', '20mg', '30mg'],
@@ -43,7 +42,6 @@ const MasterData = {
         },
         {
             drugKey: '002',
-            drugName: 'Lipitor',
             drugNames: ['Lipitor', 'Atorvastatin (generic)'],
             forms: ['tablet', 'capsule'],
             dosages: ['20mg', '30mg', '40mg'],
@@ -51,7 +49,6 @@ const MasterData = {
         },
         {
             drugKey: '003',
-            drugName: 'Cozaar',
             drugNames: ['Cozaar', 'Losartan (generic)'],
             forms: ['syrup', 'capsule'],
             dosages: ['30mg', '40mg', '50mg'],

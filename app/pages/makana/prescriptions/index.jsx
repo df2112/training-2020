@@ -22,6 +22,7 @@ const vmPrescriptionsGrid = UserData.cart.map((value, index) => ({
 
     drug: {
         ...MasterData.drugs.find(el => el.drugKey === value.drugKey),
+        selectedDrugName: value.selectedDrugName,
         selectedDrugForm: value.selectedDrugForm,
         selectedDrugDosage: value.selectedDrugDosage,
         selectedDrugQuantity: value.selectedDrugQuantity

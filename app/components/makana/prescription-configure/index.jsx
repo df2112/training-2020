@@ -16,6 +16,11 @@ const PrescriptionConfigure = (props) => {
     const [formData1, setFormData1] = useState()
     const [formData2, setFormData2] = useState()
 
+    const [selectedDrugDosage, setSelectedDrugDosage] = useState(viewModel.prescription.drug.selectedDrugDosage)
+    const [selectedDrugForm, setSelectedDrugForm] = useState(viewModel.prescription.drug.selectedDrugForm)
+    const [selectedDrugName, setSelectedDrugName] = useState(viewModel.prescription.drug.selectedDrugName)
+    const [selectedDrugQuantity, setSelectedDrugQuantity] = useState(viewModel.prescription.drug.selectedDrugQuantity)
+
     const handlePrescriptionSaveSubmit = (event) => {
         event.preventDefault()
 
@@ -47,6 +52,22 @@ const PrescriptionConfigure = (props) => {
         }
     }
 
+    const handleDrugDosageChanged = (event) => {
+        setSelectedDrugDosage(event.target.value)
+    }
+
+    const handleDrugFormChanged = (event) => {
+        setSelectedDrugForm(event.target.value)
+    }
+
+    const handleDrugNameChanged = (event) => {
+        setSelectedDrugName(event.target.value)
+    }
+
+    const handleDrugQuantityChanged = (event) => {
+        setSelectedDrugQuantity(event.target.value)
+    }
+
     return (
         <div>
 
@@ -60,10 +81,16 @@ const PrescriptionConfigure = (props) => {
             >
                 <h2>Configure Prescription</h2>
                 <List>
+                    <input name="drug-key" type="hidden" value={viewModel.prescription.drug.drugKey} />
+
                     <ListTile className="c-prescription-configure__form-field-row u-flexbox">
-                        <select name="drug-key" >
-                            {viewModel.drug.drugNames.map((item, index) => (
-                                <option key={index} value={viewModel.drug.drugKey}>{item}</option>
+                        <select 
+                            name="selected-drug-name" 
+                            value={selectedDrugName}
+                            onChange={handleDrugNameChanged} 
+                        >
+                            {viewModel.prescription.drug.drugNames.map((item, index) => (
+                                <option key={index}>{item}</option>
                             ))}
                         </select>
                     </ListTile>
@@ -71,8 +98,12 @@ const PrescriptionConfigure = (props) => {
                     <div>
                         <ListTile className="c-prescription-configure__form-field-row u-flexbox">
                             <div>Form</div>
-                            <select name="drug-form">
-                                {viewModel.drug.forms.map((item, index) => (
+                            <select 
+                                name="selected-drug-form" 
+                                value={selectedDrugForm}
+                                onChange={handleDrugFormChanged} 
+                                >
+                                {viewModel.prescription.drug.forms.map((item, index) => (
                                     <option key={index}>{item}</option>
                                 ))}
                             </select>
@@ -80,8 +111,12 @@ const PrescriptionConfigure = (props) => {
 
                         <ListTile className="c-prescription-configure__form-field-row u-flexbox">
                             <div>Dosage</div>
-                            <select name="drug-dosage">
-                                {viewModel.drug.dosages.map((item, index) => (
+                            <select 
+                                name="selected-drug-dosage" 
+                                value={selectedDrugDosage}
+                                onChange={handleDrugDosageChanged} 
+                            >
+                                {viewModel.prescription.drug.dosages.map((item, index) => (
                                     <option key={index}>{item}</option>
                                 ))}
                             </select>
@@ -89,8 +124,12 @@ const PrescriptionConfigure = (props) => {
 
                         <ListTile className="c-prescription-configure__form-field-row u-flexbox">
                             <div>Quantity</div>
-                            <select name="drug-quantity">
-                                {viewModel.drug.quantities.map((item, index) => (
+                            <select 
+                                name="selected-drug-quantity" 
+                                value={selectedDrugQuantity}
+                                onChange={handleDrugQuantityChanged} 
+                            >
+                                {viewModel.prescription.drug.quantities.map((item, index) => (
                                     <option key={index}>{item}</option>
                                 ))}
                             </select>
