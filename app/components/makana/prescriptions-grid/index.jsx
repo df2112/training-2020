@@ -65,9 +65,9 @@ const PrescriptionsGrid = (props) => {
                     doctor: MasterData.doctors.find(el => el.doctorKey === action.formData.get('doctor-key')),
                     drug: {
                         ...MasterData.drugs.find(el => el.drugKey === action.formData.get('drug-key')),
-                        drugForm: action.formData.get('drug-form'),
-                        drugDosage: action.formData.get('drug-dosage'),
-                        drugQuantity: action.formData.get('drug-quantity'),
+                        selectedDrugForm: action.formData.get('drug-form'),
+                        selectedDrugDosage: action.formData.get('drug-dosage'),
+                        selectedDrugQuantity: action.formData.get('drug-quantity'),
                     },
                     pharmacy: MasterData.pharmacies.find(el => el.pharmacyKey === action.formData.get('pharmacy-key')),
                 }
@@ -87,9 +87,9 @@ const PrescriptionsGrid = (props) => {
                             doctor: MasterData.doctors.find(el => el.doctorKey === action.formData.get('doctor-key')),
                             drug: {
                                 ...MasterData.drugs.find(el => el.drugKey === action.formData.get('drug-key')),
-                                drugForm: action.formData.get('drug-form'),
-                                drugDosage: action.formData.get('drug-dosage'),
-                                drugQuantity: action.formData.get('drug-quantity'),
+                                selectedDrugForm: action.formData.get('drug-form'),
+                                selectedDrugDosage: action.formData.get('drug-dosage'),
+                                selectedDrugQuantity: action.formData.get('drug-quantity'),
                             },
                             pharmacy: MasterData.pharmacies.find(el => el.pharmacyKey === action.formData.get('pharmacy-key'))
                         }
@@ -237,7 +237,7 @@ const PrescriptionsGrid = (props) => {
                             }
                         >
                             <div style={{ fontWeight: 'bold' }}>{lineItem.drug.drugName}</div>
-                            <div style={{ marginBottom: "5px" }}>{lineItem.drug.drugQuantity} {lineItem.drug.drugForm} {lineItem.drug.drugDosage}</div>
+                            <div style={{ marginBottom: "5px" }}>{lineItem.drug.selectedDrugQuantity} {lineItem.drug.selectedDrugForm} {lineItem.drug.selectedDrugDosage}</div>
                             <Divider />
                             <div style={{ fontWeight: 'bold', marginBottom: "5px", marginTop: "5px" }}>{lineItem.doctor.name}</div>
                             <Divider />
