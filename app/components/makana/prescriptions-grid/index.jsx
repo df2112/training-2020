@@ -124,7 +124,6 @@ const PrescriptionsGrid = (props) => {
 
         const newDrugModalViewModel = {
             ...drugModalViewModel,
-            _drug_ToBeDeleted: MasterData.drugs.find(el => el.drugKey === id),
             prescription: cartState.find(el => el.drug.drugKey === id)
         }
 
