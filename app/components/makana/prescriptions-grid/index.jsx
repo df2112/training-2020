@@ -120,18 +120,51 @@ const PrescriptionsGrid = (props) => {
 
     const handleCartEditItem = (formData) => cartAction({ type: 'EDIT_ITEM', formData })
 
-    const showDrugModal = (mode, id) => {
-        console.log(`showDrugModal: ${mode} : ${id} `)
+    const showDrugModalAdd = (id) => {
+        console.log(`showDrugModalAdd: ${id} `)
+
+        let drugMaster = MasterData.drugs.find(el => el.drugKey === id)
 
         const newDrugModalViewModel = {
             ...drugModalViewModel,
-            prescription: cartState.find(el => el.drug.drugKey === id)
+            prescription: {
+                doctor: null,
+                drug: {
+                    ...drugMaster,
+                    selectedDrugName: drugMaster.drugNames[0],
+                    selectedDrugForm: drugMaster.forms[0],
+                    selectedDrugDosage: drugMaster.dosages[0],
+                    selectedDrugQuantity: drugMaster.quantities[0]
+                },
+                pharmacy: null
+            }
         }
 
+        console.log('Add: viewModel =>')
         console.log(newDrugModalViewModel.prescription.drug)
         setDrugModalViewModel(newDrugModalViewModel)
         setSelectedDrug(id)
-        setDrugModalMode(mode)
+        setDrugModalMode('add')
+        setIsDrugModalOpen(true)
+    }
+
+    const showDrugModalEdit = (gridRowKey) => {
+        console.log(`showDrugModalEdit: ${gridRowKey} `)
+
+        console.log('showDrugModalEdit: cartState =>')
+        console.log(cartState)
+        console.log(activeGridRowKey)
+
+        const newDrugModalViewModel = {
+            ...drugModalViewModel,
+            prescription: cartState.find(el => el._gridRowKey === gridRowKey)
+        }
+
+        console.log('showDrugModalEdit: viewModel =>')
+        console.log(newDrugModalViewModel.prescription.drug)
+        setDrugModalViewModel(newDrugModalViewModel)
+        setSelectedDrug(newDrugModalViewModel.prescription.drug.drugKey)
+        setDrugModalMode('edit')
         setIsDrugModalOpen(true)
     }
 
@@ -220,7 +253,7 @@ const PrescriptionsGrid = (props) => {
                 <DrugSearch
                     id="drug-search"
                     viewModel={vmDrugSearch}
-                    onDrugSelectSubmit={showDrugModal}
+                    onDrugSelectSubmit={showDrugModalAdd}
                 />
             </div>
 
@@ -234,7 +267,7 @@ const PrescriptionsGrid = (props) => {
                             endAction={
                                 <div>
                                     {/* TODO: align these to use same key */}
-                                    <Button className="pw--blank" icon="more" onClick={() => showDrugModal('edit', lineItem.drug.drugKey)} />
+                                    <Button className="pw--blank" icon="more" onClick={() => showDrugModalEdit(lineItem._gridRowKey)} />
                                     <Button className="pw--blank" icon="trash" onClick={() => cartAction({ type: 'REMOVE_ITEM', id: lineItem._gridRowKey })} />
                                 </div>
                             }
