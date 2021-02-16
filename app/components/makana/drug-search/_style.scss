@@ -69,3 +69,10 @@
         white-space: nowrap; // 1
     }
 }
+
+.pw-search__suggestions {
+    .pw-tile__details {
+        font-size: 16px;
+        margin-top: $unit;
+    }
+}
