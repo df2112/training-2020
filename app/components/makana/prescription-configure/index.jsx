@@ -78,7 +78,7 @@ const PrescriptionConfigure = (props) => {
                 data-analytics-name={PRESCRIPTION_CONFIGURATION_FORM1_NAME}
                 onSubmit={handlePrescriptionSaveSubmit}
             >
-                <h2>Configure Prescription</h2>
+                <h2 className="u-margin-bottom-lg">Configure Prescription</h2>
                 <List>
                     <input name="drug-key" type="hidden" value={viewModel.prescription.drug.drugKey} />
 
@@ -153,7 +153,7 @@ const PrescriptionConfigure = (props) => {
 
             {/* STEP 2 MULTIPLE FORMS - Select Pharmacy */}
             <div style={processStep !== 2 ? { display: "none" } : {}}>
-                <h2>Select Pharmacy</h2>
+                <h2 className="u-margin-bottom-lg">Select Pharmacy</h2>
                 <List>
                     {viewModel.pharmacies.map((pharmacy, index) => (
                         <form key={index} id={`${PRESCRIPTION_CONFIGURATION_FORM2_NAME} ${index}`}
@@ -188,7 +188,7 @@ const PrescriptionConfigure = (props) => {
 
             {/* STEP 3 MULTIPLE FORMS - Select Doctor */}
             <div style={processStep !== 3 ? { display: "none" } : {}}>
-                <h2>Select Physician</h2>
+                <h2 className="u-margin-bottom-lg">Select Physician</h2>
                 <List>
                     {viewModel.doctors.map((doctor, index) => (                        
                         <form key={index} id={`${PRESCRIPTION_CONFIGURATION_FORM3_NAME} ${index}`}
@@ -198,6 +198,11 @@ const PrescriptionConfigure = (props) => {
 
                             <ListTile
                                 className="pw--instructional-block"
+                                startAction={
+                                    <img 
+                                        style={{ borderRadius: "50%", width: "30.8px", height: "30.8px", marginRight: "5px" }} 
+                                        src={doctor.imgSrc} 
+                                    />}
                                 endAction={
                                     viewModel.prescription.doctor &&
                                     viewModel.prescription.doctor.doctorKey === doctor.doctorKey

@@ -4,31 +4,43 @@ const MasterData = {
             doctorKey: '000',
             name: 'Tim Brown, MDX',
             age: 41,
+            imgSrc: 'https://lh3.googleusercontent.com/a-/AOh14Gg3XGKD-v4EpVeECRKnNFSxUhGAxhmogB0ed6tP'
         },
         {
             doctorKey: '001',
             name: 'Dave Foley, DO',
             age: 42,
+            imgSrc: 'https://render.fineartamerica.com/images/rendered/default/print/8/8/break/images/artworkimages/medium/2/shaken-not-stirred-peter-ruck.jpg'
         },
         {
             doctorKey: '002',
             name: 'Olivier Lafont, DSE',
             age: 43,
+            imgSrc: 'https://lh3.googleusercontent.com/a-/AOh14GhsaCN4AmWohyd7OyjX-E7msAsmq6By64vy58y2pQ'
         },
         {
             doctorKey: '003',
             name: 'Nupur Marwaha, MD',
             age: 44,
+            imgSrc: 'https://lh3.googleusercontent.com/a-/AOh14Giw6VCcbTc2-HljzAattVvx3s-d3ASL232gZ6Pb'
         },
         {
             doctorKey: '004',
             name: 'Nat Pavic, DMD',
             age: 45,
+            imgSrc: 'https://lh3.googleusercontent.com/a-/AOh14GjlrOHEVfWo-aywcCcJ9b8KLgFEniZSJiqNfDkf4g'
         },
         {
             doctorKey: '005',
+            name: 'Chad Chain, PhD',
+            age: 45,
+            imgSrc: 'https://lh3.googleusercontent.com/a-/AOh14GhtgE0HUsxQIO9297BV3hzZOD-ybsLKNMwF7gII0Q'
+        },
+        {
+            doctorKey: '006',
             name: 'Amulya Pradhan, DO',
-            age: 46
+            age: 46,
+            imgSrc: 'https://lh3.googleusercontent.com/a-/AOh14Gh55P1TegmgRk81Aa5ZAwzD_0Ymcj_bat0zxKVt'
         }    
     ],
 
