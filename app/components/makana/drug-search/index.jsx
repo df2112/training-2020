@@ -32,11 +32,11 @@ const DrugSearch = (props) => {
         // This is a colossal hack
         const outerElement = [ ...event.target.closest('article').classList ]
         const hackCss = outerElement.find(e => e.includes('masterId_'))
-        const selectedProductId = hackCss.replace('masterId_', '')
+        const selectedVariantId = hackCss.replace('masterId_', '')
 
         setProductSuggestions([])
         
-        if (onDrugSelectSubmit) onDrugSelectSubmit(selectedProductId)
+        if (onDrugSelectSubmit) onDrugSelectSubmit(selectedVariantId)
     }
 
     return (
