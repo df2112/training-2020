@@ -57,7 +57,7 @@ const vmDrugSearch = MasterData.drugs.map((drug) => {
             title: variant.variantName,
             price: index === 0 ? '$100' : '$25',
         }
-    
+
     })
 
 }).flat(2)
@@ -98,13 +98,14 @@ const PrescriptionsGrid = (props) => {
                         selectedDrugQuantity: action.formData.get('selected-drug-quantity'),
                         //  BIG TODO FIX THIS
                         // selectedVariantKey: value.variantKey,
-                        selectedVariantName: action.formData.get('selected-variant-name')                    
+                        selectedVariantName: action.formData.get('selected-variant-name')
                     },
                     pharmacy: MasterData.pharmacies.find(el => el.pharmacyKey === action.formData.get('pharmacy-key')),
                 }
 
                 setIsDrugModalOpen(false)
-                return state.concat(newGridRow)
+                return [newGridRow, ...state] // Stick the new item at the start
+            //return state.concat(newGridRow)
 
             case 'EDIT_ITEM':
                 console.log('cartReducer: EDIT_ITEM')
@@ -123,7 +124,7 @@ const PrescriptionsGrid = (props) => {
                                 selectedDrugQuantity: action.formData.get('selected-drug-quantity'),
                                 //  BIG TODO FIX THIS
                                 // selectedVariantKey: value.variantKey,
-                                selectedVariantName: action.formData.get('selected-variant-name')                    
+                                selectedVariantName: action.formData.get('selected-variant-name')
                             },
                             pharmacy: MasterData.pharmacies.find(el => el.pharmacyKey === action.formData.get('pharmacy-key'))
                         }
@@ -179,7 +180,7 @@ const PrescriptionsGrid = (props) => {
 
         console.log('Add: viewModel =>')
         console.log(newDrugModalViewModel.prescription.drug)
-        
+
         setDrugModalViewModel(newDrugModalViewModel)
         setSelectedDrug(id)
         setDrugModalMode('add')
@@ -294,12 +295,7 @@ const PrescriptionsGrid = (props) => {
                 />
             </div>
 
-            <div style={{
-                marginTop: "6px",
-                height: "450px",
-                overflowX: "hidden",
-                overflowY: "auto"
-            }}>
+            <div style={{ marginTop: "6px", height: "450px", overflowX: "hidden", overflowY: "auto" }}>
                 <List>
                     {cartState.map((lineItem, index) => (
                         <ListTile
