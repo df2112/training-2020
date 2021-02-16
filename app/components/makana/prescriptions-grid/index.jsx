@@ -39,7 +39,7 @@ const vmDrugSearch = MasterData.drugs.map((drug) => {
     return drug.variants.map((variant, index) => {
 
         return {
-            className: ('masterId_' + drug.drugKey),
+            className: ('masterId_' + variant.variantKey),
             isSimple: true,
             isFull: true,
             imageProps: {
@@ -155,7 +155,11 @@ const PrescriptionsGrid = (props) => {
     const showDrugModalAdd = (id) => {
         console.log(`showDrugModalAdd: selectedProductId ${id} `)
 
-        let drugMaster = MasterData.drugs.find(el => el.drugKey === id)
+        let drugMaster = MasterData.drugs
+            .find(d => d.variants.find(v => v.variantKey === id))
+
+        let variant = drugMaster.variants
+            .find(v => v.variantKey === id)
 
         const newDrugModalViewModel = {
             ...drugModalViewModel,
@@ -163,10 +167,11 @@ const PrescriptionsGrid = (props) => {
                 doctor: null,
                 drug: {
                     ...drugMaster,
-                    selectedDrugName: drugMaster.variants[0],
                     selectedDrugForm: drugMaster.forms[0],
                     selectedDrugDosage: drugMaster.dosages[0],
-                    selectedDrugQuantity: drugMaster.quantities[0]
+                    selectedDrugQuantity: drugMaster.quantities[0],
+                    selectedVariantKey: variant.variantKey,
+                    selectedVariantName: variant.variantName
                 },
                 pharmacy: null
             }
