@@ -63,6 +63,21 @@
     }
 }
 
+.pw-button.selected {
+    background-color: #fff;
+
+    border-style: solid;
+    border-color: $success-color;
+    border-width: 2px;
+
+    color: $success-color;
+
+    &:active,
+    &:focus {
+        background-color: $dark-success-color;
+    }
+}
+
 .pw-button.pw--primary {
     background-color: $primary-action-color;
 

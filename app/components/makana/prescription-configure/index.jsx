@@ -21,6 +21,9 @@ const PrescriptionConfigure = (props) => {
     const [selectedDrugQuantity, setSelectedDrugQuantity] = useState(viewModel.prescription.drug.selectedDrugQuantity)
     const [selectedVariantName, setSelectedVariantName] = useState(viewModel.prescription.drug.selectedVariantName)
 
+    console.log('PrescriptionConfigure: viewModel =>')
+    console.log(viewModel)
+
     const handlePrescriptionSaveSubmit = (event) => {
         event.preventDefault()
 
@@ -161,7 +164,16 @@ const PrescriptionConfigure = (props) => {
                             <ListTile
                                 className="pw--instructional-block"
                                 startAction={<img style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} src={pharmacy.pharmacyLogoUrl} />}
-                                endAction={<Button type="submit" className="pw--success"><Price current={`$${pharmacy.pharmacyPrice}`} /></Button>}
+                                endAction={
+                                    viewModel.prescription.pharmacy && 
+                                    viewModel.prescription.pharmacy.pharmacyKey === pharmacy.pharmacyKey
+                                        ? <Button type="submit" className="selected">
+                                             <Price current={`$${pharmacy.pharmacyPrice}`} />
+                                          </Button>
+                                        : <Button type="submit" className="pw--success">
+                                              <Price current={`$${pharmacy.pharmacyPrice}`} />
+                                          </Button>
+                                }
                             >
                                 <input name="pharmacy-key" type="hidden" value={pharmacy.pharmacyKey} />
 
@@ -186,7 +198,12 @@ const PrescriptionConfigure = (props) => {
 
                             <ListTile
                                 className="pw--instructional-block"
-                                endAction={<Button type="submit" className="pw--success">Select</Button>}
+                                endAction={
+                                    viewModel.prescription.doctor &&
+                                    viewModel.prescription.doctor.doctorKey === doctor.doctorKey
+                                        ? <Button type="submit" className="selected">Select</Button>
+                                        : <Button type="submit" className="pw--success">Select</Button>
+                                }
                             >
                                 <div>{doctor.name}</div>
                                 <input id="doctor-key" name="doctor-key" type="hidden" value={doctor.doctorKey} />
