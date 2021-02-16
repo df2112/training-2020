@@ -15,22 +15,29 @@ import UserData from '../../../data/makana/UserData'
 
 const analyticsManager = getAnalyticsManager()
 
-const vmPrescriptionsGrid = UserData.cart.map((value, index) => ({
-    _gridRowKey: value._gridRowKey,
+const vmPrescriptionsGrid = UserData.cart.map((value, index) => {
 
-    doctor: MasterData.doctors.find(el => el.doctorKey === value.doctorKey),
+    const drugMaster = MasterData.drugs.find(el => el.drugKey === value.drugKey)
 
-    drug: {
-        ...MasterData.drugs.find(el => el.drugKey === value.drugKey),
-        selectedDrugName: value.selectedDrugName,
-        selectedDrugForm: value.selectedDrugForm,
-        selectedDrugDosage: value.selectedDrugDosage,
-        selectedDrugQuantity: value.selectedDrugQuantity
-    },
-    
-    pharmacy: MasterData.pharmacies.find(el => el.pharmacyKey === value.pharmacyKey)
-}))
+    return {
+        _gridRowKey: value._gridRowKey,
 
+        doctor: MasterData.doctors.find(el => el.doctorKey === value.doctorKey),
+
+        drug: {
+            ...drugMaster,
+            selectedDrugForm: value.selectedDrugForm,
+            selectedDrugDosage: value.selectedDrugDosage,
+            selectedDrugQuantity: value.selectedDrugQuantity,
+            selectedVariantKey: value.variantKey,
+            selectedVariantName: drugMaster.variants.find(el => el.variantKey === value.variantKey).variantName
+        },
+
+        pharmacy: MasterData.pharmacies.find(el => el.pharmacyKey === value.pharmacyKey)
+    }
+})
+
+console.log('vmPrescriptionsGrid =>')
 console.log(vmPrescriptionsGrid)
 
 const Prescriptions = (props) => {

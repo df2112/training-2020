@@ -18,8 +18,8 @@ const PrescriptionConfigure = (props) => {
 
     const [selectedDrugDosage, setSelectedDrugDosage] = useState(viewModel.prescription.drug.selectedDrugDosage)
     const [selectedDrugForm, setSelectedDrugForm] = useState(viewModel.prescription.drug.selectedDrugForm)
-    const [selectedDrugName, setSelectedDrugName] = useState(viewModel.prescription.drug.selectedDrugName)
     const [selectedDrugQuantity, setSelectedDrugQuantity] = useState(viewModel.prescription.drug.selectedDrugQuantity)
+    const [selectedVariantName, setSelectedVariantName] = useState(viewModel.prescription.drug.selectedVariantName)
 
     const handlePrescriptionSaveSubmit = (event) => {
         event.preventDefault()
@@ -58,11 +58,11 @@ const PrescriptionConfigure = (props) => {
     const handleDrugFormChanged = 
         (event) => setSelectedDrugForm(event.target.value)
 
-    const handleDrugNameChanged = 
-        (event) => setSelectedDrugName(event.target.value)
-
     const handleDrugQuantityChanged = 
         (event) => setSelectedDrugQuantity(event.target.value)
+
+    const handleVariantChanged = 
+    (event) => setSelectedVariantName(event.target.value)
 
     return (
         <div>
@@ -81,12 +81,12 @@ const PrescriptionConfigure = (props) => {
 
                     <ListTile className="c-prescription-configure__form-field-row u-flexbox">
                         <select 
-                            name="selected-drug-name" 
-                            value={selectedDrugName}
-                            onChange={handleDrugNameChanged} 
+                            name="selected-variant-name" 
+                            value={selectedVariantName}
+                            onChange={handleVariantChanged} 
                         >
-                            {viewModel.prescription.drug.drugNames.map((item, index) => (
-                                <option key={index}>{item}</option>
+                            {viewModel.prescription.drug.variants.map((variant, index) => (
+                                <option key={index}>{variant.variantName}</option>
                             ))}
                         </select>
                     </ListTile>
@@ -99,8 +99,8 @@ const PrescriptionConfigure = (props) => {
                                 value={selectedDrugForm}
                                 onChange={handleDrugFormChanged} 
                                 >
-                                {viewModel.prescription.drug.forms.map((item, index) => (
-                                    <option key={index}>{item}</option>
+                                {viewModel.prescription.drug.forms.map((form, index) => (
+                                    <option key={index}>{form}</option>
                                 ))}
                             </select>
                         </ListTile>
@@ -112,8 +112,8 @@ const PrescriptionConfigure = (props) => {
                                 value={selectedDrugDosage}
                                 onChange={handleDrugDosageChanged} 
                             >
-                                {viewModel.prescription.drug.dosages.map((item, index) => (
-                                    <option key={index}>{item}</option>
+                                {viewModel.prescription.drug.dosages.map((dosage, index) => (
+                                    <option key={index}>{dosage}</option>
                                 ))}
                             </select>
                         </ListTile>
@@ -125,8 +125,8 @@ const PrescriptionConfigure = (props) => {
                                 value={selectedDrugQuantity}
                                 onChange={handleDrugQuantityChanged} 
                             >
-                                {viewModel.prescription.drug.quantities.map((item, index) => (
-                                    <option key={index}>{item}</option>
+                                {viewModel.prescription.drug.quantities.map((qty, index) => (
+                                    <option key={index}>{qty}</option>
                                 ))}
                             </select>
                         </ListTile>
@@ -152,7 +152,7 @@ const PrescriptionConfigure = (props) => {
             <div style={processStep !== 2 ? { display: "none" } : {}}>
                 <h2>Select Pharmacy</h2>
                 <List>
-                    {viewModel.pharmacies.map((item, index) => (
+                    {viewModel.pharmacies.map((pharmacy, index) => (
                         <form key={index} id={`${PRESCRIPTION_CONFIGURATION_FORM2_NAME} ${index}`}
                             className="c-prescription-configure"
                             data-analytics-name={PRESCRIPTION_CONFIGURATION_FORM2_NAME}
@@ -160,14 +160,14 @@ const PrescriptionConfigure = (props) => {
 
                             <ListTile
                                 className="pw--instructional-block"
-                                startAction={<img style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} src={item.pharmacyLogoUrl} />}
-                                endAction={<Button type="submit" className="pw--success"><Price current={`$${item.pharmacyPrice}`} /></Button>}
+                                startAction={<img style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} src={pharmacy.pharmacyLogoUrl} />}
+                                endAction={<Button type="submit" className="pw--success"><Price current={`$${pharmacy.pharmacyPrice}`} /></Button>}
                             >
-                                <input name="pharmacy-key" type="hidden" value={item.pharmacyKey} />
+                                <input name="pharmacy-key" type="hidden" value={pharmacy.pharmacyKey} />
 
-                                <div>{item.pharmacyChain}</div>
+                                <div>{pharmacy.pharmacyChain}</div>
 
-                                <div>{item.pharmacyCity}</div>
+                                <div>{pharmacy.pharmacyCity}</div>
                             </ListTile>
                         </form>
                     ))}
@@ -178,7 +178,7 @@ const PrescriptionConfigure = (props) => {
             <div style={processStep !== 3 ? { display: "none" } : {}}>
                 <h2>Select Physician</h2>
                 <List>
-                    {viewModel.doctors.map((item, index) => (                        
+                    {viewModel.doctors.map((doctor, index) => (                        
                         <form key={index} id={`${PRESCRIPTION_CONFIGURATION_FORM3_NAME} ${index}`}
                             className="c-prescription-configure"
                             data-analytics-name={PRESCRIPTION_CONFIGURATION_FORM3_NAME}
@@ -188,8 +188,8 @@ const PrescriptionConfigure = (props) => {
                                 className="pw--instructional-block"
                                 endAction={<Button type="submit" className="pw--success">Select</Button>}
                             >
-                                <div>{item.name}</div>
-                                <input id="doctor-key" name="doctor-key" type="hidden" value={item.doctorKey} />
+                                <div>{doctor.name}</div>
+                                <input id="doctor-key" name="doctor-key" type="hidden" value={doctor.doctorKey} />
                             </ListTile>
                         </form>
                     ))}

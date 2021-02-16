@@ -36,7 +36,7 @@ const fakeDoctors = [
 
 const vmDrugSearch = MasterData.drugs.map((drug) => {
 
-    return drug.drugNames.map((drugName, index) => {
+    return drug.variants.map((variant, index) => {
 
         return {
             className: ('masterId_' + drug.drugKey),
@@ -54,7 +54,7 @@ const vmDrugSearch = MasterData.drugs.map((drug) => {
                     label: 'TODO: Dave ID (a)'
                 }
             ],
-            title: drugName,
+            title: variant.variantName,
             price: index === 0 ? '$100' : '$25',
         }
     
@@ -62,6 +62,7 @@ const vmDrugSearch = MasterData.drugs.map((drug) => {
 
 }).flat(2)
 
+console.log('vmDrugSearch =>')
 console.log(vmDrugSearch)
 
 const PrescriptionsGrid = (props) => {
@@ -84,7 +85,7 @@ const PrescriptionsGrid = (props) => {
 
             case 'ADD_ITEM':
                 console.log('cartReducer: ADD_ITEM')
-                console.log('--- formData parameter: ')
+                console.log('--- formData parameter =>')
                 console.log(Object.fromEntries(action.formData.entries()))
 
                 const newGridRow = {
@@ -92,10 +93,12 @@ const PrescriptionsGrid = (props) => {
                     doctor: MasterData.doctors.find(el => el.doctorKey === action.formData.get('doctor-key')),
                     drug: {
                         ...MasterData.drugs.find(el => el.drugKey === action.formData.get('drug-key')),
-                        selectedDrugName: action.formData.get('selected-drug-name'),
                         selectedDrugForm: action.formData.get('selected-drug-form'),
                         selectedDrugDosage: action.formData.get('selected-drug-dosage'),
                         selectedDrugQuantity: action.formData.get('selected-drug-quantity'),
+                        //  BIG TODO FIX THIS
+                        // selectedVariantKey: value.variantKey,
+                        selectedVariantName: action.formData.get('selected-variant-name')                    
                     },
                     pharmacy: MasterData.pharmacies.find(el => el.pharmacyKey === action.formData.get('pharmacy-key')),
                 }
@@ -105,7 +108,7 @@ const PrescriptionsGrid = (props) => {
 
             case 'EDIT_ITEM':
                 console.log('cartReducer: EDIT_ITEM')
-                console.log('--- formData parameter: ')
+                console.log('--- formData parameter =>')
                 console.log(Object.fromEntries(action.formData.entries()))
 
                 const newList = state.map((item) => {
@@ -115,10 +118,12 @@ const PrescriptionsGrid = (props) => {
                             doctor: MasterData.doctors.find(el => el.doctorKey === action.formData.get('doctor-key')),
                             drug: {
                                 ...MasterData.drugs.find(el => el.drugKey === action.formData.get('drug-key')),
-                                selectedDrugName: action.formData.get('selected-drug-name'),
                                 selectedDrugForm: action.formData.get('selected-drug-form'),
                                 selectedDrugDosage: action.formData.get('selected-drug-dosage'),
                                 selectedDrugQuantity: action.formData.get('selected-drug-quantity'),
+                                //  BIG TODO FIX THIS
+                                // selectedVariantKey: value.variantKey,
+                                selectedVariantName: action.formData.get('selected-variant-name')                    
                             },
                             pharmacy: MasterData.pharmacies.find(el => el.pharmacyKey === action.formData.get('pharmacy-key'))
                         }
@@ -158,7 +163,7 @@ const PrescriptionsGrid = (props) => {
                 doctor: null,
                 drug: {
                     ...drugMaster,
-                    selectedDrugName: drugMaster.drugNames[0],
+                    selectedDrugName: drugMaster.variants[0],
                     selectedDrugForm: drugMaster.forms[0],
                     selectedDrugDosage: drugMaster.dosages[0],
                     selectedDrugQuantity: drugMaster.quantities[0]
@@ -269,8 +274,7 @@ const PrescriptionsGrid = (props) => {
     )
 
     const handleDoctorSelectSubmit = (selectedDoctorId) => {
-        console.log('PrescriptionsGrid: handleDoctorSelectSubmit()')
-        console.log(selectedDoctorId)
+        console.log(`PrescriptionsGrid: handleDoctorSelectSubmit() ${selectedDoctorId}`)
         setDoctorsList([...doctorsList, ...fakeDoctors.filter(el => el._doctorKey == selectedDoctorId)])
         setIsDoctorModalOpen(false)
     }
@@ -305,7 +309,7 @@ const PrescriptionsGrid = (props) => {
                                 </div>
                             }
                         >
-                            <div style={{ fontWeight: 'bold' }}>{lineItem.drug.selectedDrugName}</div>
+                            <div style={{ fontWeight: 'bold' }}>{lineItem.drug.selectedVariantName}</div>
                             <div style={{ marginBottom: "5px" }}>{lineItem.drug.selectedDrugQuantity} {lineItem.drug.selectedDrugForm} {lineItem.drug.selectedDrugDosage}</div>
                             <Divider />
                             <div style={{ fontWeight: 'bold', marginBottom: "5px", marginTop: "5px" }}>{lineItem.doctor.name}</div>
