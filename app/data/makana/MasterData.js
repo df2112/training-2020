@@ -37,11 +37,11 @@ const MasterData = {
             drugKey: '001',
             variants: [
                 {
-                    variantKey: '001',
+                    variantKey: '00101',
                     variantName: 'Metformin'
                 }, 
                 {
-                    variantKey: '002',
+                    variantKey: '00102',
                     variantName: 'Glucophage (* Metformin)'                    
                 }
             ],            
@@ -54,11 +54,11 @@ const MasterData = {
             drugKey: '002',
             variants: [
                 {
-                    variantKey: '001',
+                    variantKey: '00201',
                     variantName: 'Lipitor'
                 }, 
                 {
-                    variantKey: '002',
+                    variantKey: '00202',
                     variantName: 'Atorvastatin (* Lipitor)'                    
                 }
             ],            
@@ -71,11 +71,11 @@ const MasterData = {
             drugKey: '003',
             variants: [
                 {
-                    variantKey: '001',
+                    variantKey: '00301',
                     variantName: 'Cozaar'
                 }, 
                 {
-                    variantKey: '002',
+                    variantKey: '00302',
                     variantName: 'Losartan (* Cozaar)'                    
                 }
             ],            
