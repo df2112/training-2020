@@ -16,6 +16,7 @@ import Nav from 'progressive-web-sdk/dist/components/nav/'
 import NavHeader from 'progressive-web-sdk/dist/components/nav-header/'
 import NavMenu from 'progressive-web-sdk/dist/components/nav-menu/'
 import Sheet from 'progressive-web-sdk/dist/components/sheet'
+import {getAssetUrl} from 'progressive-web-sdk/dist/ssr/universal/utils'
 
 export const MobileHeader = (props) => {
     const {
@@ -100,8 +101,8 @@ export const MobileHeader = (props) => {
             <HeaderBarTitle className="c-header__title">
                 <a href="/">
                     <img
-                        src="https://www.mobify.com/wp-content/uploads/logo-mobify-white.png"
-                        alt="Mobify Logo"
+                        src={getAssetUrl('static/img/makana/makana_logo.svg')}
+                        alt="Makana Logo"
                         height="35"
                     />
                 </a>
@@ -130,8 +131,8 @@ export const DesktopHeader = (props) => {
                     <HeaderBarTitle className="u-flexbox" href="/">
                         <img
                             className="c-header__logo"
-                            src="https://www.mobify.com/wp-content/uploads/logo-mobify-white.png"
-                            alt="Mobify Logo"
+                            src={getAssetUrl('static/img/makana/makana_logo.svg')}
+                            alt="Makana Logo"
                             height="50"
                         />
                     </HeaderBarTitle>
