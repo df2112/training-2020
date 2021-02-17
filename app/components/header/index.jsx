@@ -100,7 +100,7 @@ export const MobileHeader = (props) => {
             <HeaderBarTitle className="c-header__title">
                 <a href="/">
                     <img
-                        src="https://www.mobify.com/wp-content/uploads/logo-mobify-white.png"
+                        src="https://zzsa-031.sandbox.us01.dx.commercecloud.salesforce.com/on/demandware.static/Sites-MakanaHealth-Site/-/default/dwaa6e11df/images/logo.svg"
                         alt="Mobify Logo"
                         height="35"
                     />
@@ -130,7 +130,7 @@ export const DesktopHeader = (props) => {
                     <HeaderBarTitle className="u-flexbox" href="/">
                         <img
                             className="c-header__logo"
-                            src="https://www.mobify.com/wp-content/uploads/logo-mobify-white.png"
+                            src="https://zzsa-031.sandbox.us01.dx.commercecloud.salesforce.com/on/demandware.static/Sites-MakanaHealth-Site/-/default/dwaa6e11df/images/logo.svg"
                             alt="Mobify Logo"
                             height="50"
                         />
