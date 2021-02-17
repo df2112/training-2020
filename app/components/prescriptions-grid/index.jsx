@@ -9,12 +9,12 @@ import List from 'progressive-web-sdk/dist/components/list'
 import ListTile from 'progressive-web-sdk/dist/components/list-tile'
 import Sheet from 'progressive-web-sdk/dist/components/sheet'
 
-import { Desktop, Mobile, Tablet } from '../../media-queries'
+import { Desktop, Mobile, Tablet } from '../media-queries'
 
 import DoctorSearch from '../doctor-search'
 import DrugSearch from '../drug-search'
 import PrescriptionConfigure from '../prescription-configure'
-import MasterData from '../../../data/makana/MasterData'
+import MasterData from '../../data/makana/MasterData'
 
 const fakeDoctors = [
     {
@@ -66,7 +66,7 @@ console.log('vmDrugSearch =>')
 console.log(vmDrugSearch)
 
 const PrescriptionsGrid = (props) => {
-    const { analyticsManager, doctors, viewModel } = props
+    const { doctors, viewModel } = props
 
     const [doctorsList, setDoctorsList] = useState(doctors)
     const [isDoctorModalOpen, setIsDoctorModalOpen] = useState(false)
@@ -233,7 +233,6 @@ const PrescriptionsGrid = (props) => {
                 <br />
                 <PrescriptionConfigure
                     viewModel={drugModalViewModel}
-                    analyticsManager={analyticsManager}
                     onPrescriptionConfigureSubmit={drugModalMode === 'add' ? handleCartAddItem : handleCartEditItem}
                 />
 
@@ -272,7 +271,6 @@ const PrescriptionsGrid = (props) => {
         >
             <div className="t-product-details__shipping-delivery-modal-content">
                 <DoctorSearch
-                    analyticsManager={analyticsManager}
                     onDoctorSelectSubmit={handleDoctorSelectSubmit}
                 />
             </div>

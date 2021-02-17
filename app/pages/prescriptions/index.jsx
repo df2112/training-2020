@@ -6,39 +6,36 @@ import PropTypes from 'prop-types'
 import Breadcrumbs from 'progressive-web-sdk/dist/components/breadcrumbs'
 import Divider from 'progressive-web-sdk/dist/components/divider'
 
-import { getAnalyticsManager } from '../../../analytics'
-import PrescriptionsGrid from '../../../components/makana/prescriptions-grid'
-import { Desktop } from '../../../components/media-queries'
+// import PrescriptionsGrid from '../../components/prescriptions-grid'
+import { Desktop } from '../../components/media-queries'
 
-import MasterData from '../../../data/makana/MasterData'
-import UserData from '../../../data/makana/UserData'
+// import MasterData from '../../data/makana/MasterData'
+// import UserData from '../../data/makana/UserData'
 
-const analyticsManager = getAnalyticsManager()
+// const vmPrescriptionsGrid = UserData.cart.map((value, index) => {
 
-const vmPrescriptionsGrid = UserData.cart.map((value, index) => {
+//     const drugMaster = MasterData.drugs.find(el => el.drugKey === value.drugKey)
 
-    const drugMaster = MasterData.drugs.find(el => el.drugKey === value.drugKey)
+//     return {
+//         _gridRowKey: value._gridRowKey,
 
-    return {
-        _gridRowKey: value._gridRowKey,
+//         doctor: MasterData.doctors.find(el => el.doctorKey === value.doctorKey),
 
-        doctor: MasterData.doctors.find(el => el.doctorKey === value.doctorKey),
+//         drug: {
+//             ...drugMaster,
+//             selectedDrugForm: value.selectedDrugForm,
+//             selectedDrugDosage: value.selectedDrugDosage,
+//             selectedDrugQuantity: value.selectedDrugQuantity,
+//             selectedVariantKey: value.variantKey,
+//             selectedVariantName: drugMaster.variants.find(el => el.variantKey === value.variantKey).variantName
+//         },
 
-        drug: {
-            ...drugMaster,
-            selectedDrugForm: value.selectedDrugForm,
-            selectedDrugDosage: value.selectedDrugDosage,
-            selectedDrugQuantity: value.selectedDrugQuantity,
-            selectedVariantKey: value.variantKey,
-            selectedVariantName: drugMaster.variants.find(el => el.variantKey === value.variantKey).variantName
-        },
+//         pharmacy: MasterData.pharmacies.find(el => el.pharmacyKey === value.pharmacyKey)
+//     }
+// })
 
-        pharmacy: MasterData.pharmacies.find(el => el.pharmacyKey === value.pharmacyKey)
-    }
-})
-
-console.log('vmPrescriptionsGrid =>')
-console.log(vmPrescriptionsGrid)
+// console.log('vmPrescriptionsGrid =>')
+// console.log(vmPrescriptionsGrid)
 
 const Prescriptions = (props) => {
     const { category } = props
@@ -67,10 +64,10 @@ const Prescriptions = (props) => {
             </Desktop>
 
             <div className="t-prescriptions-list__container">
-                <PrescriptionsGrid
-                    analyticsManager={analyticsManager}
+                Test
+                {/* <PrescriptionsGrid
                     doctors={MasterData.doctors}
-                    viewModel={vmPrescriptionsGrid} />
+                    viewModel={vmPrescriptionsGrid} /> */}
             </div>
 
         </div>

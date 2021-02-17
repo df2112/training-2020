@@ -4,9 +4,7 @@ import PropTypes from 'prop-types'
 import Button from 'progressive-web-sdk/dist/components/button'
 import List from 'progressive-web-sdk/dist/components/list'
 import ListTile from 'progressive-web-sdk/dist/components/list-tile'
-import { getAnalyticsManager } from '../../../analytics'
 
-const analyticsManager = getAnalyticsManager()
 const DOCTOR_SEARCH_FORM_NAME = 'doctor-search'
 
 export const validate = (values) => {
