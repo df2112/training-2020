@@ -1,10 +1,10 @@
 {
-  "name": "training-2020",
+  "name": "makana-dfoley",
   "version": "0.0.1",
   "siteName": "training-2020",
   "siteUrl": "https://www.example.com/",
-  "projectSlug": "training-2020",
-  "aJSSlug": "training-2020",
+  "projectSlug": "makana-dfoley",
+  "aJSSlug": "makana-dfoley",
   "license": "See license in LICENSE",
   "private": true,
   "mobify": {
