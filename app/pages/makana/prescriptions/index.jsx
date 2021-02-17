@@ -57,14 +57,14 @@ const Prescriptions = (props) => {
                 includeMicroData
             />
 
-            <Desktop>
+            {/* <Desktop> <---- THIS CAUSED A HUGE PROBLEM
                 {category && (
                     <Fragment>
                         <h1 className="u-margin-bottom-lg">My {category.name}</h1>
                         <Divider className="u-margin-bottom-md" />
                     </Fragment>
                 )}
-            </Desktop>
+            </Desktop> */}
 
             <div className="t-prescriptions-list__container">
                 <PrescriptionsGrid
