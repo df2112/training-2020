@@ -57,7 +57,7 @@ const PWAApp = (props) => {
         <ResponsiveContainer>
             <Helmet>
                 <meta name="theme-color" content="#0288a7" />
-                <meta name="apple-mobile-web-app-title" content="Scaffold" />
+                <meta name="apple-mobile-web-app-title" content="Makana" />
                 <link
                     rel="apple-touch-icon"
                     href={getAssetUrl('static/img/global/apple-touch-icon.png')}
