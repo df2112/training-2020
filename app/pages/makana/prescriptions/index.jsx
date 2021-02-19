@@ -24,31 +24,7 @@ const Prescriptions = (props) => {
         return breadcrumb
     }
 
-    let vmPrescriptionsGrid = []
-
-    if (cart) {
-        vmPrescriptionsGrid = cart.map((value, index) => {
-
-            const drugMaster = MasterData.drugs.find(el => el.drugKey === value.drugKey)
-
-            return {
-                _gridRowKey: value._gridRowKey,
-
-                doctor: MasterData.doctors.find(el => el.doctorKey === value.doctorKey),
-
-                drug: {
-                    ...drugMaster,
-                    selectedDrugForm: value.selectedDrugForm,
-                    selectedDrugDosage: value.selectedDrugDosage,
-                    selectedDrugQuantity: value.selectedDrugQuantity,
-                    selectedVariantKey: value.variantKey,
-                    selectedVariantName: drugMaster.variants.find(el => el.variantKey === value.variantKey).variantName
-                },
-
-                pharmacy: MasterData.pharmacies.find(el => el.pharmacyKey === value.pharmacyKey)
-            }
-        })
-    }
+    const vmPrescriptionsGrid = cart ? getPrescriptionGridProps(cart) : []
 
     return (
         <div className="t-prescriptions-list">
@@ -88,6 +64,33 @@ const Prescriptions = (props) => {
         </div>
     )
 }
+
+const getPrescriptionGridProps = (cart) => {
+
+    const viewModel = cart.map((value, index) => {
+
+        const drugMaster = MasterData.drugs.find(el => el.drugKey === value.drugKey)
+
+        return {
+            _gridRowKey: value._gridRowKey,
+
+            doctor: MasterData.doctors.find(el => el.doctorKey === value.doctorKey),
+
+            drug: {
+                ...drugMaster,
+                selectedDrugForm: value.selectedDrugForm,
+                selectedDrugDosage: value.selectedDrugDosage,
+                selectedDrugQuantity: value.selectedDrugQuantity,
+                selectedVariantKey: value.variantKey,
+                selectedVariantName: drugMaster.variants.find(el => el.variantKey === value.variantKey).variantName
+            },
+
+            pharmacy: MasterData.pharmacies.find(el => el.pharmacyKey === value.pharmacyKey)
+        }
+    })
+
+    return viewModel
+} 
 
 Prescriptions.getTemplateName = () => {
     return 'prescriptions'
