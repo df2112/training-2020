@@ -12,42 +12,42 @@ import PrescriptionsGrid from '../../../components/makana/prescriptions-grid'
 import { Desktop } from '../../../components/media-queries'
 
 import MasterData from '../../../data/makana/MasterData'
-import UserData from '../../../data/makana/UserData'
 
 const analyticsManager = getAnalyticsManager()
 
-const vmPrescriptionsGrid = UserData.cart.map((value, index) => {
-
-    const drugMaster = MasterData.drugs.find(el => el.drugKey === value.drugKey)
-
-    return {
-        _gridRowKey: value._gridRowKey,
-
-        doctor: MasterData.doctors.find(el => el.doctorKey === value.doctorKey),
-
-        drug: {
-            ...drugMaster,
-            selectedDrugForm: value.selectedDrugForm,
-            selectedDrugDosage: value.selectedDrugDosage,
-            selectedDrugQuantity: value.selectedDrugQuantity,
-            selectedVariantKey: value.variantKey,
-            selectedVariantName: drugMaster.variants.find(el => el.variantKey === value.variantKey).variantName
-        },
-
-        pharmacy: MasterData.pharmacies.find(el => el.pharmacyKey === value.pharmacyKey)
-    }
-})
-
-console.log('vmPrescriptionsGrid =>')
-console.log(vmPrescriptionsGrid)
-
 const Prescriptions = (props) => {
-    const { category, productSearch } = props
+    const { cart, category, productSearch } = props
 
     const getBreadcrumbs = (category) => {
         const breadcrumb = [{ text: 'Home', href: '/' }]
         if (category) breadcrumb.push({ text: category['name'] })
         return breadcrumb
+    }
+
+    let vmPrescriptionsGrid = []
+
+    if (cart) {
+        vmPrescriptionsGrid = cart.map((value, index) => {
+
+            const drugMaster = MasterData.drugs.find(el => el.drugKey === value.drugKey)
+
+            return {
+                _gridRowKey: value._gridRowKey,
+
+                doctor: MasterData.doctors.find(el => el.doctorKey === value.doctorKey),
+
+                drug: {
+                    ...drugMaster,
+                    selectedDrugForm: value.selectedDrugForm,
+                    selectedDrugDosage: value.selectedDrugDosage,
+                    selectedDrugQuantity: value.selectedDrugQuantity,
+                    selectedVariantKey: value.variantKey,
+                    selectedVariantName: drugMaster.variants.find(el => el.variantKey === value.variantKey).variantName
+                },
+
+                pharmacy: MasterData.pharmacies.find(el => el.pharmacyKey === value.pharmacyKey)
+            }
+        })
     }
 
     return (
@@ -76,12 +76,14 @@ const Prescriptions = (props) => {
                 </Desktop>
             )}
 
-            <div className="t-prescriptions-list__container">
-                <PrescriptionsGrid
-                    analyticsManager={analyticsManager}
-                    doctors={MasterData.doctors}
-                    viewModel={vmPrescriptionsGrid} />
-            </div>
+            {cart && (
+                <div className="t-prescriptions-list__container">
+                    <PrescriptionsGrid
+                        analyticsManager={analyticsManager}
+                        doctors={MasterData.doctors}
+                        viewModel={vmPrescriptionsGrid} />
+                </div>
+            )}
 
         </div>
     )
@@ -95,22 +97,27 @@ Prescriptions.shouldGetProps = ({ previousParams, params }) => {
     return !previousParams || previousParams.categoryId !== params.categoryId
 }
 
-Prescriptions.getProps = async ({ params, connector }) => {
+Prescriptions.getProps = async ({ params, connector, fakeConnector }) => {
     const categoryId = 'prescriptions'
-    const [category, productSearch] = await Promise.all([
+
+    const [cart, category, productSearch] = await Promise.all([
+        fakeConnector.getCart(),
         connector.getCategory(categoryId),
         connector.searchProducts({
             filters: {
                 categoryId
             },
             query: ''
-        })
+        }),
     ])
-    return { category, productSearch }
+
+    return { cart, category, productSearch }
 }
 
 Prescriptions.propTypes = {
-    category: PropTypes.object
+    cart: PropTypes.array,
+    category: PropTypes.object,
+    productSearch: PropTypes.object,
 }
 
 export default Prescriptions

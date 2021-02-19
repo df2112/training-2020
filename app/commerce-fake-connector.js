@@ -1,5 +1,10 @@
+import UserData from './data/makana/UserData'
 
 export default class CommerceFakeConnector {
+
+    getCart() {
+        return UserData.cart
+    }
 
     getProduct(id) {
         const product = {
