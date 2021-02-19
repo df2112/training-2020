@@ -1,7 +1,7 @@
 {
   "name": "makana-dfoley",
   "short_name": "makana-dfoley",
-  "start_url": "/?homescreen=1",
+  "start_url": "/category/prescriptions",
   "background_color": "#fff",
   "theme_color": "#000",
   "display": "standalone",
