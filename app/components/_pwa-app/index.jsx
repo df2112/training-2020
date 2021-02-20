@@ -63,6 +63,7 @@ const PWAApp = (props) => {
                     href={getAssetUrl('static/img/global/apple-touch-icon.png')}
                 />
                 <link rel="manifest" href={getAssetUrl('static/manifest.json')} />
+                <script async src="https://unpkg.com/pwacompat" crossOrigin="anonymous"></script>
             </Helmet>
 
             <ScrollToTop />
