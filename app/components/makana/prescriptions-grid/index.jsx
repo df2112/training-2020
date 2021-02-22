@@ -8,6 +8,7 @@ import { HeaderBar, HeaderBarActions, HeaderBarTitle } from 'progressive-web-sdk
 import List from 'progressive-web-sdk/dist/components/list'
 import ListTile from 'progressive-web-sdk/dist/components/list-tile'
 import Sheet from 'progressive-web-sdk/dist/components/sheet'
+import { Tabs, TabsPanel } from 'progressive-web-sdk/dist/components/tabs'
 
 import { Desktop, Mobile, Tablet } from '../../media-queries'
 
@@ -287,6 +288,28 @@ const PrescriptionsGrid = (props) => {
 
     return (
         <div className="c-prescriptions-grid">
+
+            <div>
+                <Tabs activeIndex={0}>
+                    <TabsPanel title="Prescriptions">
+                        <p>
+                            Content for tab A
+                        </p>
+                    </TabsPanel>
+                    <TabsPanel title="Pharmacies">
+                        <p>
+                            Content for tab B
+                        </p>
+                    </TabsPanel>
+                    <TabsPanel title="Physicians">
+                        <p>
+                            Content for tab C
+                        </p>
+                    </TabsPanel>
+                </Tabs>
+            </div>
+
+
             <div style={{ marginTop: "6px" }} className="c-prescriptions-grid__form-field-input">
                 <DrugSearch
                     id="drug-search"
