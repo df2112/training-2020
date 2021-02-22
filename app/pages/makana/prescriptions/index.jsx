@@ -28,11 +28,6 @@ const Prescriptions = (props) => {
 
     return (
         <div className="t-prescriptions-list">
-            <Breadcrumbs
-                className="u-margin-top-lg u-margin-bottom-lg"
-                items={getBreadcrumbs(category)}
-                includeMicroData
-            />
 
             {productSearch && (
                 <Helmet>
