@@ -330,6 +330,9 @@ const PrescriptionsGrid = (props) => {
                                 ))}
                             </List>
                         </div>
+                        <div style={{ marginTop: "50px" }}>
+                            <Button className="pw--primary">Checkout!</Button>
+                        </div>
                     </TabsPanel>
 
                     <TabsPanel title="Pharmacies">
@@ -348,9 +351,6 @@ const PrescriptionsGrid = (props) => {
             </div>
 
 
-            <div style={{ marginTop: "50px" }}>
-                <Button className="pw--primary">Checkout!</Button>
-            </div>
 
             {/* Floating element/components */}
             <Mobile>
