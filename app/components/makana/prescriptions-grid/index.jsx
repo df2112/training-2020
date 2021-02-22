@@ -105,8 +105,8 @@ const PrescriptionsGrid = (props) => {
                 }
 
                 setIsDrugModalOpen(false)
-                return [newGridRow, ...state] // Stick the new item at the start
-            //return state.concat(newGridRow)
+                //return [newGridRow, ...state] // Stick the new item at the start
+                return state.concat(newGridRow)
 
             case 'EDIT_ITEM':
                 console.log('cartReducer: EDIT_ITEM')
