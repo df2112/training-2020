@@ -2,7 +2,7 @@ const MasterData = {
     doctors: [
         {
             doctorKey: '000',
-            name: 'Tim Brown, MDX',
+            name: 'Tim Brown, MD',
             age: 41,
             imgSrc: 'https://lh3.googleusercontent.com/a-/AOh14Gg3XGKD-v4EpVeECRKnNFSxUhGAxhmogB0ed6tP'
         },

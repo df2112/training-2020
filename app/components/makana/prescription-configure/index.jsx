@@ -188,7 +188,7 @@ const PrescriptionConfigure = (props) => {
 
             {/* STEP 3 MULTIPLE FORMS - Select Doctor */}
             <div style={processStep !== 3 ? { display: "none" } : {}}>
-                <h2 className="u-margin-bottom-lg">Select Physician</h2>
+                <h2 className="u-margin-bottom-lg">Select Doctor</h2>
                 <List>
                     {viewModel.doctors.map((doctor, index) => (                        
                         <form key={index} id={`${PRESCRIPTION_CONFIGURATION_FORM3_NAME} ${index}`}

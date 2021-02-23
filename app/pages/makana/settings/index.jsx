@@ -8,6 +8,8 @@ import Divider from 'progressive-web-sdk/dist/components/divider'
 
 import { getAnalyticsManager } from '../../../analytics'
 import { Desktop } from '../../../components/media-queries'
+import Button from 'progressive-web-sdk/dist/components/button'
+import Icon from 'progressive-web-sdk/dist/components/icon'
 import List from 'progressive-web-sdk/dist/components/list'
 import ListTile from 'progressive-web-sdk/dist/components/list-tile'
 
@@ -114,62 +116,60 @@ const Settings = (props) => {
             {cart && (
                 <div className="t-settings-list__container">
                     <div>
-                        <div style={{ marginTop: "6px" }} className="c-prescriptions-grid__form-field-input">
-                            <DrugSearch
-                                id="drug-search"
-                                viewModel={vmDrugSearch}
-                                onDrugSelectSubmit={showDrugModalAdd}
-                            />
-                        </div>
 
-                        <h3 className="u-margin-bottom-lg u-margin-top-lg">Blah</h3>
+                        {/* <h3 className="u-margin-bottom-lg u-margin-top-lg">Account</h3> */}
 
-                        <div style={{ marginTop: "6px", height: "450px", overflowX: "hidden", overflowY: "auto" }}>
+                        <div style={{ marginTop: "20px", height: "450px", overflowX: "hidden", overflowY: "auto" }}>
                             <List>
                                 <ListTile
-                                    startAction={<img 
-                                        style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} 
-                                        src="https://www.grxstatic.com/d4fuqqd5l3dbz/products/DrugItem_26204.JPG" />
-                                    }>
-                                    <div>Lipitor (atorvastatin)</div>
+                                    endAction={<Button className="pw--blank" icon="more" />}
+                                    startAction={<Icon name="cart" />}>
+                                    <div>Prescriptions</div>
                                 </ListTile>
                                 <Divider />
 
                                 <ListTile
-                                    startAction={<img 
-                                        style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} 
-                                        src="https://www.grxstatic.com/d4fuqqd5l3dbz/products/tms/DrugItem_6931.JPG" />
-                                    }>
-                                    <div>Lexapro (escitalopram)</div>
+                                    endAction={<Button className="pw--blank" icon="more" />}
+                                    startAction={<Icon name="help" />}>
+                                    <div>Doctors</div>
                                 </ListTile>
                                 <Divider />
 
                                 <ListTile
-                                    startAction={<img 
-                                        style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} 
-                                        src="https://www.grxstatic.com/d4fuqqd5l3dbz/products/DrugItem_26204.JPG" />
-                                    }>
-                                    <div>Zoloft (sertraline)</div>
+                                    endAction={<Button className="pw--blank" icon="more" />}
+                                    startAction={<Icon name="plus" />}>
+                                    <div>Pharmacies</div>
                                 </ListTile>
                                 <Divider />
 
                                 <ListTile
-                                    startAction={<img 
-                                        style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} 
-                                        src="https://www.grxstatic.com/d4fuqqd5l3dbz/products/tms/DrugItem_6931.JPG" />
-                                    }>
-                                    <div>Cozaar (losartan)</div>
+                                    endAction={<Button className="pw--blank" icon="more" />}
+                                    startAction={<Icon name="shipping" />}>
+                                    <div>Order History</div>
                                 </ListTile>
                                 <Divider />
 
                                 <ListTile
-                                    startAction={<img 
-                                        style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} 
-                                        src="https://www.grxstatic.com/d4fuqqd5l3dbz/products/DrugItem_26204.JPG" />
-                                    }>
-                                    <div>Neurontin (gabapentin)</div>
+                                    endAction={<Button className="pw--blank" icon="more" />}
+                                    startAction={<Icon name="settings" />}>
+                                    <div>Profile and Password</div>
                                 </ListTile>
                                 <Divider />
+
+                                <ListTile
+                                    endAction={<Button className="pw--blank" icon="more" />}
+                                    startAction={<Icon name="map" />}>
+                                    <div>Address Book</div>
+                                </ListTile>
+                                <Divider />
+
+                                <ListTile
+                                    endAction={<Button className="pw--blank" icon="more" />}
+                                    startAction={<Icon name="payment" />}>
+                                    <div>Payment</div>
+                                </ListTile>
+                                <Divider />
+
                             </List>
                         </div>
 

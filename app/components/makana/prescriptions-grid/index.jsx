@@ -341,10 +341,9 @@ const PrescriptionsGrid = (props) => {
                         </h2>
                     </TabsPanel>
 
-
-                    <TabsPanel title="Physicians">
+                    <TabsPanel title="Doctors">
                         <h2 style={{ marginTop: "20px" }}>
-                            Physicians (stub)
+                            Doctors (stub)
                         </h2>
                     </TabsPanel>
 
