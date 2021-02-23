@@ -25,7 +25,7 @@ const Footer = ({ year }) => {
                 </span>
 
                 <span style={{ paddingLeft: 20 }}>
-                    <Button href="/category/womens">
+                    <Button href="/category/search">
                         <IconLabel iconName="settings" label="Settings" />
                     </Button>
                 </span>

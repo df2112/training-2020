@@ -40,12 +40,14 @@ const Prescriptions = (props) => {
                 </Helmet>
             )}
 
-            {category && (
+            {/* {category && (
                 <Desktop>
                     <h1 className="u-margin-bottom-lg">My {category.name}</h1>
                     <Divider className="u-margin-bottom-md" />
                 </Desktop>
-            )}
+            )} */}
+
+            <h2 className="u-margin-bottom-lg u-margin-top-lg">Home</h2>
 
             {cart && (
                 <div className="t-prescriptions-list__container">

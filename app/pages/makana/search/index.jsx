@@ -7,12 +7,77 @@ import PropTypes from 'prop-types'
 import Divider from 'progressive-web-sdk/dist/components/divider'
 
 import { getAnalyticsManager } from '../../../analytics'
-import PrescriptionsGrid from '../../../components/makana/prescriptions-grid'
 import { Desktop } from '../../../components/media-queries'
+import List from 'progressive-web-sdk/dist/components/list'
+import ListTile from 'progressive-web-sdk/dist/components/list-tile'
 
+import DrugSearch from '../../../components/makana/drug-search'
 import MasterData from '../../../data/makana/MasterData'
 
 const analyticsManager = getAnalyticsManager()
+
+const vmDrugSearch = MasterData.drugs.map((drug) => {
+
+    return drug.variants.map((variant, index) => {
+
+        return {
+            className: ('masterId_' + variant.variantKey),
+            isSimple: true,
+            isFull: true,
+            imageProps: {
+                src: drug.imgSrc,
+                width: '88px',
+                height: '88px',
+                alt: 'cat'
+            },
+            href: '#',
+            options: [
+                {
+                    label: 'TODO: Dave ID (a)'
+                }
+            ],
+            title: variant.variantName,
+            price: index === 0 ? '$100' : '$25',
+        }
+
+    })
+
+}).flat(2)
+
+const showDrugModalAdd = (id) => {
+    console.log(`showDrugModalAdd: selectedProductId ${id} `)
+
+    let drugMaster = MasterData.drugs
+        .find(d => d.variants.find(v => v.variantKey === id))
+
+    let variant = drugMaster.variants
+        .find(v => v.variantKey === id)
+
+    const newDrugModalViewModel = {
+        ...drugModalViewModel,
+        prescription: {
+            doctor: null,
+            drug: {
+                ...drugMaster,
+                selectedDrugForm: drugMaster.forms[0],
+                selectedDrugDosage: drugMaster.dosages[0],
+                selectedDrugQuantity: drugMaster.quantities[0],
+                selectedVariantKey: variant.variantKey,
+                selectedVariantName: variant.variantName
+            },
+            pharmacy: null
+        }
+    }
+
+    console.log('Add: viewModel =>')
+    console.log(newDrugModalViewModel.prescription.drug)
+
+    setDrugModalViewModel(newDrugModalViewModel)
+    setSelectedDrug(id)
+    setDrugModalMode('add')
+    setIsDrugModalOpen(true)
+}
+
 
 const Search = (props) => {
     const { cart, category, productSearch } = props
@@ -22,8 +87,6 @@ const Search = (props) => {
         if (category) breadcrumb.push({ text: category['name'] })
         return breadcrumb
     }
-
-    const vmPrescriptionsGrid = cart ? getPrescriptionGridProps(cart) : []
 
     return (
         <div className="t-search-list">
@@ -39,19 +102,79 @@ const Search = (props) => {
                 </Helmet>
             )}
 
-            {category && (
+            {/* {category && (
                 <Desktop>
                     <h1 className="u-margin-bottom-lg">My {category.name}</h1>
                     <Divider className="u-margin-bottom-md" />
                 </Desktop>
-            )}
+            )} */}
+
+            <h2 className="u-margin-bottom-lg u-margin-top-lg">Search</h2>
 
             {cart && (
                 <div className="t-search-list__container">
-                    <PrescriptionsGrid
-                        analyticsManager={analyticsManager}
-                        doctors={MasterData.doctors}
-                        viewModel={vmPrescriptionsGrid} />
+                    <div>
+                        <div style={{ marginTop: "6px" }} className="c-prescriptions-grid__form-field-input">
+                            <DrugSearch
+                                id="drug-search"
+                                viewModel={vmDrugSearch}
+                                onDrugSelectSubmit={showDrugModalAdd}
+                            />
+                        </div>
+
+                        <h3 className="u-margin-bottom-lg u-margin-top-lg">Popular Searches</h3>
+
+                        <div style={{ marginTop: "6px", height: "450px", overflowX: "hidden", overflowY: "auto" }}>
+                            <List>
+                                <ListTile
+                                    startAction={<img 
+                                        style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} 
+                                        src="https://www.grxstatic.com/d4fuqqd5l3dbz/products/DrugItem_26204.JPG" />
+                                    }>
+                                    <div>Lipitor (atorvastatin)</div>
+                                </ListTile>
+                                <Divider />
+
+                                <ListTile
+                                    startAction={<img 
+                                        style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} 
+                                        src="https://www.grxstatic.com/d4fuqqd5l3dbz/products/tms/DrugItem_6931.JPG" />
+                                    }>
+                                    <div>Lexapro (escitalopram)</div>
+                                </ListTile>
+                                <Divider />
+
+                                <ListTile
+                                    startAction={<img 
+                                        style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} 
+                                        src="https://www.grxstatic.com/d4fuqqd5l3dbz/products/DrugItem_26204.JPG" />
+                                    }>
+                                    <div>Zoloft (sertraline)</div>
+                                </ListTile>
+                                <Divider />
+
+                                <ListTile
+                                    startAction={<img 
+                                        style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} 
+                                        src="https://www.grxstatic.com/d4fuqqd5l3dbz/products/tms/DrugItem_6931.JPG" />
+                                    }>
+                                    <div>Cozaar (losartan)</div>
+                                </ListTile>
+                                <Divider />
+
+                                <ListTile
+                                    startAction={<img 
+                                        style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} 
+                                        src="https://www.grxstatic.com/d4fuqqd5l3dbz/products/DrugItem_26204.JPG" />
+                                    }>
+                                    <div>Neurontin (gabapentin)</div>
+                                </ListTile>
+                                <Divider />
+                            </List>
+                        </div>
+
+                    </div>
+
                 </div>
             )}
 
@@ -59,32 +182,6 @@ const Search = (props) => {
     )
 }
 
-const getPrescriptionGridProps = (cart) => {
-
-    const viewModel = cart.map((value, index) => {
-
-        const drugMaster = MasterData.drugs.find(el => el.drugKey === value.drugKey)
-
-        return {
-            _gridRowKey: value._gridRowKey,
-
-            doctor: MasterData.doctors.find(el => el.doctorKey === value.doctorKey),
-
-            drug: {
-                ...drugMaster,
-                selectedDrugForm: value.selectedDrugForm,
-                selectedDrugDosage: value.selectedDrugDosage,
-                selectedDrugQuantity: value.selectedDrugQuantity,
-                selectedVariantKey: value.variantKey,
-                selectedVariantName: drugMaster.variants.find(el => el.variantKey === value.variantKey).variantName
-            },
-
-            pharmacy: MasterData.pharmacies.find(el => el.pharmacyKey === value.pharmacyKey)
-        }
-    })
-
-    return viewModel
-} 
 
 Search.getTemplateName = () => {
     return 'search'
