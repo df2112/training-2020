@@ -288,69 +288,48 @@ const PrescriptionsGrid = (props) => {
 
     return (
         <div className="c-prescriptions-grid">
-
             <div>
-                <Tabs activeIndex={0}>
-
-                    <TabsPanel title="Prescriptions">
-                        <div style={{ marginTop: "6px" }} className="c-prescriptions-grid__form-field-input">
-                            <DrugSearch
-                                id="drug-search"
-                                viewModel={vmDrugSearch}
-                                onDrugSelectSubmit={showDrugModalAdd}
-                            />
-                        </div>
-                        <div style={{ marginTop: "6px", height: "450px", overflowX: "hidden", overflowY: "auto" }}>
-                            <List>
-                                {cartState.map((lineItem, index) => (
-                                    <ListTile
-                                        key={lineItem._gridRowKey}
-                                        className="pw--instructional-block"
-                                        onClick={() => setActiveGridRowKey(lineItem._gridRowKey)}
-                                        endAction={
-                                            <div>
-                                                {/* TODO: align these to use same key */}
-                                                <Button className="pw--blank" icon="more" onClick={() => showDrugModalEdit(lineItem._gridRowKey)} />
-                                                <Button className="pw--blank" icon="trash" onClick={() => cartAction({ type: 'REMOVE_ITEM', id: lineItem._gridRowKey })} />
-                                            </div>
-                                        }
-                                    >
-                                        <div style={{ fontWeight: 'bold' }}>{lineItem.drug.selectedVariantName}</div>
-                                        <div style={{ marginBottom: "5px" }}>{lineItem.drug.selectedDrugQuantity} {lineItem.drug.selectedDrugForm} {lineItem.drug.selectedDrugDosage}</div>
-                                        <Divider />
-                                        <div style={{ fontWeight: 'bold', marginBottom: "5px", marginTop: "5px" }}>{lineItem.doctor.name}</div>
-                                        <Divider />
-                                        <ListTile
-                                            startAction={
-                                                <img style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} src={lineItem.pharmacy.pharmacyLogoUrl} />
-                                            }>
-                                            <div>{lineItem.pharmacy.pharmacyChain}</div>
-                                        </ListTile>
-                                    </ListTile>
-                                ))}
-                            </List>
-                        </div>
-                        <div style={{ marginTop: "50px" }}>
-                            <Button className="pw--primary">Checkout!</Button>
-                        </div>
-                    </TabsPanel>
-
-                    <TabsPanel title="Pharmacies">
-                        <p>
-                            TODO Pharmacies
-                        </p>
-                    </TabsPanel>
-
-                    <TabsPanel title="Physicians">
-                        <p>
-                            TODO Physicians
-                        </p>
-                    </TabsPanel>
-
-                </Tabs>
+                <div style={{ marginTop: "6px" }} className="c-prescriptions-grid__form-field-input">
+                    <DrugSearch
+                        id="drug-search"
+                        viewModel={vmDrugSearch}
+                        onDrugSelectSubmit={showDrugModalAdd}
+                    />
+                </div>
+                <div style={{ marginTop: "6px", height: "450px", overflowX: "hidden", overflowY: "auto" }}>
+                    <List>
+                        {cartState.map((lineItem, index) => (
+                            <ListTile
+                                key={lineItem._gridRowKey}
+                                className="pw--instructional-block"
+                                onClick={() => setActiveGridRowKey(lineItem._gridRowKey)}
+                                endAction={
+                                    <div>
+                                        {/* TODO: align these to use same key */}
+                                        <Button className="pw--blank" icon="more" onClick={() => showDrugModalEdit(lineItem._gridRowKey)} />
+                                        <Button className="pw--blank" icon="trash" onClick={() => cartAction({ type: 'REMOVE_ITEM', id: lineItem._gridRowKey })} />
+                                    </div>
+                                }
+                            >
+                                <div style={{ fontWeight: 'bold' }}>{lineItem.drug.selectedVariantName}</div>
+                                <div style={{ marginBottom: "5px" }}>{lineItem.drug.selectedDrugQuantity} {lineItem.drug.selectedDrugForm} {lineItem.drug.selectedDrugDosage}</div>
+                                <Divider />
+                                <div style={{ fontWeight: 'bold', marginBottom: "5px", marginTop: "5px" }}>{lineItem.doctor.name}</div>
+                                <Divider />
+                                <ListTile
+                                    startAction={
+                                        <img style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} src={lineItem.pharmacy.pharmacyLogoUrl} />
+                                    }>
+                                    <div>{lineItem.pharmacy.pharmacyChain}</div>
+                                </ListTile>
+                            </ListTile>
+                        ))}
+                    </List>
+                </div>
+                {/* <div style={{ marginTop: "50px" }}>
+                        <Button className="pw--primary">Checkout!</Button>
+                    </div> */}
             </div>
-
-
 
             {/* Floating element/components */}
             <Mobile>
