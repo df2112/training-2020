@@ -79,7 +79,7 @@ const showDrugModalAdd = (id) => {
 }
 
 
-const Search = (props) => {
+const Settings = (props) => {
     const { cart, category, productSearch } = props
 
     const getBreadcrumbs = (category) => {
@@ -89,7 +89,7 @@ const Search = (props) => {
     }
 
     return (
-        <div className="t-search-list">
+        <div className="t-settings-list">
 
             {productSearch && (
                 <Helmet>
@@ -109,10 +109,10 @@ const Search = (props) => {
                 </Desktop>
             )} */}
 
-            <h2 className="u-margin-bottom-lg u-margin-top-lg">Search (stub)</h2>
+            <h2 className="u-margin-bottom-lg u-margin-top-lg">Settings (stub)</h2>
 
             {cart && (
-                <div className="t-search-list__container">
+                <div className="t-settings-list__container">
                     <div>
                         <div style={{ marginTop: "6px" }} className="c-prescriptions-grid__form-field-input">
                             <DrugSearch
@@ -122,7 +122,7 @@ const Search = (props) => {
                             />
                         </div>
 
-                        <h3 className="u-margin-bottom-lg u-margin-top-lg">Popular Searches</h3>
+                        <h3 className="u-margin-bottom-lg u-margin-top-lg">Blah</h3>
 
                         <div style={{ marginTop: "6px", height: "450px", overflowX: "hidden", overflowY: "auto" }}>
                             <List>
@@ -183,15 +183,15 @@ const Search = (props) => {
 }
 
 
-Search.getTemplateName = () => {
-    return 'search'
+Settings.getTemplateName = () => {
+    return 'settings'
 }
 
-Search.shouldGetProps = ({ previousParams, params }) => {
+Settings.shouldGetProps = ({ previousParams, params }) => {
     return !previousParams || previousParams.categoryId !== params.categoryId
 }
 
-Search.getProps = async ({ params, connector, fakeConnector }) => {
+Settings.getProps = async ({ params, connector, fakeConnector }) => {
     const categoryId = 'prescriptions'
 
     const [cart, category, productSearch] = await Promise.all([
@@ -208,10 +208,10 @@ Search.getProps = async ({ params, connector, fakeConnector }) => {
     return { cart, category, productSearch }
 }
 
-Search.propTypes = {
+Settings.propTypes = {
     cart: PropTypes.array,
     category: PropTypes.object,
     productSearch: PropTypes.object,
 }
 
-export default Search
+export default Settings

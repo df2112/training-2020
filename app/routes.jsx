@@ -9,15 +9,20 @@ const ProductList = loadable(() => import('./pages/product-list'), {fallback})
 const ProductDetails = loadable(() => import('./pages/product-details'), {fallback})
 const Prescriptions = loadable(() => import('./pages/makana/prescriptions'), {fallback})
 const Search = loadable(() => import('./pages/makana/search'), {fallback})
+const Settings = loadable(() => import('./pages/makana/settings'), {fallback})
 
 const routes = [
     {
-        path: '/category/prescriptions',
+        path: '/prescriptions',
         component: Prescriptions
     },
     {
-        path: '/category/search',
+        path: '/search',
         component: Search
+    },
+    {
+        path: '/settings',
+        component: Settings
     },
     {
         path: '/category/:categoryId',
