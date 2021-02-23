@@ -13,19 +13,19 @@ const Footer = ({ year }) => {
         <footer className="c-footer u-padding-top-sm u-padding-bottom-sm">
             <div className="c-footer__content">
                 <span style={{ paddingRight: 20 }}>
-                    <Button>
+                    <Button href="/category/mens">
                         <IconLabel iconName="search" label="Search" />
                     </Button>
                 </span>
 
                 <span>
-                    <Button>
+                    <Button href="/category/prescriptions">
                         <IconLabel iconName="store" label="Home" />
                     </Button>
                 </span>
 
                 <span style={{ paddingLeft: 20 }}>
-                    <Button>
+                    <Button href="/category/womens">
                         <IconLabel iconName="settings" label="Settings" />
                     </Button>
                 </span>
