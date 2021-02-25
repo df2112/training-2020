@@ -51,7 +51,7 @@ const AppConfig = (props) => {
     const [state, dispatch] = useReducer(cartReducer, initialState)
 
     return (
-        <GlobalState initialState={state} dispatch={dispatch}>
+        <GlobalState state={state} dispatch={dispatch}>
             <Fragment>{props.children}</Fragment>
         </GlobalState>
     )

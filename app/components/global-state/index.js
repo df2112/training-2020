@@ -88,10 +88,10 @@ export const cartReducer = (state, action) => {
 };
 
 function GlobalState(props) {
-    const { initialState, dispatch } = props;
+    const { state, dispatch } = props;
 
     return (
-        <GlobalStateContext.Provider value={initialState}>
+        <GlobalStateContext.Provider value={state}>
             <GlobalDispatchContext.Provider value={dispatch}>
                 {props.children}
             </GlobalDispatchContext.Provider>
@@ -100,7 +100,7 @@ function GlobalState(props) {
 }
 
 GlobalState.propTypes = {
-    initialState: PropTypes.object.isRequired,
+    state: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
     children: PropTypes.node
 };
