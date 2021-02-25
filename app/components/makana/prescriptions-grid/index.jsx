@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useReducer } from 'react'
+import React, { useContext, useState } from 'react'
 import PropTypes from 'prop-types'
-import { v4 as uuidv4 } from 'uuid'
 
 import Button from 'progressive-web-sdk/dist/components/button'
 import Divider from 'progressive-web-sdk/dist/components/divider'
@@ -12,6 +11,7 @@ import { Tabs, TabsPanel } from 'progressive-web-sdk/dist/components/tabs'
 
 import { Desktop, Mobile, Tablet } from '../../media-queries'
 
+import { GlobalStateContext, GlobalDispatchContext, SET_CART_ITEMS } from '../../global-state'
 import DoctorSearch from '../doctor-search'
 import DrugSearch from '../drug-search'
 import PrescriptionConfigure from '../prescription-configure'
@@ -69,6 +69,12 @@ console.log(vmDrugSearch)
 const PrescriptionsGrid = (props) => {
     const { analyticsManager, doctors, viewModel } = props
 
+    const globalState = useContext(GlobalStateContext)
+    const globalDispatch = useContext(GlobalDispatchContext)
+
+    console.log('Global State in PrescriptionsGrid =>')
+    console.log(globalState)
+
     const [doctorsList, setDoctorsList] = useState(doctors)
     const [isDoctorModalOpen, setIsDoctorModalOpen] = useState(false)
     const [isDrugModalOpen, setIsDrugModalOpen] = useState(false)
@@ -81,78 +87,15 @@ const PrescriptionsGrid = (props) => {
     const [selectedDoctor, setSelectedDoctor] = useState('999')
     const [selectedDrug, setSelectedDrug] = useState()
 
-    const cartReducer = (state, action) => {
-        switch (action.type) {
-
-            case 'ADD_ITEM':
-                console.log('cartReducer: ADD_ITEM')
-                console.log('--- formData parameter =>')
-                console.log(Object.fromEntries(action.formData.entries()))
-
-                const newGridRow = {
-                    _gridRowKey: uuidv4(),
-                    doctor: MasterData.doctors.find(el => el.doctorKey === action.formData.get('doctor-key')),
-                    drug: {
-                        ...MasterData.drugs.find(el => el.drugKey === action.formData.get('drug-key')),
-                        selectedDrugForm: action.formData.get('selected-drug-form'),
-                        selectedDrugDosage: action.formData.get('selected-drug-dosage'),
-                        selectedDrugQuantity: action.formData.get('selected-drug-quantity'),
-                        //  BIG TODO FIX THIS
-                        // selectedVariantKey: value.variantKey,
-                        selectedVariantName: action.formData.get('selected-variant-name')
-                    },
-                    pharmacy: MasterData.pharmacies.find(el => el.pharmacyKey === action.formData.get('pharmacy-key')),
-                }
-
-                setIsDrugModalOpen(false)
-                //return [newGridRow, ...state] // Stick the new item at the start
-                return state.concat(newGridRow)
-
-            case 'EDIT_ITEM':
-                console.log('cartReducer: EDIT_ITEM')
-                console.log('--- formData parameter =>')
-                console.log(Object.fromEntries(action.formData.entries()))
-
-                const newList = state.map((item) => {
-                    if (item._gridRowKey === activeGridRowKey) {
-                        const updatedItem = {
-                            ...item,
-                            doctor: MasterData.doctors.find(el => el.doctorKey === action.formData.get('doctor-key')),
-                            drug: {
-                                ...MasterData.drugs.find(el => el.drugKey === action.formData.get('drug-key')),
-                                selectedDrugForm: action.formData.get('selected-drug-form'),
-                                selectedDrugDosage: action.formData.get('selected-drug-dosage'),
-                                selectedDrugQuantity: action.formData.get('selected-drug-quantity'),
-                                //  BIG TODO FIX THIS
-                                // selectedVariantKey: value.variantKey,
-                                selectedVariantName: action.formData.get('selected-variant-name')
-                            },
-                            pharmacy: MasterData.pharmacies.find(el => el.pharmacyKey === action.formData.get('pharmacy-key'))
-                        }
-                        return updatedItem
-                    } else {
-                        return item
-                    }
-                })
-
-                setIsDrugModalOpen(false)
-                return newList
-
-            case 'REMOVE_ITEM':
-                console.log('cartReducer: REMOVE_ITEM')
-
-                return state.filter((item) => item._gridRowKey !== action.id)
-
-            default:
-                throw new Error();
-        }
+    const handleCartAddItem = (formData) => {
+        globalDispatch({ type: 'ADD_ITEM', formData })
+        setIsDrugModalOpen(false)
     }
 
-    const [cartState, cartAction] = useReducer(cartReducer, viewModel)
-
-    const handleCartAddItem = (formData) => cartAction({ type: 'ADD_ITEM', formData })
-
-    const handleCartEditItem = (formData) => cartAction({ type: 'EDIT_ITEM', formData })
+    const handleCartEditItem = (formData) => {
+        globalDispatch({ type: 'EDIT_ITEM', formData })
+        setIsDrugModalOpen(false)
+    }
 
     const showDrugModalAdd = (id) => {
         console.log(`showDrugModalAdd: selectedProductId ${id} `)
@@ -191,16 +134,10 @@ const PrescriptionsGrid = (props) => {
     const showDrugModalEdit = (gridRowKey) => {
         console.log(`showDrugModalEdit: gridRowKey ${gridRowKey} `)
 
-        console.log('showDrugModalEdit: cartState =>')
-        console.log(cartState)
-
         const newDrugModalViewModel = {
             ...drugModalViewModel,
-            prescription: cartState.find(el => el._gridRowKey === gridRowKey)
+            prescription: globalState.cart.find(el => el._gridRowKey === gridRowKey)
         }
-
-        console.log('showDrugModalEdit: viewModel =>')
-        console.log(newDrugModalViewModel.prescription.drug)
 
         setDrugModalViewModel(newDrugModalViewModel)
         setSelectedDrug(newDrugModalViewModel.prescription.drug.drugKey)
@@ -302,7 +239,7 @@ const PrescriptionsGrid = (props) => {
                         </div>
                         <div style={{ marginTop: "6px", height: "450px", overflowX: "hidden", overflowY: "auto" }}>
                             <List>
-                                {cartState.map((lineItem, index) => (
+                                {globalState.cart.map((lineItem, index) => (
                                     <ListTile
                                         key={lineItem._gridRowKey}
                                         className="pw--instructional-block"
@@ -311,7 +248,7 @@ const PrescriptionsGrid = (props) => {
                                             <div>
                                                 {/* TODO: align these to use same key */}
                                                 <Button className="pw--blank" icon="more" onClick={() => showDrugModalEdit(lineItem._gridRowKey)} />
-                                                <Button className="pw--blank" icon="trash" onClick={() => cartAction({ type: 'REMOVE_ITEM', id: lineItem._gridRowKey })} />
+                                                <Button className="pw--blank" icon="trash" onClick={() => globalDispatch({ type: 'REMOVE_ITEM', id: lineItem._gridRowKey })} />
                                             </div>
                                         }
                                     >

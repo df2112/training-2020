@@ -13,7 +13,7 @@ const UserData = {
 
     cart: [
         {
-            _gridRowKey: 0,
+            _gridRowKey: '0',
             doctorKey: '000',            
             drugKey: '001',
             variantKey: '00102',
@@ -23,7 +23,7 @@ const UserData = {
             pharmacyKey: '001'
         },
         // {
-        //     _gridRowKey: 1,
+        //     _gridRowKey: '1',
         //     doctorKey: '001',            
         //     drugKey: '002',
         //     variantKey: '00201',
@@ -33,7 +33,7 @@ const UserData = {
         //     pharmacyKey: '002'
         // },
         {
-            _gridRowKey: 2,
+            _gridRowKey: '5',
             doctorKey: '003',            
             drugKey: '003',
             variantKey: '00302',

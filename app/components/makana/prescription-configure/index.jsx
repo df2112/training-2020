@@ -80,6 +80,7 @@ const PrescriptionConfigure = (props) => {
             >
                 <h2 className="u-margin-bottom-lg">Configure Prescription</h2>
                 <List>
+                    <input name="grid-row-key" type="hidden" value={viewModel.prescription._gridRowKey} />
                     <input name="drug-key" type="hidden" value={viewModel.prescription.drug.drugKey} />
 
                     <ListTile className="c-prescription-configure__form-field-row u-flexbox">
