@@ -67,7 +67,7 @@ console.log('vmDrugSearch =>')
 console.log(vmDrugSearch)
 
 const PrescriptionsGrid = (props) => {
-    const { analyticsManager, doctors, viewModel } = props
+    const { analyticsManager, doctors } = props
 
     const globalState = useContext(GlobalStateContext)
     const globalDispatch = useContext(GlobalDispatchContext)
@@ -83,7 +83,6 @@ const PrescriptionsGrid = (props) => {
         pharmacies: MasterData.pharmacies,
         doctors: MasterData.doctors
     })
-    const [activeGridRowKey, setActiveGridRowKey] = useState()
     const [selectedDoctor, setSelectedDoctor] = useState('999')
     const [selectedDrug, setSelectedDrug] = useState()
 
@@ -243,7 +242,6 @@ const PrescriptionsGrid = (props) => {
                                     <ListTile
                                         key={lineItem._gridRowKey}
                                         className="pw--instructional-block"
-                                        onClick={() => setActiveGridRowKey(lineItem._gridRowKey)}
                                         endAction={
                                             <div>
                                                 {/* TODO: align these to use same key */}
@@ -311,7 +309,7 @@ PrescriptionsGrid.propTypes = {
      * Handler that is triggers when the form is submitted
      */
     onSubmit: PropTypes.func,
-    viewModel: PropTypes.array
+    doctors: PropTypes.array
 }
 
 export default PrescriptionsGrid

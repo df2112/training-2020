@@ -16,15 +16,13 @@ import MasterData from '../../../data/makana/MasterData'
 const analyticsManager = getAnalyticsManager()
 
 const Prescriptions = (props) => {
-    const { cart, category, productSearch } = props
+    const { category, productSearch } = props
 
     const getBreadcrumbs = (category) => {
         const breadcrumb = [{ text: 'Home', href: '/' }]
         if (category) breadcrumb.push({ text: category['name'] })
         return breadcrumb
     }
-
-    const vmPrescriptionsGrid = cart ? getPrescriptionGridProps(cart) : []
 
     return (
         <div className="t-prescriptions-list">
@@ -49,45 +47,16 @@ const Prescriptions = (props) => {
 
             <h2 className="u-margin-bottom-lg u-margin-top-lg">Home</h2>
 
-            {cart && (
-                <div className="t-prescriptions-list__container">
-                    <PrescriptionsGrid
-                        analyticsManager={analyticsManager}
-                        doctors={MasterData.doctors}
-                        viewModel={vmPrescriptionsGrid} />
-                </div>
-            )}
+            <div className="t-prescriptions-list__container">
+                <PrescriptionsGrid
+                    analyticsManager={analyticsManager}
+                    doctors={MasterData.doctors}
+                />
+            </div>
 
         </div>
     )
 }
-
-const getPrescriptionGridProps = (cart) => {
-
-    const viewModel = cart.map((value, index) => {
-
-        const drugMaster = MasterData.drugs.find(el => el.drugKey === value.drugKey)
-
-        return {
-            _gridRowKey: value._gridRowKey,
-
-            doctor: MasterData.doctors.find(el => el.doctorKey === value.doctorKey),
-
-            drug: {
-                ...drugMaster,
-                selectedDrugForm: value.selectedDrugForm,
-                selectedDrugDosage: value.selectedDrugDosage,
-                selectedDrugQuantity: value.selectedDrugQuantity,
-                selectedVariantKey: value.variantKey,
-                selectedVariantName: drugMaster.variants.find(el => el.variantKey === value.variantKey).variantName
-            },
-
-            pharmacy: MasterData.pharmacies.find(el => el.pharmacyKey === value.pharmacyKey)
-        }
-    })
-
-    return viewModel
-} 
 
 Prescriptions.getTemplateName = () => {
     return 'prescriptions'
@@ -100,8 +69,7 @@ Prescriptions.shouldGetProps = ({ previousParams, params }) => {
 Prescriptions.getProps = async ({ params, connector, fakeConnector }) => {
     const categoryId = 'prescriptions'
 
-    const [cart, category, productSearch] = await Promise.all([
-        fakeConnector.getCart(),
+    const [category, productSearch] = await Promise.all([
         connector.getCategory(categoryId),
         connector.searchProducts({
             filters: {
@@ -111,11 +79,10 @@ Prescriptions.getProps = async ({ params, connector, fakeConnector }) => {
         }),
     ])
 
-    return { cart, category, productSearch }
+    return { category, productSearch }
 }
 
 Prescriptions.propTypes = {
-    cart: PropTypes.array,
     category: PropTypes.object,
     productSearch: PropTypes.object,
 }
