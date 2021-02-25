@@ -63,9 +63,6 @@ const vmDrugSearch = MasterData.drugs.map((drug) => {
 
 }).flat(2)
 
-console.log('vmDrugSearch =>')
-console.log(vmDrugSearch)
-
 const PrescriptionsGrid = (props) => {
     const { analyticsManager, doctors } = props
 
