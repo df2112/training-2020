@@ -65,7 +65,7 @@ const PrescriptionConfigure = (props) => {
         (event) => setSelectedDrugQuantity(event.target.value)
 
     const handleVariantChanged = 
-    (event) => setSelectedVariantName(event.target.value)
+        (event) => setSelectedVariantName(event.target.value)
 
     return (
         <div>
