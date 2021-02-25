@@ -11,7 +11,7 @@ const PRESCRIPTION_CONFIGURATION_FORM2_NAME = 'prescription-configure-2'
 const PRESCRIPTION_CONFIGURATION_FORM3_NAME = 'prescription-configure-3'
 
 const PrescriptionConfigure = (props) => {
-    const { viewModel, onPrescriptionConfigureSubmit } = props
+    const { viewModel, onSubmit } = props
     const [processStep, setProcessStep] = useState(1)
     const [formData1, setFormData1] = useState()
     const [formData2, setFormData2] = useState()
@@ -50,7 +50,7 @@ const PrescriptionConfigure = (props) => {
                     formData3.set(kv[0], kv[1])
                 }
 
-                if (onPrescriptionConfigureSubmit) onPrescriptionConfigureSubmit(formData3)
+                if (onSubmit) onSubmit(formData3)
                 break
         }
     }
@@ -227,7 +227,7 @@ PrescriptionConfigure.propTypes = {
     /**
      * Handler that is triggers when the form is submitted
      */
-    onPrescriptionConfigureSubmit: PropTypes.func,
+    onSubmit: PropTypes.func,
     viewModel: PropTypes.object
 }
 

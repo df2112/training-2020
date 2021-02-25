@@ -6,7 +6,7 @@ import Search from 'progressive-web-sdk/dist/components/search'
 const DRUG_SEARCH_FORM_NAME = 'drug-search'
 
 const DrugSearch = (props) => {
-    const { viewModel, onDrugSelectSubmit } = props
+    const { viewModel, onSubmit } = props
     const [productSuggestions, setProductSuggestions] = useState([])
 
     const addSuggestions = (event) => {
@@ -36,7 +36,7 @@ const DrugSearch = (props) => {
 
         setProductSuggestions([])
         
-        if (onDrugSelectSubmit) onDrugSelectSubmit(selectedVariantId)
+        if (onSubmit) onSubmit(selectedVariantId)
     }
 
     return (
@@ -56,7 +56,7 @@ const DrugSearch = (props) => {
 
 DrugSearch.propTypes = {
     viewModel: PropTypes.array,
-    onDrugSelectSubmit: PropTypes.func
+    onSubmit: PropTypes.func
 }
 
 export default DrugSearch

@@ -118,7 +118,7 @@ const Search = (props) => {
                             <DrugSearch
                                 id="drug-search"
                                 viewModel={vmDrugSearch}
-                                onDrugSelectSubmit={showDrugModalAdd}
+                                onSubmit={showDrugModalAdd}
                             />
                         </div>
 

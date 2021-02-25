@@ -168,7 +168,7 @@ const PrescriptionsGrid = (props) => {
                 <PrescriptionConfigure
                     viewModel={drugModalViewModel}
                     analyticsManager={analyticsManager}
-                    onPrescriptionConfigureSubmit={drugModalMode === 'add' ? handleCartAddItem : handleCartEditItem}
+                    onSubmit={drugModalMode === 'add' ? handleCartAddItem : handleCartEditItem}
                 />
 
             </div>
@@ -230,7 +230,7 @@ const PrescriptionsGrid = (props) => {
                             <DrugSearch
                                 id="drug-search"
                                 viewModel={vmDrugSearch}
-                                onDrugSelectSubmit={showDrugModalAdd}
+                                onSubmit={showDrugModalAdd}
                             />
                         </div>
                         <div style={{ marginTop: "6px", height: "450px", overflowX: "hidden", overflowY: "auto" }}>
