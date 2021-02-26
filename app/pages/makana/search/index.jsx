@@ -1,19 +1,19 @@
 /* eslint-disable import/namespace */
 /* eslint-disable import/named */
-import React, { Fragment, useContext, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Helmet from 'react-helmet'
 import PropTypes from 'prop-types'
+import { useHistory } from 'react-router-dom'
 
-import Divider from 'progressive-web-sdk/dist/components/divider'
-
-import { getAnalyticsManager } from '../../../analytics'
-import { Desktop, Mobile, Tablet } from '../../../components/media-queries'
-import { HeaderBar, HeaderBarActions, HeaderBarTitle } from 'progressive-web-sdk/dist/components/header-bar'
 import Button from 'progressive-web-sdk/dist/components/button'
+import Divider from 'progressive-web-sdk/dist/components/divider'
+import { HeaderBar, HeaderBarActions, HeaderBarTitle } from 'progressive-web-sdk/dist/components/header-bar'
 import List from 'progressive-web-sdk/dist/components/list'
 import ListTile from 'progressive-web-sdk/dist/components/list-tile'
 import Sheet from 'progressive-web-sdk/dist/components/sheet'
 
+import { getAnalyticsManager } from '../../../analytics'
+import { Desktop, Mobile, Tablet } from '../../../components/media-queries'
 import { GlobalStateContext, GlobalDispatchContext, SET_CART_ITEMS } from '../../../components/global-state'
 import DrugSearch from '../../../components/makana/drug-search'
 import MasterData from '../../../data/makana/MasterData'
@@ -58,24 +58,20 @@ const Search = (props) => {
     console.log('Global State in Search page =>')
     console.log(globalState)
 
-    const handleCartAddItem = (formData) => {
-        globalDispatch({ type: 'ADD_ITEM', formData })
-        setIsDrugModalOpen(false)
-    }
-    
     const [isDrugModalOpen, setIsDrugModalOpen] = useState(false)
     const [drugModalMode, setDrugModalMode] = useState()
-    const [selectedDrug, setSelectedDrug] = useState()
-
     const [drugModalViewModel, setDrugModalViewModel] = useState({
         pharmacies: MasterData.pharmacies,
         doctors: MasterData.doctors
     })
+    const [selectedDrug, setSelectedDrug] = useState()
 
-    const getBreadcrumbs = (category) => {
-        const breadcrumb = [{ text: 'Home', href: '/' }]
-        if (category) breadcrumb.push({ text: category['name'] })
-        return breadcrumb
+    let history = useHistory()
+
+    function handleCartAddItem(formData) {
+        globalDispatch({ type: 'ADD_ITEM', formData })
+        setIsDrugModalOpen(false)
+        history.push('/prescriptions')
     }
 
     const DrugModal = ({ width }) => (
@@ -112,15 +108,15 @@ const Search = (props) => {
         </Sheet>
     )
 
-    const showDrugModalAdd = (id) => {
-        console.log(`showDrugModalAdd: selectedProductId ${id} `)
-    
+    const showDrugModal = (id) => {
+        console.log(`Search Page showDrugModal: selectedProductId ${id} `)
+
         let drugMaster = MasterData.drugs
             .find(d => d.variants.find(v => v.variantKey === id))
-    
+
         let variant = drugMaster.variants
             .find(v => v.variantKey === id)
-    
+
         const newDrugModalViewModel = {
             ...drugModalViewModel,
             prescription: {
@@ -136,16 +132,16 @@ const Search = (props) => {
                 pharmacy: null
             }
         }
-    
+
         console.log('Add: viewModel =>')
         console.log(newDrugModalViewModel.prescription.drug)
-    
+
         setDrugModalViewModel(newDrugModalViewModel)
         setSelectedDrug(id)
         setDrugModalMode('add')
         setIsDrugModalOpen(true)
     }
-    
+
     return (
         <div className="t-search-list">
 
@@ -176,7 +172,7 @@ const Search = (props) => {
                             <DrugSearch
                                 id="drug-search"
                                 viewModel={vmDrugSearch}
-                                onSubmit={showDrugModalAdd}
+                                onSubmit={showDrugModal}
                             />
                         </div>
 
@@ -185,8 +181,8 @@ const Search = (props) => {
                         <div style={{ marginTop: "6px", height: "450px", overflowX: "hidden", overflowY: "auto" }}>
                             <List>
                                 <ListTile
-                                    startAction={<img 
-                                        style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} 
+                                    startAction={<img
+                                        style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }}
                                         src="https://www.grxstatic.com/d4fuqqd5l3dbz/products/DrugItem_26204.JPG" />
                                     }>
                                     <div>Lipitor (atorvastatin)</div>
@@ -194,8 +190,8 @@ const Search = (props) => {
                                 <Divider />
 
                                 <ListTile
-                                    startAction={<img 
-                                        style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} 
+                                    startAction={<img
+                                        style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }}
                                         src="https://www.grxstatic.com/d4fuqqd5l3dbz/products/tms/DrugItem_6931.JPG" />
                                     }>
                                     <div>Lexapro (escitalopram)</div>
@@ -203,8 +199,8 @@ const Search = (props) => {
                                 <Divider />
 
                                 <ListTile
-                                    startAction={<img 
-                                        style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} 
+                                    startAction={<img
+                                        style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }}
                                         src="https://www.grxstatic.com/d4fuqqd5l3dbz/products/DrugItem_26204.JPG" />
                                     }>
                                     <div>Zoloft (sertraline)</div>
@@ -212,8 +208,8 @@ const Search = (props) => {
                                 <Divider />
 
                                 <ListTile
-                                    startAction={<img 
-                                        style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} 
+                                    startAction={<img
+                                        style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }}
                                         src="https://www.grxstatic.com/d4fuqqd5l3dbz/products/tms/DrugItem_6931.JPG" />
                                     }>
                                     <div>Cozaar (losartan)</div>
@@ -221,8 +217,8 @@ const Search = (props) => {
                                 <Divider />
 
                                 <ListTile
-                                    startAction={<img 
-                                        style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} 
+                                    startAction={<img
+                                        style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }}
                                         src="https://www.grxstatic.com/d4fuqqd5l3dbz/products/DrugItem_26204.JPG" />
                                     }>
                                     <div>Neurontin (gabapentin)</div>
@@ -252,7 +248,6 @@ const Search = (props) => {
         </div>
     )
 }
-
 
 Search.getTemplateName = () => {
     return 'search'
