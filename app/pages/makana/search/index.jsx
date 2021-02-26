@@ -1,18 +1,23 @@
 /* eslint-disable import/namespace */
 /* eslint-disable import/named */
-import React, { Fragment } from 'react'
+import React, { Fragment, useContext, useState } from 'react'
 import Helmet from 'react-helmet'
 import PropTypes from 'prop-types'
 
 import Divider from 'progressive-web-sdk/dist/components/divider'
 
 import { getAnalyticsManager } from '../../../analytics'
-import { Desktop } from '../../../components/media-queries'
+import { Desktop, Mobile, Tablet } from '../../../components/media-queries'
+import { HeaderBar, HeaderBarActions, HeaderBarTitle } from 'progressive-web-sdk/dist/components/header-bar'
+import Button from 'progressive-web-sdk/dist/components/button'
 import List from 'progressive-web-sdk/dist/components/list'
 import ListTile from 'progressive-web-sdk/dist/components/list-tile'
+import Sheet from 'progressive-web-sdk/dist/components/sheet'
 
+import { GlobalStateContext, GlobalDispatchContext, SET_CART_ITEMS } from '../../../components/global-state'
 import DrugSearch from '../../../components/makana/drug-search'
 import MasterData from '../../../data/makana/MasterData'
+import PrescriptionConfigure from '../../../components/makana/prescription-configure'
 
 const analyticsManager = getAnalyticsManager()
 
@@ -44,43 +49,28 @@ const vmDrugSearch = MasterData.drugs.map((drug) => {
 
 }).flat(2)
 
-const showDrugModalAdd = (id) => {
-    console.log(`showDrugModalAdd: selectedProductId ${id} `)
-
-    let drugMaster = MasterData.drugs
-        .find(d => d.variants.find(v => v.variantKey === id))
-
-    let variant = drugMaster.variants
-        .find(v => v.variantKey === id)
-
-    const newDrugModalViewModel = {
-        ...drugModalViewModel,
-        prescription: {
-            doctor: null,
-            drug: {
-                ...drugMaster,
-                selectedDrugForm: drugMaster.forms[0],
-                selectedDrugDosage: drugMaster.dosages[0],
-                selectedDrugQuantity: drugMaster.quantities[0],
-                selectedVariantKey: variant.variantKey,
-                selectedVariantName: variant.variantName
-            },
-            pharmacy: null
-        }
-    }
-
-    console.log('Add: viewModel =>')
-    console.log(newDrugModalViewModel.prescription.drug)
-
-    setDrugModalViewModel(newDrugModalViewModel)
-    setSelectedDrug(id)
-    setDrugModalMode('add')
-    setIsDrugModalOpen(true)
-}
-
-
 const Search = (props) => {
     const { cart, category, productSearch } = props
+
+    const globalState = useContext(GlobalStateContext)
+    const globalDispatch = useContext(GlobalDispatchContext)
+
+    console.log('Global State in Search page =>')
+    console.log(globalState)
+
+    const handleCartAddItem = (formData) => {
+        globalDispatch({ type: 'ADD_ITEM', formData })
+        setIsDrugModalOpen(false)
+    }
+    
+    const [isDrugModalOpen, setIsDrugModalOpen] = useState(false)
+    const [drugModalMode, setDrugModalMode] = useState()
+    const [selectedDrug, setSelectedDrug] = useState()
+
+    const [drugModalViewModel, setDrugModalViewModel] = useState({
+        pharmacies: MasterData.pharmacies,
+        doctors: MasterData.doctors
+    })
 
     const getBreadcrumbs = (category) => {
         const breadcrumb = [{ text: 'Home', href: '/' }]
@@ -88,6 +78,74 @@ const Search = (props) => {
         return breadcrumb
     }
 
+    const DrugModal = ({ width }) => (
+        <Sheet
+            className="pw--no-shadow t-product-details__shipping-delivery-info-modal"
+            coverage={width}
+            open={isDrugModalOpen}
+            effect="modal-center"
+            headerContent={
+                <HeaderBar>
+                    <HeaderBarTitle className="u-flex u-padding-start-md u-text-align-start u-text-size-big">
+                        Prescription {drugModalMode}
+                    </HeaderBarTitle>
+
+                    <HeaderBarActions>
+                        <Button
+                            innerClassName="u-padding-0"
+                            icon="close"
+                            onClick={() => setIsDrugModalOpen(false)}
+                        />
+                    </HeaderBarActions>
+                </HeaderBar>
+            }
+        >
+            <div className="t-product-details__shipping-delivery-modal-content">
+                <br />
+                <PrescriptionConfigure
+                    viewModel={drugModalViewModel}
+                    analyticsManager={analyticsManager}
+                    onSubmit={handleCartAddItem}
+                />
+
+            </div>
+        </Sheet>
+    )
+
+    const showDrugModalAdd = (id) => {
+        console.log(`showDrugModalAdd: selectedProductId ${id} `)
+    
+        let drugMaster = MasterData.drugs
+            .find(d => d.variants.find(v => v.variantKey === id))
+    
+        let variant = drugMaster.variants
+            .find(v => v.variantKey === id)
+    
+        const newDrugModalViewModel = {
+            ...drugModalViewModel,
+            prescription: {
+                doctor: null,
+                drug: {
+                    ...drugMaster,
+                    selectedDrugForm: drugMaster.forms[0],
+                    selectedDrugDosage: drugMaster.dosages[0],
+                    selectedDrugQuantity: drugMaster.quantities[0],
+                    selectedVariantKey: variant.variantKey,
+                    selectedVariantName: variant.variantName
+                },
+                pharmacy: null
+            }
+        }
+    
+        console.log('Add: viewModel =>')
+        console.log(newDrugModalViewModel.prescription.drug)
+    
+        setDrugModalViewModel(newDrugModalViewModel)
+        setSelectedDrug(id)
+        setDrugModalMode('add')
+        setIsDrugModalOpen(true)
+    }
+    
     return (
         <div className="t-search-list">
 
@@ -177,6 +235,19 @@ const Search = (props) => {
 
                 </div>
             )}
+
+            {/* Floating element/components */}
+            <Mobile>
+                <DrugModal width="80%" />
+            </Mobile>
+
+            <Tablet>
+                <DrugModal width="60%" />
+            </Tablet>
+
+            <Desktop>
+                <DrugModal width="60%" />
+            </Desktop>
 
         </div>
     )
