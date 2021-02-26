@@ -1,12 +1,10 @@
 /* eslint-disable import/namespace */
 /* eslint-disable import/named */
 import React, { useContext, useState } from 'react'
-import Helmet from 'react-helmet'
 import PropTypes from 'prop-types'
 import { useHistory } from 'react-router-dom'
 
 import Button from 'progressive-web-sdk/dist/components/button'
-import Divider from 'progressive-web-sdk/dist/components/divider'
 import { HeaderBar, HeaderBarActions, HeaderBarTitle } from 'progressive-web-sdk/dist/components/header-bar'
 import List from 'progressive-web-sdk/dist/components/list'
 import ListTile from 'progressive-web-sdk/dist/components/list-tile'
@@ -145,25 +143,7 @@ const Search = (props) => {
     return (
         <div className="t-search-list">
 
-            {productSearch && (
-                <Helmet>
-                    <title>{`${productSearch.total} results for "${productSearch.query}"`}</title>
-                    <meta name="keywords" content={productSearch.query} />
-                    <meta
-                        name="description"
-                        content={productSearch.query || 'Default page description.'}
-                    />
-                </Helmet>
-            )}
-
-            {/* {category && (
-                <Desktop>
-                    <h1 className="u-margin-bottom-lg">My {category.name}</h1>
-                    <Divider className="u-margin-bottom-md" />
-                </Desktop>
-            )} */}
-
-            <h2 className="u-margin-bottom-lg u-margin-top-lg">Search (stub)</h2>
+            <h2 className="u-margin-bottom-lg u-margin-top-lg">Search</h2>
 
             {cart && (
                 <div className="t-search-list__container">
@@ -180,55 +160,24 @@ const Search = (props) => {
 
                         <div style={{ marginTop: "6px", height: "450px", overflowX: "hidden", overflowY: "auto" }}>
                             <List>
-                                <ListTile
-                                    startAction={<img
-                                        style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }}
-                                        src="https://www.grxstatic.com/d4fuqqd5l3dbz/products/DrugItem_26204.JPG" />
-                                    }>
-                                    <div>Lipitor (atorvastatin)</div>
-                                </ListTile>
-                                <Divider />
+                                {MasterData.drugs.map((drug, index) => (
+                                    (index < 5 &&
+                                        <ListTile key={drug.drugKey}
+                                            className="pw--instructional-block"
+                                            startAction={<img style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} src={drug.imgSrc} />}
+                                            endAction={
+                                                <Button className="pw--blank" icon="more" onClick={() => showPrescriptionModal(drug.variants[0].variantKey)} />
+                                            }
+                                        >
+                                            <input name="variant-key" type="hidden" value={drug.variants[0].variantKey} />
 
-                                <ListTile
-                                    startAction={<img
-                                        style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }}
-                                        src="https://www.grxstatic.com/d4fuqqd5l3dbz/products/tms/DrugItem_6931.JPG" />
-                                    }>
-                                    <div>Lexapro (escitalopram)</div>
-                                </ListTile>
-                                <Divider />
-
-                                <ListTile
-                                    startAction={<img
-                                        style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }}
-                                        src="https://www.grxstatic.com/d4fuqqd5l3dbz/products/DrugItem_26204.JPG" />
-                                    }>
-                                    <div>Zoloft (sertraline)</div>
-                                </ListTile>
-                                <Divider />
-
-                                <ListTile
-                                    startAction={<img
-                                        style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }}
-                                        src="https://www.grxstatic.com/d4fuqqd5l3dbz/products/tms/DrugItem_6931.JPG" />
-                                    }>
-                                    <div>Cozaar (losartan)</div>
-                                </ListTile>
-                                <Divider />
-
-                                <ListTile
-                                    startAction={<img
-                                        style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }}
-                                        src="https://www.grxstatic.com/d4fuqqd5l3dbz/products/DrugItem_26204.JPG" />
-                                    }>
-                                    <div>Neurontin (gabapentin)</div>
-                                </ListTile>
-                                <Divider />
+                                            <div>{drug.variants[0].variantName}</div>
+                                        </ListTile>
+                                    )
+                                ))}
                             </List>
                         </div>
-
                     </div>
-
                 </div>
             )}
 

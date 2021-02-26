@@ -95,6 +95,57 @@ const MasterData = {
             dosages: ['30mg', '40mg', '50mg'],
             quantities: [13, 23, 53],
             imgSrc: 'https://www.grxstatic.com/d4fuqqd5l3dbz/products/DrugItem_26204.JPG',
+        },
+        {
+            drugKey: '004',
+            variants: [
+                {
+                    variantKey: '00401',
+                    variantName: 'Lexapro'
+                }, 
+                {
+                    variantKey: '00402',
+                    variantName: 'escitalopram (* Lexapro)'                    
+                }
+            ],            
+            forms: ['tablet', 'capsule'],
+            dosages: ['10mg', '20mg', '30mg'],
+            quantities: [14, 24, 54],
+            imgSrc: 'https://www.grxstatic.com/d4fuqqd5l3dbz/products/DrugItem_6931.JPG',
+        },
+        {
+            drugKey: '005',
+            variants: [
+                {
+                    variantKey: '00501',
+                    variantName: 'Zoloft'
+                }, 
+                {
+                    variantKey: '00502',
+                    variantName: 'sertraline (* Zoloft)'                    
+                }
+            ],            
+            forms: ['syrup', 'capsule'],
+            dosages: ['50mg', '75mg', '100mg'],
+            quantities: [15, 25, 55],
+            imgSrc: 'https://www.grxstatic.com/d4fuqqd5l3dbz/products/DrugItem_26204.JPG',
+        },
+        {
+            drugKey: '006',
+            variants: [
+                {
+                    variantKey: '00601',
+                    variantName: 'Neurontin'
+                }, 
+                {
+                    variantKey: '00602',
+                    variantName: 'gabapentin (* Neurontin)'                    
+                }
+            ],            
+            forms: ['tablet', 'capsule'],
+            dosages: ['20mg', '35mg', '60mg'],
+            quantities: [16, 26, 56],
+            imgSrc: 'https://www.grxstatic.com/d4fuqqd5l3dbz/products/DrugItem_6931.JPG',
         }
     ],
     
