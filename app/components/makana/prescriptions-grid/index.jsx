@@ -44,9 +44,9 @@ const PrescriptionsGrid = (props) => {
 
     const [doctorsList, setDoctorsList] = useState(doctors)
     const [isDoctorModalOpen, setIsDoctorModalOpen] = useState(false)
-    const [isDrugModalOpen, setIsDrugModalOpen] = useState(false)
-    const [drugModalMode, setDrugModalMode] = useState()
-    const [drugModalViewModel, setDrugModalViewModel] = useState({
+    const [isPrescriptionModalOpen, setIsPrescriptionModalOpen] = useState(false)
+    const [PrescriptionModalMode, setPrescriptionModalMode] = useState()
+    const [PrescriptionModalViewModel, setPrescriptionModalViewModel] = useState({
         pharmacies: MasterData.pharmacies,
         doctors: MasterData.doctors
     })
@@ -55,26 +55,26 @@ const PrescriptionsGrid = (props) => {
 
     const handleCartEditItem = (formData) => {
         globalDispatch({ type: 'EDIT_ITEM', formData })
-        setIsDrugModalOpen(false)
+        setIsPrescriptionModalOpen(false)
     }
 
-    const DrugModal = ({ width }) => (
+    const PrescriptionModal = ({ width }) => (
         <Sheet
             className="pw--no-shadow t-product-details__shipping-delivery-info-modal"
             coverage={width}
-            open={isDrugModalOpen}
+            open={isPrescriptionModalOpen}
             effect="modal-center"
             headerContent={
                 <HeaderBar>
                     <HeaderBarTitle className="u-flex u-padding-start-md u-text-align-start u-text-size-big">
-                        Prescription {drugModalMode}
+                        Prescription {PrescriptionModalMode}
                     </HeaderBarTitle>
 
                     <HeaderBarActions>
                         <Button
                             innerClassName="u-padding-0"
                             icon="close"
-                            onClick={() => setIsDrugModalOpen(false)}
+                            onClick={() => setIsPrescriptionModalOpen(false)}
                         />
                     </HeaderBarActions>
                 </HeaderBar>
@@ -83,7 +83,7 @@ const PrescriptionsGrid = (props) => {
             <div className="t-product-details__shipping-delivery-modal-content">
                 <br />
                 <PrescriptionConfigure
-                    viewModel={drugModalViewModel}
+                    viewModel={PrescriptionModalViewModel}
                     analyticsManager={analyticsManager}
                     onSubmit={handleCartEditItem}
                 />
@@ -92,18 +92,18 @@ const PrescriptionsGrid = (props) => {
         </Sheet>
     )
 
-    const showDrugModal = (gridRowKey) => {
-        console.log(`PrescriptionsGrid showDrugModal: gridRowKey ${gridRowKey} `)
+    const showPrescriptionModal = (gridRowKey) => {
+        console.log(`PrescriptionsGrid showPrescriptionModal: gridRowKey ${gridRowKey} `)
 
-        const newDrugModalViewModel = {
-            ...drugModalViewModel,
+        const newPrescriptionModalViewModel = {
+            ...PrescriptionModalViewModel,
             prescription: globalState.cart.find(el => el._gridRowKey === gridRowKey)
         }
 
-        setDrugModalViewModel(newDrugModalViewModel)
-        setSelectedDrug(newDrugModalViewModel.prescription.drug.drugKey)
-        setDrugModalMode('edit')
-        setIsDrugModalOpen(true)
+        setPrescriptionModalViewModel(newPrescriptionModalViewModel)
+        setSelectedDrug(newPrescriptionModalViewModel.prescription.drug.drugKey)
+        setPrescriptionModalMode('edit')
+        setIsPrescriptionModalOpen(true)
     }
 
     const handleDoctorChange = (event) => {
@@ -164,7 +164,7 @@ const PrescriptionsGrid = (props) => {
                                         endAction={
                                             <div>
                                                 {/* TODO: align these to use same key */}
-                                                <Button className="pw--blank" icon="more" onClick={() => showDrugModal(lineItem._gridRowKey)} />
+                                                <Button className="pw--blank" icon="more" onClick={() => showPrescriptionModal(lineItem._gridRowKey)} />
                                                 <Button className="pw--blank" icon="trash" onClick={() => globalDispatch({ type: 'REMOVE_ITEM', id: lineItem._gridRowKey })} />
                                             </div>
                                         }
@@ -203,17 +203,17 @@ const PrescriptionsGrid = (props) => {
             {/* Floating element/components */}
             <Mobile>
                 <DoctorModal width="80%" />
-                <DrugModal width="80%" />
+                <PrescriptionModal width="80%" />
             </Mobile>
 
             <Tablet>
                 <DoctorModal width="60%" />
-                <DrugModal width="60%" />
+                <PrescriptionModal width="60%" />
             </Tablet>
 
             <Desktop>
                 <DoctorModal width="40%" />
-                <DrugModal width="60%" />
+                <PrescriptionModal width="60%" />
             </Desktop>
         </div>
     )

@@ -58,9 +58,9 @@ const Search = (props) => {
     console.log('Global State in Search page =>')
     console.log(globalState)
 
-    const [isDrugModalOpen, setIsDrugModalOpen] = useState(false)
-    const [drugModalMode, setDrugModalMode] = useState()
-    const [drugModalViewModel, setDrugModalViewModel] = useState({
+    const [isPrescriptionModalOpen, setIsPrescriptionModalOpen] = useState(false)
+    const [PrescriptionModalMode, setPrescriptionModalMode] = useState()
+    const [PrescriptionModalViewModel, setPrescriptionModalViewModel] = useState({
         pharmacies: MasterData.pharmacies,
         doctors: MasterData.doctors
     })
@@ -70,27 +70,27 @@ const Search = (props) => {
 
     function handleCartAddItem(formData) {
         globalDispatch({ type: 'ADD_ITEM', formData })
-        setIsDrugModalOpen(false)
+        setIsPrescriptionModalOpen(false)
         history.push('/prescriptions')
     }
 
-    const DrugModal = ({ width }) => (
+    const PrescriptionModal = ({ width }) => (
         <Sheet
             className="pw--no-shadow t-product-details__shipping-delivery-info-modal"
             coverage={width}
-            open={isDrugModalOpen}
+            open={isPrescriptionModalOpen}
             effect="modal-center"
             headerContent={
                 <HeaderBar>
                     <HeaderBarTitle className="u-flex u-padding-start-md u-text-align-start u-text-size-big">
-                        Prescription {drugModalMode}
+                        Prescription {PrescriptionModalMode}
                     </HeaderBarTitle>
 
                     <HeaderBarActions>
                         <Button
                             innerClassName="u-padding-0"
                             icon="close"
-                            onClick={() => setIsDrugModalOpen(false)}
+                            onClick={() => setIsPrescriptionModalOpen(false)}
                         />
                     </HeaderBarActions>
                 </HeaderBar>
@@ -99,7 +99,7 @@ const Search = (props) => {
             <div className="t-product-details__shipping-delivery-modal-content">
                 <br />
                 <PrescriptionConfigure
-                    viewModel={drugModalViewModel}
+                    viewModel={PrescriptionModalViewModel}
                     analyticsManager={analyticsManager}
                     onSubmit={handleCartAddItem}
                 />
@@ -108,8 +108,8 @@ const Search = (props) => {
         </Sheet>
     )
 
-    const showDrugModal = (id) => {
-        console.log(`Search Page showDrugModal: selectedProductId ${id} `)
+    const showPrescriptionModal = (id) => {
+        console.log(`Search Page showPrescriptionModal: selectedProductId ${id} `)
 
         let drugMaster = MasterData.drugs
             .find(d => d.variants.find(v => v.variantKey === id))
@@ -117,8 +117,8 @@ const Search = (props) => {
         let variant = drugMaster.variants
             .find(v => v.variantKey === id)
 
-        const newDrugModalViewModel = {
-            ...drugModalViewModel,
+        const newPrescriptionModalViewModel = {
+            ...PrescriptionModalViewModel,
             prescription: {
                 doctor: null,
                 drug: {
@@ -134,12 +134,12 @@ const Search = (props) => {
         }
 
         console.log('Add: viewModel =>')
-        console.log(newDrugModalViewModel.prescription.drug)
+        console.log(newPrescriptionModalViewModel.prescription.drug)
 
-        setDrugModalViewModel(newDrugModalViewModel)
+        setPrescriptionModalViewModel(newPrescriptionModalViewModel)
         setSelectedDrug(id)
-        setDrugModalMode('add')
-        setIsDrugModalOpen(true)
+        setPrescriptionModalMode('add')
+        setIsPrescriptionModalOpen(true)
     }
 
     return (
@@ -172,7 +172,7 @@ const Search = (props) => {
                             <DrugSearch
                                 id="drug-search"
                                 viewModel={vmDrugSearch}
-                                onSubmit={showDrugModal}
+                                onSubmit={showPrescriptionModal}
                             />
                         </div>
 
@@ -234,15 +234,15 @@ const Search = (props) => {
 
             {/* Floating element/components */}
             <Mobile>
-                <DrugModal width="80%" />
+                <PrescriptionModal width="80%" />
             </Mobile>
 
             <Tablet>
-                <DrugModal width="60%" />
+                <PrescriptionModal width="60%" />
             </Tablet>
 
             <Desktop>
-                <DrugModal width="60%" />
+                <PrescriptionModal width="60%" />
             </Desktop>
 
         </div>
