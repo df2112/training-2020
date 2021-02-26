@@ -4,82 +4,16 @@ import React, { Fragment } from 'react'
 import Helmet from 'react-helmet'
 import PropTypes from 'prop-types'
 
-import Divider from 'progressive-web-sdk/dist/components/divider'
-
 import { getAnalyticsManager } from '../../../analytics'
-import { Desktop } from '../../../components/media-queries'
 import Button from 'progressive-web-sdk/dist/components/button'
+import Divider from 'progressive-web-sdk/dist/components/divider'
 import Icon from 'progressive-web-sdk/dist/components/icon'
 import List from 'progressive-web-sdk/dist/components/list'
 import ListTile from 'progressive-web-sdk/dist/components/list-tile'
 
-import DrugSearch from '../../../components/makana/drug-search'
 import MasterData from '../../../data/makana/MasterData'
 
 const analyticsManager = getAnalyticsManager()
-
-const vmDrugSearch = MasterData.drugs.map((drug) => {
-
-    return drug.variants.map((variant, index) => {
-
-        return {
-            className: ('masterId_' + variant.variantKey),
-            isSimple: true,
-            isFull: true,
-            imageProps: {
-                src: drug.imgSrc,
-                width: '88px',
-                height: '88px',
-                alt: 'cat'
-            },
-            href: '#',
-            options: [
-                {
-                    label: 'TODO: Dave ID (a)'
-                }
-            ],
-            title: variant.variantName,
-            price: index === 0 ? '$100' : '$25',
-        }
-
-    })
-
-}).flat(2)
-
-const showDrugModalAdd = (id) => {
-    console.log(`showDrugModalAdd: selectedProductId ${id} `)
-
-    let drugMaster = MasterData.drugs
-        .find(d => d.variants.find(v => v.variantKey === id))
-
-    let variant = drugMaster.variants
-        .find(v => v.variantKey === id)
-
-    const newDrugModalViewModel = {
-        ...drugModalViewModel,
-        prescription: {
-            doctor: null,
-            drug: {
-                ...drugMaster,
-                selectedDrugForm: drugMaster.forms[0],
-                selectedDrugDosage: drugMaster.dosages[0],
-                selectedDrugQuantity: drugMaster.quantities[0],
-                selectedVariantKey: variant.variantKey,
-                selectedVariantName: variant.variantName
-            },
-            pharmacy: null
-        }
-    }
-
-    console.log('Add: viewModel =>')
-    console.log(newDrugModalViewModel.prescription.drug)
-
-    setDrugModalViewModel(newDrugModalViewModel)
-    setSelectedDrug(id)
-    setDrugModalMode('add')
-    setIsDrugModalOpen(true)
-}
-
 
 const Settings = (props) => {
     const { cart, category, productSearch } = props
