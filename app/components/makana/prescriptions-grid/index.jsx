@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 import PropTypes from 'prop-types'
+import { v4 as uuidv4 } from 'uuid'
 
 import Button from 'progressive-web-sdk/dist/components/button'
 import Divider from 'progressive-web-sdk/dist/components/divider'
@@ -41,6 +42,15 @@ const PrescriptionsGrid = (props) => {
 
     console.log('Global State in PrescriptionsGrid =>')
     console.log(globalState)
+
+    const pharmacyGroupings = globalState.cart.reduce((accumulator, current) => {
+        const property = current['pharmacy']['pharmacyKey'];
+        accumulator[property] = accumulator[property] || [];
+        accumulator[property].push(current);
+        return accumulator;
+    }, [])
+
+    const pharmacyGroupValues = Object.values(pharmacyGroupings)
 
     const [doctorsList, setDoctorsList] = useState(doctors)
     const [isDoctorModalOpen, setIsDoctorModalOpen] = useState(false)
@@ -187,9 +197,36 @@ const PrescriptionsGrid = (props) => {
                     </TabsPanel>
 
                     <TabsPanel title="Pharmacies">
-                        <h2 style={{ marginTop: "20px" }}>
-                            Pharmacies (stub)
-                        </h2>
+                        <div style={{ marginTop: "6px", height: "450px", overflowX: "hidden", overflowY: "auto" }}>
+                            <List>
+                                {pharmacyGroupValues.map((pharmacyGroup, pharmacyGroupIndex) => (
+                                    <ListTile
+                                        key={uuidv4()}
+                                        className="pw--instructional-block"
+                                    >
+                                        {pharmacyGroup.map((prescription, prescriptionIndex) => (
+                                            <div key={uuidv4()}>
+                                                {prescriptionIndex === 0 && (
+                                                    <ListTile
+                                                        startAction={
+                                                            <img style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} src={prescription.pharmacy.pharmacyLogoUrl} />
+                                                        }>
+                                                        <div style={{ fontWeight: 'bold' }}>{prescription.pharmacy.pharmacyChain}</div>
+                                                    </ListTile>
+                                                )}
+                                                
+                                                <Divider />
+                                                <ListTile>
+                                                    <div>{prescription.drug.selectedVariantName}</div>
+                                                </ListTile>
+                                            </div>
+                                        ))}
+
+                                    </ListTile>
+                                ))}
+
+                            </List>
+                        </div>
                     </TabsPanel>
 
                     <TabsPanel title="Doctors">

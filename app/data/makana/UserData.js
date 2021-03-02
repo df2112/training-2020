@@ -22,16 +22,16 @@ const UserData = {
             selectedDrugQuantity: '51',
             pharmacyKey: '001'
         },
-        // {
-        //     _gridRowKey: '1',
-        //     doctorKey: '001',            
-        //     drugKey: '002',
-        //     variantKey: '00201',
-        //     selectedDrugForm: 'capsule',
-        //     selectedDrugDosage: '30mg',
-        //     selectedDrugQuantity: '32',
-        //     pharmacyKey: '002'
-        // },
+        {
+            _gridRowKey: '1',
+            doctorKey: '001',            
+            drugKey: '002',
+            variantKey: '00201',
+            selectedDrugForm: 'capsule',
+            selectedDrugDosage: '30mg',
+            selectedDrugQuantity: '32',
+            pharmacyKey: '002'
+        },
         {
             _gridRowKey: '5',
             doctorKey: '003',            
@@ -40,7 +40,7 @@ const UserData = {
             selectedDrugForm: 'syrup',
             selectedDrugDosage: '50mg',
             selectedDrugQuantity: '13',
-            pharmacyKey: '003'
+            pharmacyKey: '001'
         }        
     ],
 
