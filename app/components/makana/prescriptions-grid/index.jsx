@@ -43,6 +43,7 @@ const PrescriptionsGrid = (props) => {
     console.log('Global State in PrescriptionsGrid =>')
     console.log(globalState)
 
+    // Pharmacy tab data
     const pharmacyGroupings = globalState.cart.reduce((accumulator, current) => {
         const property = current['pharmacy']['pharmacyKey'];
         accumulator[property] = accumulator[property] || [];
@@ -52,6 +53,17 @@ const PrescriptionsGrid = (props) => {
 
     const pharmacyGroupValues = Object.values(pharmacyGroupings)
 
+    // Doctor tab data
+    const doctorGroupings = globalState.cart.reduce((accumulator, current) => {
+        const property = current['doctor']['doctorKey'];
+        accumulator[property] = accumulator[property] || [];
+        accumulator[property].push(current);
+        return accumulator;
+    }, [])
+
+    const doctorGroupValues = Object.values(doctorGroupings)
+
+    // Local state management
     const [doctorsList, setDoctorsList] = useState(doctors)
     const [isDoctorModalOpen, setIsDoctorModalOpen] = useState(false)
     const [isPrescriptionModalOpen, setIsPrescriptionModalOpen] = useState(false)
@@ -199,7 +211,7 @@ const PrescriptionsGrid = (props) => {
                     <TabsPanel title="Pharmacies">
                         <div style={{ marginTop: "6px", height: "450px", overflowX: "hidden", overflowY: "auto" }}>
                             <List>
-                                {pharmacyGroupValues.map((pharmacyGroup, pharmacyGroupIndex) => (
+                                {pharmacyGroupValues.map((pharmacyGroup) => (
                                     <ListTile
                                         key={uuidv4()}
                                         className="pw--instructional-block"
@@ -214,7 +226,7 @@ const PrescriptionsGrid = (props) => {
                                                         <div style={{ fontWeight: 'bold' }}>{prescription.pharmacy.pharmacyChain}</div>
                                                     </ListTile>
                                                 )}
-                                                
+
                                                 <Divider />
                                                 <ListTile>
                                                     <div>{prescription.drug.selectedVariantName}</div>
@@ -230,9 +242,36 @@ const PrescriptionsGrid = (props) => {
                     </TabsPanel>
 
                     <TabsPanel title="Doctors">
-                        <h2 style={{ marginTop: "20px" }}>
-                            Doctors (stub)
-                        </h2>
+                        <div style={{ marginTop: "6px", height: "450px", overflowX: "hidden", overflowY: "auto" }}>
+                            <List>
+                                {doctorGroupValues.map((doctorGroup) => (
+                                    <ListTile
+                                        key={uuidv4()}
+                                        className="pw--instructional-block"
+                                    >
+                                        {doctorGroup.map((prescription, prescriptionIndex) => (
+                                            <div key={uuidv4()}>
+                                                {prescriptionIndex === 0 && (
+                                                    <ListTile
+                                                        startAction={
+                                                            <img style={{ width: "30.8px", height: "30.8px", marginRight: "5px" }} src={prescription.doctor.imgSrc} />
+                                                        }>
+                                                        <div style={{ fontWeight: 'bold' }}>{prescription.doctor.name}</div>
+                                                    </ListTile>
+                                                )}
+
+                                                <Divider />
+                                                <ListTile>
+                                                    <div>{prescription.drug.selectedVariantName}</div>
+                                                </ListTile>
+                                            </div>
+                                        ))}
+
+                                    </ListTile>
+                                ))}
+
+                            </List>
+                        </div>
                     </TabsPanel>
                 </Tabs>
             </div>
