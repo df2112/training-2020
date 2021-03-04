@@ -113,4 +113,12 @@ export default class CommerceCloudConnector {
             `search/shopper-search/v1/organizations/${this.organizationId}/product-search?${urlParams}`
         )
     }
+
+    createBasket() {
+        return this.api(
+            'POST',
+            `checkout/shopper-baskets/v1/organizations/${this.organizationId}/baskets`,
+            {}
+        )
+    }
 }
