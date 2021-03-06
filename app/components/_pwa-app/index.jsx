@@ -102,7 +102,14 @@ PWAApp.shouldGetProps = () => {
 PWAApp.getProps = async ({connector}) => {
     const category = await connector.getCategory(getRootCategoryId())
     const flattened = flattenCategory(category)
-    return {categories: flattened}
+
+    const realCart = await connector.createBasket()
+    console.log(realCart)
+    
+    return {
+        categories: flattened,
+        realCart: realCart
+    }
 }
 
 PWAApp.propTypes = {
